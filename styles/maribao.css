@@ -62,14 +62,69 @@ header {
 #menu {
   display: none;
 }
-footer {
-  background-color: #f8f8f8; 
+/* Footer container */
+/* Footer container */
+.footer {
+  display: flex;
+  justify-content: space-between; /* Separates left and right sections */
+  align-items: flex-start; /* Aligns content at the top */
+  background-color: #f8f8f8;
   color: rgb(0, 0, 0);
-  text-align: center; 
-  padding: 10px 0; 
-  position: absolute; 
-  bottom: 1rem; 
-  left: 1rem; 
+  padding: 10px 35px;
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
   right: 1rem;
   box-shadow: 0 2px 5px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Left content styling */
+.left-content ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 80px;
+}
+
+.left-content ul li a {
+  color: black;
+  text-decoration: none;
+  padding: 10px 5px;
+  margin: 5px;
+  display: inline-block;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-size: 1.1rem;
+}
+
+.left-content ul li a:hover {
+  color: #007BFF;
+  background-color: rgb(204, 236, 236);
+  border-radius: 5px;
+}
+
+/* Footer text styling */
+.footer-text {
+  
+  margin-top: 10px; /* Adds space above the paragraph */
+  font-size: 0.9rem; /* Adjusts text size */
+  color: #555; /* Subtle text color */
+}
+
+/* Social icons styling */
+.social-icons {
+  margin-right: 50px;
+  margin-top: 30px;
+  display: flex;
+  gap: 25px; /* Adds space between social icons */
+}
+
+.social-icons a img {
+  width: 35px; /* Icon size */
+  height: auto; /* Maintains aspect ratio */
+  transition: transform 0.3s ease; /* Smooth hover effect */
+}
+
+.social-icons a img:hover {
+  transform: scale(1.2); /* Enlarges the icon slightly on hover */
 }
