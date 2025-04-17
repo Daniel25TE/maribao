@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This site promotes Hotel Maribao, located in General Villamil, 
+    Guayas Province, Ecuador. It includes features like hotel information, room booking options, 
+    a photo gallery, and a section for guest reviews.">
+    <meta name="author" content="Daniel Llumiquinga">
+    <link rel="icon" href="images/maribaoLogo2.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles/maribao.css">
+    <script src="scripts/maribao.js" defer></script>
+    <title>Maribao a website to reserve hotel's rooms.</title>
+</head>
+<body>
+    <header>
+        <div class="logo">
+        <img src="images/maribaoLogo.png" alt="Beautiful landscape of Madagascar" width="100" height="100">
+        </div>
+        <button id="menu">Menu</button>
+        <nav class="navigation">
+            <ul>
+                <li><a href="#" onclick="showHome()">Overview</a></li>
+                <li><a href="#" id="manta" title="Manta">Find and Reserve</a></li>
+                <li><a href="#" id="quito" title="Quito">Gallery</a></li>
+                <li><a href="#" id="cuenca" title="Cuenca">Accomodations</a></li>
+                <li><a href="#" onclick="showContact()">Experiences</a></li>
+            </ul>
+        </nav>
+    </header>
+    <footer>
+        <p>
+            &copy; <span id="currentyear"></span> Daniel Llumiquinga, Utah - United States.
+        </p>
+        <p id="lastModified"></p>
+    </footer>
+</body>
+</html>

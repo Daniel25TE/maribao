@@ -1,0 +1,75 @@
+.x-icon {
+    background: none;
+    background-color: transparent;
+  }
+/* General styling */
+/* Header container */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Ensures space between the logo and menu */
+  padding: 10px 40px 20px 130px; /* Adds padding on both sides to bring elements inward */
+  background-color: #f8f8f8;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  height: 90px;
+}
+
+/* Logo styling */
+.logo {
+  display: inline-flex; /* Mantiene flexibilidad y centra contenido */
+    background-color: #007BFF; /* Cambia al color deseado */
+    padding: 30px 20px 20px 20px; /* Reduce el espacio en los lados */
+    border-radius: px; /* Esquinas redondeadas opcional */
+    width: fit-content
+}
+
+.logo img {
+  width: 85px;
+  height: 80px;
+}
+
+/* Menu styling */
+.navigation {
+  flex-basis: 80%; /* Adjusts the space for the menu */
+  display: flex;
+  justify-content: center; /* Centers the menu within its space */
+}
+
+.navigation ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 60px;
+}
+
+.navigation ul li a {
+  color: black;
+  text-decoration: none;
+  padding: 10px 15px; /* Adds space inside the link */
+  margin: 5px; /* Adds space between links */
+  display: inline-block; /* Ensures padding and margin apply properly */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+  font-size: 1.1rem;
+}
+
+.navigation ul li a:hover {
+  color: #007BFF;
+  background-color: rgb(204, 236, 236);
+  border-radius: 5px;
+}
+
+#menu {
+  display: none;
+}
+footer {
+  background-color: #f8f8f8; 
+  color: rgb(0, 0, 0);
+  text-align: center; 
+  padding: 10px 0; 
+  position: absolute; 
+  bottom: 1rem; 
+  left: 1rem; 
+  right: 1rem;
+  box-shadow: 0 2px 5px 5px rgba(0, 0, 0, 0.1);
+}
