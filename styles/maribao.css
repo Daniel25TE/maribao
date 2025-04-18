@@ -27,6 +27,12 @@ header {
   width: 85px;
   height: 80px;
 }
+.mobile-options {
+  display: none; /* Hide mobile-specific options on larger views */
+}
+.arrow {
+  display: none; /* Hide arrow on larger views */
+}
 
 /* Menu styling */
 .navigation {
@@ -59,8 +65,13 @@ header {
   border-radius: 5px;
 }
 
-#menu {
-  display: none;
+.hamburger {
+  display: none; /* Hidden on desktop */
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: -80px;
 }
 /* Footer container */
 /* Footer container */

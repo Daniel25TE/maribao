@@ -1,0 +1,129 @@
+@media (max-width: 768px) {
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between; /* Space out hamburger menu and logo */
+        position: relative;
+    }
+
+    .hamburger {
+        display: block; /* Show hamburger menu on mobile views */
+        order: 1; /* Ensure hamburger menu appears first */
+    }
+
+    .logo {
+        order: 2; /* Ensure logo appears second on mobile */
+        margin-left: auto; /* Push logo to the right */
+    }
+    .mobile-options {
+        display: flex; /* Arrange options side by side */
+        gap: 10rem; /* Space between "View Map" and phone number */
+        padding: 10px 0; /* Space above and below the options */
+        border-bottom: 1px solid #ccc; /* Optional separator for better design */
+        justify-content: center; /* Center both options */
+    }
+
+    .view-map {
+        text-decoration: none;
+        color: black;
+        font-size: 1.1rem; /* Slightly larger text for visibility */
+        padding: 5px 10px;
+        border-radius: 5px; /* Optional rounded corners */
+        transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover effect */
+    }
+
+    .view-map:hover {
+        color: white;
+        background-color: #007BFF; /* Highlighted background on hover */
+    }
+
+    .call-us {
+        display: flex;
+        align-items: center; /* Align phone icon and number */
+        text-decoration: none;
+        color: black;
+        font-size: 1.1rem;
+        gap: 5px; /* Space between phone icon and number */
+        padding: 5px 10px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .call-us:hover {
+        color: white;
+        background-color: #007BFF; /* Highlighted background on hover */
+    }
+
+    .navigation ul {
+        margin-top: 10px; /* Adds space below the new options */
+    }
+
+    .navigation {
+        display: none; /* Hidden by default */
+        flex-direction: column; /* Arrange menu items in a column */
+        gap: 20px; /* Space between menu items */
+        position: fixed; /* Ensures menu stays in place */
+        top: 128px; /* Position right below the header */
+        left: 0;
+        width: 100%; /* Takes up the full width of the screen */
+        height: calc(80vh - 60px); /* Takes up the full screen height, excluding the header */
+        background-color: #d88787; /* Background of the menu */
+        padding: 20px; /* Space inside the menu */
+        overflow-y: auto; /* Enables scrolling if content exceeds viewport height */
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for design */
+        z-index: 1000; /* Ensures it stays above other content */
+        
+    }
+
+    .navigation.active {
+        display: flex; /* Show navigation when active */
+    }
+    .navigation ul {
+        list-style: none; /* Remove default list styling */
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column; /* Stack menu items vertically */
+        align-items: flex-start; /* Align items to the left */
+        gap: 40px;
+    }
+    .navigation ul li {
+        display: flex; /* Flexbox para alinear la flecha y el texto */
+        position: relative;
+        align-items: center;
+        gap: 10px; /* Make list items span the entire width */
+        max-width: 100%; /* Full width for each item */
+        width: 90%;
+        border-bottom: 1px solid #ccc;
+    }
+    .arrow {
+        position: absolute;
+        right: 10px;
+        display: inline-block;
+        color: #007BFF; /* Color de la flecha */
+        font-size: 1.2rem; /* Tamaño de la flecha */
+        flex-shrink: 0; /* Evita que la flecha se reduzca */
+        transform: translateY(0%);
+        pointer-events: none;
+    }
+
+    .navigation ul li a {
+        display: block;
+        align-items: center;
+        text-decoration: none;
+        color: black;
+        padding: 0px; /* Add spacing inside each link */
+        transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover effect */
+        border-radius: 5px; /* Optional: Rounded corners for links */
+        font-size: 1.2rem; /* Adjust text size */
+        width: 100%; /* Ensure links span the width of the menu */
+        text-align: left;
+        padding-right: 100px;
+        
+    }
+
+    .navigation ul li a:hover {
+        color: #007BFF;
+        background-color: rgb(204, 236, 236); /* Highlighted background on hover */
+    }
+}
