@@ -4,6 +4,7 @@
         align-items: center;
         justify-content: space-between; /* Space out hamburger menu and logo */
         position: relative;
+        padding: 0px 40px 0px 100px; /* Space around the header */
     }
 
     .hamburger {
@@ -14,6 +15,7 @@
     .logo {
         order: 2; /* Ensure logo appears second on mobile */
         margin-left: auto; /* Push logo to the right */
+        padding: 20px 20px 10px 20px;
     }
     .mobile-options {
         display: flex; /* Arrange options side by side */
@@ -21,6 +23,8 @@
         padding: 10px 0; /* Space above and below the options */
         border-bottom: 1px solid #ccc; /* Optional separator for better design */
         justify-content: center; /* Center both options */
+        
+        max-width: 90%;
     }
 
     .view-map {
@@ -63,10 +67,11 @@
         flex-direction: column; /* Arrange menu items in a column */
         gap: 20px; /* Space between menu items */
         position: fixed; /* Ensures menu stays in place */
-        top: 128px; /* Position right below the header */
+        top: 100px; /* Position right below the header */
+         /* Sticks to the bottom of the screen */
         left: 0;
         width: 100%; /* Takes up the full width of the screen */
-        height: calc(80vh - 60px); /* Takes up the full screen height, excluding the header */
+        height: calc(85vh - 60px); /* Takes up the full screen height, excluding the header */
         background-color: #d88787; /* Background of the menu */
         padding: 20px; /* Space inside the menu */
         overflow-y: auto; /* Enables scrolling if content exceeds viewport height */
