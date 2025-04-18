@@ -71,7 +71,7 @@
          /* Sticks to the bottom of the screen */
         left: 0;
         width: 100%; /* Takes up the full width of the screen */
-        height: calc(85vh - 60px); /* Takes up the full screen height, excluding the header */
+        height: calc(90vh - 85px); /* Takes up the full screen height, excluding the header */
         background-color: #d88787; /* Background of the menu */
         padding: 20px; /* Space inside the menu */
         overflow-y: auto; /* Enables scrolling if content exceeds viewport height */
