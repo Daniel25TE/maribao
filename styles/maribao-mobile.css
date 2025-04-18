@@ -15,10 +15,13 @@
     .logo {
         order: 2; /* Ensure logo appears second on mobile */
         margin-left: auto; /* Push logo to the right */
-        padding: 20px 20px 10px 20px;
-        width: auto;
-        height: auto;
+        padding: 20px 20px 20px 20px;
+        
     }
+    .logo img {
+        width: 65px;
+        height: 60px;
+      }
     .mobile-options {
         display: flex; /* Arrange options side by side */
         gap: 3rem; /* Space between "View Map" and phone number */
@@ -152,6 +155,7 @@
     
       .social-icons {
         margin: 15px 0; /* Adds margin between icons and other content */
+        margin-left: .6rem;
       }
       .currentyear-mobile {
         display: flex;
