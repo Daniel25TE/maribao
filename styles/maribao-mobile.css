@@ -16,6 +16,8 @@
         order: 2; /* Ensure logo appears second on mobile */
         margin-left: auto; /* Push logo to the right */
         padding: 20px 20px 10px 20px;
+        width: auto;
+        height: auto;
     }
     .mobile-options {
         display: flex; /* Arrange options side by side */
