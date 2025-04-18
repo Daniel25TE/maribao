@@ -139,3 +139,7 @@ header {
 .social-icons a img:hover {
   transform: scale(1.2); /* Enlarges the icon slightly on hover */
 }
+
+.currentyear-mobile {
+  display: none; /* Adds space above the paragraph */
+}

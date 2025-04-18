@@ -19,7 +19,7 @@
     }
     .mobile-options {
         display: flex; /* Arrange options side by side */
-        gap: 10rem; /* Space between "View Map" and phone number */
+        gap: 3rem; /* Space between "View Map" and phone number */
         padding: 10px 0; /* Space above and below the options */
         border-bottom: 1px solid #ccc; /* Optional separator for better design */
         justify-content: center; /* Center both options */
@@ -131,4 +131,33 @@
         color: #007BFF;
         background-color: rgb(204, 236, 236); /* Highlighted background on hover */
     }
+    .footer {
+        flex-direction: column; /* Stack elements vertically */
+        align-items: left; /* Centers all content */
+        text-align: left;
+        padding: 15px; /* Adjusts padding for smaller devices */
+      }
+    
+      .left-content ul {
+        flex-direction: column; /* Stack links vertically */
+        align-items: left; /* Center-align links */
+        gap: 10px; /* Space between links */
+      }
+      .left-content ul li a {
+        margin: 10px 10px; /* Remove margin between links */
+        padding: 0px 0; /* Adjusts padding for smaller devices */
+      }
+    
+      .social-icons {
+        margin: 15px 0; /* Adds margin between icons and other content */
+      }
+      .currentyear-mobile {
+        display: flex;
+         /* Remove padding for smaller devices */
+      }
+      .currentyear-desktop {
+        display: none; /* Hide on mobile */
+      }
+      
+    
 }
