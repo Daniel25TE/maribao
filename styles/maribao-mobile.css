@@ -76,7 +76,7 @@
          /* Sticks to the bottom of the screen */
         left: 0;
         width: 100%; /* Takes up the full width of the screen */
-        height: calc(85vh - 80px); /* Takes up the full screen height, excluding the header */
+         /* Takes up the full screen height, excluding the header */
         background-color: #d88787; /* Background of the menu */
         padding: 20px; /* Space inside the menu */
         padding-top: 0px;
@@ -84,6 +84,7 @@
         overflow-y: auto; /* Enables scrolling if content exceeds viewport height */
         box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for design */
         z-index: 1000; /* Ensures it stays above other content */
+        
         
     }
 
@@ -116,7 +117,7 @@
         font-size: 1.2rem; /* Tamaño de la flecha */
         flex-shrink: 0; /* Evita que la flecha se reduzca */
         transform: translateY(0%);
-        pointer-events: none;
+        
     }
 
     .navigation ul li a {
@@ -140,14 +141,14 @@
     }
     .footer {
         flex-direction: column; /* Stack elements vertically */
-        align-items: left; /* Centers all content */
+         /* Centers all content */
         text-align: left;
         padding: 15px; /* Adjusts padding for smaller devices */
       }
     
       .left-content ul {
         flex-direction: column; /* Stack links vertically */
-        align-items: left; /* Center-align links */
+         /* Center-align links */
         gap: 10px; /* Space between links */
       }
       .left-content ul li a {

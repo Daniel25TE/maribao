@@ -20,7 +20,7 @@ header {
   display: inline-flex; /* Mantiene flexibilidad y centra contenido */
     background-color: #007BFF; /* Cambia al color deseado */
     padding: 30px 20px 20px 20px; /* Reduce el espacio en los lados */
-    border-radius: px; /* Esquinas redondeadas opcional */
+    border-radius: 0px; /* Esquinas redondeadas opcional */
     width: fit-content
 }
 
