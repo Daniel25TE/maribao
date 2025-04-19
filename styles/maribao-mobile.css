@@ -69,15 +69,16 @@
 
     .navigation {
         display: none; /* Hidden by default */
-        flex-direction: column; /* Arrange menu items in a column */
+        flex-direction: column;
+        justify-content: flex-start; /* Arrange menu items in a column */
         gap: 20px; /* Space between menu items */
         position: fixed; /* Ensures menu stays in place */
         top: 100px; /* Position right below the header */
          /* Sticks to the bottom of the screen */
         left: 0;
         width: 100%; /* Takes up the full width of the screen */
-         /* Takes up the full screen height, excluding the header */
-        background-color: #ebd7d7; /* Background of the menu */
+        height: calc(85vh - 70px); /* Takes up the full screen height, excluding the header */
+        background-color: #bd2525; /* Background of the menu */
         padding: 20px; /* Space inside the menu */
         padding-top: 0px;
         padding-bottom: 50px;
