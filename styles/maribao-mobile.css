@@ -78,7 +78,7 @@
         left: 0;
         width: 100%; /* Takes up the full width of the screen */
         height: calc(85vh - 70px); /* Takes up the full screen height, excluding the header */
-        background-color: #bd2525; /* Background of the menu */
+        background-color: #e2ecec; /* Background of the menu */
         padding: 20px; /* Space inside the menu */
         padding-top: 0px;
         padding-bottom: 50px;
