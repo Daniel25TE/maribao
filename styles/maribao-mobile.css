@@ -29,10 +29,11 @@
         width: var(--hamburger-width);
         height: var(--hamburger-height);
         position: relative;
+        cursor: pointer;
     }
 
     .hamburger div {
-        background-color: var(--primary-color);
+        background-color: red;
         height: var(--line-height);
         width: 100%;
         transition: transform var(--transition-speed) ease, opacity var(--transition-speed) ease;
