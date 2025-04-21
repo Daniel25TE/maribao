@@ -12,6 +12,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const navigation = document.querySelector(".navigation");
 
     hamburger.addEventListener("click", function () {
-        navigation.classList.toggle("active");
+        navigation.classList.toggle("active"); // Activa el menú
+        hamburger.classList.toggle("is-active"); // Activa el estado de la X
     });
 });
+

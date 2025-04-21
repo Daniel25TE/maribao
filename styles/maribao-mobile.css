@@ -1,80 +1,103 @@
 @media (max-width: 900px) {
+    :root {
+        --primary-color: black;
+        --hover-color: #007BFF;
+        --background-color: #e2ecec;
+        --text-hover-bg: rgb(204, 236, 236);
+        --line-height: 4px;
+        --transition-speed: 0.3s;
+        --hamburger-width: 30px;
+        --hamburger-height: 24px;
+        --gap-small: 10px;
+        --gap-large: 40px;
+        --font-size-large: 1.2rem;
+        --font-size-medium: 1.1rem;
+    }
     header {
         display: flex;
         align-items: center;
-        justify-content: space-between; /* Space out hamburger menu and logo */
+        justify-content: space-between;
         position: relative;
-        padding: 0px 40px 0px 100px; /* Space around the header */
+        padding: 0 var(--gap-large) 0 100px;
     }
 
     .hamburger {
-        display: block; /* Show hamburger menu on mobile views */
-        order: 1; /* Ensure hamburger menu appears first */
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: var(--hamburger-width);
+        height: var(--hamburger-height);
+        position: relative;
     }
 
-    .logo {
-        order: 2; /* Ensure logo appears second on mobile */
-        margin-left: auto; /* Push logo to the right */
-        padding: 20px 20px 20px 20px;
-        
+    .hamburger div {
+        background-color: var(--primary-color);
+        height: var(--line-height);
+        width: 100%;
+        transition: transform var(--transition-speed) ease, opacity var(--transition-speed) ease;
     }
+
+    .hamburger.is-active div:nth-child(1) {
+        transform: rotate(55deg) translate(7px, 7px);
+    }
+
+    .hamburger.is-active div:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.is-active div:nth-child(3) {
+        transform: rotate(-55deg) translate(6px, -6px);
+    }
+    .logo {
+        order: 2;
+        margin-left: auto;
+        padding: 20px;
+    }
+
     .logo img {
         width: 65px;
         height: 60px;
-      }
+    }
+
+    /* Mobile Options */
     .mobile-options {
-        display: flex; /* Arrange options side by side */
-        gap: 3rem; /* Space between "View Map" and phone number */
-        padding: 10px 0; /* Space above and below the options */
-        border-bottom: 1px solid #ccc; /* Optional separator for better design */
-        justify-content: center; /* Center both options */
-        
+        display: flex;
+        gap: 3rem;
+        padding: var(--gap-small) 0;
+        border-bottom: 1px solid #ccc;
+        justify-content: center;
         max-width: 90%;
     }
-
-    .view-map {
+    .view-map,
+    .call-us {
         text-decoration: none;
-        color: black;
-        font-size: 1.1rem; /* Slightly larger text for visibility */
+        color: var(--primary-color);
+        font-size: var(--font-size-medium);
         padding: 5px 10px;
-        border-radius: 5px; /* Optional rounded corners */
-        transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover effect */
+        border-radius: 5px;
+        transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
     }
 
-    .view-map:hover {
+    .view-map:hover,
+    .call-us:hover {
         color: white;
-        background-color: #007BFF; /* Highlighted background on hover */
+        background-color: var(--hover-color);
     }
 
     .call-us {
         display: flex;
-        align-items: center; /* Align phone icon and number */
-        text-decoration: none;
-        color: black;
-        font-size: 1.1rem;
-        gap: 5px; /* Space between phone icon and number */
-        padding: 5px 10px;
-        border-radius: 5px;
-        transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    .call-us:hover {
-        color: white;
-        background-color: #007BFF; /* Highlighted background on hover */
-    }
-
-    .navigation ul {
-        margin-top: 10px; /* Adds space below the new options */
+        align-items: center;
+        gap: 5px;
     }
 
     .navigation {
         display: none; /* Hidden by default */
         flex-direction: column;
         justify-content: flex-start; /* Arrange menu items in a column */
-        gap: 20px; /* Space between menu items */
+        gap: var(--gap-small); /* Space between menu items */
         position: fixed; /* Ensures menu stays in place */
         top: 100px; /* Position right below the header */
-         /* Sticks to the bottom of the screen */
         left: 0;
         width: 100%; /* Takes up the full width of the screen */
         height: calc(85vh - 70px); /* Takes up the full screen height, excluding the header */
@@ -85,10 +108,8 @@
         overflow-y: auto; /* Enables scrolling if content exceeds viewport height */
         box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for design */
         z-index: 1000; /* Ensures it stays above other content */
-        
-        
     }
-
+    
     .navigation.active {
         display: flex; /* Show navigation when active */
     }
@@ -99,13 +120,14 @@
         display: flex;
         flex-direction: column; /* Stack menu items vertically */
         align-items: flex-start; /* Align items to the left */
-        gap: 40px;
+        gap: var(--gap-large);
+        margin-top: 10px;
     }
     .navigation ul li {
         display: flex; /* Flexbox para alinear la flecha y el texto */
         position: relative;
         align-items: center;
-        gap: 10px; /* Make list items span the entire width */
+        gap: var(--gap-small);
         max-width: 100%; /* Full width for each item */
         width: 90%;
         border-bottom: 1px solid #ccc;
@@ -114,60 +136,51 @@
         position: absolute;
         right: 10px;
         display: inline-block;
-        color: #007BFF; /* Color de la flecha */
-        font-size: 1.2rem; /* Tamaño de la flecha */
+        color: var(--hover-color); /* Color de la flecha */
+        font-size: var(--font-size-large); /* Tamaño de la flecha */
         flex-shrink: 0; /* Evita que la flecha se reduzca */
-        transform: translateY(0%);
         
     }
 
     .navigation ul li a {
-        display: block;
-        align-items: center;
         text-decoration: none;
-        color: black;
+        color: var(--primary-color);
         padding: 0px; /* Add spacing inside each link */
-        transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover effect */
+        transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease; /* Smooth hover effect */
         border-radius: 5px; /* Optional: Rounded corners for links */
-        font-size: 1.2rem; /* Adjust text size */
+        font-size: var(--font-size-large); /* Adjust text size */
         width: 100%; /* Ensure links span the width of the menu */
         text-align: left;
         padding-right: 100px;
-        
     }
 
     .navigation ul li a:hover {
-        color: #007BFF;
-        background-color: rgb(204, 236, 236); /* Highlighted background on hover */
+        color: var(--hover-color);
+        background-color: var(--text-hover-bg);
     }
     .footer {
-        flex-direction: column; /* Stack elements vertically */
-         /* Centers all content */
+        flex-direction: column;
         text-align: left;
-        padding: 15px; /* Adjusts padding for smaller devices */
-      }
+        padding: 15px;
+    }
     
-      .left-content ul {
-        flex-direction: column; /* Stack links vertically */
-         /* Center-align links */
-        gap: 10px; /* Space between links */
-      }
-      .left-content ul li a {
-        margin: 10px 10px; /* Remove margin between links */
-        padding: 0px 0; /* Adjusts padding for smaller devices */
-      }
-    
-      .social-icons {
-        margin: 15px 0; /* Adds margin between icons and other content */
-        margin-left: .6rem;
-      }
-      .currentyear-mobile {
+    .left-content ul {
+        flex-direction: column;
+        gap: var(--gap-small);
+    }
+    .left-content ul li a {
+        margin: 10px;
+        padding: 0;
+    }
+    .social-icons {
+        margin: 15px 0 0 0.6rem;
+    }
+
+    .currentyear-mobile {
         display: flex;
-         /* Remove padding for smaller devices */
-      }
-      .currentyear-desktop {
-        display: none; /* Hide on mobile */
-      }
-      
-    
+    }
+
+    .currentyear-desktop {
+        display: none;
+    }
 }

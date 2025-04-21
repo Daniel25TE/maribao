@@ -1,27 +1,43 @@
+:root {
+  --primary-color: black;
+  --hover-color: #007BFF;
+  --background-color: #f8f8f8;
+  --text-hover-bg: rgb(204, 236, 236);
+  --subtle-text-color: #555;
+  --transition-speed: 0.3s;
+  --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  --footer-shadow: 0 2px 5px 5px rgba(0, 0, 0, 0.1);
+  --gap-small: 25px;
+  --gap-medium: 35px;
+  --gap-large: 80px;
+  --font-size-small: 0.9rem;
+  --font-size-medium: 1.1rem;
+  --icon-size: 35px;
+}
+
 .x-icon {
     background: none;
     background-color: transparent;
   }
 /* General styling */
-/* Header container */
 header {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Ensures space between the logo and menu */
-  padding: 10px 40px 20px 130px; /* Adds padding on both sides to bring elements inward */
-  background-color: #f8f8f8;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  justify-content: space-between;
+  padding: 10px var(--gap-medium) 20px 130px;
+  background-color: var(--background-color);
+  box-shadow: var(--box-shadow);
   height: 90px;
   max-width: 100%;
 }
 
 /* Logo styling */
 .logo {
-  display: inline-flex; /* Mantiene flexibilidad y centra contenido */
-    background-color: #007BFF; /* Cambia al color deseado */
-    padding: 30px 20px 20px 20px; /* Reduce el espacio en los lados */
-    border-radius: 0px; /* Esquinas redondeadas opcional */
-    width: fit-content
+  display: inline-flex;
+  background-color: var(--hover-color);
+  padding: 30px 20px 20px 20px;
+  border-radius: 0px;
+  width: fit-content;
 }
 
 .logo img {
@@ -29,10 +45,10 @@ header {
   height: 80px;
 }
 .mobile-options {
-  display: none; /* Hide mobile-specific options on larger views */
+  display: none;
 }
 .arrow {
-  display: none; /* Hide arrow on larger views */
+  display: none;
 }
 
 /* Menu styling */
@@ -51,23 +67,23 @@ header {
 }
 
 .navigation ul li a {
-  color: black;
+  color: var(--primary-color);
   text-decoration: none;
-  padding: 10px 15px; /* Adds space inside the link */
-  margin: 5px; /* Adds space between links */
-  display: inline-block; /* Ensures padding and margin apply properly */
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
-  font-size: 1.1rem;
+  padding: 10px 15px;
+  margin: 5px;
+  display: inline-block;
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+  font-size: var(--font-size-medium);
 }
 
 .navigation ul li a:hover {
-  color: #007BFF;
-  background-color: rgb(204, 236, 236);
+  color: var(--hover-color);
+  background-color: var(--text-hover-bg);
   border-radius: 5px;
 }
 
 .hamburger {
-  display: none; /* Hidden on desktop */
+  display: none;
   font-size: 24px;
   background: none;
   border: none;
@@ -75,19 +91,18 @@ header {
   margin-left: -80px;
 }
 /* Footer container */
-/* Footer container */
 .footer {
   display: flex;
   justify-content: space-between; /* Separates left and right sections */
   align-items: flex-start; /* Aligns content at the top */
-  background-color: #f8f8f8;
-  color: rgb(0, 0, 0);
-  padding: 10px 35px;
+  background-color: var(--background-color);
+  color: var(--primary-color);
+  padding: 10px var(--gap-medium);
   position: absolute;
   bottom: 1rem;
   left: 1rem;
   right: 1rem;
-  box-shadow: 0 2px 5px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--footer-shadow);
 }
 
 /* Left content styling */
@@ -96,33 +111,31 @@ header {
   margin: 0;
   padding: 0;
   display: flex;
-  gap: 80px;
+  gap: var(--gap-large);
 }
 
 .left-content ul li a {
-  color: black;
+  color: var(--primary-color);
   text-decoration: none;
   padding: 10px 5px;
   margin: 5px;
   display: inline-block;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  font-size: 1.1rem;
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+  font-size: var(--font-size-medium);
 }
 
 .left-content ul li a:hover {
-  color: #007BFF;
-  background-color: rgb(204, 236, 236);
+  color: var(--hover-color);
+  background-color: var(--text-hover-bg);
   border-radius: 5px;
 }
 
 /* Footer text styling */
 .footer-text {
-  
   margin-top: 10px; /* Adds space above the paragraph */
-  font-size: 0.9rem; /* Adjusts text size */
-  color: #555; /* Subtle text color */
+  font-size: var(--font-size-small);
+  color: var(--subtle-text-color);
 }
-
 /* Social icons styling */
 .social-icons {
   margin-right: 50px;
@@ -134,7 +147,7 @@ header {
 .social-icons a img {
   width: 35px; /* Icon size */
   height: auto; /* Maintains aspect ratio */
-  transition: transform 0.3s ease; /* Smooth hover effect */
+  transition: transform var(--transition-speed) ease;
 }
 
 .social-icons a img:hover {
