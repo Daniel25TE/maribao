@@ -36,7 +36,10 @@
         background-color: red;
         height: var(--line-height);
         width: 100%;
-        transition: transform var(--transition-speed) ease, opacity var(--transition-speed) ease;
+        transition: -webkit-transform 0.3s ease, opacity 0.3s ease; /* Safari compatibility */
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        min-height: 4px;
+        min-width: 30px;
     }
 
     .hamburger.is-active div:nth-child(1) {
