@@ -43,7 +43,7 @@
     }
 
     .hamburger.is-active div:nth-child(1) {
-        transform: rotate(55deg) translate(7px, 7px);
+        transform: rotate(55deg) translate(8px, 8px);
     }
 
     .hamburger.is-active div:nth-child(2) {
