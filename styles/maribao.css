@@ -90,7 +90,121 @@ header {
   cursor: pointer;
   margin-left: -80px;
 }
+/* Body*/
+.maintitle {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+}
+/* main picture*/
+.album {
+  position: relative;
+  width: 600px;
+  height: 550px;
+  margin: auto;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: visible; /* Allow side images to be seen */
+  max-width: 100%;
+  
+}
+
+
+.image-container img {
+  position: absolute;
+  width: 100%;
+  transition: all 0.4s ease-in-out;
+  border-radius: 10px;
+  object-fit: cover;
+  height: 100%;
+  max-width: 100%;
+  max-height: 80%;
+  width: 1000px;
+  
+}
+
+/* Main image centered */
+.current {
+  width: 60%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  z-index: 2;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Previous image visible on the left */
+.prev {
+  width: 40%;
+  left: 25%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  z-index: 1;
+  opacity: 0.6;
+}
+
+/* Next image visible on the right */
+.next {
+  width: 40%; /* Maintain a smaller size compared to the main image */
+  left: -20%; /* Adjust this to position the image closer to the main one */
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.9); /* Adjust scaling for proportion */
+  z-index: 1;
+  opacity: 0.6;
+}
+
+
+
+
+
+.prev-btn, .next-btn {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  
+  cursor: pointer;
+  font-size: 20px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.prev-btn {
+  left: -25px;
+}
+
+.next-btn {
+  right: -25px;
+}
+
+.prev-btn:hover, .next-btn:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.prev-btn, .next-btn {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 ;
+}
+.prev-btn, .next-btn {
+  z-index: 10; /* Ensure buttons appear above images */
+}
+
+
+
+/* close main picture*/
+
+/* close body*/
+
+
+
 /* Footer container */
+
 .footer {
   display: flex;
   justify-content: space-between; /* Separates left and right sections */
@@ -98,7 +212,6 @@ header {
   background-color: var(--background-color);
   color: var(--primary-color);
   padding: 10px var(--gap-medium);
-  position: absolute;
   bottom: 1rem;
   left: 1rem;
   right: 1rem;
