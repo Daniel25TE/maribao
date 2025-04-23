@@ -77,17 +77,21 @@ function showHome() {
     content.innerHTML = `
         <h1 class="maintitle">Bienvenidos a Maribao!</h1>
         <div class="album">
-            <div class="image-container">
-                <img src="https://picsum.photos/1000/550" class="current" alt="Current Image">
-                <img src="https://picsum.photos/1000/550" class="next" alt="Next Image">
-                <img src="https://picsum.photos/1000/550" class="prev" alt="Previous Image">
-                <img src="https://picsum.photos/1000/550" alt="Extra Image">
-                <img src="https://picsum.photos/1000/550" alt="Extra Image">
-                <img src="https://picsum.photos/1000/550" alt="Extra Image">
-            </div>
+            <div class="carousel-wrapper">
+                <div class="image-container">
+                    <img src="https://picsum.photos/1000/550" class="current" alt="Current Image">
+                    <img src="https://picsum.photos/1000/550" class="next" alt="Next Image">
+                    <img src="https://picsum.photos/1000/550" class="prev" alt="Previous Image">
+                    <img src="https://picsum.photos/1000/550" alt="Extra Image">
+                    <img src="https://picsum.photos/1000/550" alt="Extra Image">
+                    <img src="https://picsum.photos/1000/550" alt="Extra Image">
+                </div>
+            </div>    
             <button class="prev-btn">◀</button>
             <button class="next-btn">▶</button>
         </div>
+        <h1 class="maintitle">Bienvenidos a Maribao!</h1>
+        <h1 class="maintitle">Bienvenidos a Maribao!</h1>
     `;
 }
 

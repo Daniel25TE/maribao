@@ -96,22 +96,29 @@ header {
   color: var(--primary-color);
   display: flex;
   justify-content: center;
+  
 }
 /* main picture*/
 .album {
   position: relative;
-  width: 600px;
-  height: 550px;
+  width: 1200px;
+  height: 750px;
   margin: auto;
-  
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: visible; /* Allow side images to be seen */
+  padding-top: 0;
   max-width: 100%;
+  background-color: var(--hover-color);
   
 }
-
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Clips any overflowing images */
+  
+}
 
 .image-container img {
   position: absolute;
@@ -121,22 +128,14 @@ header {
   object-fit: cover;
   height: 100%;
   max-width: 100%;
-  max-height: 80%;
-  width: 1000px;
+  max-height: 100%;
+  margin-top: -3rem;
+  margin-bottom: -10rem;
+  
   
 }
 
 /* Main image centered */
-.current {
-  width: 60%;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%) scale(1);
-  z-index: 2;
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
-}
-
-/* Previous image visible on the left */
 .prev {
   width: 40%;
   left: 25%;
@@ -146,15 +145,24 @@ header {
   opacity: 0.6;
 }
 
-/* Next image visible on the right */
-.next {
-  width: 40%; /* Maintain a smaller size compared to the main image */
-  left: -20%; /* Adjust this to position the image closer to the main one */
+.current {
+  width: 60%;
+  left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%) scale(0.9); /* Adjust scaling for proportion */
+  transform: translate(-50%, -50%) scale(1);
+  z-index: 2;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+}
+
+.next {
+  width: 40%;
+  left: 75%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
   z-index: 1;
   opacity: 0.6;
 }
+
 
 
 
@@ -173,6 +181,7 @@ header {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  z-index: 10;
 }
 
 .prev-btn {

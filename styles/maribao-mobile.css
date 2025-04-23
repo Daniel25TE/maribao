@@ -32,7 +32,7 @@
         cursor: pointer;
     }
 
-    .hamburger div {
+    .hamburger span {
         background-color: red;
         height: var(--line-height);
         width: 100%;
@@ -42,15 +42,15 @@
         min-width: 30px;
     }
 
-    .hamburger.is-active div:nth-child(1) {
+    .hamburger.is-active span:nth-child(1) {
         transform: rotate(55deg) translate(8px, 8px);
     }
 
-    .hamburger.is-active div:nth-child(2) {
+    .hamburger.is-active span:nth-child(2) {
         opacity: 0;
     }
 
-    .hamburger.is-active div:nth-child(3) {
+    .hamburger.is-active span:nth-child(3) {
         transform: rotate(-55deg) translate(6px, -6px);
     }
     .logo {
