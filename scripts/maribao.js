@@ -1,5 +1,12 @@
 "use strict";
 
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted) {
+    // The page was restored from bfcache.
+    // Reinitialize state or reattach event listeners if needed.
+    console.log("Page restored from cache.");
+  }
+});
 // Update current year and last modified info
 (function updatePageInfo() {
   const currentYear = new Date().getFullYear();
@@ -35,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
   showHome();
 
   // Ensure images have native lazy loading enabled
-  applyLazyLoading();
+ 
 
   // Carousel logic
   const initCarousel = () => {
@@ -113,14 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
 /**
  * Ensures that all images in the carousel have the native lazy loading attribute.
  */
-function applyLazyLoading() {
-  const lazyImages = document.querySelectorAll(".image-container img");
-  lazyImages.forEach((img) => {
-    if (!img.hasAttribute("loading")) {
-      img.setAttribute("loading", "lazy");
-    }
-  });
-}
+
 
 /**
  * Inserts the home content into the element with class "verna".
@@ -134,12 +134,12 @@ function showHome() {
       <div class="album">
           <div class="carousel-wrapper">
               <div class="image-container">
-                  <img src="images/manta.webp" class="current" alt="Current Image" loading="lazy">
-                  <img src="images/quito.webp" class="next" alt="Next Image" loading="lazy">
-                  <img src="images/manta.webp" class="prev" alt="Previous Image" loading="lazy">
-                  <img src="images/quito.webp" alt="Extra Image" loading="lazy">
-                  <img src="images/manta.webp" alt="Extra Image" loading="lazy">
-                  <img src="images/quito.webp" alt="Extra Image" loading="lazy">
+                  <img src="images/manta.webp" class="current" alt="Current Image" >
+                  <img src="images/quito.webp" class="next" alt="Next Image" >
+                  <img src="images/manta.webp" class="prev" alt="Previous Image" >
+                  <img src="images/quito.webp" alt="Extra Image" >
+                  <img src="images/manta.webp" alt="Extra Image" >
+                  <img src="images/quito.webp" alt="Extra Image" >
               </div>
           </div>    
           <button class="prev-btn">◀</button>
@@ -190,6 +190,25 @@ function showHome() {
               <span>Habitaciones sin humo</span>
             </li>
         </ul>
+        <div class="container">
+          <!-- Contenedor de la información textual -->
+          <div class="info">
+            <h1 class="interactivemap">Ubicación excelente</h1>
+            <p class="interactivetextmap">Maribao Playa Paraiso, Engabao, General Villamil, Ecuador</p>
+            <a href="tel:+1234567890" class="call-us-map-interactive">
+              Tel: +123-456-7890
+            </a>
+            <p class="interactivetextmap">Está ubicado en una de las mejores playas de General Villamil</p>
+            <p class="interactivetextmap">106 km del aeropuerto</p>
+            <p class="interactivetextmap">10 min de la playa</p>
+            <p class="interactivetextmap">Restaurantes y cafeterías alrededor de 12 km</p>
+          </div>
+          <!-- Contenedor del mapa -->
+          <div class="map-container" >
+              <iframe width="768" height="576" src="https://maphub.net/embed_h/4vCvR6qe62fBbRqE?panel=1&panel_closed=1" frameborder="0"></iframe>
+             
+          </div>
+        </div>
     `;
   } else {
     console.error("Element with class 'verna' not found.");
