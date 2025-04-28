@@ -1,4 +1,6 @@
-
+window.onload = function() {
+  updatePageInfo();
+};
 // Update current year and last modified info
 function updatePageInfo() {
   const currentYear = new Date().getFullYear();
@@ -197,7 +199,7 @@ function showHome() {
           </div>
           <!-- Contenedor del mapa -->
           <div class="map-container" >
-            <iframe title="Interactive Map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3985.7793214073413!2d-80.49264022525449!3d-2.57830673840276!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x90320dd0f236bb69%3A0x46376d112e4e3e9f!2sMARIBAO!5e0!3m2!1ses-419!2sus!4v1745846208372!5m2!1ses-419!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>  
+            <iframe title="Interactive Map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3985.7793214073413!2d-80.49264022525449!3d-2.57830673840276!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x90320dd0f236bb69%3A0x46376d112e4e3e9f!2sMARIBAO!5e0!3m2!1ses-419!2sus!4v1745846208372!5m2!1ses-419!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                           
           </div>
         </div>
