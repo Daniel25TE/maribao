@@ -1,12 +1,4 @@
-"use strict";
 
-window.addEventListener("pageshow", (event) => {
-  if (event.persisted) {
-    // The page was restored from bfcache.
-    // Reinitialize state or reattach event listeners if needed.
-    console.log("Page restored from cache.");
-  }
-});
 // Update current year and last modified info
 (function updatePageInfo() {
   const currentYear = new Date().getFullYear();
