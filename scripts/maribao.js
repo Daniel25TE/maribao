@@ -1,6 +1,6 @@
 
 // Update current year and last modified info
-(function updatePageInfo() {
+function updatePageInfo() {
   const currentYear = new Date().getFullYear();
 
   const currentYearElem = document.getElementById("currentyear");
@@ -17,7 +17,7 @@
   if (lastModifiedElem) {
     lastModifiedElem.textContent = `Last Modified: ${document.lastModified}`;
   }
-})();
+};
 
 document.addEventListener("DOMContentLoaded", function () {
   // Hamburger Menu Functionality
