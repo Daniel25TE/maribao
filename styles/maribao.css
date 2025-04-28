@@ -117,7 +117,7 @@ header {
   align-items: center;
   padding-top: 0;
   max-width: 100%;
-  background-color: var(--hover-color);
+  
   
 }
 .carousel-wrapper {
@@ -221,7 +221,7 @@ header {
   margin: 0;
   padding: 0;
   justify-content: center; /* Opcional: centra las filas */
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 /* Estilo para cada opción */
@@ -268,6 +268,7 @@ header {
   gap: 20px;
   padding: 20px;
   background-color: var(--primary-color);
+  margin-bottom: 2rem;
 }
 /* Contenedor del contenido textual, ubicado a la izquierda */
 .info {
@@ -306,6 +307,29 @@ header {
   }
 }
 /* Close Interactive Map*/
+/* Open restaurants section*/
+.restaurants {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente el contenedor */
+  align-items: center; /* Centra verticalmente el contenedor */
+  margin-bottom: 2rem; /* Ocupa el alto completo de la pantalla */
+}
+
+.restaurant-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columnas uniformes */
+  gap: 20px; /* Espacio entre tarjetas */
+}
+
+.restaurant-card {
+  background-color: #f9f9f9; /* Fondo suave */
+  border-radius: 10px; /* Esquinas curvas */
+  padding: 15px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra moderna */
+  text-align: left;
+}
+
+/* Close restaurants section*/
 /* close body*/
 
 

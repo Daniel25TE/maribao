@@ -197,10 +197,46 @@ function showHome() {
           </div>
           <!-- Contenedor del mapa -->
           <div class="map-container" >
-              <iframe width="768" height="576" src="https://maphub.net/embed_h/4vCvR6qe62fBbRqE?panel=1&panel_closed=1" frameborder="0"></iframe>
-             
+            <iframe title="Interactive Map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3985.7793214073413!2d-80.49264022525449!3d-2.57830673840276!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x90320dd0f236bb69%3A0x46376d112e4e3e9f!2sMARIBAO!5e0!3m2!1ses-419!2sus!4v1745846208372!5m2!1ses-419!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>  
+                          
           </div>
         </div>
+
+        <h1 class="secondtitle">Restaurantes cercanos</h1>
+        <div class="restaurants">
+          <div class="restaurant-container">
+            <div class="restaurant-card">
+              <h2>Restaurante La Plaza</h2>
+              <p>Tipo de comida: Mexicana</p>
+              <p>Distancia: 0.5 millas</p>
+              <p>Dirección: 123 Main St, West Jordan</p>
+              <p>Teléfono: (801) 123-4567</p>
+            </div>
+            <div class="restaurant-card">
+              <h2>Café Sol</h2>
+              <p>Tipo de comida: Italiana</p>
+              <p>Distancia: 0.8 millas</p>
+              <p>Dirección: 456 Elm St, West Jordan</p>
+              <p>Teléfono: (801) 987-6543</p>
+            </div>
+            <div class="restaurant-card">
+              <h2>Delicias del Mar</h2>
+              <p>Tipo de comida: Mariscos</p>
+              <p>Distancia: 1.2 millas</p>
+              <p>Dirección: 789 Oak St, West Jordan</p>
+              <p>Teléfono: (801) 555-6789</p>
+            </div>
+            <div class="restaurant-card">
+              <h2>Café Aroma</h2>
+              <p>Tipo de comida: Cafetería</p>
+              <p>Distancia: 0.3 millas</p>
+              <p>Dirección: 321 Pine St, West Jordan</p>
+              <p>Teléfono: (801) 999-1111</p>
+            </div>
+          </div>
+        </div>
+
+
     `;
   } else {
     console.error("Element with class 'verna' not found.");
