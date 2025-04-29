@@ -330,6 +330,119 @@ header {
 }
 
 /* Close restaurants section*/
+
+/* Open Preguntas frequentes*/
+/* Contenedor de la sección FAQ */
+.faq-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 100px auto;
+}
+
+/* Cada ítem de FAQ */
+.faq-item {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+/* Estilo de la pregunta */
+.faq-question {
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  padding-right: 20px;
+}
+
+/* Indicador visual (más) */
+.faq-question::after {
+  content: '+';
+  position: absolute;
+  right: 0;
+  transition: transform 0.3s ease;
+}
+
+/* Estado activo: cambiamos el indicador */
+.faq-item.active .faq-question::after {
+  transform: rotate(45deg); /* Puedes ajustar o cambiar el símbolo si lo deseas */
+}
+
+/* Respuesta inicialmente oculta con transición suave */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+/* Estado activo: mostramos la respuesta */
+.faq-item.active .faq-answer {
+  max-height: 500px; /* Ajusta este valor según el contenido, o usa una alternativa como animaciones de altura automática */
+}
+
+/* Close Preguntas frequentes*/
+/* Open all services*/
+.hotel-services {
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* Cada tarjeta de categoría */
+.service-category {
+  border: 1px solid #ddd;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+/* Encabezado de la categoría que muestra el ícono y el título */
+.category-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.category-icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.category-header h3 {
+  font-size: 1.2rem;
+  margin: 0;
+  color: #333;
+}
+
+/* Lista de servicios */
+.service-list {
+  list-style: none;  /* Eliminamos la viñeta predeterminada */
+  padding: 0;
+  margin: 0;
+}
+
+.service-list li {
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* Pseudo-elemento para mostrar el icono de "visto" (check) */
+.service-list li::before {
+  content: "✔";
+  color: green;
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 1rem;
+  line-height: 1;
+}
+/* Close all services*/
 /* close body*/
 
 
