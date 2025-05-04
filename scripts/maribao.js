@@ -1,21 +1,24 @@
-// Función para actualizar la información de la página: año actual y última modificación
+fetch("images/manta.webp", {
+  headers: {
+    "Cache-Control": "public, max-age=31536000"
+  }
+});
+
+// Función para actualizar la información de la página (año actual)
 function updatePageInfo() {
   const currentYear = new Date().getFullYear();
-
-  const currentYearElem = document.getElementById("currentyear");
+  const currentYearElem = document.getElementById("currentyear-desktop");
   if (currentYearElem) {
     currentYearElem.textContent = currentYear;
   }
+}
 
-  const currentYearMobileElem = document.getElementById("currentyear-mobile");
-  if (currentYearMobileElem) {
-    currentYearMobileElem.textContent = currentYear;
-  }
-
-  const lastModifiedElem = document.getElementById("lastModified");
-  if (lastModifiedElem) {
-    lastModifiedElem.textContent = `Last Modified: ${document.lastModified}`;
-  }
+// Función para asignar los event listeners a la FAQ
+function attachFAQListeners() {
+  document.querySelectorAll(".faq-item").forEach(item => {
+    const question = item.querySelector(".faq-question");
+    question?.addEventListener("click", () => item.classList.toggle("active"));
+  });
 }
 
 // Función que inyecta el contenido de la home en el elemento con clase "verna"
@@ -28,12 +31,12 @@ function showHome() {
       <div class="album">
           <div class="carousel-wrapper">
               <div class="image-container">
-                  <img src="images/manta.webp" class="current" alt="Current Image" loading="lazy">
-                  <img src="images/quito.webp" class="next" alt="Next Image" loading="lazy">
-                  <img src="images/manta.webp" class="prev" alt="Previous Image" loading="lazy">
-                  <img src="images/quito.webp" alt="Extra Image" loading="lazy">
-                  <img src="images/manta.webp" alt="Extra Image" loading="lazy">
-                  <img src="images/quito.webp" alt="Extra Image" loading="lazy">
+                  <img src="images/manta.webp" class="current" alt="Current Image" loading="eager">
+                  <img src="images/quito.webp" class="next" alt="Next Image" loading="eager">
+                  <img src="images/manta.webp" class="prev" alt="Previous Image" loading="eager">
+                  <img src="images/quito.webp" alt="Extra Image" loading="eager">
+                  <img src="images/manta.webp" alt="Extra Image" loading="eager">
+                  <img src="images/quito.webp" alt="Extra Image" loading="eager">
               </div>
           </div>    
           <button class="prev-btn">◀</button>
@@ -44,43 +47,43 @@ function showHome() {
       
       <ul class="options-list">
           <li class="option-item">
-              <img src="images/house.svg" alt="house" loading="lazy" />
+              <img src="images/house.svg" alt="house"  />
               <span>Apartamentos</span>
           </li>
           <li class="option-item">
-              <img src="images/parking.svg" alt="parking" loading="lazy" />
+              <img src="images/parking.svg" alt="parking"  />
               <span>Parking gratis en el alojamiento</span>
           </li>
           <li class="option-item">
-              <img src="images/beach.svg" alt="beach" loading="lazy" />
+              <img src="images/beach.svg" alt="beach" />
               <span>Vistas al mar</span>
           </li>
           <li class="option-item">
-              <img src="images/footprints.svg" alt="footprints" loading="lazy" />
+              <img src="images/footprints.svg" alt="footprints" />
               <span>Admite mascotas</span>
           </li>
           <li class="option-item">
-              <img src="images/bathroom.svg" alt="bathroom" loading="lazy" />
+              <img src="images/bathroom.svg" alt="bathroom"  />
               <span>Baño privado</span>
           </li>
           <li class="option-item">
-              <img src="images/snow.svg" alt="snow" loading="lazy" />
+              <img src="images/snow.svg" alt="snow"  />
               <span>Aire acondicionado</span>
           </li>
           <li class="option-item">
-              <img src="images/balcony.svg" alt="balcony" loading="lazy" />
+              <img src="images/balcony.svg" alt="balcony"  />
               <span>Balcón</span>
           </li>
           <li class="option-item">
-              <img src="images/vistas.svg" alt="vista al mar" loading="lazy" />
+              <img src="images/vistas.svg" alt="vista al mar"  />
               <span>Vistas</span>
           </li>
           <li class="option-item">
-              <img src="images/family.svg" alt="family" loading="lazy" />
+              <img src="images/family.svg" alt="family"  />
               <span>Habitaciones familiares</span>
           </li>
           <li class="option-item">
-              <img src="images/nosmoking.svg" alt="nosmoking" loading="lazy" />
+              <img src="images/nosmoking.svg" alt="nosmoking"  />
               <span>Habitaciones sin humo</span>
           </li>
       </ul>
@@ -99,7 +102,7 @@ function showHome() {
           </div>
           <!-- Contenedor del mapa -->
           <div class="map-container">
-              <iframe title="Interactive Map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3985.7793214073413!2d-80.49264022525449!3d-2.57830673840276!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x90320dd0f236bb69%3A0x46376d112e4e3e9f!2sMARIBAO!5e0!3m2!1ses-419!2sus!4v1745846208372!5m2!1ses-419!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              <iframe title ="Interactive Map" width="100%" height="576" src="https://maphub.net/embed_h/4vCvR6qe62fBbRqE?panel=1&button=0" frameborder="0"></iframe>
           </div>
       </div>
 
@@ -143,7 +146,7 @@ function showHome() {
                   ¿Qué es Lorem Ipsum?
               </div>
               <div class="faq-answer">
-                  <p>Lorem Ipsum es simplemente el texto de relleno de la industria de la impresión y composición tipográfica. Se utiliza para simular contenido en diseños.</p>
+                  <p>Lorem Ipsum es simplemente el texto de relleno de la industria de impresión y composición tipográfica. Se utiliza para simular contenido en diseños.</p>
               </div>
           </div>
 
@@ -244,7 +247,6 @@ function showHome() {
               <li>Minibar</li>
             </ul>
           </div>
-
           <!-- Categoría: Mascotas -->
           <div class="service-category">
             <div class="category-header">
@@ -306,6 +308,11 @@ function showHome() {
           </div>
         </section>
     `;
+    setTimeout(() => {
+      initCarousel();
+      fixLazyLoading();
+      attachFAQListeners();  // Se re-asignan los eventos para la FAQ
+    }, 50);
   } else {
     console.error("Element with class 'verna' not found.");
   }
@@ -373,22 +380,52 @@ function initCarousel() {
   updateImages();
 }
 
+// Función para corregir el lazy-loading con IntersectionObserver
+function fixLazyLoading() {
+  const lazyImages = document.querySelectorAll("img[loading='lazy']");
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.setAttribute("loading", "eager");
+        observer.unobserve(entry.target);
+      }
+    });
+  });
+  lazyImages.forEach(img => observer.observe(img));
+}
+
 // Maneja la carga del DOM y garantiza que todas las funcionalidades se inicien en orden
 document.addEventListener("DOMContentLoaded", function() {
   // Actualizar la información de la página
   updatePageInfo();
 
-  // Funcionalidad para el menú hamburguesa
+  // Funcionalidad para el menú hamburguesa y cierre del menú al seleccionar una opción en mobile
   const hamburger = document.querySelector(".hamburger");
   const navigation = document.querySelector(".navigation");
   if (hamburger && navigation) {
     hamburger.addEventListener("click", function() {
       navigation.classList.toggle("active");
       hamburger.classList.toggle("is-active");
+      // Al hacer click en el botón de hamburguesa, contraer el footer en mobile
+      if (window.innerWidth <= 1060) {
+        const footer = document.querySelector(".footer");
+        if (footer) {
+          footer.classList.add("collapsed");
+        }
+      }
+    });
+    // Al hacer click en cualquier enlace de la navegación, cerrar el menú en mobile
+    document.querySelectorAll(".navigation a").forEach(link => {
+      link.addEventListener("click", function() {
+        if (window.innerWidth <= 1060) {
+          navigation.classList.remove("active");
+          hamburger.classList.remove("is-active");
+        }
+      });
     });
   }
 
-  // Inyectar el contenido de la home
+  // Inyectar el contenido de la home (se hará tanto al cargar la página como al pulsar "Overview")
   showHome();
 
   // Inicializar el carrusel de forma inmediata o mediante MutationObserver si aún no hay imágenes
@@ -409,19 +446,42 @@ document.addEventListener("DOMContentLoaded", function() {
       observer.observe(imageContainer, { childList: true });
     }
   }
-
-  // Configuración del comportamiento de la sección FAQ, comprobando la existencia de cada pregunta
-  const faqItems = document.querySelectorAll('.faq-container .faq-item');
-  faqItems.forEach(function(item) {
-    const question = item.querySelector('.faq-question');
-    if (question) {
-      question.addEventListener('click', function() {
-        item.classList.toggle('active');
-      });
-    }
-  });
 });
 
+// Seleccionamos el footer y configuramos su comportamiento
+document.addEventListener("DOMContentLoaded", function() {
+  function isMobile() {
+    return window.innerWidth <= 1060;
+  }
+
+  const footer = document.querySelector('.footer');
+  const collapseButton = footer.querySelector('.collapse-button');
+  // Aseguramos que el footer inicia expandido
+  footer.classList.remove('collapsed');
+
+  function collapseFooter() {
+    if (!footer.classList.contains('collapsed') && isMobile()) {
+      footer.classList.add('collapsed');
+    }
+  }
+
+  function expandFooter() {
+    footer.classList.remove('collapsed');
+  }
+
+  // Colapsar el footer al hacer scroll en mobile
+  window.addEventListener('scroll', function() {
+    if (isMobile()) {
+      collapseFooter();
+    }
+  });
+
+  // Al hacer click en el botón de colapso del footer se expande
+  collapseButton.addEventListener('click', function(e) {
+    e.stopPropagation();
+    expandFooter();
+  });
+});
 
 
 

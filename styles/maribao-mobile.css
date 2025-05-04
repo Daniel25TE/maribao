@@ -162,29 +162,5 @@
         color: var(--hover-color);
         background-color: var(--text-hover-bg);
     }
-    .footer {
-        flex-direction: column;
-        text-align: left;
-        padding: 15px;
-    }
-    
-    .left-content ul {
-        flex-direction: column;
-        gap: var(--gap-small);
-    }
-    .left-content ul li a {
-        margin: 10px;
-        padding: 0;
-    }
-    .social-icons {
-        margin: 15px 0 0 0.6rem;
-    }
 
-    .currentyear-mobile {
-        display: flex;
-    }
-
-    .currentyear-desktop {
-        display: none;
-    }
 }

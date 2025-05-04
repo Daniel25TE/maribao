@@ -14,11 +14,12 @@
     <title>Maribao a website to reserve hotel's rooms.</title>
 </head>
 <body>
+    <div class="wrapper">
     <header>
         <div class="logo">
         <img src="images/maribaoLogo.webp" alt="Beautiful landscape of Madagascar" width="85" height="80">
         </div>
-        <button class="hamburger">
+        <button title="Menu" class="hamburger">
             <span></span>
             <span></span>
             <span></span>
@@ -42,41 +43,36 @@
             </ul>
         </nav>
     </header>
-    <main>
+    <main class="content">
         <div class="verna">
 
         </div>
     </main>
     <footer class="footer">
-        <div class="left-content">
+        <div class="footer-top">
+          <div class="left-content">
             <ul>
-                <li><a href="#about">Sobre Maribao</a></li>
-                <li><a href="#contact">Contactanos</a></li>
-                <li><a href="#privacy">Preguntas Frequentes</a></li>
-                <li><a href="#privacy">Ayuda</a></li>
+              <li><a href="#about">Sobre Maribao</a></li>
+              <li><a href="#contact">Contáctanos</a></li>
+              <li><a href="#faq">Preguntas Frecuentes</a></li>
+              <li><a href="#help">Ayuda</a></li>
             </ul>
-            <p class="currentyear-desktop">
-                &copy; <span id="currentyear"></span> - Maribao. Todos los Derechos Reservados, Utah - United States.
-            </p>
-            <p id="lastModified"></p>
+          </div>
+          <div class="social-icons">
+            <a href="https://facebook.com"><img alt="Facebook" src="images/facebookIcon.svg" width="35" height="35"></a>
+            <a href="https://instagram.com"><img alt="Instagram" src="images/instagramIcon.svg" width="35" height="35"></a>
+            <a href="https://twitter.com"><img alt="Twitter" src="images/whatsappIcon.svg" width="35" height="35"></a>
+          </div>
         </div>
-        
-        <div class="social-icons">
-            <a href="https://facebook.com" target="_blank">
-                <img src="images/facebookIcon.svg" alt="Facebook" width="35" height="35">
-            </a>
-            <a href="https://instagram.com" target="_blank">
-                <img src="images/instagramIcon.svg" alt="Instagram" width="35" height="35">
-            </a>
-            <a href="https://twitter.com" target="_blank">
-                <img src="images/whatsappIcon.svg" alt="Twitter" width="35" height="35">
-            </a>
+        <div class="footer-bottom">
+          &copy; <span id="currentyear-desktop">2025</span> - Maribao. Todos los Derechos Reservados, Utah - United States.
         </div>
-        <p class="currentyear-mobile">
-            &copy; <span id="currentyear-mobile"></span> - Maribao. Todos los Derechos Reservados, Utah - United States.
-        </p>
-        
-    </footer>
-    
+        <!-- Este contenedor se usará para mostrar el botón de expansión en estado contraído -->
+        <div class="collapse-button">
+          <button>Footer</button>
+        </div>
+      </footer>
+      
+    </div>
 </body>
 </html>

@@ -2,11 +2,11 @@
   --primary-color: black;
   --hover-color: #007BFF;
   --background-color: #f8f8f8;
-  --text-hover-bg: rgb(204, 236, 236);
+  --text-hover-bg: rgb(204,236,236);
   --subtle-text-color: #555;
   --transition-speed: 0.3s;
-  --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  --footer-shadow: 0 2px 5px 5px rgba(0, 0, 0, 0.1);
+  --box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  --footer-shadow: 0 2px 5px 5px rgba(0,0,0,0.1);
   --gap-small: 25px;
   --gap-medium: 35px;
   --gap-large: 80px;
@@ -15,11 +15,26 @@
   --icon-size: 35px;
 }
 
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Asegura que el contenedor ocupe al menos la altura del viewport */
+}
+
 .x-icon {
-    background: none;
-    background-color: transparent;
-  }
-/* General styling */
+  background: transparent;
+}
+
+/* ==================================================
+   HEADER
+================================================== */
 header {
   display: flex;
   align-items: center;
@@ -31,12 +46,10 @@ header {
   max-width: 100%;
 }
 
-/* Logo styling */
 .logo {
   display: inline-flex;
   background-color: var(--hover-color);
   padding: 30px 20px 20px 20px;
-  border-radius: 0px;
   width: fit-content;
 }
 
@@ -44,18 +57,16 @@ header {
   width: 85px;
   height: 80px;
 }
-.mobile-options {
-  display: none;
-}
+
+.mobile-options,
 .arrow {
   display: none;
 }
 
-/* Menu styling */
 .navigation {
-  flex-basis: 80%; /* Adjusts the space for the menu */
+  flex-basis: 80%;
   display: flex;
-  justify-content: center; /* Centers the menu within its space */
+  justify-content: center;
 }
 
 .navigation ul {
@@ -72,8 +83,8 @@ header {
   padding: 10px 15px;
   margin: 5px;
   display: inline-block;
-  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
   font-size: var(--font-size-medium);
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
 }
 
 .navigation ul li a:hover {
@@ -90,14 +101,17 @@ header {
   cursor: pointer;
   margin-left: -80px;
 }
-/* Body*/
+
+/* ==================================================
+   TITULOS Y TEXTOS
+================================================== */
 .maintitle {
   font-size: 2.5rem;
   color: var(--primary-color);
   display: flex;
   justify-content: center;
-  
 }
+
 .secondtitle {
   font-size: 2rem;
   color: var(--primary-color);
@@ -106,7 +120,10 @@ header {
   text-align: center;
   margin: 2rem;
 }
-/* main picture*/
+
+/* ==================================================
+   MAIN PICTURE & CAROUSEL
+================================================== */
 .album {
   position: relative;
   width: 1200px;
@@ -115,36 +132,29 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 0;
   max-width: 100%;
-  
-  
 }
+
 .carousel-wrapper {
   position: relative;
   width: 100%;
   height: 100%;
-  overflow: hidden; /* Clips any overflowing images */
-  
-  
+  overflow: hidden;
 }
 
 .image-container img {
   position: absolute;
-  width: 100%;
-  will-change: transform, opacity;
-  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
   border-radius: 10px;
   object-fit: cover;
-  height: 100%;
-  max-width: 100%;
-  max-height: 100%;
+  will-change: transform, opacity;
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
   width: 1200px;
   height: 600px;
-  
+  max-width: 100%;
+  max-height: 100%;
 }
 
-/* Main image centered */
+/* Posicionamiento de las imágenes del carousel */
 .prev {
   width: 40%;
   left: 25%;
@@ -160,7 +170,7 @@ header {
   top: 50%;
   transform: translate(-40%, -50%) scale(1);
   z-index: 2;
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 8px 15px rgba(0,0,0,0.4);
 }
 
 .next {
@@ -172,11 +182,12 @@ header {
   opacity: 0.6;
 }
 
-.prev-btn, .next-btn {
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
+/* Botones de navegación */
+.prev-btn,
+.next-btn {
+  background-color: rgba(0,0,0,0.5);
+  color: #fff;
   border: none;
-  
   cursor: pointer;
   font-size: 20px;
   border-radius: 50%;
@@ -186,52 +197,39 @@ header {
   top: 50%;
   transform: translateY(-50%);
   z-index: 10;
-}
-
-.prev-btn {
-  left: -25px;
-}
-
-.next-btn {
-  right: -25px;
-}
-
-.prev-btn:hover, .next-btn:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-}
-.prev-btn, .next-btn {
   display: block !important;
   visibility: visible !important;
-  opacity: 1 ;
-}
-.prev-btn, .next-btn {
-  z-index: 10; /* Ensure buttons appear above images */
+  opacity: 1;
 }
 
+.prev-btn { left: -25px; }
+.next-btn { right: -25px; }
 
+.prev-btn:hover,
+.next-btn:hover {
+  background-color: rgba(0,0,0,0.8);
+}
 
-/* close main picture*/
-/* open list of services*/
-
+/* ==================================================
+   LISTA DE SERVICIOS
+================================================== */
 .options-list {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   list-style: none;
-  margin: 0;
+  margin: 0 0 2rem;
   padding: 0;
-  justify-content: center; /* Opcional: centra las filas */
-  margin-bottom: 2rem;
+  justify-content: center;
 }
 
-/* Estilo para cada opción */
 .option-item {
-  flex: 0 1 calc(16% - 1rem); /* 20% del ancho menos el gap */
+  flex: 0 1 calc(16% - 1rem);
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 120px; /* Ajusta según lo que necesites */
+  width: 120px;
   padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -239,113 +237,110 @@ header {
   transition: background-color 0.3s ease;
 }
 
-/* Efecto hover para una retroalimentación visual (opcional) */
 .option-item:hover {
   background-color: #eaeaea;
 }
 
-/* Estilos para el icono */
 .option-item img {
   width: 40px;
   height: 40px;
   margin-bottom: 0.5rem;
 }
 
-/* Estilos para el texto */
 .option-item span {
   font-size: 0.9rem;
   color: #333;
   text-align: center;
 }
 
-/* close list of services*/
-/* Open Interactive Map*/
+/* ==================================================
+   MAPA INTERACTIVO
+================================================== */
 .container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center; /* centra verticalmente ambos bloques dentro del contenedor */
+  align-items: center;
   gap: 20px;
   padding: 20px;
   background-color: var(--primary-color);
   margin-bottom: 2rem;
 }
-/* Contenedor del contenido textual, ubicado a la izquierda */
+
 .info {
   flex: 1;
   min-width: 300px;
   text-align: center;
   color: white;
 }
+
 .interactivemap {
   font-size: 2.5rem;
 }
+
 .call-us-map-interactive {
   color: white;
-  
-  
 }
+
 .interactivetextmap {
   font-size: 1.2rem;
- 
-  margin-bottom: 20px;
 }
-/* Contenedor del mapa, ubicado a la derecha */
+
 .map-container {
   flex: 1;
   min-width: 300px;
   display: flex;
-  
 }
-/* Opcional: Ajuste responsive para dispositivos pequeños */
+
+/* Responsive para el mapa */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
   }
-  .map-container, .info {
+  .map-container,
+  .info {
     width: 100%;
   }
 }
-/* Close Interactive Map*/
-/* Open restaurants section*/
+
+/* ==================================================
+   SECCIÓN RESTAURANTES
+================================================== */
 .restaurants {
   display: flex;
-  justify-content: center; /* Centra horizontalmente el contenedor */
-  align-items: center; /* Centra verticalmente el contenedor */
-  margin-bottom: 2rem; /* Ocupa el alto completo de la pantalla */
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
 }
 
 .restaurant-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 columnas uniformes */
-  gap: 20px; /* Espacio entre tarjetas */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
 }
 
 .restaurant-card {
-  background-color: #f9f9f9; /* Fondo suave */
-  border-radius: 10px; /* Esquinas curvas */
+  background-color: #f9f9f9;
+  border-radius: 10px;
   padding: 15px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra moderna */
+  box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
   text-align: left;
 }
 
-/* Close restaurants section*/
-
-/* Open Preguntas frequentes*/
-/* Contenedor de la sección FAQ */
+/* ==================================================
+   SECCIÓN FAQ
+================================================== */
 .faq-container {
   width: 100%;
   max-width: 600px;
   margin: 100px auto;
 }
 
-/* Cada ítem de FAQ */
 .faq-item {
   border-bottom: 1px solid #ddd;
   padding: 10px 0;
 }
 
-/* Estilo de la pregunta */
 .faq-question {
   font-weight: bold;
   cursor: pointer;
@@ -353,7 +348,6 @@ header {
   padding-right: 20px;
 }
 
-/* Indicador visual (más) */
 .faq-question::after {
   content: '+';
   position: absolute;
@@ -361,25 +355,23 @@ header {
   transition: transform 0.3s ease;
 }
 
-/* Estado activo: cambiamos el indicador */
 .faq-item.active .faq-question::after {
-  transform: rotate(45deg); /* Puedes ajustar o cambiar el símbolo si lo deseas */
+  transform: rotate(45deg);
 }
 
-/* Respuesta inicialmente oculta con transición suave */
 .faq-answer {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease;
 }
 
-/* Estado activo: mostramos la respuesta */
 .faq-item.active .faq-answer {
-  max-height: 500px; /* Ajusta este valor según el contenido, o usa una alternativa como animaciones de altura automática */
+  max-height: 500px;
 }
 
-/* Close Preguntas frequentes*/
-/* Open all services*/
+/* ==================================================
+   ALL SERVICES
+================================================== */
 .hotel-services {
   width: 100%;
   max-width: 1200px;
@@ -390,7 +382,6 @@ header {
   gap: 20px;
 }
 
-/* Cada tarjeta de categoría */
 .service-category {
   border: 1px solid #ddd;
   padding: 20px;
@@ -398,7 +389,6 @@ header {
   border-radius: 5px;
 }
 
-/* Encabezado de la categoría que muestra el ícono y el título */
 .category-header {
   display: flex;
   align-items: center;
@@ -417,11 +407,10 @@ header {
   color: #333;
 }
 
-/* Lista de servicios */
 .service-list {
-  list-style: none;  /* Eliminamos la viñeta predeterminada */
-  padding: 0;
+  list-style: none;
   margin: 0;
+  padding: 0;
 }
 
 .service-list li {
@@ -432,7 +421,6 @@ header {
   color: #555;
 }
 
-/* Pseudo-elemento para mostrar el icono de "visto" (check) */
 .service-list li::before {
   content: "✔";
   color: green;
@@ -442,75 +430,166 @@ header {
   font-size: 1rem;
   line-height: 1;
 }
-/* Close all services*/
-/* close body*/
 
-
-
-/* Footer container */
-
+/* ==================================================
+   FOOTER
+================================================== */
+/* --- Footer general --- */
+/* Footer simplificado */
 .footer {
-  display: flex;
-  justify-content: space-between; /* Separates left and right sections */
-  align-items: flex-start; /* Aligns content at the top */
+  position: sticky;
+  bottom: 0;
   background-color: var(--background-color);
   color: var(--primary-color);
-  padding: 10px var(--gap-medium);
-  bottom: 1rem;
-  left: 1rem;
-  right: 1rem;
-  box-shadow: var(--footer-shadow);
+  padding: 20px var(--gap-medium);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  
+  /* Limitar el ancho solo al contenido */
+  max-width: 1200px; /* Ajusta el valor según el diseño */
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px; /* Opcional, para bordes suaves */
+  z-index: 9999;
 }
 
-/* Left content styling */
-.left-content ul {
+/* Bloque superior */
+.footer-top {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer .left-content {
+  padding-right: 3rem;
+}
+/* Lista de enlaces */
+.footer .left-content ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
-  gap: var(--gap-large);
+  gap: 1rem;
 }
 
-.left-content ul li a {
-  color: var(--primary-color);
+.footer .left-content ul li a {
   text-decoration: none;
+  color: var(--primary-color);
+  font-size: var(--font-size-medium);
   padding: 10px 5px;
   margin: 5px;
-  display: inline-block;
-  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
-  font-size: var(--font-size-medium);
+  /* Sin transición de propiedades que impacten el layout */
 }
 
-.left-content ul li a:hover {
-  color: var(--hover-color);
+.footer .left-content ul li a:hover {
   background-color: var(--text-hover-bg);
+  color: var(--hover-color);
   border-radius: 5px;
 }
 
-/* Footer text styling */
-.footer-text {
-  margin-top: 10px; /* Adds space above the paragraph */
+/* Íconos sociales con dimensiones fijas */
+.footer .social-icons {
+  display: flex;
+  gap: 25px;
+}
+
+.footer .social-icons a img {
+  width: 35px;
+  height: 35px;
+  /* Evitamos transiciones que puedan provocar reflow */
+}
+
+/* Bloque inferior con dimensiones reservadas */
+.footer-bottom {
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 10px;
+  min-height: 24px;
   font-size: var(--font-size-small);
   color: var(--subtle-text-color);
-}
-/* Social icons styling */
-.social-icons {
-  margin-right: 50px;
-  margin-top: 30px;
-  display: flex;
-  gap: 25px; /* Adds space between social icons */
+  text-align: left;
 }
 
-.social-icons a img {
-  width: 35px; /* Icon size */
-  height: 35px; /* Maintains aspect ratio */
-  transition: transform var(--transition-speed) ease;
+.footer-bottom #currentyear-desktop {
+  display: inline-block;
+  width: 40px;
+}
+.collapse-button {
+  display: none;
 }
 
-.social-icons a img:hover {
-  transform: scale(1.2); /* Enlarges the icon slightly on hover */
+@media screen and (max-width: 1060px) {
+  
+  /* Reducir padding general y ajustar el ancho de los bloques */
+  .footer {
+    padding: 15px var(--gap-small);
+  }
+  
+  /* Apilar verticalmente los elementos en la parte superior */
+  .footer-top {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+  }
+  .footer .left-content {
+    padding-right: 0rem;
+  }
+  /* Apilar la lista de enlaces */
+  .footer .left-content ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  /* Centrar los iconos sociales y ajustar espacio */
+  .footer .social-icons {
+    margin-top: 10px;
+  }
+  
+  /* Centrar el bloque inferior */
+  .footer-bottom {
+    text-align: center;
+    font-size: 0.8rem; /* Ajusta el tamaño de fuente para móviles */
+    margin-top: 10px;
+  }
+  .footer.collapsed .footer-top,
+  .footer.collapsed .footer-bottom {
+    display: none;
+  }
+  .collapse-button {
+    display: none;
+  }
+  .footer.collapsed .collapse-button {
+    display: block;
+    position: fixed;
+    bottom: 10px;
+    
+    z-index: 1000;
+  }
+  
+  .collapse-button button {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    transition: background-color 0.3s ease;
+  }
+  
+  .collapse-button button:hover {
+    background-color: rgba(0, 0, 0, 0.85);
+  }
 }
 
-.currentyear-mobile {
-  display: none; /* Adds space above the paragraph */
-}
+
+
+
+
+
