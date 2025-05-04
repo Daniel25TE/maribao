@@ -1,78 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="This site promotes Hotel Maribao, located in General Villamil, 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="This site promotes Hotel Maribao, located in General Villamil, 
     Guayas Province, Ecuador. It includes features like hotel information, room booking options, 
     a photo gallery, and a section for guest reviews.">
-    <meta name="author" content="Daniel Llumiquinga">
-    <link rel="icon" href="images/maribaoLogo2.ico" type="image/x-icon">
-    <link rel="stylesheet" href="styles/maribao.css">
-    <link rel="stylesheet" href="styles/maribao-mobile.css">
-    <script src="scripts/maribao.js" defer></script>
-    <title>Maribao a website to reserve hotel's rooms.</title>
+  <meta name="author" content="Daniel Llumiquinga">
+  <link rel="icon" href="images/maribaoLogo2.ico" type="image/x-icon">
+  <link rel="stylesheet" href="styles/maribao.css">
+  <link rel="stylesheet" href="styles/maribao-mobile.css">
+  <script src="scripts/maribao.js" defer></script>
+  <title>Maribao a website to reserve hotel's rooms.</title>
 </head>
-<body>
-    <div class="wrapper">
-    <header>
-        <div class="logo">
-        <img src="images/maribaoLogo.webp" alt="Beautiful landscape of Madagascar" width="85" height="80">
-        </div>
-        <button title="Menu" class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <nav class="navigation">
-            <div class="mobile-options">
-                <a href="#viewmap" class="view-map">
-                    <img src="images/location.svg" alt="Location Icon" width="20" height="20">View Map
-                </a>
 
-                <a href="tel:+1234567890" class="call-us">
-                    <img src="images/whatsappIcon.svg" alt="Phone Icon" width="20" height="20"> +123-456-7890
-                </a>
-            </div>
-            <ul>
-                <li><a href="#" onclick="showHome()">Overview <img src="images/rightarrow.svg" class="arrow" alt="Phone Icon" width="20" height="20"></a></li>
-                <li><a href="#" id="manta" title="Manta">Find and Reserve <img src="images/rightarrow.svg" class="arrow" alt="Phone Icon" width="20" height="20"></a></li>
-                <li><a href="#" id="quito" title="Quito">Gallery <img src="images/rightarrow.svg" class="arrow" alt="Phone Icon" width="20" height="20"></a></li>
-                <li><a href="#" id="cuenca" title="Cuenca">Accomodations <img src="images/rightarrow.svg" class="arrow" alt="Phone Icon" width="20" height="20"></a></li>
-                <li><a href="#" onclick="showContact()">Experiences <img src="images/rightarrow.svg" class="arrow" alt="Phone Icon" width="20" height="20"></a></li>
-            </ul>
-        </nav>
+<body>
+  <div class="wrapper">
+    <header>
+      <div class="logo">
+        <img src="images/maribaoLogo.webp" alt="Beautiful landscape of Madagascar" width="85" height="80">
+      </div>
+      <button title="Menu" class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="navigation">
+        <div class="mobile-options">
+          <a href="#viewmap" class="view-map">
+            <img src="images/location.svg" alt="Location Icon" width="20" height="20">View Map
+          </a>
+
+          <a href="tel:+1234567890" class="call-us">
+            <img src="images/whatsappIcon.svg" alt="Phone Icon" width="20" height="20"> +123-456-7890
+          </a>
+        </div>
+        <ul>
+          <li><a href="#" onclick="showHome()">Overview <img src="images/rightarrow.svg" class="arrow" alt="Phone Icon"
+                width="20" height="20"></a></li>
+          <li><a href="#" id="manta" title="Manta">Find and Reserve <img src="images/rightarrow.svg" class="arrow"
+                alt="Phone Icon" width="20" height="20"></a></li>
+          <li><a href="#" id="quito" title="Quito">Gallery <img src="images/rightarrow.svg" class="arrow"
+                alt="Phone Icon" width="20" height="20"></a></li>
+          <li><a href="#" id="cuenca" title="Cuenca">Accomodations <img src="images/rightarrow.svg" class="arrow"
+                alt="Phone Icon" width="20" height="20"></a></li>
+          <li><a href="#" onclick="showContact()">Experiences <img src="images/rightarrow.svg" class="arrow"
+                alt="Phone Icon" width="20" height="20"></a></li>
+        </ul>
+      </nav>
     </header>
     <main class="content">
-        <div class="verna">
+      <div class="verna">
 
-        </div>
+      </div>
     </main>
     <footer class="footer">
-        <div class="footer-top">
-          <div class="left-content">
-            <ul>
-              <li><a href="#about">Sobre Maribao</a></li>
-              <li><a href="#contact">Contáctanos</a></li>
-              <li><a href="#faq">Preguntas Frecuentes</a></li>
-              <li><a href="#help">Ayuda</a></li>
-            </ul>
-          </div>
-          <div class="social-icons">
-            <a href="https://facebook.com"><img alt="Facebook" src="images/facebookIcon.svg" width="35" height="35"></a>
-            <a href="https://instagram.com"><img alt="Instagram" src="images/instagramIcon.svg" width="35" height="35"></a>
-            <a href="https://twitter.com"><img alt="Twitter" src="images/whatsappIcon.svg" width="35" height="35"></a>
-          </div>
+      <div class="footer-top">
+        <div class="left-content">
+          <ul>
+            <li><a href="#about">Sobre Maribao</a></li>
+            <li><a href="#contact">Contáctanos</a></li>
+            <li><a href="#faq">Preguntas Frecuentes</a></li>
+            <li><a href="#help">Ayuda</a></li>
+          </ul>
         </div>
-        <div class="footer-bottom">
-          &copy; <span id="currentyear-desktop">2025</span> - Maribao. Todos los Derechos Reservados, Utah - United States.
+        <div class="social-icons">
+          <a href="https://facebook.com"><img alt="Facebook" src="images/facebookicon.svg" width="35" height="35"></a>
+          <a href="https://instagram.com"><img alt="Instagram" src="images/instagramicon.svg" width="35"
+              height="35"></a>
+          <a href="https://twitter.com"><img alt="Twitter" src="images/whatsappicon.svg" width="35" height="35"></a>
         </div>
-        <!-- Este contenedor se usará para mostrar el botón de expansión en estado contraído -->
-        <div class="collapse-button">
-          <button>Footer</button>
-        </div>
-      </footer>
-      
-    </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; <span id="currentyear-desktop">2025</span> - Maribao. Todos los Derechos Reservados, Utah - United
+        States.
+      </div>
+      <!-- Este contenedor se usará para mostrar el botón de expansión en estado contraído -->
+      <div class="collapse-button">
+        <button>Footer</button>
+      </div>
+    </footer>
+
+  </div>
 </body>
+
 </html>
