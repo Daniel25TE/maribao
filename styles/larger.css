@@ -11,6 +11,10 @@ body {
     padding: 1rem;
     background-color: #f4f4f4;
     overflow-x: hidden;
+    font-family: "Sansation", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
 
 }
 
@@ -21,7 +25,7 @@ header {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 1rem;
+
     background-color: #333;
     color: white;
 }
@@ -32,6 +36,9 @@ header {
     align-items: center;
     gap: 1rem;
     margin: 1rem;
+    font-family: "Sansation", sans-serif;
+    font-weight: 700;
+    font-style: normal;
 }
 
 
@@ -63,6 +70,8 @@ nav {
     width: 100%;
     background-color: #222;
     padding: 0.5rem 0;
+
+
 }
 
 .navigation {
@@ -90,6 +99,7 @@ nav {
 
 .navigation a:hover {
     background-color: #555;
+    border-radius: 5px;
 }
 
 
@@ -104,10 +114,30 @@ main {
 h1 {
     text-align: left;
     margin-bottom: 1rem;
+    font-family: "Sansation", sans-serif;
+    font-weight: 700;
+    font-style: normal;
 }
 
 h2 {
     text-align: center;
+    font-family: "Sansation", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    background-color: lightblue;
+
+    margin: 0;
+
+    padding: 10px;
+
+    width: calc(100% + 40px);
+
+    position: relative;
+    left: -20px;
+
+    top: -20px;
+
+
 }
 
 
@@ -121,25 +151,37 @@ h2 {
 .section-left {
     flex: 2;
     background-color: white;
-    padding: 1.5rem;
+
     border-radius: 5px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+
+    padding: 1.5rem;
+
+
 }
 
 .section-right {
     flex: 1;
     background-color: white;
-    padding: 1.5rem;
+
     border-radius: 5px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+
+    padding: 1.5rem;
+
 }
 
 .section-full {
     width: 100%;
     background-color: white;
-    padding: 1.5rem;
     border-radius: 5px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+
+    padding: 1.5rem;
+
     margin-top: 1.5rem;
 }
 
@@ -184,6 +226,17 @@ button {
     border-radius: 5px;
     transition: background-color 0.3s ease, transform 0.2s ease;
     width: 20%;
+
+}
+
+#lineContainer {
+    height: 1px;
+
+    background-color: rgb(165, 164, 164);
+
+    width: 100%;
+
+    margin: 5px 0;
 
 }
 

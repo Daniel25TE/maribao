@@ -119,8 +119,12 @@ document.addEventListener("DOMContentLoaded", () => {
         button.textContent = `${category}`;
         button.dataset.category = category;
         buttonContainer.appendChild(button);
+
     });
 
+    const lineContainer = document.createElement("div");
+    lineContainer.id = "lineContainer";
+    certificateSection.appendChild(lineContainer);
 
     const courseContainer = document.createElement("div");
     courseContainer.id = "courseContainer";
