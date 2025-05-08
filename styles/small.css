@@ -65,6 +65,17 @@
         width: 100%;
     }
 
+    .historic-center {
+        text-align: center;
+        color: black;
+    }
+
+
+
+    .historic-center-description {
+        margin: 1rem;
+    }
+
     #courseContainer {
         display: block;
 

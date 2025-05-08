@@ -185,6 +185,15 @@ h2 {
     margin-top: 1.5rem;
 }
 
+.historic-center {
+    text-align: center;
+    color: black;
+}
+
+.historic-center-description {
+    margin: 1rem;
+}
+
 #courseContainer {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
