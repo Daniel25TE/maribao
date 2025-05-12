@@ -19,9 +19,9 @@
     }
 
 
-    .navigation {
-        display: none;
 
+    #animateme {
+        display: flex;
         flex-direction: column;
         background-color: #222;
         position: absolute;
@@ -29,13 +29,19 @@
         left: 0;
         width: 100%;
         z-index: 500;
-
+        padding: 10px;
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        transition: max-height 0.4s ease-out, opacity 0.4s ease-out;
     }
 
-    .navigation.active {
-        display: flex;
-
+    #animateme.active {
+        max-height: 500px;
+        opacity: 1;
     }
+
+
 
 
     header,
