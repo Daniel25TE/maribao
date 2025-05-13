@@ -15,10 +15,60 @@
         content="https://raw.githubusercontent.com/Daniel25TE/wdd231/refs/heads/main/images/ecuadorflag.webp" />
     <meta property="og:url" content="https://daniel25te.github.io/wdd231/">
     <meta property="og:type" content="website">
+    <script src="scripts/chamber.js" defer></script>
+    <link rel="stylesheet" href="styles/chamber-large.css">
     <title>Directory Page</title>
 </head>
 
 <body>
+    <header>
+        <div class="header-top">
+            <img src="images/ecuadorflag.webp" alt="Daniel A. Llumiquinga" width="120" height="95">
+            <div class="header-text">
+                <span>Quito</span>
+                <span>Chamber of Commerce</span>
+            </div>
+        </div>
+
+        <a id="circle-mobile"><img alt="Circlehalf" src="images/circlehalf.svg" width="35" height="35"></a>
+        <button class="hamburger-menu" type="button">☰</button>
+
+        <nav id="animateme">
+            <ul class="navigation">
+                <li><a href="index.html" id="home" title="Home">Home</a></li>
+                <li><a href="#" id="directory" title="Directory">Directory</a></li>
+                <li><a href="#" id="join" title="Join">Join</a></li>
+                <li><a href="#" id="discover" title="Discover">Discover</a></li>
+                <a id="circle-desktop"><img alt="Circlehalf" src="images/circlehalf.svg" width="35" height="35"></a>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="directory"></div>
+        <p>sdfghj</p>
+    </main>
+    <footer>
+        <section class="contact-info">
+            <h2>Quito Chamber of Commerce</h2>
+            <p>25 Rafael Illescas, Calderon 2509</p>
+            <p>info@quitocc.org</p>
+            <p>(123) 456-789</p>
+        </section>
+
+        <section class="social-links">
+            <h2>Síguenos</h2>
+            <a href="https://facebook.com"><img alt="Youtube" src="images/youtube.svg" width="35" height="35"></a>
+            <a href="https://instagram.com"><img alt="Twitter" src="images/twitter.svg" width="35" height="35"></a>
+            <a href="https://twitter.com"><img alt="Indeed" src="images/indeed.svg" width="35" height="35"></a>
+        </section>
+
+        <section class="copyright">
+            <p>WDD231 Class Project</p>
+            <p>Daniel A. Llumiquinga</p>
+            <p>&copy; <span id="year"></span> Quito Chamber of Commerce</p>
+            <p>Last Modification: <span id="last-modified"></span></p>
+        </section>
+    </footer>
 
 </body>
 

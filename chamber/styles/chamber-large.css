@@ -1,0 +1,145 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #333;
+    color: white;
+}
+
+.header-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-top img {
+    width: 120px;
+    height: 95px;
+    object-fit: cover;
+}
+
+.header-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.header-text span:first-of-type {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.header-text span:last-of-type {
+    font-size: 1rem;
+    opacity: 0.7;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.profile-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+#animateme {
+    display: flex;
+    gap: 20px;
+}
+
+.navigation {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.navigation a {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    padding: 10px;
+    transition: color 0.3s ease-in-out;
+}
+
+.navigation a:hover {
+    color: #f4a261;
+}
+
+#circle-mobile {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .nav-container {
+        justify-content: flex-end;
+    }
+
+    .navigation {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .hamburger-menu {
+        position: relative;
+        z-index: 10;
+    }
+
+    #animateme {
+        max-height: 0;
+        overflow: hidden;
+        flex-direction: column;
+        align-items: center;
+        background-color: #333;
+        width: 82%;
+        padding: 0;
+        position: absolute;
+        top: 20%;
+        transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+    }
+
+    #animateme.active {
+        max-height: 200px;
+        padding: 10px;
+    }
+
+    #circle-mobile {
+        display: flex;
+    }
+
+    #circle-desktop {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    #animateme {
+        display: flex !important;
+    }
+}
+
+.hamburger-menu {
+    display: none;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .hamburger-menu {
+        display: block;
+    }
+}
