@@ -40,12 +40,7 @@ header {
     gap: 15px;
 }
 
-.profile-image {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    object-fit: cover;
-}
+
 
 .nav-container {
     display: flex;
@@ -71,6 +66,8 @@ header {
     padding: 10px;
     transition: color 0.3s ease-in-out;
 }
+
+
 
 .navigation a:hover {
     color: #f4a261;
