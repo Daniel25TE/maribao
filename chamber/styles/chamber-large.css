@@ -155,36 +155,65 @@ nav {
 }
 
 /* Footer */
+/* Estilos base para el footer */
 footer {
-    background: var(--bg-footer);
-    color: var(--text-color);
-    padding: 20px 0;
-}
+    background-color: #363636;
 
-.footer-container {
+    color: #fff;
+
+    padding: 2rem 1rem;
+
     display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
     flex-wrap: wrap;
-    max-width: 90%;
-    margin: 0 auto;
+
+
+
 }
 
 
-.footer-container>section {
+footer section {
     flex: 1;
+
+    min-width: 250px;
+
     padding: 0 1rem;
 }
 
-.footer-container>section.contact-info {
-    text-align: left;
+
+footer h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
 }
 
-.footer-container>section.social-links {
-    text-align: center;
+
+footer p {
+    font-size: 1rem;
+    margin: 0.5rem 0;
 }
 
-.footer-container>section.copyright {
-    text-align: right;
+footer a {
+    color: #fff;
+    text-decoration: none;
 }
+
+
+.social-links a {
+    display: inline-block;
+    margin: 0.25rem;
+
+}
+
+.social-links img {
+    width: 35px;
+    height: 35px;
+    transition: transform 0.3s ease;
+
+}
+
 
 
 

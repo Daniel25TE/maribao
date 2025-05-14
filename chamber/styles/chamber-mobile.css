@@ -116,24 +116,17 @@
     }
 }
 
-@media (max-width: 957px) {
-    .footer-container {
+@media screen and (max-width: 768px) {
+    footer {
         flex-direction: column;
-        align-items: center;
-        padding: 20px 1rem;
-    }
 
-    .footer-container>section {
-        width: 100%;
-        margin-bottom: 1rem;
         text-align: center;
     }
 
-    .footer-container>section:last-child {
-        margin-bottom: 0;
+    footer section {
+        margin-bottom: 1rem;
     }
 }
-
 
 @media (max-width: 957px) {
     #cardsContainer {
