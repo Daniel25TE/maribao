@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const mainContainer = document.getElementById("membersContainer");
     if (mainContainer) {
-        const header = document.createElement("h1");
+        const header = document.createElement("h2");
         header.textContent = "Chamber Members";
         mainContainer.appendChild(header);
 
