@@ -1,7 +1,6 @@
 :root {
     --bg-primary: #333;
     --bg-secondary: #222;
-    --bg-footer-mobile: #303030;
     --text-color: #fff;
     --padding-standard: 1rem;
     --font-size-large-sm: 1.5rem;
@@ -20,8 +19,8 @@
     }
 
     .header-left img {
-        width: 80px;
-        height: 56px;
+        max-width: 100%;
+        height: auto;
     }
 
     .header-top {
@@ -36,19 +35,8 @@
         order: 0;
     }
 
-    .header-text span:first-child {
-        font-size: var(--font-size-large-sm, 1.5rem);
-        text-align: left;
-    }
 
-    .header-text span:last-child {
-        font-size: var(--font-size-small-sm, 0.8rem);
-    }
 
-    #circle-mobile {
-        display: block;
-        order: 1;
-    }
 
     .hamburger-menu {
         display: block;
@@ -65,6 +53,7 @@
         background-color: transparent;
     }
 
+
     #animateme {
         margin-top: 0.5rem;
         display: grid;
@@ -72,15 +61,18 @@
         width: 100%;
         z-index: 500;
         overflow: hidden;
-        height: 0;
+        max-height: 0;
+
         transform: scaleY(0);
         transform-origin: top;
         opacity: 0;
-        transition: height 0.4s ease, transform 0.4s ease, opacity 0.4s ease;
+        transition: max-height 0.4s ease, transform 0.4s ease, opacity 0.4s ease;
+        will-change: max-height, transform, opacity;
+        contain: layout style;
     }
 
     #animateme.active {
-        height: 300px;
+        max-height: 300px;
         transform: scaleY(1);
         opacity: 1;
     }
@@ -105,30 +97,14 @@
         transform: translateY(0);
     }
 
-    #circle-desktop {
-        display: none;
-    }
+
 
     div a img {
         margin-top: 10px;
         width: 30px;
         height: 30px;
     }
-}
 
-@media screen and (max-width: 768px) {
-    footer {
-        flex-direction: column;
-
-        text-align: center;
-    }
-
-    footer section {
-        margin-bottom: 1rem;
-    }
-}
-
-@media (max-width: 957px) {
     #cardsContainer {
         grid-template-columns: repeat(2, minmax(150px, 1fr));
     }
@@ -136,5 +112,25 @@
     .member-card {
         padding: 10px;
         font-size: 0.9rem;
+    }
+
+
+    #cardsContainer.grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .social-links {
+        text-align: center;
+    }
+
+
+}
+
+@media screen and (max-width: 1200px) {
+    .header-left img {
+        max-width: 90%;
+        height: auto;
     }
 }
