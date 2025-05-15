@@ -1,88 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="This page provides a list of local business and other organizations that belong to the chamber of commerce.">
-    <meta name="author" content="Daniel Alejandro Llumiquinga Dominguez">
+    <title>Directory - Quito Chamber of Commerce</title>
+    <meta name="description" content="Directorio de miembros del Quito Chamber of Commerce.">
+    <meta name="author" content="Daniel Llumiquinga">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-    <meta property="og:title" content="Directory Page">
-    <meta property="og:description"
-        content="This page provides a list of local business and other organizations that belong to the chamber of commerce.">
-    <meta property="og:image" content="https://github.com/Daniel25TE/wdd231/blob/main/chamber/images/ecuadorflag.webp">
-    <meta property="og:url" content="https://daniel25te.github.io/wdd231/chamber/directory.html">
-    <meta property="og:type" content="website">
-    <script src="scripts/chamber.js" defer></script>
+    <meta property="og:title" content="Quito Chamber of Commerce">
+    <meta property="og:description" content="Directorio y más sobre el Quito Chamber of Commerce.">
+    <meta property="og:image" content="images/og-image.jpg">
+    <meta property="og:url" content="https://www.example.com/directory.html">
     <link rel="stylesheet" href="styles/chamber-large.css">
-    <link rel="stylesheet" href="styles/chamber-mobile.css" media="(max-width: 957px)">
-    <title>Chamber of Commerce Directory Page</title>
+    <script src="scripts/chamber.js" defer></script>
 </head>
 
 <body>
     <header>
-
-        <div class="header-top">
-            <div class="header-left">
+        <div class="header-container">
+            <div class="logo">
                 <picture>
                     <source
                         srcset="images/ecuadorflag2.webp 80w, images/ecuadorflag1.webp 120w, images/ecuadorflag3.webp 180w"
                         sizes="(max-width: 957px) 80px, (min-width: 958px) 120px, (min-width: 1200px) 180px">
                     <img src="images/ecuadorflag1.webp" alt="Daniel A. Llumiquinga" width="120" height="84">
                 </picture>
-                <span><strong>Quito</strong><br>Chamber of Commerce</span>
-
+                <span class="site-title">Quito-Chamber of Commerce</span>
             </div>
-
-
-            <button class="hamburger-menu">☰</button>
+            <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="directory.html">Directory</a></li>
+                    <li><a href="join.html">Join</a></li>
+                    <li><a href="discover.html">Discover</a></li>
+                </ul>
+            </nav>
         </div>
-
-
-        <nav id="animateme">
-            <ul class="navigation">
-                <li><a href="index.html" title="Home">Home</a></li>
-                <li><a href="#" title="Directory">Directory</a></li>
-                <li><a href="#" title="Join">Join</a></li>
-                <li><a href="#" title="Discover">Discover</a></li>
-
-            </ul>
-        </nav>
     </header>
 
     <main>
-        <h1>Chamber of Commerce Directory Page</h1>
-        <div class="menu">
-            <button id="grid">⏹️ Grid</button>
-            <button id="list">📄 List</button>
-        </div>
-        <div id="membersContainer"></div>
+        <div class="directory"></div>
     </main>
 
     <footer>
-        <section>
-            <h2>Quito</h2>
-            <p>25 Rafael Illescas, Calderon 2509</p>
-            <p>info@quitocc.org</p>
-            <p>(123) 456-789</p>
-        </section>
-
-        <section class="social-links">
-            <h2>Síguenos</h2>
-            <a href="https://youtube.com"><img alt="Youtube" src="images/youtube.svg" width="35" height="35"></a>
-            <a href="https://twitter.com"><img alt="Twitter" src="images/twitter.svg" width="35" height="35"></a>
-            <a href="https://indeed.com"><img alt="Indeed" src="images/indeed.svg" width="35" height="35"></a>
-        </section>
-
-        <section>
-            <h2>WDD231 Class Project</h2>
-            <p>Daniel A. Llumiquinga</p>
-            <p>&copy; <span id="year"></span> Quito Chamber of Commerce</p>
-            <p>Last Modification: <span id="last-modified"></span></p>
-        </section>
+        <div class="footer-container">
+            <div class="footer-section contact-info">
+                <p>Quito</p>
+                <p>Address: [Inserte dirección]</p>
+                <p>Email: [correo@example.com]</p>
+                <p>Phone: [123-456-7890]</p>
+            </div>
+            <div class="footer-section social-media">
+                <a href="https://youtube.com"><img alt="Youtube" src="images/youtube.svg" width="35" height="35"></a>
+                <a href="https://twitter.com"><img alt="Twitter" src="images/twitter.svg" width="35" height="35"></a>
+                <a href="https://indeed.com"><img alt="Indeed" src="images/indeed.svg" width="35" height="35"></a>
+            </div>
+            <div class="footer-section development-info">
+                <p>WDD231 Class Project</p>
+                <p>Daniel Llumiquinga</p>
+                <p>Lanzamiento: <span id="launchYear"></span></p>
+                <p>Última modificación: <span id="lastModified"></span></p>
+            </div>
+        </div>
     </footer>
-
 </body>
 
 </html>

@@ -1,138 +1,144 @@
-document.addEventListener("DOMContentLoaded", () => {
-    updateDates();
-    setupMenu();
-    setupMembers();
+document.addEventListener('DOMContentLoaded', function () {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+    menuToggle.addEventListener('click', function () {
+        nav.classList.toggle('active');
+    });
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    init();
+});
 
-function updateDates() {
-    const yearElem = document.getElementById("year");
-    if (yearElem) {
-        yearElem.textContent = new Date().getFullYear();
-    }
-    const lastModifiedElem = document.getElementById("last-modified");
-    if (lastModifiedElem) {
-        lastModifiedElem.textContent = `Last modified: ${document.lastModified}`;
+async function init() {
+    try {
+        const main = document.querySelector("main");
+
+        const toggleButtons = createToggleButtons();
+        main.appendChild(toggleButtons);
+
+        const displayContainer = document.createElement("article");
+        displayContainer.style.minHeight = "400px";
+        main.appendChild(displayContainer);
+        displayContainer.classList.add("grid");
+
+        setupToggleView(displayContainer);
+
+        const members = await fetchMembers();
+        displayMembers(members, displayContainer);
+    } catch (error) {
+        console.error("Error durante la inicialización:", error);
     }
 }
 
-
-function setupMenu() {
-    const hamburger = document.querySelector(".hamburger-menu");
-    const nav = document.getElementById("animateme");
-
-    if (hamburger && nav) {
-        hamburger.setAttribute("aria-expanded", "false");
-        hamburger.setAttribute("aria-controls", "animateme");
-
-        hamburger.addEventListener("click", () => {
-            const isActive = nav.classList.toggle("active");
-            hamburger.classList.toggle("active");
-            hamburger.setAttribute("aria-expanded", isActive.toString());
-        });
-    }
-
-
-    document.addEventListener("click", (event) => {
-        if (
-            hamburger &&
-            nav &&
-            !hamburger.contains(event.target) &&
-            !nav.contains(event.target)
-        ) {
-            if (nav.classList.contains("active")) {
-                nav.classList.remove("active");
-            }
-            if (hamburger.classList.contains("active")) {
-                hamburger.classList.remove("active");
-                hamburger.setAttribute("aria-expanded", "false");
-            }
+async function fetchMembers() {
+    try {
+        const cached = sessionStorage.getItem("membersData");
+        if (cached) {
+            return JSON.parse(cached);
         }
+        const response = await fetch("data/members.json");
+        if (!response.ok) {
+            throw new Error("Error en la respuesta de la red");
+        }
+        const membersData = await response.json();
+        sessionStorage.setItem("membersData", JSON.stringify(membersData));
+        return membersData;
+    } catch (error) {
+        console.error("Error fetching members:", error);
+        return [];
+    }
+}
+
+function createToggleButtons() {
+    const btnContainer = document.createElement("div");
+    btnContainer.className = "menu";
+
+    const gridButton = document.createElement("button");
+    gridButton.id = "grid";
+    gridButton.textContent = "Grid View";
+
+    const listButton = document.createElement("button");
+    listButton.id = "list";
+    listButton.textContent = "List View";
+
+    btnContainer.appendChild(gridButton);
+    btnContainer.appendChild(listButton);
+
+    return btnContainer;
+}
+
+function createMemberCard(member) {
+    const sectionEl = document.createElement("section");
+
+    const img = document.createElement("img");
+    img.src = `images/${member.image}`;
+    img.alt = member.name;
+    img.setAttribute("width", "16");
+    img.setAttribute("height", "16");
+
+
+    const h3 = document.createElement("h3");
+    h3.textContent = member.name;
+
+    const address = document.createElement("p");
+    address.textContent = member.address;
+
+    const phone = document.createElement("p");
+    phone.textContent = member.phone;
+
+    const websiteLink = document.createElement("a");
+    websiteLink.href = member.website;
+    websiteLink.textContent = "Visitar sitio";
+
+    const email = document.createElement("p");
+    email.textContent = member.email;
+
+    const description = document.createElement("p");
+    description.textContent = member.description;
+
+    sectionEl.appendChild(img);
+    sectionEl.appendChild(h3);
+    sectionEl.appendChild(address);
+    sectionEl.appendChild(phone);
+    sectionEl.appendChild(websiteLink);
+    sectionEl.appendChild(email);
+    sectionEl.appendChild(description);
+
+    return sectionEl;
+}
+
+function displayMembers(members, container) {
+    container.innerHTML = "";
+    members.forEach((member) => {
+        const card = createMemberCard(member);
+        container.appendChild(card);
     });
 }
 
-
-function setupMembers() {
-    const mainContainer = document.getElementById("membersContainer");
-    if (!mainContainer) return;
-
-
-    const membersHeader = document.createElement("h2");
-    membersHeader.textContent = "Chamber Members";
-    mainContainer.appendChild(membersHeader);
-
-
-    const cardsContainer = document.createElement("article");
-    cardsContainer.id = "cardsContainer";
-    mainContainer.appendChild(cardsContainer);
-
-
+function setupToggleView(displayContainer) {
     const gridButton = document.querySelector("#grid");
     const listButton = document.querySelector("#list");
 
-    if (gridButton && listButton) {
-        gridButton.addEventListener("click", () => {
-            cardsContainer.classList.add("grid");
-            cardsContainer.classList.remove("list");
-        });
-        listButton.addEventListener("click", showList);
+    gridButton.addEventListener("click", () => {
+        displayContainer.classList.add("grid");
+        displayContainer.classList.remove("list");
+    });
 
-        function showList() {
-            cardsContainer.classList.add("list");
-            cardsContainer.classList.remove("grid");
-        }
-    }
-
-    async function fetchMembers() {
-        try {
-            const response = await fetch("data/members.json");
-            if (!response.ok) throw new Error("Network response was not ok");
-            const members = await response.json();
-            displayMembers(members);
-        } catch (error) {
-            console.error("Error fetching members data:", error);
-            const errorMsg = document.createElement("p");
-            errorMsg.textContent = "Error loading members data. Please try again later.";
-            cardsContainer.appendChild(errorMsg);
-        }
-    }
-
-
-    function displayMembers(members) {
-        cardsContainer.innerHTML = "";
-        members.forEach((member) => {
-            const card = document.createElement("div");
-            card.classList.add("member-card");
-            card.innerHTML = `
-                <h2>${member.name}</h2>
-                <p><strong>Address:</strong> ${member.address}</p>
-                <p><strong>Phone:</strong> ${member.phone}</p>
-                <p><strong>Website:</strong> <a href="${member.website}" target="_blank">${member.website}</a></p>
-                <p><strong>Membership:</strong> ${getMembershipName(member.membership)}</p>
-                <p><img src="images/${member.image}" alt="${member.name} logo" width="16" height="16"></p>
-                ${member.description ? `<p>${member.description}</p>` : ""}
-            `;
-            cardsContainer.appendChild(card);
-        });
-    }
-
-
-    function getMembershipName(level) {
-        switch (level) {
-            case 1:
-                return "Member";
-            case 2:
-                return "Silver";
-            case 3:
-                return "Gold";
-            default:
-                return "Unknown";
-        }
-    }
-
-    fetchMembers();
+    listButton.addEventListener("click", () => {
+        displayContainer.classList.add("list");
+        displayContainer.classList.remove("grid");
+    });
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+    const launchYearEl = document.getElementById('launchYear');
+    const lastModifiedEl = document.getElementById('lastModified');
 
+    if (launchYearEl && lastModifiedEl) {
+        launchYearEl.textContent = new Date().getFullYear();
+        lastModifiedEl.textContent = document.lastModified;
+    }
+});
 
 
