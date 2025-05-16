@@ -52,23 +52,12 @@ nav ul li a {
 
 .footer-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--gap);
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5rem;
     padding: 1rem 7rem;
-    background-color: #b6b4b4;
-    color: #000
-}
-
-.footer-container>div:nth-child(1) {
-    text-align: left
-}
-
-.footer-container>div:nth-child(2) {
-    text-align: center
-}
-
-.footer-container>div:nth-child(3) {
-    text-align: right
+    background: #b6b4b4;
+    color: #000;
+    container-type: inline-size;
 }
 
 main {
@@ -214,4 +203,16 @@ section a {
     .header-container {
         padding: 1rem;
     }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.footer-container>div:nth-child(1).footer-container>div:nth-child(3) {
+    text-align: left;
+}
+
+.footer-container>div:nth-child(2) {
+    text-align: center;
 }
