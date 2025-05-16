@@ -1,91 +1,92 @@
+:root {
+    --base-padding: 1rem;
+    --small-padding: 0.5rem;
+    --gap: 1rem;
+    --border: 0.0625rem solid rgba(0, 0, 0, 0.1);
+}
+
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box
 }
 
 body {
-
-    line-height: 1.6;
+    line-height: 1.6
 }
-
-
 
 .header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
+    padding: 1rem 7rem;
     background-color: #b8b8b8;
-    color: rgb(0, 0, 0);
+    color: #000;
 }
 
 .logo {
     display: flex;
-    align-items: center;
+    align-items: center
 }
 
 .logo img {
-    max-height: 50px;
-    margin-right: 0.5rem;
+    max-height: 7.94rem;
+    margin-right: 0.5rem
 }
 
 nav ul {
     display: flex;
     list-style: none;
-    gap: 1rem;
+    gap: var(--gap)
 }
 
 nav ul li a {
     text-decoration: none;
-    color: #000000;
-    padding: 0.5rem;
+    color: #000;
+    padding: var(--small-padding)
 }
 
 .menu-toggle {
-    display: none;
+    display: none
 }
 
 .footer-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 1rem;
-    background: #b6b4b4;
-    min-height: 100px;
-    color: rgb(0, 0, 0);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--gap);
+    padding: 1rem 7rem;
+    background-color: #b6b4b4;
+    color: #000
 }
 
-.footer-container .footer-section {
-    flex: 1;
+.footer-container>div:nth-child(1) {
+    text-align: left
 }
 
-.footer-container .footer-section:nth-child(1) {
-    text-align: left;
+.footer-container>div:nth-child(2) {
+    text-align: center
 }
 
-.footer-container .footer-section:nth-child(2) {
-    text-align: center;
-}
-
-.footer-container .footer-section:nth-child(3) {
-    text-align: right;
+.footer-container>div:nth-child(3) {
+    text-align: right
 }
 
 main {
     margin: 0 auto;
-    padding: 0.5rem;
-    max-width: 700px;
+    padding: var(--small-padding);
+    max-width: 43.75rem;
     background-color: #fff;
-    min-height: 500px;
+    min-height: 31.25rem;
+    display: grid;
+    gap: var(--gap)
 }
 
 .menu {
     margin: 1rem auto;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    padding: 0.5rem;
+    border: var(--border);
+    padding: var(--small-padding);
     background-color: #333;
-    text-align: center;
+    text-align: center
 }
 
 .menu button {
@@ -94,139 +95,123 @@ main {
     color: #fff;
     background: none;
     border: none;
-    cursor: pointer;
+    cursor: pointer
 }
 
 article {
-    min-height: 400px;
-    transition: all 0.3s ease;
+    min-height: 25rem;
+    transition: all 0.3s ease
 }
 
 section {
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    padding: 0.5rem;
+    border: var(--border);
+    padding: var(--small-padding);
     background-color: #ddd;
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--small-padding)
 }
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-gap: 5px;
-    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
+    gap: 0.3125rem;
+    align-items: center
 }
 
 .grid section {
-    text-align: center;
+    text-align: center
 }
 
 .grid section img {
-    border: 1px solid #fff;
+    border: 0.0625rem solid #fff;
     box-shadow: 0 0 1rem #555;
-    width: 16px;
-    height: 16px;
-    aspect-ratio: 1 / 1;
-    object-fit: contain;
+    width: 1rem;
+    height: 1rem;
+    aspect-ratio: 1/1;
+    object-fit: contain
 }
 
 .grid section>* {
-    margin: 0.1rem;
+    margin: 0.1rem
 }
 
-.grid h3 {
-    font-size: 1.2rem;
+.grid h2 {
+    font-size: 1.2rem
 }
 
 .list {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    gap: var(--gap)
 }
 
 .list section {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(9.38rem, 1fr));
+    gap: var(--gap);
     margin: 0;
     padding: 0.25rem;
-    align-items: center;
-}
-
-.list section>* {
-    margin: 0 1rem;
+    align-items: center
 }
 
 .list section img {
-    display: none;
+    display: none
 }
 
-.list section h3 {
-    font-size: 1rem;
+.list section h2 {
+    font-size: 1rem
 }
 
 .list section:nth-child(even) {
-    background-color: #bbb;
+    background-color: #bbb
 }
 
-section h3 {
-    font-size: 1.5rem;
+section h2 {
+    font-size: 1.5rem
 }
 
 section a {
-
     font-size: 0.85rem;
-    color: navy;
+    color: navy
 }
 
-@media (max-width: 768px) {
+@media (max-width:48em) {
     .menu-toggle {
         display: block;
         background: none;
         border: none;
         font-size: 1.5rem;
-        cursor: pointer;
+        cursor: pointer
     }
 
     nav ul {
         display: none;
         flex-direction: column;
         position: absolute;
-        top: 60px;
-        right: 1rem;
+        top: 3.75rem;
+        right: var(--base-padding);
         background: #fff;
-        border: 1px solid #ddd;
-        width: 200px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-
+        border: var(--border);
+        width: 12.5rem;
+        box-shadow: 0 0.125rem 0.3125rem rgb(0 0 0/0.1)
     }
 
     nav.active ul {
-        display: flex;
+        display: flex
     }
 
     nav ul li {
-        border-bottom: 1px solid #ddd;
+        border-bottom: var(--border)
     }
 
     nav ul li a {
-        padding: 0.75rem 1rem;
-        display: block;
+        padding: 0.75rem var(--base-padding);
+        display: block
     }
 
     .footer-container {
-        flex-direction: column;
-        text-align: center;
-        align-items: center;
+        padding: 1rem;
     }
 
-    .footer-container .footer-section {
-        margin: 0.5rem 0;
-    }
-
-    .grid {
-        grid-template-columns: 1fr;
-    }
-
-    .list section {
-        grid-template-columns: 1fr;
+    .header-container {
         padding: 1rem;
     }
 }
