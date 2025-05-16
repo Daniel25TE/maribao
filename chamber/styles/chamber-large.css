@@ -46,7 +46,7 @@ nav ul li a {
     padding: var(--small-padding)
 }
 
-.menu-toggle {
+#menu-toggle {
     display: none
 }
 
@@ -162,7 +162,7 @@ section a {
 }
 
 @media (max-width:48em) {
-    .menu-toggle {
+    #menu-toggle {
         display: block;
         background: none;
         border: none;
