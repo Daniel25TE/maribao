@@ -50,29 +50,15 @@ nav ul li a {
     display: none
 }
 
-/* Footer: Se utiliza CSS Grid para alinear sin repetir selectores individuales */
 .footer-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 5rem;
     padding: 1rem 7rem;
     background: #b6b4b4;
-    color: #000;
-    justify-items: center;
-    /* Por defecto centra todos */
+    color: #000
 }
 
-.footer-container>div:first-child {
-    justify-self: start;
-    /* Primer bloque a la izquierda */
-}
-
-.footer-container>div:last-child {
-    justify-self: end;
-    /* Último bloque a la derecha */
-}
-
-/* Main */
 main {
     margin: 0 auto;
     padding: var(--small-padding);
@@ -209,17 +195,23 @@ section a {
         display: block
     }
 
+    .footer-container {
+        padding: 1rem;
+    }
+
     .header-container {
         padding: 1rem;
     }
 
     .footer-container {
-        padding: 1rem;
         grid-template-columns: 1fr;
-        justify-items: center;
     }
 
-    .footer-container>div {
-        justify-self: center;
+    .footer-container>div:nth-child(1).footer-container>div:nth-child(3) {
+        text-align: left;
+    }
+
+    .footer-container>div:nth-child(2) {
+        text-align: center;
     }
 }
