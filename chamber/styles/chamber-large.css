@@ -50,7 +50,7 @@ nav ul li a {
     display: none
 }
 
-.footer-container {
+#footer-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 5rem;
@@ -195,7 +195,7 @@ section a {
         display: block
     }
 
-    .footer-container {
+    #footer-container {
         padding: 1rem;
     }
 
@@ -203,15 +203,15 @@ section a {
         padding: 1rem;
     }
 
-    .footer-container {
+    #footer-container {
         grid-template-columns: 1fr;
     }
 
-    .footer-container>div:nth-child(1).footer-container>div:nth-child(3) {
+    #footer-container>div:nth-child(1)#footer-container>div:nth-child(3) {
         text-align: left;
     }
 
-    .footer-container>div:nth-child(2) {
+    #footer-container>div:nth-child(2) {
         text-align: center;
     }
 }
