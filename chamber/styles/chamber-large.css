@@ -15,13 +15,13 @@ body {
     line-height: 1.6
 }
 
-header>div {
+.header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem 7rem;
     background-color: #b8b8b8;
-    color: #000
+    color: #000;
 }
 
 .logo {
@@ -50,27 +50,29 @@ nav ul li a {
     display: none
 }
 
-footer>div {
+/* Footer: Se utiliza CSS Grid para alinear sin repetir selectores individuales */
+.footer-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 5rem;
     padding: 1rem 7rem;
     background: #b6b4b4;
-    color: #000
+    color: #000;
+    justify-items: center;
+    /* Por defecto centra todos */
 }
 
-footer>div>div:nth-child(1) {
-    text-align: left
+.footer-container>div:first-child {
+    justify-self: start;
+    /* Primer bloque a la izquierda */
 }
 
-footer>div>div:nth-child(2) {
-    text-align: center
+.footer-container>div:last-child {
+    justify-self: end;
+    /* Último bloque a la derecha */
 }
 
-footer>div>div:nth-child(3) {
-    text-align: right
-}
-
+/* Main */
 main {
     margin: 0 auto;
     padding: var(--small-padding);
@@ -173,7 +175,7 @@ section a {
     color: navy
 }
 
-@media (max-width: 48em) {
+@media (max-width:48em) {
     #menu-toggle {
         display: block;
         background: none;
@@ -207,21 +209,17 @@ section a {
         display: block
     }
 
-    header>div {
-        padding: 1rem
-    }
-
-    footer>div {
+    .header-container {
         padding: 1rem;
-        grid-template-columns: 1fr
     }
 
-    footer>div>div:nth-child(1),
-    footer>div>div:nth-child(3) {
-        text-align: left
+    .footer-container {
+        padding: 1rem;
+        grid-template-columns: 1fr;
+        justify-items: center;
     }
 
-    footer>div>div:nth-child(2) {
-        text-align: center
+    .footer-container>div {
+        justify-self: center;
     }
 }
