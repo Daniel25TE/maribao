@@ -56,8 +56,7 @@ nav ul li a {
     gap: 5rem;
     padding: 1rem 7rem;
     background: #b6b4b4;
-    color: #000;
-    container-type: inline-size;
+    color: #000
 }
 
 main {
@@ -207,12 +206,12 @@ section a {
     .footer-container {
         grid-template-columns: 1fr;
     }
-}
 
-.footer-container>div:nth-child(1).footer-container>div:nth-child(3) {
-    text-align: left;
-}
+    .footer-container>div:nth-child(1).footer-container>div:nth-child(3) {
+        text-align: left;
+    }
 
-.footer-container>div:nth-child(2) {
-    text-align: center;
+    .footer-container>div:nth-child(2) {
+        text-align: center;
+    }
 }
