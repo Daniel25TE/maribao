@@ -15,13 +15,13 @@ body {
     line-height: 1.6
 }
 
-.header-container {
+header>div {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem 7rem;
     background-color: #b8b8b8;
-    color: #000;
+    color: #000
 }
 
 .logo {
@@ -50,13 +50,25 @@ nav ul li a {
     display: none
 }
 
-.footer-container {
+footer>div {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 5rem;
     padding: 1rem 7rem;
     background: #b6b4b4;
     color: #000
+}
+
+footer>div>div:nth-child(1) {
+    text-align: left
+}
+
+footer>div>div:nth-child(2) {
+    text-align: center
+}
+
+footer>div>div:nth-child(3) {
+    text-align: right
 }
 
 main {
@@ -161,7 +173,7 @@ section a {
     color: navy
 }
 
-@media (max-width:48em) {
+@media (max-width: 48em) {
     #menu-toggle {
         display: block;
         background: none;
@@ -195,23 +207,21 @@ section a {
         display: block
     }
 
-    .footer-container {
+    header>div {
+        padding: 1rem
+    }
+
+    footer>div {
         padding: 1rem;
+        grid-template-columns: 1fr
     }
 
-    .header-container {
-        padding: 1rem;
+    footer>div>div:nth-child(1),
+    footer>div>div:nth-child(3) {
+        text-align: left
     }
 
-    .footer-container {
-        grid-template-columns: 1fr;
-    }
-
-    .footer-container>div:nth-child(1).footer-container>div:nth-child(3) {
-        text-align: left;
-    }
-
-    .footer-container>div:nth-child(2) {
-        text-align: center;
+    footer>div>div:nth-child(2) {
+        text-align: center
     }
 }
