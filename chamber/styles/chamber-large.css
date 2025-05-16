@@ -24,12 +24,12 @@ body {
     color: #000;
 }
 
-.logo {
+#logo {
     display: flex;
     align-items: center
 }
 
-.logo img {
+#logo img {
     max-height: 7.94rem;
     margin-right: 0.5rem
 }
