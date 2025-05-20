@@ -1,15 +1,302 @@
-document.addEventListener('DOMContentLoaded', function () { const menuToggle = document.querySelector('#menu-toggle'); const nav = document.querySelector('nav'); menuToggle.addEventListener('click', function () { nav.classList.toggle('active') }) }); document.addEventListener('DOMContentLoaded', function () { init() }); async function init() { try { const main = document.querySelector("main"); const toggleButtons = createToggleButtons(); main.appendChild(toggleButtons); const displayContainer = document.createElement("article"); displayContainer.style.minHeight = "400px"; main.appendChild(displayContainer); displayContainer.classList.add("grid"); setupToggleView(displayContainer); const members = await fetchMembers(); displayMembers(members, displayContainer) } catch (error) { console.error("Error durante la inicialización:", error) } }
+document.addEventListener("DOMContentLoaded", () => {
+    setupMenuToggle();
+    init();
+    updateFooter();
+});
+
+function setupMenuToggle() {
+    const menuToggle = document.querySelector("#menu-toggle");
+    const nav = document.querySelector("nav");
+
+    menuToggle.addEventListener("click", () => {
+        nav.classList.toggle("active");
+    });
+}
+
+async function init() {
+    try {
+        const members = await fetchMembers();
+        const directory = document.querySelector("#directory");
+        if (directory) {
+            const toggleButtons = createToggleButtons();
+            directory.appendChild(toggleButtons);
+
+            const displayContainer = document.createElement("article");
+            displayContainer.style.minHeight = "400px";
+            displayContainer.classList.add("grid");
+            directory.appendChild(displayContainer);
+
+            setupToggleView(displayContainer);
+            displayMembers(members, displayContainer);
+        }
+
+        const homeMembers = document.getElementById("homemembers");
+        if (homeMembers) {
+            displaySpotlights(members);
+        }
+    } catch (error) {
+        console.error("Error during initialization:", error);
+    }
+}
+
 async function fetchMembers() {
     try {
-        const cached = sessionStorage.getItem("membersData"); if (cached) { return JSON.parse(cached) }
-        const response = await fetch("data/members.json"); if (!response.ok) { throw new Error("Error en la respuesta de la red") }
-        const membersData = await response.json(); sessionStorage.setItem("membersData", JSON.stringify(membersData)); return membersData
-    } catch (error) { console.error("Error fetching members:", error); return [] }
+        const cached = sessionStorage.getItem("membersData");
+        if (cached) return JSON.parse(cached);
+
+        const response = await fetch("data/members.json");
+        if (!response.ok) throw new Error("Network response error");
+
+        const membersData = await response.json();
+        sessionStorage.setItem("membersData", JSON.stringify(membersData));
+
+        return membersData;
+    } catch (error) {
+        console.error("Error fetching members:", error);
+        return [];
+    }
 }
-function createToggleButtons() { const btnContainer = document.createElement("div"); btnContainer.className = "menu"; const gridButton = document.createElement("button"); gridButton.id = "grid"; gridButton.textContent = "Grid View"; const listButton = document.createElement("button"); listButton.id = "list"; listButton.textContent = "List View"; btnContainer.appendChild(gridButton); btnContainer.appendChild(listButton); return btnContainer }
-function createMemberCard(member) { const sectionEl = document.createElement("section"); const img = document.createElement("img"); img.src = `images/${member.image}`; img.alt = member.name; img.setAttribute("width", "16"); img.setAttribute("height", "16"); const h2 = document.createElement("h2"); h2.textContent = member.name; const address = document.createElement("p"); address.textContent = member.address; const phone = document.createElement("p"); phone.textContent = member.phone; const websiteLink = document.createElement("a"); websiteLink.href = member.website; websiteLink.textContent = "Visitar sitio"; const email = document.createElement("p"); email.textContent = member.email; const description = document.createElement("p"); description.textContent = member.description; sectionEl.appendChild(img); sectionEl.appendChild(h2); sectionEl.appendChild(address); sectionEl.appendChild(phone); sectionEl.appendChild(websiteLink); sectionEl.appendChild(email); sectionEl.appendChild(description); return sectionEl }
-function displayMembers(members, container) { container.innerHTML = ""; members.forEach((member) => { const card = createMemberCard(member); container.appendChild(card) }) }
-function setupToggleView(displayContainer) { const gridButton = document.querySelector("#grid"); const listButton = document.querySelector("#list"); gridButton.addEventListener("click", () => { displayContainer.classList.add("grid"); displayContainer.classList.remove("list") }); listButton.addEventListener("click", () => { displayContainer.classList.add("list"); displayContainer.classList.remove("grid") }) }
-document.addEventListener('DOMContentLoaded', function () { const launchYearEl = document.getElementById('launchYear'); const lastModifiedEl = document.getElementById('lastModified'); if (launchYearEl && lastModifiedEl) { launchYearEl.textContent = new Date().getFullYear(); lastModifiedEl.textContent = document.lastModified } })
+
+function createToggleButtons() {
+    const btnContainer = document.createElement("div");
+    btnContainer.className = "menu";
+
+    const gridButton = document.createElement("button");
+    gridButton.id = "grid";
+    gridButton.textContent = "Grid View";
+
+    const listButton = document.createElement("button");
+    listButton.id = "list";
+    listButton.textContent = "List View";
+
+    btnContainer.appendChild(gridButton);
+    btnContainer.appendChild(listButton);
+
+    return btnContainer;
+}
+
+function createMemberCard(member) {
+    const sectionEl = document.createElement("section");
+
+    const img = document.createElement("img");
+    img.src = `images/${member.image}`;
+    img.alt = member.name;
+    img.width = 16;
+    img.height = 16;
+
+    const h2 = document.createElement("h2");
+    h2.textContent = member.name;
+
+    const address = document.createElement("p");
+    address.textContent = member.address;
+
+    const phone = document.createElement("p");
+    phone.textContent = member.phone;
+
+    const websiteLink = document.createElement("a");
+    websiteLink.href = member.website;
+    websiteLink.textContent = "Visit Site";
+
+    const email = document.createElement("p");
+    email.textContent = member.email;
+
+    const description = document.createElement("p");
+    description.textContent = member.description;
+
+    sectionEl.append(img, h2, address, phone, websiteLink, email, description);
+
+    return sectionEl;
+}
+function createSpotlightCard(member) {
+    const sectionEl = document.createElement("section");
+    sectionEl.classList.add("spotlight-card");
+
+    const h2 = document.createElement("h2");
+    h2.textContent = member.name;
+
+    const hr = document.createElement("hr");
+
+    const contentDiv = document.createElement("div");
+    contentDiv.classList.add("spotlight-content");
+
+    const leftCol = document.createElement("div");
+    leftCol.classList.add("spotlight-img");
+    const img = document.createElement("img");
+    img.src = `images/${member.image}`;
+    img.alt = member.name;
+    img.width = 100;
+    img.height = 100;
+    leftCol.appendChild(img);
+
+    const rightCol = document.createElement("div");
+    rightCol.classList.add("spotlight-info");
+
+    const phone = document.createElement("p");
+    phone.textContent = `Phone: ${member.phone}`;
+
+    const address = document.createElement("p");
+    address.textContent = `Address: ${member.address}`;
+
+    const websiteLink = document.createElement("a");
+    websiteLink.href = member.website;
+    websiteLink.textContent = "Visit Site";
+
+    let membershipText = "";
+    switch (member.membership) {
+        case 3:
+            membershipText = "Gold";
+            break;
+        case 2:
+            membershipText = "Silver";
+            break;
+        case 1:
+            membershipText = "Bronze";
+            break;
+        default:
+            membershipText = member.membership;
+    }
+    const membershipEl = document.createElement("p");
+    membershipEl.textContent = `Membership: ${membershipText}`;
+
+    rightCol.append(phone, address, websiteLink, membershipEl);
+
+    contentDiv.append(leftCol, rightCol);
+
+    sectionEl.append(h2, hr, contentDiv);
+
+    return sectionEl;
+}
+
+function displayMembers(members, container) {
+    container.innerHTML = "";
+    members.forEach(member => {
+        const card = createMemberCard(member);
+        container.appendChild(card);
+    });
+}
+
+function displaySpotlights(members) {
+    const spotlights = members.filter(member => member.membership >= 2);
+
+    const randomSpotlights = spotlights.sort(() => Math.random() - 0.5).slice(0, 3);
+
+    const spotlightsContainer = document.getElementById("homemembers");
+    if (!spotlightsContainer) return;
+
+    spotlightsContainer.innerHTML = "";
+
+    randomSpotlights.forEach(member => {
+        const card = createSpotlightCard(member);
+        spotlightsContainer.appendChild(card);
+    });
+}
+
+function setupToggleView(displayContainer) {
+    const gridButton = document.querySelector("#grid");
+    const listButton = document.querySelector("#list");
+
+    gridButton.addEventListener("click", () => {
+        displayContainer.classList.add("grid");
+        displayContainer.classList.remove("list");
+    });
+
+    listButton.addEventListener("click", () => {
+        displayContainer.classList.add("list");
+        displayContainer.classList.remove("grid");
+    });
+}
+
+function updateFooter() {
+    const launchYearEl = document.getElementById("launchYear");
+    const lastModifiedEl = document.getElementById("lastModified");
+
+    if (launchYearEl && lastModifiedEl) {
+        launchYearEl.textContent = new Date().getFullYear();
+        lastModifiedEl.textContent = document.lastModified;
+    }
+}
+
+const currentTemp = document.querySelector('#current-weather');
+const weatherIcon = document.querySelector('#weather-icon');
+const captionDesc = document.querySelector('.iconcurrent');
+const additionalInfo = document.querySelector('#weather-details');
+const forecastContainer = document.querySelector('#forecast');
+
+const url = 'https://api.openweathermap.org/data/2.5/forecast?lat=49.75&lon=6.64&units=imperial&appid=56d058cb82bb25bb1fbf5aa56dd47fa9';
+
+async function apiFetch() {
+    try {
+        const response = await fetch(url);
+        if (response.ok) {
+            const data = await response.json();
+
+            displayResults(data);
+            displayForecast(data);
+        } else {
+            throw Error(await response.text());
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+function displayResults(data) {
+    const currentData = data.list[0];
+    const temp = currentData.main.temp.toFixed(1);
+    const desc = currentData.weather[0].description;
+    const iconSrc = `https://openweathermap.org/img/w/${currentData.weather[0].icon}.png`;
+    const humidity = currentData.main.humidity;
+    const highTemp = currentData.main.temp_max.toFixed(1);
+    const lowTemp = currentData.main.temp_min.toFixed(1);
+    const sunrise = new Date(data.city.sunrise * 1000).toLocaleTimeString();
+    const sunset = new Date(data.city.sunset * 1000).toLocaleTimeString();
+
+    currentTemp.innerHTML = `Current: ${temp}&deg;F`;
+    weatherIcon.setAttribute('src', iconSrc);
+    weatherIcon.setAttribute('alt', desc);
+    captionDesc.textContent = `Short Description: ${desc}`;
+
+    additionalInfo.innerHTML = `
+        <p>High: ${highTemp}&deg;F</p>
+        <p>Low: ${lowTemp}&deg;F</p>
+        <p>Humidity: ${humidity}%</p>
+        <p>Sunrise: ${sunrise}</p>
+        <p>Sunset: ${sunset}</p>
+    `;
+}
+
+function displayForecast(data) {
+    forecastContainer.innerHTML = "";
+
+    const today = new Date();
+    const todayWeekday = today.toLocaleDateString('en-US', { weekday: 'long' });
+
+    const filteredForecasts = data.list.filter(entry => entry.dt_txt.includes("12:00:00")).slice(0, 3);
+
+    filteredForecasts.forEach((entry, index) => {
+        const date = new Date(entry.dt_txt);
+        const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'long' });
+
+        let label = index === 0 ? todayWeekday : dayOfWeek;
+
+        const temp = entry.main.temp.toFixed(1);
+        const iconSrc = `https://openweathermap.org/img/w/${entry.weather[0].icon}.png`;
+
+        forecastContainer.innerHTML += `
+            <div class="forecast-item">
+                <p><strong>${label}: ${temp}&deg;F</strong></p>
+                <img src="${iconSrc}" alt="Weather icon">
+            </div>
+        `;
+    });
+}
+
+if (document.querySelector('#current-weather')) {
+    apiFetch();
+}
+
+
+
+
 
 

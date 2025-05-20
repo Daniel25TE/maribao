@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Directory - Quito Chamber of Commerce</title>
-    <meta name="description" content="Directory of members of the Quito Chamber of Commerce.">
+    <title>Home Page - Quito Chamber of Commerce</title>
+    <meta name="description"
+        content="The home page will contain some attention grabbing information along with community information, weather, calls to action, and business spotlights.">
     <meta name="author" content="Daniel Alejandro Llumiquinga Dominguez">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <meta property="og:title" content="Quito Chamber of Commerce">
-    <meta property="og:description" content="Directory of members of the Quito Chamber of Commerce.">
+    <meta property="og:description"
+        content="The home page will contain some attention grabbing information along with community information, weather, calls to action, and business spotlights.">
     <meta property="og:image" content="https://github.com/Daniel25TE/wdd231/blob/main/chamber/images/ecuadorflag1.webp">
     <meta property="og:url" content="https://daniel25te.github.io/wdd231/chamber/directory.html">
     <link rel="stylesheet" href="styles/chamber-large.css">
@@ -37,8 +38,43 @@
         </div>
     </header>
     <main>
-        <h1>Directory - Quito Chamber of Commerce</h1>
-        <div id="directory"></div>
+        <div class="hero-container">
+            <div class="heroquito">
+                <img id="heroquito" alt="Hero Quito" src="images/heroquito.webp" width="1920" height="1280"
+                    loading="lazy">
+                <div class="cta-overlay">
+                    <p>¡Únete a nuestra comunidad!</p>
+                    <a href="#" class="cta-button">Empieza ahora</a>
+                </div>
+            </div>
+        </div>
+        <h1>Home</h1>
+        <div class="content-container">
+            <section class="events">
+                <h2>Events</h2>
+                <p>sdfghj</p>
+            </section>
+            <section class="current-weather">
+                <h2>Current Weather</h2>
+                <div class="weather-content">
+                    <img id="weather-icon" src="images/favicon.ico" alt="desc">
+                    <div>
+                        <div id="current-weather"></div>
+                        <p class="iconcurrent">
+                        <div id="weather-details"></div>
+                    </div>
+                </div>
+            </section>
+            <section class="weather-forecast">
+                <h2>Weather Forecast</h2>
+                <div id="forecast"></div>
+            </section>
+
+        </div>
+        <div id="homemembers"></div>
+
+
+
     </main>
     <footer>
         <div id="footer-container">
