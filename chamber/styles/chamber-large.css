@@ -72,21 +72,24 @@ nav ul li a {
 }
 
 
-picture img {
-    max-width: 100%;
-    width: 100%;
-    max-height: 80vh;
-    display: block;
-    object-fit: cover;
-    margin: 0 auto;
-    padding: 0rem 2rem;
+.hero-container {
     position: relative;
+    width: 100%;
+    /* o el ancho deseado */
+    padding: auto;
+}
 
+.hero-container picture img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
 }
 
 .cta-overlay {
     position: absolute;
     bottom: 10%;
+    /* o el valor que prefieras */
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
@@ -112,6 +115,7 @@ picture img {
 .cta-button:hover {
     background-color: #ff7f32;
 }
+
 
 h1 {
     text-align: left;
@@ -145,7 +149,7 @@ h1 {
 }
 
 #weather-icon {
-    width: 50px;
+    width: 40px;
     height: auto;
     display: block;
     image-rendering: crisp-edges;
@@ -179,7 +183,7 @@ h1 {
 }
 
 .forecast-item img {
-    width: 50px;
+    width: 40px;
     height: auto;
 }
 
@@ -195,40 +199,38 @@ h1 {
 #homemembers .spotlight-card {
     flex: 0 0 32%;
     box-sizing: border-box;
-}
-
-#homemembers .spotlight-card {
     border: 1px solid #ccc;
     padding: 1rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: #fff;
 }
 
-#homemembers .spotlight-card h2 {
+h3 {
     text-align: center;
     margin: 0;
     padding-bottom: 0.5rem;
+    font-size: 1.5rem;
 }
 
-#homemembers .spotlight-card hr {
+hr {
     border: none;
     border-top: 1px solid #ccc;
     margin: 0 auto 1rem auto;
     width: 90%;
 }
 
-#homemembers .spotlight-card .spotlight-content {
+.spotlight-content {
     display: flex;
     gap: 1rem;
 }
 
-#homemembers .spotlight-card .spotlight-img {
+.spotlight-img {
     flex: 0 0 auto;
     display: flex;
     align-items: center;
 }
 
-#homemembers .spotlight-card .spotlight-info {
+.spotlight-info {
     flex: 1 1 auto;
 }
 

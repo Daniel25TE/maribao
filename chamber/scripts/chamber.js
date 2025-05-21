@@ -111,8 +111,8 @@ function createSpotlightCard(member) {
     const sectionEl = document.createElement("section");
     sectionEl.classList.add("spotlight-card");
 
-    const h2 = document.createElement("h2");
-    h2.textContent = member.name;
+    const h3 = document.createElement("h3");
+    h3.textContent = member.name;
 
     const hr = document.createElement("hr");
 
@@ -162,7 +162,7 @@ function createSpotlightCard(member) {
 
     contentDiv.append(leftCol, rightCol);
 
-    sectionEl.append(h2, hr, contentDiv);
+    sectionEl.append(h3, hr, contentDiv);
 
     return sectionEl;
 }
