@@ -8,7 +8,7 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box
+    box-sizing: border-box;
 }
 
 body {
@@ -17,50 +17,61 @@ body {
     width: 100%;
 }
 
+/* Agrupación de padding que se repetía en varios selectores */
+.header-container,
+h1,
+.content-container,
+#footer-container,
+#homemembers {
+    padding: 1rem 7rem;
+}
+
+/* Header */
 .header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 7rem;
     background-color: #b8b8b8;
     color: #000;
 }
 
 #logo {
     display: flex;
-    align-items: center
+    align-items: center;
 }
 
 #logo img {
     max-height: 7.94rem;
-    margin-right: 0.5rem
+    margin-right: 0.5rem;
 }
 
+/* Navegación */
 nav ul {
     display: flex;
     list-style: none;
-    gap: var(--gap)
+    gap: var(--gap);
 }
 
 nav ul li a {
     text-decoration: none;
     color: #000;
-    padding: var(--small-padding)
+    padding: var(--small-padding);
 }
 
 #menu-toggle {
-    display: none
+    display: none;
 }
 
+/* Footer */
 #footer-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 5rem;
-    padding: 1rem 7rem;
     background: #b6b4b4;
-    color: #000
+    color: #000;
 }
 
+/* Directory */
 #directory {
     margin: 0 auto;
     padding: var(--small-padding);
@@ -68,10 +79,10 @@ nav ul li a {
     background-color: #fff;
     min-height: 31.25rem;
     display: grid;
-    gap: var(--gap)
+    gap: var(--gap);
 }
 
-
+/* Imagen en picture */
 picture img {
     max-width: 100%;
     width: 100%;
@@ -81,9 +92,9 @@ picture img {
     margin: 0 auto;
     padding: 0rem 2rem;
     position: relative;
-
 }
 
+/* CTA */
 .cta-overlay {
     position: absolute;
     bottom: 10%;
@@ -113,23 +124,25 @@ picture img {
     background-color: #ff7f32;
 }
 
+/* h1 ya comparte padding agrupado */
 h1 {
     text-align: left;
-    padding: 1rem 7rem;
 }
 
+/* Content Container */
 .content-container {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     gap: 1rem;
-    padding: 1rem 7rem;
 }
 
+/* Eventos */
 .events {
     background-color: #ffcc00;
     padding: 0;
 }
 
+/* Weather */
 .current-weather {
     display: flex;
     flex-direction: column;
@@ -183,21 +196,18 @@ h1 {
     height: auto;
 }
 
+/* Homemembers y Spotlight Card */
 #homemembers {
     display: flex !important;
     flex-direction: row;
     justify-content: space-between;
     align-items: stretch;
     gap: 1rem;
-    padding: 1rem 7rem;
 }
 
 #homemembers .spotlight-card {
     flex: 0 0 32%;
     box-sizing: border-box;
-}
-
-#homemembers .spotlight-card {
     border: 1px solid #ccc;
     padding: 1rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -232,6 +242,7 @@ h1 {
     flex: 1 1 auto;
 }
 
+/* Estilo base para h2 */
 h2 {
     background-color: #ddd;
     width: 100%;
@@ -240,12 +251,13 @@ h2 {
     text-align: left;
 }
 
+/* Menú */
 .menu {
     margin: 1rem auto;
     border: var(--border);
     padding: var(--small-padding);
     background-color: #333;
-    text-align: center
+    text-align: center;
 }
 
 .menu button {
@@ -254,30 +266,33 @@ h2 {
     color: #fff;
     background: none;
     border: none;
-    cursor: pointer
+    cursor: pointer;
 }
 
+/* Artículo */
 article {
     min-height: 25rem;
-    transition: all 0.3s ease
+    transition: all 0.3s ease;
 }
 
+/* Secciones */
 section {
     border: var(--border);
     padding: var(--small-padding);
     background-color: #ddd;
-    margin-bottom: var(--small-padding)
+    margin-bottom: var(--small-padding);
 }
 
+/* Grid */
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
     gap: 0.3125rem;
-    align-items: center
+    align-items: center;
 }
 
 .grid section {
-    text-align: center
+    text-align: center;
 }
 
 .grid section img {
@@ -286,20 +301,21 @@ section {
     width: 1rem;
     height: 1rem;
     aspect-ratio: 1/1;
-    object-fit: contain
+    object-fit: contain;
 }
 
 .grid section>* {
-    margin: 0.1rem
+    margin: 0.1rem;
 }
 
 .grid h2 {
-    font-size: 1.2rem
+    font-size: 1.2rem;
 }
 
+/* Lista */
 .list {
     display: grid;
-    gap: var(--gap)
+    gap: var(--gap);
 }
 
 .list section {
@@ -308,26 +324,27 @@ section {
     gap: var(--gap);
     margin: 0;
     padding: 0.25rem;
-    align-items: center
+    align-items: center;
 }
 
 .list section img {
-    display: none
+    display: none;
 }
 
 .list section h2 {
-    font-size: 1rem
+    font-size: 1rem;
 }
 
 .list section:nth-child(even) {
-    background-color: #bbb
+    background-color: #bbb;
 }
 
+/* Tipografía en secciones */
 section h2 {
-    font-size: 1.5rem
+    font-size: 1.5rem;
 }
 
 section a {
     font-size: 0.85rem;
-    color: navy
+    color: navy;
 }
