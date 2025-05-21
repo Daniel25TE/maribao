@@ -61,22 +61,13 @@ nav ul li a {
     color: #000
 }
 
-#directory {
-    margin: 0 auto;
-    padding: var(--small-padding);
-    max-width: 43.75rem;
-    background-color: #fff;
-    min-height: 31.25rem;
-    display: grid;
-    gap: var(--gap)
-}
+
 
 
 .hero-container {
     position: relative;
     width: 100%;
-    /* o el ancho deseado */
-    padding: auto;
+
 }
 
 .hero-container picture img {
@@ -89,7 +80,6 @@ nav ul li a {
 .cta-overlay {
     position: absolute;
     bottom: 10%;
-    /* o el valor que prefieras */
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
@@ -240,6 +230,16 @@ h2 {
     margin: 0;
     padding: 0.5rem;
     text-align: left;
+}
+
+#directory {
+    margin: 0 auto;
+    padding: var(--small-padding);
+    max-width: 43.75rem;
+    background-color: #fff;
+    min-height: 31.25rem;
+    display: grid;
+    gap: var(--gap)
 }
 
 .menu {
