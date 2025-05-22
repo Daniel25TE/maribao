@@ -102,9 +102,7 @@ nav ul li a {
     transition: background 0.3s;
 }
 
-.cta-button:hover {
-    background-color: #ff7f32;
-}
+
 
 
 h1 {
@@ -115,66 +113,18 @@ h1 {
 .content-container {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
-    gap: 1rem;
+    gap: 2rem;
     padding: 1rem 7rem;
+    box-sizing: border-box;
+    background: #f8f8f8;
 }
 
-.events {
-    background-color: #ffcc00;
-    padding: 0;
-}
 
-.current-weather {
-    display: flex;
-    flex-direction: column;
-    background-color: #00aaff;
-    padding: 0;
-}
-
-.weather-content {
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
-    padding: 1rem;
-}
-
-#weather-icon {
-    width: 40px;
-    height: auto;
-    display: block;
-    image-rendering: crisp-edges;
-}
-
-.weather-details {
-    display: flex;
-    flex-direction: column;
-}
-
-.weather-forecast {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #00ffd5;
-    padding: 0;
-}
-
-#forecast {
-    margin-top: 1rem;
-    display: flex;
-    flex-direction: column;
-}
-
-.forecast-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    border-radius: 8px;
-}
-
-.forecast-item img {
-    width: 40px;
-    height: auto;
+.content-container>section {
+    padding: 0rem 1rem 1rem 1rem;
+    border: 1px solid #ddd;
+    background: #fff;
+    box-sizing: border-box;
 }
 
 #homemembers {

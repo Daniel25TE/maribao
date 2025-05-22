@@ -35,15 +35,14 @@
 
     #footer-container {
         padding: 1rem;
+        grid-template-columns: 1fr;
     }
 
     .header-container {
         padding: 1rem;
     }
 
-    #footer-container {
-        grid-template-columns: 1fr;
-    }
+
 
     #footer-container>div:nth-child(1)#footer-container>div:nth-child(3) {
         text-align: left;
@@ -53,14 +52,9 @@
         text-align: center;
     }
 
-
-
-
-
     .content-container {
-        display: flex;
-        flex-direction: column;
-        padding: 1rem;
+        grid-template-columns: 1fr;
+        padding: 1rem 2rem;
     }
 
     #homemembers {
@@ -82,10 +76,7 @@
         padding: 1rem;
     }
 
-    .weather-content {
-        flex-direction: column;
-        align-items: center;
-    }
+
 
 
 
