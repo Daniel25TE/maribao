@@ -6,7 +6,7 @@
         "website": "...",
         "image": "alpha.svg",
         "membership": 3,
-        "email": "info@alphasolutions.com",
+        "email": "info@alpha.com",
         "description": "Innovative software solutions provider since 2001."
     },
     {
@@ -16,7 +16,7 @@
         "website": "...",
         "image": "tools.svg",
         "membership": 2,
-        "email": "contact@betaindustries.com",
+        "email": "contact@beta.com",
         "description": "Leading manufacturer in industrial equipment."
     },
     {
@@ -26,8 +26,8 @@
         "website": "...",
         "image": "finance.svg",
         "membership": 1,
-        "email": "sales@gammaenterprises.com",
-        "description": "Quality services in business consulting and finance."
+        "email": "sales@gamma.com",
+        "description": "Quality services in business consulting and finance since 2002."
     },
     {
         "name": "Delta Corp",

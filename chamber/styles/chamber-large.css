@@ -3,12 +3,19 @@
     --small-padding: 0.5rem;
     --gap: 1rem;
     --border: 0.0625rem solid rgba(0, 0, 0, 0.1);
+    --large-padding: 1rem 3rem;
+    --container-bg: #f8f8f8;
+    --light-bg: #fff;
+    --dark-text: #000;
+    --cta-bg: rgba(255, 255, 255, 0.8);
+    --card-border: 1px solid #ccc;
+    --header-footer-bg: #b8b8b8;
 }
 
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box
+    box-sizing: border-box;
 }
 
 body {
@@ -21,50 +28,46 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 7rem;
-    background-color: #b8b8b8;
-    color: #000;
+    padding: var(--large-padding);
+    background-color: var(--header-footer-bg);
+    color: var(--dark-text);
 }
 
 #logo {
     display: flex;
     align-items: center;
     max-height: 7.94rem;
-    margin-right: 0.5rem;
+    margin-right: var(--small-padding);
 }
-
-
 
 nav ul {
     display: flex;
     list-style: none;
-    gap: var(--gap)
+    gap: var(--gap);
 }
 
 nav ul li a {
     text-decoration: none;
-    color: #000;
-    padding: var(--small-padding)
+    color: var(--dark-text);
+    padding: var(--small-padding);
 }
 
 #menu-toggle {
-    display: none
+    display: none;
 }
 
 #footer-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 5rem;
-    padding: 1rem 7rem;
+    padding: var(--large-padding);
     background: #b6b4b4;
-    color: #000
+    color: var(--dark-text);
 }
-
 
 #hero-container {
     position: relative;
     width: 100%;
-
 }
 
 #hero-container picture img {
@@ -80,9 +83,9 @@ nav ul li a {
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
-    background: rgba(255, 255, 255, 0.8);
-    color: rgb(0, 0, 0);
-    padding: 1rem;
+    background: var(--cta-bg);
+    color: var(--dark-text);
+    padding: var(--base-padding);
     border-radius: 8px;
     z-index: 2;
     width: auto;
@@ -94,23 +97,22 @@ nav ul li a {
 
 h1 {
     text-align: left;
-    padding: 1rem 7rem;
+    padding: var(--large-padding);
 }
 
 .content-container {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     gap: 2rem;
-    padding: 1rem 7rem;
+    padding: var(--large-padding);
     box-sizing: border-box;
-    background: #f8f8f8;
+    background: var(--container-bg);
 }
 
-
 .content-container>section {
-    padding: 0rem 1rem 1rem 1rem;
-    border: 1px solid #ddd;
-    background: #fff;
+    padding: 0rem var(--base-padding) var(--base-padding) var(--base-padding);
+    border: var(--card-border);
+    background: var(--light-bg);
     box-sizing: border-box;
 }
 
@@ -119,36 +121,36 @@ h1 {
     flex-direction: row;
     justify-content: space-between;
     align-items: stretch;
-    gap: 1rem;
-    padding: 1rem 7rem;
+    gap: var(--gap);
+    padding: var(--large-padding);
 }
 
 .spotlight-card {
     flex: 0 0 32%;
     box-sizing: border-box;
-    border: 1px solid #ccc;
-    padding: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+    border: var(--card-border);
+    padding: var(--base-padding);
+    box-shadow: 0 2px 4px var(--border);
+    background-color: var(--light-bg);
 }
 
 h3 {
     text-align: center;
     margin: 0;
-    padding-bottom: 0.5rem;
+    padding-bottom: var(--small-padding);
     font-size: 1.5rem;
 }
 
 hr {
     border: none;
-    border-top: 1px solid #ccc;
-    margin: 0 auto 1rem auto;
+    border-top: var(--card-border);
+    margin: 0 auto var(--base-padding) auto;
     width: 90%;
 }
 
 .spotlight-content {
     display: flex;
-    gap: 1rem;
+    gap: var(--gap);
 }
 
 .spotlight-img {
@@ -165,7 +167,7 @@ h2 {
     background-color: #ddd;
     width: 100%;
     margin: 0;
-    padding: 0.5rem;
+    padding: var(--small-padding);
     text-align: left;
 }
 
@@ -173,64 +175,64 @@ h2 {
     margin: 0 auto;
     padding: var(--small-padding);
     max-width: 43.75rem;
-    background-color: #fff;
+    background-color: var(--light-bg);
     min-height: 31.25rem;
     display: grid;
-    gap: var(--gap)
+    gap: var(--gap);
 }
 
 .menu {
-    margin: 1rem auto;
+    margin: var(--base-padding) auto;
     border: var(--border);
     padding: var(--small-padding);
     background-color: #333;
-    text-align: center
+    text-align: center;
 }
 
 .menu button {
-    padding: 1rem;
+    padding: var(--base-padding);
     font-weight: 700;
-    color: #fff;
+    color: var(--light-bg);
     background: none;
     border: none;
-    cursor: pointer
+    cursor: pointer;
 }
 
 article {
     min-height: 25rem;
-    transition: all 0.3s ease
+    transition: all 0.3s ease;
 }
 
 section {
     border: var(--border);
     padding: var(--small-padding);
     background-color: #ddd;
-    margin-bottom: var(--small-padding)
+    margin-bottom: var(--small-padding);
 }
 
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
     gap: 0.3125rem;
-    align-items: center
+    align-items: center;
 }
 
 .grid section {
-    text-align: center
+    text-align: center;
 }
 
 .grid section>* {
     margin: 0.1rem;
-    text-align: center
+    text-align: center;
 }
 
 .grid h2 {
-    font-size: 1.2rem
+    font-size: 1.2rem;
 }
 
 .list {
     display: grid;
-    gap: var(--gap)
+    gap: var(--gap);
 }
 
 .list section {
@@ -239,26 +241,26 @@ section {
     gap: var(--gap);
     margin: 0;
     padding: 0.25rem;
-    align-items: center
+    align-items: center;
 }
 
 .list section img {
-    display: none
+    display: none;
 }
 
 .list section h2 {
-    font-size: 1rem
+    font-size: 1rem;
 }
 
 .list section:nth-child(even) {
-    background-color: #bbb
+    background-color: #bbb;
 }
 
 section h2 {
-    font-size: 1.5rem
+    font-size: 1.5rem;
 }
 
 section a {
     font-size: 0.85rem;
-    color: navy
+    color: navy;
 }
