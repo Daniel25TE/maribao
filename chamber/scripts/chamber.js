@@ -268,28 +268,30 @@ function displayResults(data) {
 function displayForecast(data) {
     forecastContainer.innerHTML = "";
 
-    const today = new Date();
-    const todayWeekday = today.toLocaleDateString('en-US', { weekday: 'long' });
+    const today = new Date().toISOString().split("T")[0];
 
-    const filteredForecasts = data.list.filter(entry => entry.dt_txt.includes("12:00:00")).slice(0, 3);
+    let forecastList = data.list.filter(entry => entry.dt_txt.includes("12:00:00"));
 
-    filteredForecasts.forEach((entry, index) => {
+    let uniqueDates = new Set();
+    let finalForecasts = forecastList.filter(entry => {
+        const dateStr = entry.dt_txt.split(" ")[0];
+        return uniqueDates.size < 3 && uniqueDates.add(dateStr);
+    });
+
+    forecastContainer.innerHTML = finalForecasts.map(entry => {
         const date = new Date(entry.dt_txt);
-        const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'long' });
-
-        let label = index === 0 ? todayWeekday : dayOfWeek;
-
-        const temp = entry.main.temp.toFixed(1);
-        const iconSrc = `https://openweathermap.org/img/w/${entry.weather[0].icon}.png`;
-
-        forecastContainer.innerHTML += `
+        return `
             <div class="forecast-item">
-                <p><strong>${label}: ${temp}&deg;F</strong></p>
-                <img src="${iconSrc}" alt="Weather icon">
+                <p><strong>${date.toLocaleDateString('en-US', { weekday: 'long' })}: ${entry.main.temp.toFixed(1)}&deg;F</strong></p>
+                <img src="https://openweathermap.org/img/w/${entry.weather[0].icon}.png" alt="Weather icon" style="width: 50px; height: 50px;">
+
             </div>
         `;
-    });
+    }).join("");
 }
+
+
+
 
 if (document.querySelector('#current-weather')) {
     apiFetch();

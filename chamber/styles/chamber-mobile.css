@@ -9,7 +9,7 @@
     --gap-small: 0.5rem;
 }
 
-@media (max-width: 48em) {
+@media (max-width: 54em) {
     #menu-toggle {
         display: block;
         background: none;
@@ -63,7 +63,7 @@
 
     .content-container {
         grid-template-columns: 1fr;
-        padding: var(--medium-padding);
+        padding: var(--small-padding);
     }
 
     #homemembers {
