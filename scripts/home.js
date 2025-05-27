@@ -103,6 +103,14 @@ document.addEventListener("DOMContentLoaded", () => {
     ]
 
     const certificateSection = document.querySelector(".section-full");
+    const mydialog = document.querySelector("#mydialog");
+    const mysubject = document.querySelector("#mydialog h2");
+    const mytitle = document.querySelector("#mydialog h4");
+    const myclose = document.querySelector("#mydialog button");
+    const paragraphs = document.querySelectorAll("#mydialog p");
+
+    myclose.addEventListener("click", () => mydialog.close())
+
 
     if (!certificateSection) {
         console.error("Container with ID 'section-full' not found.");
@@ -149,6 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 
             `;
+            courseCard.addEventListener('click', () => showStuff(course));
             courseContainer.appendChild(courseCard);
         });
 
@@ -157,6 +166,25 @@ document.addEventListener("DOMContentLoaded", () => {
         totalCredits.textContent = `Total Credits: ${totalCreditsValue}`;
     }
 
+    function showStuff(course) {
+        mysubject.innerHTML = course.subject
+        mytitle.innerHTML = course.title
+        if (paragraphs.length > 0) {
+            paragraphs[0].innerHTML = `${course.credits} credits`;
+        }
+
+        if (paragraphs.length > 1) {
+            paragraphs[1].innerHTML = `Certificate: ${course.certificate}`;
+        }
+        if (paragraphs.length > 2) {
+            paragraphs[2].innerHTML = `${course.description}`;
+        }
+
+        if (paragraphs.length > 3) {
+            paragraphs[3].innerHTML = `Technology: ${course.technology}`;
+        }
+        mydialog.showModal()
+    }
 
     function filterCourses(category) {
         const filteredCourses = category === "All" ? courses : courses.filter(course => course.subject === category);

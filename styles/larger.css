@@ -262,9 +262,51 @@ button.active {
     transform: scale(1.1);
 }
 
+#mydialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background: white;
+    border: none;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8);
+}
+
+#mydialog div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    background-color: lightblue;
+    border-bottom: #aaa 1px solid;
+}
+
+#mydialog button {
+    margin: 0;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    box-shadow: 0 0 10px #aaa;
+}
+
+#mydialog h2 {
+    left: 0px;
+
+    top: 0px;
 
 
+}
 
+#mydialog p,
+h4 {
+    padding: 10px;
+    color: #202f41;
+}
+
+::backdrop {
+    background-color: rgba(97, 102, 104, 0.6);
+}
 
 footer {
     text-align: center;
