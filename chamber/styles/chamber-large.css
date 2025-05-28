@@ -112,6 +112,10 @@ h1 {
     background: var(--container-bg);
 }
 
+.content-container h2 {
+    background-color: #bdbdbd;
+}
+
 .content-container>section {
     padding: 0rem var(--base-padding) var(--base-padding) var(--base-padding);
     border: var(--card-border);
@@ -168,7 +172,7 @@ hr {
 }
 
 h2 {
-    background-color: #ddd;
+
     width: 100%;
     margin: 0;
     padding: var(--small-padding);
@@ -267,4 +271,216 @@ section h2 {
 section a {
     font-size: 0.85rem;
     color: navy;
+}
+
+.formJoin {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 10px;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin: 1rem;
+}
+
+label {
+    display: grid;
+    grid-template-columns: 1fr;
+    font-size: 1.1rem;
+}
+
+input,
+select,
+textarea {
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+
+
+dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background: white;
+    border: none;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8);
+    border-radius: 5px;
+}
+
+dialog div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    background-color: rgb(212, 224, 228);
+    border-bottom: #aaa 1px solid;
+    border-radius: 5px;
+}
+
+dialog button {
+    margin: 0;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    box-shadow: 0 0 10px #aaa;
+    padding: .8rem;
+}
+
+dialog h2 {
+    left: 0px;
+    background-color: rgb(212, 224, 228);
+    top: 0px;
+
+
+}
+
+dialog p {
+    padding: 10px;
+    color: #000000;
+}
+
+::backdrop {
+    background-color: rgba(97, 102, 104, 0.6);
+}
+
+#Non-Profit {
+    background-color: rgba(0, 128, 0, 0.2);
+    backdrop-filter: blur(8px);
+}
+
+#Bronze {
+    background-color: rgba(205, 127, 50, 0.3);
+    backdrop-filter: blur(8px);
+}
+
+#Silver {
+    background-color: rgba(192, 192, 192, 0.3);
+    backdrop-filter: blur(8px);
+}
+
+#Gold {
+    background-color: rgba(255, 215, 0, 0.3);
+    backdrop-filter: blur(8px);
+}
+
+fieldset {
+    padding: 2rem;
+}
+
+legend {
+    font-size: 1.5rem;
+    padding: .5rem;
+    background-color: #aaa;
+    border-radius: 5px;
+    border: 1px solid #000;
+}
+
+input[required]:invalid {
+    border: 1px solid red;
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+input[required]:valid {
+    border: 1px solid green;
+    background-color: rgba(0, 128, 0, 0.1);
+}
+
+input[type="submit"] {
+    display: block;
+    margin: 0 auto;
+    background-color: rgba(90, 161, 233, 0.8);
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    padding: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+    width: 100%;
+    max-width: 300px;
+
+}
+
+input[type="submit"]:hover {
+    background-color: rgba(0, 128, 255, 1);
+    transform: scale(1.05);
+}
+
+input[type="submit"]:active {
+    background-color: rgba(0, 100, 200, 1);
+    transform: scale(0.95);
+}
+
+#learnMoreCards {
+    margin: 1rem;
+    padding: 1rem;
+}
+
+#learnMoreCards h2 {
+    font-size: 2rem;
+    padding: 0;
+}
+
+
+.membership {
+    position: relative;
+    padding: 20px;
+    border: 2px solid transparent;
+    text-align: center;
+    border-radius: 5px 30px;
+    background-color: #b6b4b4;
+    gap: 50px;
+    margin-top: 2rem;
+    position: relative;
+    padding: 20px;
+
+    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.5);
+    animation: subtle-bounce 1.2s ease-out;
+}
+
+@keyframes subtle-bounce {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0px 30px 60px rgba(0, 0, 0, 0.6);
+    }
+
+    50% {
+        transform: scale(1.03);
+        box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.5);
+    }
+}
+
+#results {
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 600px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+#results p,
+h2 {
+    text-align: center;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.6;
+}
+
+.membership :nth-child(2) {
+    padding: 1rem;
+    cursor: pointer;
 }

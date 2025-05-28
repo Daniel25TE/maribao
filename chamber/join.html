@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -38,71 +38,154 @@
         </div>
     </header>
     <main>
-        <form method="get" action="thankyou.html">
+
+        <div class="formJoin">
+
+            <div id="form">
+                <h1>Membership Application Form</h1>
+                <form method="get" action="thanks.html">
+                    <fieldset>
+                        <legend>Aplicant Information</legend>
+                        <label>
+                            First Name*
+                            <input type="text" name="first_name" title="Applicant's First Name"
+                                autocomplete="given-name" required>
+                        </label>
 
 
-            <label>
-                First Name:
-                <input type="text" name="first_name" title="Applicant's First Name" autocomplete="given-name" required>
-            </label>
+                        <label>
+                            Last Name*
+                            <input type="text" name="last_name" title="Applicant's Last Name" autocomplete="family-name"
+                                required>
+                        </label>
 
 
-            <label>
-                Last Name:
-                <input type="text" name="last_name" title="Applicant's Last Name" autocomplete="family-name" required>
-            </label>
+                        <label>
+                            Organizational Title
+                            <input type="text" name="organization_title" title="Applicant's Organizational Title"
+                                autocomplete="organization-title" pattern="[a-zA-Z\- ]{7,}">
+                        </label>
 
 
-            <label>
-                Organizational Title:
-                <input type="text" name="organization_title" title="Applicant's Organizational Title"
-                    autocomplete="organization-title" pattern="[a-zA-Z\- ]{7,}" required>
-            </label>
+                        <label>
+                            Email Address*
+                            <input type="email" name="email" title="Applicant's Email" autocomplete="email"
+                                placeholder="example@domain.com" required>
+                        </label>
 
 
-            <label>
-                Email Address:
-                <input type="email" name="email" title="Applicant's Email" autocomplete="email"
-                    placeholder="example@domain.com" required>
-            </label>
+                        <label>
+                            Mobile Phone Number*
+                            <input type="tel" name="phone" title="Applicant's Mobile Phone" autocomplete="tel" required>
+                        </label>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Organization Information</legend>
+                        <label>
+                            Business/Organization Name*
+                            <input type="text" name="organization_name" title="Business/Organization Name"
+                                autocomplete="organization" required>
+                        </label>
 
 
-            <label>
-                Mobile Phone Number:
-                <input type="tel" name="phone" title="Applicant's Mobile Phone" autocomplete="tel" required>
-            </label>
+                        <label>
+                            Membership Level:
+                            <select name="membership_level" title="Select Membership Level" required>
+                                <option value="" selected disabled>Please select</option>
+                                <option value="np">NP Membership (Non-Profit, No Fee)</option>
+                                <option value="bronze">Bronze Membership</option>
+                                <option value="silver">Silver Membership</option>
+                                <option value="gold">Gold Membership</option>
+                            </select>
+                        </label>
 
 
-            <label>
-                Business/Organization Name:
-                <input type="text" name="organization_name" title="Business/Organization Name"
-                    autocomplete="organization" required>
-            </label>
+
+                        <label>
+                            Business/Organization Description:
+                            <textarea name="organization_description"
+                                title="Business/Organization Description"></textarea>
+                        </label>
 
 
-            <label>
-                Membership Level:
-                <select name="membership_level" title="Select Membership Level" required>
-                    <option value="np">NP Membership (Non-Profit, No Fee)</option>
-                    <option value="bronze">Bronze Membership</option>
-                    <option value="silver">Silver Membership</option>
-                    <option value="gold">Gold Membership</option>
-                </select>
-            </label>
+                        <input type="hidden" id="timestamp" name="timestamp">
+                    </fieldset>
+
+                    <input type="submit" value="Apply for Membership">
 
 
-            <label>
-                Business/Organization Description:
-                <textarea name="organization_description" title="Business/Organization Description"></textarea>
-            </label>
-
-
-            <input type="hidden" id="timestamp" name="timestamp" value="<?php echo date('Y-m-d H:i:s'); ?>">
-
-
-            <input type="submit" value="Submit Application">
-
-        </form>
+                </form>
+            </div>
+            <div id="learnMoreCards">
+                <h2>Membership Levels</h2>
+                <section class="membership">
+                    <h3>Non Profit Membership Level</h3>
+                    <button id="learn-more-non">Learn More</button>
+                </section>
+                <section class="membership">
+                    <h3>Bronze Membership Level</h3>
+                    <button id="learn-more-bronze">Learn More</button>
+                </section>
+                <section class="membership">
+                    <h3>Silver Membership Level</h3>
+                    <button id="learn-more-silver">Learn More</button>
+                </section>
+                <section class="membership">
+                    <h3>Gold Membership Level</h3>
+                    <button id="learn-more-gold">Learn More</button>
+                </section>
+            </div>
+            <dialog id="Non-Profit">
+                <div>
+                    <h2>Non Profit Membership</h2>
+                    <button id="non-close">X</button>
+                </div>
+                <p><strong>Price:</strong> Free</p>
+                <p>The Non-Profit Membership provides free access to community events, networking opportunities,
+                    training resources focused on nonprofit growth, and inclusion in a nonprofit directory for better
+                    visibility. Members also receive discounts on select workshops and consultations and have the
+                    opportunity to apply for funding assistance programs to help support their mission.</p>
+            </dialog>
+            <dialog id="Bronze">
+                <div>
+                    <h2>Bronze Membership</h2>
+                    <button id="bronze-close">X</button>
+                </div>
+                <p><strong>Price:</strong> $50</p>
+                <p>With the Bronze Membership, members enjoy all the benefits of the Non-Profit tier plus
+                    additional perks like a spotlight feature on the homepage for greater visibility, access to
+                    exclusive members-only webinars and Q&A sessions, priority access to discounted event tickets, and
+                    basic advertising opportunities through newsletters and social media. They also become eligible for
+                    special grants and funding partnerships, providing additional financial support.</p>
+            </dialog>
+            <dialog id="Silver">
+                <div>
+                    <h2>Silver Membership</h2>
+                    <button id="silver-close">X</button>
+                </div>
+                <p><strong>Price:</strong> $100</p>
+                <p>The Silver Membership takes engagement a step further by building on the Bronze benefits,
+                    offering an extended spotlight on the homepage, premium training sessions on industry trends and
+                    business development, and one-on-one consultations with experts to refine strategies. Members
+                    receive enhanced advertising in newsletters, social media, and website promotions, VIP access to
+                    events with discounted tickets and priority seating, and opportunities for deeper connections within
+                    the community.</p>
+            </dialog>
+            <dialog id="Gold">
+                <div>
+                    <h2>Gold Membership</h2>
+                    <button id="gold-close">X</button>
+                </div>
+                <p><strong>Price:</strong> $200</p>
+                <p>At the highest level, the Gold Membership includes all the benefits of Silver but adds
+                    exclusive sponsorship opportunities for events, personalized business promotion across multiple
+                    platforms, and unlimited consultations with industry experts for tailored guidance. Gold members
+                    receive high-impact advertising placements, including homepage banners, first access to funding
+                    programs and partnership initiatives, and invitations to exclusive networking dinners with top
+                    professionals, ensuring maximum visibility and influence in the industry.</p>
+            </dialog>
+        </div>
 
 
     </main>

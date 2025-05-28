@@ -292,11 +292,69 @@ function displayForecast(data) {
 
 
 
-
 if (document.querySelector('#current-weather')) {
     apiFetch();
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    const myInfo = new URLSearchParams(window.location.search);
+
+    const resultsContainer = document.querySelector("#results");
+    if (resultsContainer) {
+        resultsContainer.innerHTML = `
+            <h2>We have recieved your application with the following information:</h2>
+            <p>Application for <strong>${myInfo.get('first_name')} ${myInfo.get('last_name')}</strong> on behalf of <strong>${myInfo.get('organization_name')}</strong>
+            on ${myInfo.get('timestamp')}</p>
+            <p>We'll contact you via email at <strong>${myInfo.get('email')}</strong> or by phone at <strong>${myInfo.get('phone')}</strong></p>
+
+            
+            
+        `;
+    }
+});
+const nonprofit = document.querySelector("#Non-Profit");
+const nonclose = document.querySelector("#non-close");
+
+if (nonprofit && nonclose) {
+    nonclose.addEventListener("click", () => nonprofit.close());
+    document.getElementById("learn-more-non")?.addEventListener("click", () => {
+        nonprofit.showModal();
+    });
+}
+
+const bronze = document.querySelector("#Bronze");
+const brclose = document.querySelector("#bronze-close");
+
+if (bronze && brclose) {
+    brclose.addEventListener("click", () => bronze.close());
+    document.getElementById("learn-more-bronze")?.addEventListener("click", () => {
+        bronze.showModal();
+    });
+}
+
+const silver = document.querySelector("#Silver");
+const siclose = document.querySelector("#silver-close");
+
+if (silver && siclose) {
+    siclose.addEventListener("click", () => silver.close());
+    document.getElementById("learn-more-silver")?.addEventListener("click", () => {
+        silver.showModal();
+    });
+}
+
+const gold = document.querySelector("#Gold");
+const goclose = document.querySelector("#gold-close");
+
+if (gold && goclose) {
+    goclose.addEventListener("click", () => gold.close());
+    document.getElementById("learn-more-gold")?.addEventListener("click", () => {
+        gold.showModal();
+    });
+}
+if (document.getElementById("timestamp")) {
+    let now = new Date().toLocaleString("en-US", { hour12: false }).replace(",", "");
+    document.getElementById("timestamp").value = now;
+}
 
 
 
