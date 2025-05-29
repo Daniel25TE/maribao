@@ -286,6 +286,10 @@ form {
     margin: 1rem;
 }
 
+#form h2 {
+    font-size: 2rem;
+}
+
 label {
     display: grid;
     grid-template-columns: 1fr;
