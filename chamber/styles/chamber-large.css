@@ -42,6 +42,10 @@ body {
     margin-right: var(--small-padding);
 }
 
+nav {
+    position: relative;
+}
+
 nav ul {
     display: flex;
     list-style: none;
