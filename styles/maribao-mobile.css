@@ -1,166 +1,109 @@
-@media (max-width: 1060px) {
-    :root {
-        --primary-color: black;
-        --hover-color: #007BFF;
-        --background-color: #e2ecec;
-        --text-hover-bg: rgb(204, 236, 236);
-        --line-height: 4px;
-        --transition-speed: 0.3s;
-        --hamburger-width: 30px;
-        --hamburger-height: 24px;
-        --gap-small: 10px;
-        --gap-large: 40px;
-        --font-size-large: 1.2rem;
-        --font-size-medium: 1.1rem;
-    }
-    header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        position: relative;
-        padding: 0 var(--gap-large) 0 100px;
-    }
+@media screen and (max-width: 768px) {
 
-    .hamburger {
-        cursor: pointer;
-        display: flex;
+    header,
+    .navigation {
         flex-direction: column;
-        justify-content: space-between;
-        width: var(--hamburger-width);
-        height: var(--hamburger-height);
-        position: relative;
-        cursor: pointer;
-    }
-
-    .hamburger span {
-        background-color: red;
-        height: var(--line-height);
-        width: 100%;
-        transition: -webkit-transform 0.3s ease, opacity 0.3s ease; /* Safari compatibility */
-        transition: transform 0.3s ease, opacity 0.3s ease;
-        min-height: 4px;
-        min-width: 30px;
-    }
-
-    .hamburger.is-active span:nth-child(1) {
-        transform: rotate(55deg) translate(8px, 8px);
-    }
-
-    .hamburger.is-active span:nth-child(2) {
-        opacity: 0;
-    }
-
-    .hamburger.is-active span:nth-child(3) {
-        transform: rotate(-55deg) translate(6px, -6px);
-    }
-    .logo {
-        order: 2;
-        margin-left: auto;
-        padding: 16px;
-    }
-
-    .logo img {
-        width: 65px;
-        height: 60px;
-    }
-
-    /* Mobile Options */
-    .mobile-options {
-        display: flex;
-        gap: 3rem;
-        padding: var(--gap-small) 0;
-        border-bottom: 1px solid #ccc;
-        justify-content: center;
-        max-width: 90%;
-    }
-    .view-map,
-    .call-us {
-        text-decoration: none;
-        color: var(--primary-color);
-        font-size: var(--font-size-medium);
-        padding: 5px 10px;
-        border-radius: 5px;
-        transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
-    }
-
-    .view-map:hover,
-    .call-us:hover {
-        color: white;
-        background-color: var(--hover-color);
-    }
-
-    .call-us {
-        display: flex;
         align-items: center;
-        gap: 5px;
+
     }
 
     .navigation {
-        display: none; /* Hidden by default */
-        flex-direction: column;
-        justify-content: flex-start; /* Arrange menu items in a column */
-        gap: var(--gap-small); /* Space between menu items */
-        position: fixed; /* Ensures menu stays in place */
-        top: 100px; /* Position right below the header */
-        left: 0;
-        width: 100%; /* Takes up the full width of the screen */
-        height: calc(85vh - 70px); /* Takes up the full screen height, excluding the header */
-        background-color: #e2ecec; /* Background of the menu */
-        padding: 20px; /* Space inside the menu */
-        padding-top: 0px;
-        padding-bottom: 50px;
-        overflow-y: auto; /* Enables scrolling if content exceeds viewport height */
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for design */
-        z-index: 1000; /* Ensures it stays above other content */
+        gap: 1.4rem;
     }
-    
-    .navigation.active {
-        display: flex; /* Show navigation when active */
-    }
-    .navigation ul {
-        list-style: none; /* Remove default list styling */
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column; /* Stack menu items vertically */
-        align-items: flex-start; /* Align items to the left */
-        gap: var(--gap-large);
-        margin-top: 10px;
-    }
-    .navigation ul li {
-        display: flex; /* Flexbox para alinear la flecha y el texto */
+
+    header {
+        padding: .5rem;
         position: relative;
-        align-items: center;
-        gap: var(--gap-small);
-        max-width: 100%; /* Full width for each item */
-        width: 90%;
-        border-bottom: 1px solid #ccc;
+        gap: 0rem;
     }
-    .arrow {
+
+
+    .hamburger-menu {
+        display: block;
         position: absolute;
-        right: 10px;
-        display: inline-block;
-        color: var(--hover-color); /* Color de la flecha */
-        font-size: var(--font-size-large); /* Tamaño de la flecha */
-        flex-shrink: 0; /* Evita que la flecha se reduzca */
-        
+        top: .3rem;
+        left: .3rem;
+        z-index: 1000;
     }
 
-    .navigation ul li a {
-        text-decoration: none;
-        color: var(--primary-color);
-        padding: 0px; /* Add spacing inside each link */
-        transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease; /* Smooth hover effect */
-        border-radius: 5px; /* Optional: Rounded corners for links */
-        font-size: var(--font-size-large); /* Adjust text size */
-        width: 100%; /* Ensure links span the width of the menu */
+    nav {
+        background-color: transparent;
+    }
+
+
+    #animateme {
+        display: flex;
+        flex-direction: column;
+        background-color: #a2e5ff;
+        position: relative;
+        width: 100%;
+        z-index: 500;
+        padding: 0px;
+        height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transform: scaleY(0);
+        transform-origin: top;
+        animation: closeMenu 0.4s ease-in-out;
+        border-radius: 5px;
+        margin-bottom: 0px;
+    }
+
+
+    #animateme.active {
+        animation: openMenu 0.4s ease-out forwards;
+    }
+
+
+    @keyframes openMenu {
+        0% {
+            height: 0;
+            opacity: 0;
+            transform: scaleY(0);
+        }
+
+        100% {
+            height: 300px;
+
+            opacity: 1;
+            transform: scaleY(1);
+        }
+    }
+
+
+    @keyframes closeMenu {
+        0% {
+            height: 200px;
+
+            opacity: 1;
+            transform: scaleY(1);
+        }
+
+        100% {
+            height: 0;
+            opacity: 0;
+            transform: scaleY(0);
+        }
+    }
+
+
+
+
+
+
+    #footer-container {
+        padding: 1rem;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+
+    #footer-container> :is(div:nth-child(1), div:nth-child(3)) {
         text-align: left;
-        padding-right: 100px;
     }
 
-    .navigation ul li a:hover {
-        color: var(--hover-color);
-        background-color: var(--text-hover-bg);
+    #footer-container>div:nth-child(2) {
+        text-align: center;
     }
 
 }

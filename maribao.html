@@ -16,68 +16,64 @@
 </head>
 
 <body>
-  <div class="wrapper">
-    <header>
-      <div class="logo">
-        <img src="images/maribaoLogo.webp" alt="Beautiful landscape of Madagascar" width="85" height="80">
-      </div>
-      <button title="Menu" class="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <nav class="navigation">
-        <div class="mobile-options">
-          <a href="#viewmap" class="view-map">
-            <img src="images/location.svg" alt="Location Icon" width="20" height="20">View Map
-          </a>
+  <header>
 
-          <a href="tel:+1234567890" class="call-us">
-            <img src="images/whatsappIcon.svg" alt="Phone Icon" width="20" height="20"> +123-456-7890
-          </a>
-        </div>
-        <ul>
-          <li><a href="#" onclick="showHome()">Overview</a></li>
-          <li><a href="#" id="manta" title="Manta">Find and Reserve</a></li>
-          <li><a href="#" id="quito" title="Quito">Gallery</a></li>
-          <li><a href="#" id="cuenca" title="Cuenca">Accomodations</a></li>
-          <li><a href="#" onclick="showContact()">Experiences</a></li>
-        </ul>
-      </nav>
-    </header>
-    <main class="content">
-      <div class="verna">
 
-      </div>
-    </main>
-    <footer class="footer">
-      <div class="footer-top">
-        <div class="left-content">
-          <ul>
-            <li><a href="#about">Sobre Maribao</a></li>
-            <li><a href="#contact">Contáctanos</a></li>
-            <li><a href="#faq">Preguntas Frecuentes</a></li>
-            <li><a href="#help">Ayuda</a></li>
-          </ul>
-        </div>
-        <div class="social-icons">
-          <a href="https://facebook.com"><img alt="Facebook" src="images/facebookIcon.svg" width="35" height="35"></a>
-          <a href="https://instagram.com"><img alt="Instagram" src="images/instagramIcon.svg" width="35"
-              height="35"></a>
-          <a href="https://twitter.com"><img alt="Twitter" src="images/whatsappIcon.svg" width="35" height="35"></a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        &copy; <span id="currentyear-desktop">2025</span> - Maribao. Todos los Derechos Reservados, Utah - United
-        States.
-      </div>
-      <!-- Este contenedor se usará para mostrar el botón de expansión en estado contraído -->
-      <div class="collapse-button">
-        <button>Footer</button>
-      </div>
-    </footer>
+    <picture>
+      <source srcset="images/maribaoLogo6.webp 120w, images/maribaoLogo5.webp 180w"
+        sizes="(min-width: 320px) 120px, (min-width: 1200px) 180px">
+      <img src="images/maribaoLogo6.webp" alt="Daniel A. Llumiquinga" width="90" height="84">
+    </picture>
 
-  </div>
+
+    <button class="hamburger-menu" type="button">☰</button>
+
+    <nav id="animateme">
+      <ul class="navigation">
+        <li><a href="index.html" id="home" title="Home">Home</a></li>
+        <li><a href="#" id="chamber" title="Chamber">Chamber</a></li>
+        <li><a href="#" id="final" title="Final">Final</a></li>
+        <li><a href="#" id="github" title="GithubProfile">Github Profile</a></li>
+        <li><a href="https://www.linkedin.com/in/daniel-llumiquinga-219758311/" id="linkedin"
+            title="LinkedIn">LinkedIn</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="content">
+    <div class="verna">
+      <p>ps</p>
+
+    </div>
+  </main>
+  <footer>
+    <div id="footer-container">
+      <div>
+        <p>Quito Chamber of Commerce</p>
+        <p>Address: 25 Lion Street, Quito - ECU</p>
+        <p>Email: quito@chamber.com</p>
+        <p>Phone: (123)-456-7890</p>
+      </div>
+      <div>
+        <a href="https://youtube.com">
+          <img alt="Youtube" src="images/youtube.svg" width="35" height="35" loading="lazy">
+        </a>
+        <a href="https://twitter.com">
+          <img alt="Twitter" src="images/twitter.svg" width="35" height="35" loading="lazy">
+        </a>
+        <a href="https://indeed.com">
+          <img alt="Indeed" src="images/indeed.svg" width="35" height="35" loading="lazy">
+        </a>
+      </div>
+      <div>
+        <p>WDD231 Class Project</p>
+        <p>Daniel Llumiquinga</p>
+        <p>Lanzamiento: <span id="launchYear"></span></p>
+        <p>Última modificación: <span id="lastModified"></span></p>
+      </div>
+    </div>
+  </footer>
+
+
 </body>
 
 </html>
