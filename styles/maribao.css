@@ -4,7 +4,6 @@
   box-sizing: border-box;
 }
 
-
 body {
   width: 100%;
   margin: auto;
@@ -18,8 +17,6 @@ body {
 
 }
 
-
-
 header {
   width: 100%;
   display: flex;
@@ -32,8 +29,6 @@ header {
   padding: .5rem 2rem;
 
 }
-
-
 
 .hamburger-menu {
   display: none;
@@ -76,7 +71,6 @@ nav {
   transition: background-color 0.3s ease-in-out;
 
 }
-
 
 .navigation a:hover {
   background-color: #555;

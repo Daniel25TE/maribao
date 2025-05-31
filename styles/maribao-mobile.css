@@ -1,22 +1,19 @@
 @media screen and (max-width: 768px) {
 
-    header,
     .navigation {
+        gap: 1.4rem;
         flex-direction: column;
         align-items: center;
 
-    }
-
-    .navigation {
-        gap: 1.4rem;
     }
 
     header {
         padding: .5rem;
         position: relative;
         gap: 0rem;
+        flex-direction: column;
+        align-items: center;
     }
-
 
     .hamburger-menu {
         display: block;
@@ -26,12 +23,11 @@
         z-index: 1000;
     }
 
-    nav {
-        background-color: transparent;
+    .hamburger-menu.open::before {
+        content: "✖";
     }
 
-
-    #animateme {
+    nav {
         display: flex;
         flex-direction: column;
         background-color: #a2e5ff;
@@ -50,7 +46,7 @@
     }
 
 
-    #animateme.active {
+    nav.active {
         animation: openMenu 0.4s ease-out forwards;
     }
 
@@ -85,11 +81,6 @@
             transform: scaleY(0);
         }
     }
-
-
-
-
-
 
     #footer-container {
         padding: 1rem;
