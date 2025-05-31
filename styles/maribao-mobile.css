@@ -30,7 +30,7 @@
     nav {
         display: flex;
         flex-direction: column;
-        background-color: #a2e5ff;
+        background-color: #37a6aa63;
         position: relative;
         width: 100%;
         z-index: 500;
@@ -95,6 +95,14 @@
 
     #footer-container>div:nth-child(2) {
         text-align: center;
+    }
+
+    #copyright-mobile {
+        display: block;
+    }
+
+    #copyright {
+        display: none;
     }
 
 }

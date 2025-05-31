@@ -43,7 +43,7 @@ header {
 
 nav {
   width: 100%;
-  background-color: #d8f4ff;
+
   padding: 0.5rem 0;
   border-radius: 5px;
 
@@ -73,8 +73,8 @@ nav {
 }
 
 .navigation a:hover {
-  background-color: #555;
-  border-radius: 5px;
+  background-color: #37a6aa63;
+  border-radius: 25px;
 }
 
 #footer-container {
@@ -85,4 +85,15 @@ nav {
   background-color: #e7e7e7;
   color: var(--dark-text);
 
+}
+
+#footer-container>div a {
+  color: #000000;
+  text-decoration: none;
+  font-weight: bold;
+
+}
+
+#copyright-mobile {
+  display: none;
 }
