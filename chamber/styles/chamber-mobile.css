@@ -18,7 +18,13 @@
         cursor: pointer;
     }
 
+    .icon::before {
+        content: "☰";
+    }
 
+    #menu-toggle.open .icon::before {
+        content: "✖";
+    }
 
     nav ul {
         align-items: center;

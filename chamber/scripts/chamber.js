@@ -10,8 +10,10 @@ function setupMenuToggle() {
 
     menuToggle.addEventListener("click", () => {
         nav.classList.toggle("active");
+        menuToggle.textContent = nav.classList.contains("active") ? "✖" : "☰";
     });
 }
+
 
 async function init() {
     try {
