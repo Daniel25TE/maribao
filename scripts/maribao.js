@@ -22,25 +22,24 @@ const dotsContainer = document.querySelector(".slider-indicators");
 let currentIndex = 0;
 const totalImages = sliderTrack.children.length;
 
-// Generate dots for indicators
+// Generar los indicadores de puntos
 dotsContainer.innerHTML = Array.from({ length: totalImages }, (_, i) =>
   `<span class="dot ${i === 0 ? 'active' : ''}" onclick="changeSlide(${i})"></span>`
 ).join('');
 
 const dots = document.querySelectorAll(".dot");
 
-// Function to change slide
+// Función para cambiar de diapositiva
 function changeSlide(index) {
   currentIndex = index;
 
-  // Use requestAnimationFrame for smoother transitions
   requestAnimationFrame(() => {
     sliderTrack.style.transform = `translateX(-${index * 100}%)`;
     updateDots();
   });
 }
 
-// Function to update active dot indicator
+// Función para actualizar los indicadores activos
 function updateDots() {
   dots.forEach((dot, i) => {
     dot.classList.toggle("active", i === currentIndex);
@@ -49,15 +48,14 @@ function updateDots() {
 
 let startX = 0;
 
-// Touch start event with passive listener
-sliderTrack.addEventListener("touchstart", (e) => {
-  // Prevent default behavior that might interfere with touch
-  startX = e.touches[0].clientX;
-}, { passive: true });
+// Evento `pointerdown` para iniciar el gesto táctil
+sliderTrack.addEventListener("pointerdown", (e) => {
+  startX = e.clientX || e.touches?.[0]?.clientX;
+});
 
-// Touch end event with passive listener
-sliderTrack.addEventListener("touchend", (e) => {
-  let endX = e.changedTouches[0].clientX;
+// Evento `pointerup` para finalizar el gesto táctil
+sliderTrack.addEventListener("pointerup", (e) => {
+  let endX = e.clientX || e.changedTouches?.[0]?.clientX;
   let difference = startX - endX;
 
   if (difference > 50 && currentIndex < totalImages - 1) {
@@ -67,9 +65,9 @@ sliderTrack.addEventListener("touchend", (e) => {
   }
 
   changeSlide(currentIndex);
-}, { passive: true });
+});
 
-// Ensure CSS allows touch interactions
+// Asegurar que el CSS permite interacciones táctiles
 document.querySelector(".slider-track").style.touchAction = "pan-y";
 
 
