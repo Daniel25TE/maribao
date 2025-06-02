@@ -22,17 +22,21 @@ const dotsContainer = document.querySelector(".slider-indicators");
 let currentIndex = 0;
 const totalImages = sliderTrack.children.length;
 
+// Generate dots for indicators
 dotsContainer.innerHTML = Array.from({ length: totalImages }, (_, i) =>
-  `<span class="dot ${i === 0 ? 'active' : ''}" onclick="changeSlide(${i})"></span>`).join('');
+  `<span class="dot ${i === 0 ? 'active' : ''}" onclick="changeSlide(${i})"></span>`
+).join('');
 
 const dots = document.querySelectorAll(".dot");
 
+// Function to change slide
 function changeSlide(index) {
   currentIndex = index;
   sliderTrack.style.transform = `translateX(-${index * 100}%)`;
   updateDots();
 }
 
+// Function to update active dot indicator
 function updateDots() {
   dots.forEach((dot, i) => {
     dot.classList.toggle("active", i === currentIndex);
@@ -40,10 +44,13 @@ function updateDots() {
 }
 
 let startX = 0;
+
+// Touch start event
 sliderTrack.addEventListener("touchstart", (e) => {
   startX = e.touches[0].clientX;
-});
+}, { passive: true });
 
+// Touch end event
 sliderTrack.addEventListener("touchend", (e) => {
   let endX = e.changedTouches[0].clientX;
   let difference = startX - endX;
@@ -55,7 +62,8 @@ sliderTrack.addEventListener("touchend", (e) => {
   }
 
   changeSlide(currentIndex);
-});
+}, { passive: true });
+
 
 
 
