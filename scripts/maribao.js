@@ -17,28 +17,50 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
-document.addEventListener("DOMContentLoaded", () => {
-  const imageContainer = document.querySelector(".image-container");
-  const images = document.querySelectorAll(".image-container img");
-  const dots = document.querySelectorAll(".dot");
-  let currentIndex = 0;
+const sliderTrack = document.querySelector(".slider-track");
+const dotsContainer = document.querySelector(".slider-indicators");
+let currentIndex = 0;
+const totalImages = sliderTrack.children.length;
 
-  const updateCarousel = () => {
-    imageContainer.style.transform = `translateX(${-currentIndex * images[0].clientWidth}px)`;
-    dots.forEach((dot, i) => dot.classList.toggle("active", i === currentIndex));
-  };
+dotsContainer.innerHTML = Array.from({ length: totalImages }, (_, i) =>
+  `<span class="dot ${i === 0 ? 'active' : ''}" onclick="changeSlide(${i})"></span>`).join('');
 
-  dots.forEach((dot, i) => dot.addEventListener("click", () => { currentIndex = i; updateCarousel(); }));
+const dots = document.querySelectorAll(".dot");
 
-  imageContainer.addEventListener("touchstart", (e) => startX = e.touches[0].clientX);
-  imageContainer.addEventListener("touchend", (e) => {
-    let endX = e.changedTouches[0].clientX;
-    currentIndex = Math.min(Math.max(currentIndex + (startX > endX + 50) - (startX < endX - 50), 0), images.length - 1);
-    updateCarousel();
+function changeSlide(index) {
+  currentIndex = index;
+  sliderTrack.style.transform = `translateX(-${index * 100}%)`;
+  updateDots();
+}
+
+function updateDots() {
+  dots.forEach((dot, i) => {
+    dot.classList.toggle("active", i === currentIndex);
   });
+}
 
-  window.addEventListener("resize", updateCarousel);
+let startX = 0;
+sliderTrack.addEventListener("touchstart", (e) => {
+  startX = e.touches[0].clientX;
 });
+
+sliderTrack.addEventListener("touchend", (e) => {
+  let endX = e.changedTouches[0].clientX;
+  let difference = startX - endX;
+
+  if (difference > 50 && currentIndex < totalImages - 1) {
+    currentIndex++;
+  } else if (difference < -50 && currentIndex > 0) {
+    currentIndex--;
+  }
+
+  changeSlide(currentIndex);
+});
+
+
+
+
+
 
 
 

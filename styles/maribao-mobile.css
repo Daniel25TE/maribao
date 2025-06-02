@@ -1,4 +1,4 @@
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 840px) {
 
     .navigation {
         gap: 1.4rem;
@@ -81,28 +81,4 @@
             transform: scaleY(0);
         }
     }
-
-    #footer-container {
-        padding: 1rem;
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-
-
-    #footer-container> :is(div:nth-child(1), div:nth-child(3)) {
-        text-align: left;
-    }
-
-    #footer-container>div:nth-child(2) {
-        text-align: center;
-    }
-
-    #copyright-mobile {
-        display: block;
-    }
-
-    #copyright {
-        display: none;
-    }
-
 }

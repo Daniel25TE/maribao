@@ -38,58 +38,52 @@
     </nav>
   </header>
   <main>
-    <h1 class="maintitle">Bienvenidos a Maribao!</h1>
-    <div class="album">
-      <div class="carousel-wrapper">
-        <div class="image-container">
-          <img src="images/manta.webp" class="current" alt="Current Image" loading="eager">
+    <div class="hero-image">
+      <div class="slider-track">
+        <img src="images/quito-medium-prueba.webp"
+          srcset="images/quito-mobile-prueba.webp 640w, images/quito-medium-prueba.webp 1280w, images/quito-large-prueba.webp 1920w"
+          sizes="(max-width: 640px) 100vw, (max-width: 1280px) 75vw, 50vw" alt="Imagen 1" width="1280" height="720">
 
-          <img src="images/quito.webp" class="next" alt="Next Image" loading="eager">
+        <img src="images/quito-medium-prueba.webp"
+          srcset="images/quito-mobile-prueba.webp 640w, images/quito-medium-prueba.webp 1280w, images/quito-large-prueba.webp 1920w"
+          sizes="(max-width: 640px) 100vw, (max-width: 1280px) 75vw, 50vw" alt="Imagen 2" width="1280" height="720">
 
-          <img src="images/manta.webp" alt="Extra Image" loading="eager">
+        <img src="images/quito-medium-prueba.webp"
+          srcset="images/quito-mobile-prueba.webp 640w, images/quito-medium-prueba.webp 1280w, images/quito-large-prueba.webp 1920w"
+          sizes="(max-width: 640px) 100vw, (max-width: 1280px) 75vw, 50vw" alt="Imagen 2" width="1280" height="720">
 
-          <img src="images/quito.webp" alt="Extra Image" loading="eager">
-        </div>
-      </div>
-      <div class="pagination">
-        <span class="dot active"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
       </div>
     </div>
 
+    <div class="slider-indicators">
+      <span class="dot active" onclick="changeSlide(0)"></span>
+      <span class="dot" onclick="changeSlide(1)"></span>
+    </div>
   </main>
+
   <footer>
     <div id="footer-container">
-      <div>
-        <a href="sobremaribao.html">Sobre Maribao</a><br><br>
-        <a href="sobremaribao.html">Contactanos</a><br>
-        <br>
-
-        <p id="copyright">&copy; 2025 Maribao. Todos los derechos reservados.</p>
-      </div>
-      <div>
-        <a href="https://youtube.com">
-          <img alt="Youtube" src="images/youtube.svg" width="35" height="35" loading="lazy">
-        </a>
-        <a href="https://twitter.com">
-          <img alt="Twitter" src="images/twitter.svg" width="35" height="35" loading="lazy">
-        </a>
-        <a href="https://indeed.com">
-          <img alt="Indeed" src="images/indeed.svg" width="35" height="35" loading="lazy">
-        </a>
-      </div>
-      <div>
-        <a href="sobremaribao.html">Preguntas Frecuentes</a><br><br>
+      <div class="footer-links">
+        <a href="sobremaribao.html">Sobre Maribao</a>
+        <a href="sobremaribao.html">Contactanos</a>
+        <a href="sobremaribao.html">Preguntas Frecuentes</a>
         <a href="sobremaribao.html">Ayuda</a>
-        <br>
-        <br>
-        <br>
-        <p id="copyright-mobile">&copy; 2025 Maribao. Todos los derechos reservados.</p>
       </div>
+
+      <div class="social-icons">
+        <a href="https://youtube.com"><img src="images/youtube.svg" alt="YouTube" width="35" height="35"
+            loading="lazy"></a>
+        <a href="https://twitter.com"><img src="images/twitter.svg" alt="Twitter" width="35" height="35"
+            loading="lazy"></a>
+        <a href="https://indeed.com"><img src="images/indeed.svg" alt="Indeed" width="35" height="35"
+            loading="lazy"></a>
+      </div>
+
+      <p id="copyright">&copy; 2025 Maribao. Todos los derechos reservados.</p>
     </div>
   </footer>
+
+
 
 
 </body>
