@@ -32,8 +32,12 @@ const dots = document.querySelectorAll(".dot");
 // Function to change slide
 function changeSlide(index) {
   currentIndex = index;
-  sliderTrack.style.transform = `translateX(-${index * 100}%)`;
-  updateDots();
+
+  // Use requestAnimationFrame for smoother transitions
+  requestAnimationFrame(() => {
+    sliderTrack.style.transform = `translateX(-${index * 100}%)`;
+    updateDots();
+  });
 }
 
 // Function to update active dot indicator
@@ -45,13 +49,13 @@ function updateDots() {
 
 let startX = 0;
 
-// Touch start event with preventDefault for iOS compatibility
+// Touch start event with passive listener
 sliderTrack.addEventListener("touchstart", (e) => {
-  e.preventDefault(); // Prevent default behavior that might interfere with touch
+  // Prevent default behavior that might interfere with touch
   startX = e.touches[0].clientX;
-});
+}, { passive: true });
 
-// Touch end event to handle swipe gestures
+// Touch end event with passive listener
 sliderTrack.addEventListener("touchend", (e) => {
   let endX = e.changedTouches[0].clientX;
   let difference = startX - endX;
@@ -63,10 +67,11 @@ sliderTrack.addEventListener("touchend", (e) => {
   }
 
   changeSlide(currentIndex);
-});
+}, { passive: true });
 
 // Ensure CSS allows touch interactions
 document.querySelector(".slider-track").style.touchAction = "pan-y";
+
 
 
 
