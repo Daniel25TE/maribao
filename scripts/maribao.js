@@ -45,12 +45,13 @@ function updateDots() {
 
 let startX = 0;
 
-// Touch start event
+// Touch start event with preventDefault for iOS compatibility
 sliderTrack.addEventListener("touchstart", (e) => {
+  e.preventDefault(); // Prevent default behavior that might interfere with touch
   startX = e.touches[0].clientX;
-}, { passive: true });
+});
 
-// Touch end event
+// Touch end event to handle swipe gestures
 sliderTrack.addEventListener("touchend", (e) => {
   let endX = e.changedTouches[0].clientX;
   let difference = startX - endX;
@@ -62,7 +63,11 @@ sliderTrack.addEventListener("touchend", (e) => {
   }
 
   changeSlide(currentIndex);
-}, { passive: true });
+});
+
+// Ensure CSS allows touch interactions
+document.querySelector(".slider-track").style.touchAction = "pan-y";
+
 
 
 
