@@ -9,6 +9,16 @@ function setupMenuToggle() {
         menuToggle.textContent = nav.classList.contains("active") ? "✖" : "☰";
     });
 }
+function updateFooter() {
+    const launchYearEl = document.getElementById("launchYear");
+    const lastModifiedEl = document.getElementById("lastModified");
+
+    if (launchYearEl && lastModifiedEl) {
+        launchYearEl.textContent = new Date().getFullYear();
+        lastModifiedEl.textContent = document.lastModified;
+    }
+}
+updateFooter();
 setupMenuToggle();
 function renderCards() {
     const container = document.getElementById("cards-container");

@@ -538,6 +538,8 @@ h2 {
     grid-area: photo_url;
     text-align: center;
     margin: 0 auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
 }
 
 .card address {
@@ -570,19 +572,12 @@ h2 {
     background-color: #303030;
 }
 
-.card img {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
 .card img:hover {
     transform: scale(1.01);
     box-shadow: 0 15px 16px rgba(0, 0, 0, 0.5);
 }
 
-p {
-    font-size: 1.1em;
-    margin: 20px 0;
-}
+
 
 .visits {
     position: fixed;

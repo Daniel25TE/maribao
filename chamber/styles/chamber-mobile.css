@@ -117,5 +117,13 @@
             "learn-more";
     }
 
+    .card img {
+        transition: none;
+    }
+
+    .card img:hover {
+        transform: none;
+        box-shadow: none;
+    }
 
 }

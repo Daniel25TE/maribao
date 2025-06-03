@@ -12,11 +12,17 @@
 
     #cards-container div img {
         width: 300px;
+        transition: none;
     }
 
     #cards-container {
         display: grid;
         grid-template-columns: 1fr;
+    }
+
+    .card img:hover {
+        transform: none;
+        box-shadow: none;
     }
 
 }
