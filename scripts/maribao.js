@@ -21,10 +21,7 @@ const sliderTrack = document.querySelector(".slider-track");
 const dotsContainer = document.querySelector(".slider-indicators");
 let currentIndex = 0;
 const totalImages = sliderTrack.children.length;
-let startX = 0;
-let moveX = 0;
 
-// Generar los indicadores de puntos
 dotsContainer.innerHTML = Array.from({ length: totalImages }, (_, i) =>
   `<span class="dot ${i === 0 ? 'active' : ''}" onclick="changeSlide(${i})"></span>`
 ).join('');
@@ -45,20 +42,22 @@ function updateDots() {
   });
 }
 
-// Evento `pointerdown` para iniciar el deslizamiento
-sliderTrack.addEventListener("pointerdown", (e) => {
-  startX = e.clientX || e.touches?.[0]?.clientX;
+let startX = 0;
+let moveX = 0;
+
+// Evento `touchstart` para iniciar gesto táctil
+sliderTrack.addEventListener("touchstart", (e) => {
+  startX = e.touches[0].clientX;
 });
 
-// Evento `pointermove` para registrar movimiento
-sliderTrack.addEventListener("pointermove", (e) => {
-  moveX = e.clientX || e.touches?.[0]?.clientX;
+// Evento `touchmove` para captar desplazamiento
+sliderTrack.addEventListener("touchmove", (e) => {
+  moveX = e.touches[0].clientX;
 });
 
-// Evento `pointerup` para finalizar deslizamiento
-sliderTrack.addEventListener("pointerup", (e) => {
-  let endX = e.clientX || e.changedTouches?.[0]?.clientX;
-  let difference = startX - endX;
+// Evento `touchend` para finalizar gesto y determinar desplazamiento
+sliderTrack.addEventListener("touchend", (e) => {
+  let difference = startX - moveX;
 
   if (difference > 50 && currentIndex < totalImages - 1) {
     currentIndex++;
@@ -69,8 +68,9 @@ sliderTrack.addEventListener("pointerup", (e) => {
   changeSlide(currentIndex);
 });
 
-// Asegurar que el CSS permite interacciones táctiles
+// Asegurar interactividad táctil correcta
 sliderTrack.style.touchAction = "pan-y";
+
 
 
 
