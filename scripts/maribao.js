@@ -45,17 +45,17 @@ function updateDots() {
 let startX = 0;
 let moveX = 0;
 
-// Evento `touchstart` para iniciar gesto táctil
+// Prevent default behavior for touch events
 sliderTrack.addEventListener("touchstart", (e) => {
+  e.preventDefault(); // Prevent default behavior
   startX = e.touches[0].clientX;
 });
 
-// Evento `touchmove` para captar desplazamiento
 sliderTrack.addEventListener("touchmove", (e) => {
+  e.preventDefault(); // Prevent default behavior
   moveX = e.touches[0].clientX;
 });
 
-// Evento `touchend` para finalizar gesto y determinar desplazamiento
 sliderTrack.addEventListener("touchend", (e) => {
   let difference = startX - moveX;
 
@@ -66,10 +66,12 @@ sliderTrack.addEventListener("touchend", (e) => {
   }
 
   changeSlide(currentIndex);
+  moveX = 0; // Reset moveX after touchend
 });
 
-// Asegurar interactividad táctil correcta
+// Ensure correct touch interactivity
 sliderTrack.style.touchAction = "pan-y";
+
 
 
 
