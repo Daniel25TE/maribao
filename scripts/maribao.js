@@ -42,26 +42,17 @@ function updateDots() {
   });
 }
 
-let startX = 0;
-
-sliderTrack.addEventListener("pointerdown", (e) => {
-  startX = e.clientX || e.touches?.[0]?.clientX;
-});
-
-sliderTrack.addEventListener("pointerup", (e) => {
-  let endX = e.clientX || e.changedTouches?.[0]?.clientX;
-  let difference = startX - endX;
-
-  if (difference > 50 && currentIndex < totalImages - 1) {
-    currentIndex++;
-  } else if (difference < -50 && currentIndex > 0) {
-    currentIndex--;
+function prevSlide() {
+  if (currentIndex > 0) {
+    changeSlide(currentIndex - 1);
   }
+}
 
-  changeSlide(currentIndex);
-});
-
-document.querySelector(".slider-track").style.touchAction = "pan-y";
+function nextSlide() {
+  if (currentIndex < totalImages - 1) {
+    changeSlide(currentIndex + 1);
+  }
+}
 
 
 

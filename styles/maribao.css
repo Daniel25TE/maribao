@@ -158,3 +158,25 @@ a {
 .dot.active {
   background-color: #000;
 }
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 100%;
+}
+
+.slider-btn.left {
+  left: 0px;
+}
+
+.slider-btn.right {
+  right: 0px;
+}

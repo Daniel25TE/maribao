@@ -16,16 +16,13 @@
 
 <body>
   <header>
-
-
     <picture>
-      <source srcset="images/maribaoLogo6.webp 120w, images/maribaoLogo5.webp 180w"
-        sizes="(min-width: 320px) 120px, (min-width: 1200px) 180px">
+      <source srcset="images/maribaoLogo6.webp 90w, images/maribaoLogo5.webp 180w"
+        sizes="(min-width: 320px) 90px, (min-width: 1200px) 180px">
       <img src="images/maribaoLogo6.webp" alt="Logotipo de Hotel Maribao" width="90" height="84">
     </picture>
 
     <button class="hamburger-menu" type="button" aria-label="Abrir menú">☰</button>
-
 
     <nav>
       <ul class="navigation">
@@ -39,6 +36,7 @@
   </header>
   <main>
     <div class="hero-image">
+      <button class="slider-btn left" onclick="prevSlide()">&#10094;</button>
       <div class="slider-track">
         <img src="images/quito-medium-prueba.webp"
           srcset="images/quito-mobile-prueba.webp 640w, images/quito-medium-prueba.webp 1280w, images/quito-large-prueba.webp 1920w"
@@ -61,6 +59,7 @@
           sizes="(max-width: 640px) 100vw, (max-width: 1280px) 75vw, 50vw" alt="Imagen 2" width="1280" height="720">
 
       </div>
+      <button class="slider-btn right" onclick="nextSlide()">&#10095;</button>
     </div>
 
     <div class="slider-indicators">
