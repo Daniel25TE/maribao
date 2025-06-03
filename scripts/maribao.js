@@ -21,6 +21,8 @@ const sliderTrack = document.querySelector(".slider-track");
 const dotsContainer = document.querySelector(".slider-indicators");
 let currentIndex = 0;
 const totalImages = sliderTrack.children.length;
+let startX = 0;
+let moveX = 0;
 
 // Generar los indicadores de puntos
 dotsContainer.innerHTML = Array.from({ length: totalImages }, (_, i) =>
@@ -29,31 +31,31 @@ dotsContainer.innerHTML = Array.from({ length: totalImages }, (_, i) =>
 
 const dots = document.querySelectorAll(".dot");
 
-// Función para cambiar de diapositiva
 function changeSlide(index) {
   currentIndex = index;
-
   requestAnimationFrame(() => {
     sliderTrack.style.transform = `translateX(-${index * 100}%)`;
     updateDots();
   });
 }
 
-// Función para actualizar los indicadores activos
 function updateDots() {
   dots.forEach((dot, i) => {
     dot.classList.toggle("active", i === currentIndex);
   });
 }
 
-let startX = 0;
-
-// Evento `pointerdown` para iniciar el gesto táctil
+// Evento `pointerdown` para iniciar el deslizamiento
 sliderTrack.addEventListener("pointerdown", (e) => {
   startX = e.clientX || e.touches?.[0]?.clientX;
 });
 
-// Evento `pointerup` para finalizar el gesto táctil
+// Evento `pointermove` para registrar movimiento
+sliderTrack.addEventListener("pointermove", (e) => {
+  moveX = e.clientX || e.touches?.[0]?.clientX;
+});
+
+// Evento `pointerup` para finalizar deslizamiento
 sliderTrack.addEventListener("pointerup", (e) => {
   let endX = e.clientX || e.changedTouches?.[0]?.clientX;
   let difference = startX - endX;
@@ -68,7 +70,8 @@ sliderTrack.addEventListener("pointerup", (e) => {
 });
 
 // Asegurar que el CSS permite interacciones táctiles
-document.querySelector(".slider-track").style.touchAction = "pan-y";
+sliderTrack.style.touchAction = "pan-y";
+
 
 
 
