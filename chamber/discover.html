@@ -16,6 +16,7 @@
     <meta property="og:url" content="https://daniel25te.github.io/wdd231/chamber/directory.html">
     <link rel="stylesheet" href="styles/chamber-large.css">
     <link rel="stylesheet" href="styles/chamber-mobile.css">
+    <link rel="stylesheet" href="styles/chamber-medium.css">
 </head>
 
 <body>
@@ -43,40 +44,10 @@
         </div>
     </header>
     <main>
-        <p><span class="label"></span><span class="visits"></span></p>
-        <div id="hero-container">
-
-            <picture>
-                <source srcset="images/heroquito.webp" media="(min-width: 1000px)">
-                <source srcset="images/hero-image-medium.webp" media="(min-width: 500px)">
-                <img src="images/hero-image-mobile.webp" alt="Beautiful landscape of Madagascar" width="500"
-                    height="749">
-            </picture>
-
-
-            <a href="#" class="cta-button">Empieza ahora</a>
-
+        <div id="cards-container" class="cards-container">
 
         </div>
 
-        <h1>Home</h1>
-        <div class="content-container">
-            <section>
-                <h2>Events</h2>
-            </section>
-            <section>
-                <h2>Current Weather</h2>
-                <img id="weather-icon" src="images/favicon.ico" alt="desc" width="50" height="50">
-                <div id="current-weather"></div>
-                <p class="iconcurrent">
-                <div id="weather-details"></div>
-            </section>
-            <section>
-                <h2>Weather Forecast</h2>
-                <div id="forecast"></div>
-            </section>
-        </div>
-        <div id="homemembers"></div>
 
 
 
@@ -109,7 +80,7 @@
         </div>
     </footer>
 
-    <script src="scripts/chamber.js" defer></script>
+    <script src="scripts/discover.js" type="module"></script>
 </body>
 
 </html>
