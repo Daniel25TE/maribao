@@ -45,17 +45,17 @@ function updateDots() {
 let startX = 0;
 let moveX = 0;
 
-// Prevent default behavior for touch events
+// Evento `touchstart` para iniciar gesto táctil
 sliderTrack.addEventListener("touchstart", (e) => {
-  e.preventDefault(); // Prevent default behavior
   startX = e.touches[0].clientX;
-});
+}, { passive: true });
 
+// Evento `touchmove` para captar desplazamiento
 sliderTrack.addEventListener("touchmove", (e) => {
-  e.preventDefault(); // Prevent default behavior
   moveX = e.touches[0].clientX;
-});
+}, { passive: true });
 
+// Evento `touchend` para finalizar gesto y actualizar indicadores
 sliderTrack.addEventListener("touchend", (e) => {
   let difference = startX - moveX;
 
@@ -66,10 +66,16 @@ sliderTrack.addEventListener("touchend", (e) => {
   }
 
   changeSlide(currentIndex);
-  moveX = 0; // Reset moveX after touchend
+}, { passive: true });
+
+// Asegurar que al hacer clic en los indicadores también cambie el estado
+dots.forEach((dot, index) => {
+  dot.addEventListener("click", () => {
+    changeSlide(index);
+  });
 });
 
-// Ensure correct touch interactivity
+// Asegurar interactividad táctil correcta
 sliderTrack.style.touchAction = "pan-y";
 
 
