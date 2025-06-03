@@ -43,21 +43,14 @@ function updateDots() {
 }
 
 let startX = 0;
-let moveX = 0;
 
-// Evento `touchstart` para iniciar gesto táctil
-sliderTrack.addEventListener("touchstart", (e) => {
-  startX = e.touches[0].clientX;
-}, { passive: true });
+sliderTrack.addEventListener("pointerdown", (e) => {
+  startX = e.clientX || e.touches?.[0]?.clientX;
+});
 
-// Evento `touchmove` para captar desplazamiento
-sliderTrack.addEventListener("touchmove", (e) => {
-  moveX = e.touches[0].clientX;
-}, { passive: true });
-
-// Evento `touchend` para finalizar gesto y actualizar indicadores
-sliderTrack.addEventListener("touchend", (e) => {
-  let difference = startX - moveX;
+sliderTrack.addEventListener("pointerup", (e) => {
+  let endX = e.clientX || e.changedTouches?.[0]?.clientX;
+  let difference = startX - endX;
 
   if (difference > 50 && currentIndex < totalImages - 1) {
     currentIndex++;
@@ -66,17 +59,9 @@ sliderTrack.addEventListener("touchend", (e) => {
   }
 
   changeSlide(currentIndex);
-}, { passive: true });
-
-// Asegurar que al hacer clic en los indicadores también cambie el estado
-dots.forEach((dot, index) => {
-  dot.addEventListener("click", () => {
-    changeSlide(index);
-  });
 });
 
-// Asegurar interactividad táctil correcta
-sliderTrack.style.touchAction = "pan-y";
+document.querySelector(".slider-track").style.touchAction = "pan-y";
 
 
 
