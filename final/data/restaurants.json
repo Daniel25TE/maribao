@@ -1,0 +1,39 @@
+{
+    "restaurants": [
+        {
+            "name": "Restaurante La Plaza",
+            "tipo_comida": "Mexicana",
+            "distancia": "0.5 millas",
+            "direccion": "123 Main St, West Jordan",
+            "telefono": "(801) 123-4567"
+        },
+        {
+            "name": "Café Sol",
+            "tipo_comida": "Italiana",
+            "distancia": "0.8 millas",
+            "direccion": "456 Elm St, West Jordan",
+            "telefono": "(801) 987-6543"
+        },
+        {
+            "name": "Delicias del Mar",
+            "tipo_comida": "Mariscos",
+            "distancia": "1.2 millas",
+            "direccion": "789 Oak St, West Jordan",
+            "telefono": "(801) 555-6789"
+        },
+        {
+            "name": "Café Aroma",
+            "tipo_comida": "Cafetería",
+            "distancia": "0.3 millas",
+            "direccion": "321 Pine St, West Jordan",
+            "telefono": "(801) 999-1111"
+        },
+        {
+            "name": "Café Rosado",
+            "tipo_comida": "Cafetería",
+            "distancia": "0.8 millas",
+            "direccion": "321 Sera St, West Jordan",
+            "telefono": "(801) 432-7689"
+        }
+    ]
+}

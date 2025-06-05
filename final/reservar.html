@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Este sitio promociona el Hotel Maribao, ubicado en General Villamil, Provincia de Guayas, Ecuador. Incluye funciones como información sobre el hotel, opciones de reserva de habitaciones, una galería de fotos y una sección de reseñas de huéspedes.">
+    <meta name="author" content="Daniel Llumiquinga">
+    <link rel="icon" href="images/maribaoLogo2.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles/maribao-mobile.css">
+    <link rel="stylesheet" href="styles/maribao-desktop.css">
+    <script src="scripts/reservar.js" type="module"></script>
+    <meta property="og:title" content="Maribao Hotel">
+    <meta property="og:description"
+        content="This website is a overall view of the Maribao Hotel, it has the information about the hotel along with photos, services, and prices.">
+    <meta property="og:image"
+        content="https://raw.githubusercontent.com/Daniel25TE/wdd231/refs/heads/main/images/ecuadorflag.webp">
+    <meta property="og:url" content="https://daniel25te.github.io/wdd231/">
+    <meta property="og:type" content="website">
+    <title>Maribao el mejor Hotel de General Villamil</title>
+</head>
+
+<body>
+    <header>
+        <picture>
+            <source srcset="images/maribaoLogo6.webp 90w, images/maribaoLogo5.webp 180w"
+                sizes="(min-width: 320px) 90px, (min-width: 1200px) 180px">
+            <img src="images/maribaoLogo6.webp" alt="Logotipo de Hotel Maribao" width="90" height="84">
+        </picture>
+
+        <button class="hamburger-menu" type="button" aria-label="Abrir menú">☰</button>
+
+        <nav>
+            <ul class="navigation">
+                <li><a href="index.html" id="resumen" title="Resumen">Resumen</a></li>
+                <li><a href="reservar.html" id="reserva" title="Reserva">Reserva</a></li>
+                <li><a href="fotos.html" id="fotos" title="Fotos">Fotos</a></li>
+                <li><a href="servicios.html" id="servicios" title="Servicios">Servicios</a></li>
+                <li><a href="experiencias.html" id="experiencias" title="Experiencias">Experiencias</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="sticky-cta" id="cta">
+        <a href="reservar.html">Reservar</a>
+    </div>
+
+    <main>
+        <section id="room-list">
+            <h2>Habitaciones disponibles</h2>
+            <div class="room-grid" id="rooms-container"></div>
+        </section>
+
+
+
+
+    </main>
+
+    <footer>
+        <div id="footer-container">
+            <div class="footer-links">
+                <a href="sobremaribao.html">Sobre Maribao</a>
+                <a href="sobremaribao.html">Contactanos</a>
+                <a href="sobremaribao.html">Preguntas Frecuentes</a>
+                <a href="sobremaribao.html">Ayuda</a>
+            </div>
+
+            <div class="social-icons">
+                <a href="https://youtube.com"><img src="images/youtube.svg" alt="YouTube" width="35" height="35"
+                        loading="lazy"></a>
+                <a href="https://twitter.com"><img src="images/twitter.svg" alt="Twitter" width="35" height="35"
+                        loading="lazy"></a>
+                <a href="https://indeed.com"><img src="images/indeed.svg" alt="Indeed" width="35" height="35"
+                        loading="lazy"></a>
+            </div>
+
+            <p id="copyright">&copy; 2025 Maribao. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+
+
+
+
+</body>
+
+</html>

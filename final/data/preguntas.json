@@ -1,0 +1,64 @@
+{
+    "faqs": [
+        {
+            "question": "¿Cuál es la hora de check-in y check-out?",
+            "answer": "El check-in es a partir de las 15:00 y el check-out es hasta las 12:00 del mediodía."
+        },
+        {
+            "question": "¿Se incluye el desayuno en la reserva?",
+            "answer": "Sí, todas las reservas incluyen desayuno continental gratuito."
+        },
+        {
+            "question": "¿El hotel cuenta con WiFi gratuito?",
+            "answer": "Sí, ofrecemos WiFi gratuito en todas las habitaciones y áreas comunes."
+        },
+        {
+            "question": "¿Tienen estacionamiento disponible?",
+            "answer": "Sí, contamos con estacionamiento privado y gratuito para nuestros huéspedes."
+        },
+        {
+            "question": "¿Puedo hospedarme con mi mascota?",
+            "answer": "Sí, aceptamos mascotas pequeñas bajo solicitud previa."
+        },
+        {
+            "question": "¿Ofrecen transporte al aeropuerto?",
+            "answer": "Sí, ofrecemos servicio de traslado al aeropuerto con costo adicional. Consulta disponibilidad con recepción."
+        },
+        {
+            "question": "¿El hotel tiene piscina?",
+            "answer": "Sí, contamos con piscina al aire libre disponible de 8:00 a 20:00."
+        },
+        {
+            "question": "¿Hay habitaciones familiares disponibles?",
+            "answer": "Sí, tenemos habitaciones para familias de hasta 5 personas."
+        },
+        {
+            "question": "¿Puedo cancelar mi reserva sin costo?",
+            "answer": "Sí, puedes cancelar sin cargo hasta 48 horas antes de tu llegada."
+        },
+        {
+            "question": "¿Se puede pagar con tarjeta de crédito?",
+            "answer": "Sí, aceptamos todas las principales tarjetas de crédito y débito."
+        },
+        {
+            "question": "¿Tienen servicio a la habitación?",
+            "answer": "Sí, ofrecemos servicio a la habitación de 7:00 a 22:00."
+        },
+        {
+            "question": "¿Qué idiomas habla el personal del hotel?",
+            "answer": "Nuestro personal habla español e inglés."
+        },
+        {
+            "question": "¿El hotel ofrece tours o actividades?",
+            "answer": "Sí, contamos con convenios para tours locales. Puedes reservarlos en recepción."
+        },
+        {
+            "question": "¿Tienen lavandería disponible?",
+            "answer": "Sí, ofrecemos servicio de lavandería por un costo adicional."
+        },
+        {
+            "question": "¿Cómo puedo hacer una solicitud especial?",
+            "answer": "Puedes escribirnos antes de tu llegada o indicarlo al momento de hacer tu reserva."
+        }
+    ]
+}

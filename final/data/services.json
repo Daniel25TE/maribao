@@ -1,0 +1,52 @@
+[
+    {
+        "icon": "images/house.svg",
+        "alt": "house",
+        "label": "Apartamentos"
+    },
+    {
+        "icon": "images/parking.svg",
+        "alt": "parking",
+        "label": "Parking gratis en el alojamiento"
+    },
+    {
+        "icon": "images/beach.svg",
+        "alt": "beach",
+        "label": "Vistas al mar"
+    },
+    {
+        "icon": "images/footprints.svg",
+        "alt": "footprints",
+        "label": "Admite mascotas"
+    },
+    {
+        "icon": "images/bathroom.svg",
+        "alt": "bathroom",
+        "label": "Baño privado"
+    },
+    {
+        "icon": "images/snow.svg",
+        "alt": "snow",
+        "label": "Aire acondicionado"
+    },
+    {
+        "icon": "images/balcony.svg",
+        "alt": "balcony",
+        "label": "Balcón"
+    },
+    {
+        "icon": "images/vistas.svg",
+        "alt": "vista al mar",
+        "label": "Vistas"
+    },
+    {
+        "icon": "images/family.svg",
+        "alt": "family",
+        "label": "Habitaciones familiares"
+    },
+    {
+        "icon": "images/nosmoking.svg",
+        "alt": "nosmoking",
+        "label": "Habitaciones sin humo"
+    }
+]

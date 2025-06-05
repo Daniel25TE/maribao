@@ -1,0 +1,79 @@
+@media screen and (min-width: 841px) {
+    header {
+        flex-direction: row;
+        justify-content: center;
+        gap: 10rem;
+        padding: 0.5rem 2rem;
+    }
+
+    .hamburger-menu {
+        display: none;
+    }
+
+    nav {
+        display: block;
+        height: auto;
+        opacity: 1;
+        transform: none;
+        background-color: transparent;
+        padding: 0.5rem 0;
+        animation: none;
+    }
+
+    .navigation {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0rem;
+        justify-content: center;
+    }
+
+    h1 {
+        font-size: 2.8rem;
+    }
+
+    #options-list {
+        padding: 0.5rem 2rem;
+    }
+
+    .comentarios {
+        padding: 0.5rem 2rem;
+    }
+
+    .ubicacion .container {
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        padding: 0.5rem 2rem;
+    }
+
+    #restaurant-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        padding: 0.5rem 2rem;
+    }
+
+    .restaurantes {
+        padding: 0.5rem 2rem;
+    }
+
+    .faq-section {
+        padding: 0.5rem 2rem;
+    }
+
+    #faq-container {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .room-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    form {
+        max-width: 600px;
+        margin: 2rem auto;
+    }
+
+    .room-preview img {
+        width: 40%;
+        height: auto;
+        border-radius: 0.5rem;
+    }
+}
