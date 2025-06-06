@@ -28,15 +28,15 @@ export function dataForm() {
             </fieldset>
 
             <!-- Datos personales -->
-            <label>Nombre* <input type="text" name="firstName" required></label>
-            <label>Apellido* <input type="text" name="lastName" required></label>
-            <label>Email* <input type="email" name="email" required></label>
+            <label>Nombre* <input type="text" name="firstName" required autocomplete="given-name"></label>
+            <label>Apellido* <input type="text" name="lastName" required required autocomplete="family-name"></label>
+            <label>Email* <input type="email" name="email" required required autocomplete="email"></label>
             <small>Se enviará la confirmación a este correo</small>
 
-            <label>Teléfono* <input type="tel" name="phone" required></label>
+            <label>Teléfono* <input type="tel" name="phone" required autocomplete="tel"></label>
 
             <label>País/Región*
-                <select name="country" required>
+                <select name="country" required autocomplete="country">
                     <option value="Ecuador">Ecuador</option>
                     <option value="Estados Unidos">Estados Unidos</option>
                     <option value="Otro">Otro</option>
@@ -44,21 +44,21 @@ export function dataForm() {
             </label>
 
             <label>
-                <input type="checkbox" name="paperlessConfirm" checked>
+                <input type="checkbox" name="paperlessConfirm" checked autocomplete="section-reservation paperless-confirm">
                 Sí, quiero confirmación digital gratuita (recomendado)
             </label>
             <small>Te enviaremos un enlace para descargar nuestra app</small>
 
             <fieldset>
                 <legend>¿Para quién es la reserva? (opcional)</legend>
-                <label><input type="radio" name="bookingFor" value="self" checked> Soy el huésped principal</label>
-                <label><input type="radio" name="bookingFor" value="other"> Estoy reservando para otra persona</label>
+                <label><input type="radio" name="bookingFor" value="self" checked autocomplete="off"> Soy el huésped principal</label>
+                <label><input type="radio" name="bookingFor" value="other" autocomplete="off"> Estoy reservando para otra persona</label>
             </fieldset>
 
             <fieldset>
                 <legend>¿Viajas por trabajo? (opcional)</legend>
-                <label><input type="radio" name="travelForWork" value="yes"> Sí</label>
-                <label><input type="radio" name="travelForWork" value="no" checked> No</label>
+                <label><input type="radio" name="travelForWork" value="yes" autocomplete="off"> Sí</label>
+                <label><input type="radio" name="travelForWork" value="no" checked autocomplete="off"> No</label>
             </fieldset>
 
             <div class="info-box">
@@ -72,21 +72,21 @@ export function dataForm() {
                 </ul>
             </div>
 
-            <label>Nombre completo del huésped <input type="text" name="fullGuestName" placeholder="Nombre y apellido"></label>
+            <label>Nombre completo del huésped <input type="text" name="fullGuestName" placeholder="Nombre y apellido" autocomplete="name"></label>
 
             <fieldset>
                 <legend>Agrega a tu reserva</legend>
-                <label><input type="checkbox" name="addFlights"> Vuelos (te mostraremos opciones en la confirmación)</label>
-                <label><input type="checkbox" name="addCar"> Renta de autos</label>
-                <label><input type="checkbox" name="addTaxi"> Taxis privados desde el aeropuerto</label>
+                <label><input type="checkbox" name="addFlights" autocomplete="off"> Vuelos (te mostraremos opciones en la confirmación)</label>
+                <label><input type="checkbox" name="addCar" autocomplete="off"> Renta de autos</label>
+                <label><input type="checkbox" name="addTaxi" autocomplete="off"> Taxis privados desde el aeropuerto</label>
             </fieldset>
 
             <label>¿Tienes solicitudes especiales? (opcional)
-                <textarea name="specialRequests" placeholder="..."></textarea>
+                <textarea name="specialRequests" placeholder="..." autocomplete="off"></textarea>
             </label>
 
             <label>Hora estimada de llegada (opcional)
-                <select name="arrivalTime">
+                <select name="arrivalTime" autocomplete="off">
                     <option value="">Selecciona una hora</option>
                     <option value="15:00">15:00</option>
                     <option value="16:00">16:00</option>

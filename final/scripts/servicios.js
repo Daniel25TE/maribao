@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const cta = document.getElementById('cta');
     const header = document.querySelector('header');
+    const weather = document.getElementById('weather-note');
 
-    setupCTAObserver(cta, header);
+    setupCTAObserver(cta, header, weather);
 });
