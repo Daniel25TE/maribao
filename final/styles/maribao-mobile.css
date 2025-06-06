@@ -764,7 +764,7 @@ input:invalid,
 select:invalid,
 textarea:invalid {
     border-left: 2.5px solid #e63946;
-    /* Rojo fuerte */
+
     outline: none;
 }
 
@@ -796,22 +796,3 @@ textarea:invalid {
     height: 28px;
     object-fit: contain;
 }
-
-
-/* Accesibilidad 
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #37a6aa;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 0 0 15px 15px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    font-weight: bold;
-    font-size: 1rem;
-    z-index: 999;
-    display: none;
-     Oculto al inicio
-    transition: all 0.3s ease;
-*/
