@@ -386,7 +386,7 @@ a {
 }
 
 /* === HERO SLIDER === */
-.hero-image {
+#hero-image {
     position: relative;
     width: 100%;
     max-width: 1200px;
