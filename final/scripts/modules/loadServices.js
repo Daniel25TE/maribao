@@ -7,6 +7,7 @@ export async function loadOptions() {
         const list = document.querySelector(".options-list");
         list.innerHTML = options.map(item => `
             <li class="option-item">
+            <p>${item.rating}</p>
               <img src="${item.icon}" alt="${item.alt}">
               <span>${item.label}</span>
             </li>

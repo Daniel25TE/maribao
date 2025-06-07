@@ -1,8 +1,8 @@
 import { highlightActiveLink } from './modules/header.js';
 import { setupCTAObserver } from './modules/ctaObserver.js';
 import { setupMenuToggle } from './modules/menuToggle.js';
-import { loadOptions } from './modules/loadOptions.js';
-import { loadRestaurants } from './modules/loadRestaurants.js';
+import { loadOptions } from './modules/loadServices.js';
+import { allRestaurants } from './modules/allRestaurantes.js';
 import { loadPreguntas } from './modules/loadPreguntas.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadPreguntas();
     setupMenuToggle();
     loadOptions();
-    loadRestaurants();
+    allRestaurants();
 
 
     const cta = document.getElementById('cta');

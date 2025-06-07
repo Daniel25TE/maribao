@@ -28,10 +28,12 @@ export function dataForm() {
             </fieldset>
 
             <!-- Datos personales -->
+            <fieldset>
+            <legend>Datos Personales</legend>
             <label>Nombre* <input type="text" name="firstName" required autocomplete="given-name"></label>
             <label>Apellido* <input type="text" name="lastName" required required autocomplete="family-name"></label>
-            <label>Email* <input type="email" name="email" required required autocomplete="email"></label>
-            <small>Se enviará la confirmación a este correo</small>
+            <label>Email* <small>Se enviará la confirmación a este correo</small><input type="email" name="email" required required autocomplete="email"></label>
+            
 
             <label>Teléfono* <input type="tel" name="phone" required autocomplete="tel"></label>
 
@@ -47,41 +49,19 @@ export function dataForm() {
                 <input type="checkbox" name="paperlessConfirm" checked autocomplete="section-reservation paperless-confirm">
                 Sí, quiero confirmación digital gratuita (recomendado)
             </label>
-            <small>Te enviaremos un enlace para descargar nuestra app</small>
+            </fieldset>
 
             <fieldset>
-                <legend>¿Para quién es la reserva? (opcional)</legend>
+            <legend>Opcional</legend>
+                <label>¿Para quién es la reserva?</label>
                 <label><input type="radio" name="bookingFor" value="Si" checked autocomplete="off"> Soy el huésped principal</label>
                 <label><input type="radio" name="bookingFor" value="Estoy reservando para otra persona" autocomplete="off"> Estoy reservando para otra persona</label>
-            </fieldset>
-
-            <fieldset>
-                <legend>¿Viajas por trabajo? (opcional)</legend>
+           
+                <label>¿Viajas por trabajo?</label>
                 <label><input type="radio" name="travelForWork" value="yes" autocomplete="off"> Sí</label>
                 <label><input type="radio" name="travelForWork" value="no" checked autocomplete="off"> No</label>
-            </fieldset>
 
-            <div id="info-box">
-                <h4>Información importante:</h4>
-                <ul>
-                    <li>¡Tendrás toda la suite para ti!</li>
-                    <li>No se requiere pago anticipado. Se paga durante la estancia.</li>
-                    <li><strong>Suite:</strong> Cancelación gratuita hasta el primer día</li>
-                    <li><strong>Huéspedes:</strong> 7 adultos</li>
-                    <li><strong>No se permite fumar</strong></li>
-                </ul>
-            </div>
-
-            <label>Nombre completo del huésped <input type="text" name="fullGuestName" placeholder="Nombre y apellido" autocomplete="name"></label>
-
-            <fieldset>
-                <legend>Agrega a tu reserva</legend>
-                <label><input type="checkbox" name="addFlights" autocomplete="off"> Vuelos (te mostraremos opciones en la confirmación)</label>
-                <label><input type="checkbox" name="addCar" autocomplete="off"> Renta de autos</label>
-                <label><input type="checkbox" name="addTaxi" autocomplete="off"> Taxis privados desde el aeropuerto</label>
-            </fieldset>
-
-            <label>¿Tienes solicitudes especiales? (opcional)
+                <label>¿Tienes solicitudes especiales?
                 <textarea name="specialRequests" placeholder="..." autocomplete="off"></textarea>
             </label>
 
@@ -95,6 +75,32 @@ export function dataForm() {
                 </select>
                 <small>Check-in disponible entre las 15:00 y 18:00 (zona horaria de Playas)</small>
             </label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Agrega a tu reserva</legend>
+                <label><input type="checkbox" name="addFlights" autocomplete="off"> Vuelos (te mostraremos opciones en la confirmación)</label>
+                <label><input type="checkbox" name="addCar" autocomplete="off"> Renta de autos</label>
+                <label><input type="checkbox" name="addTaxi" autocomplete="off"> Taxis privados desde el aeropuerto</label>
+            </fieldset>
+
+            <div id="info-box">
+                <h4>Información importante:</h4>
+                <ul>
+                    <li>¡Tendrás toda la suite para ti!</li>
+                    <li>No se requiere pago anticipado. Se paga durante la estancia.</li>
+                    <li><strong>Suite:</strong> Cancelación gratuita hasta el primer día</li>
+                    <li><strong>Huéspedes:</strong> 7 adultos</li>
+                    <li><strong>No se permite fumar</strong></li>
+                </ul>
+            </div>
+
+            
+
+            
+
+            
+            <label>Firma <input type="text" name="fullGuestName" placeholder="Nombre completo del huésped" autocomplete="name"></label>
 
             <button type="submit">Confirmar reserva</button>
         </form>

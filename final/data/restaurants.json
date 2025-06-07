@@ -34,6 +34,36 @@
             "distancia": "0.8 millas",
             "direccion": "321 Sera St, West Jordan",
             "telefono": "(801) 432-7689"
+        },
+        {
+            "name": "Restaurante Juan Ostras",
+            "tipo_comida": "Mariscos",
+            "distancia": "Av. Zenón Masías y Sisto Chán Calle Primera Playas Villamil",
+            "telefono": "(801) 432-7689"
+        },
+        {
+            "name": "El Kiosko del Gordo Daniel",
+            "tipo_comida": "Restaurante",
+            "distancia": "Km 5, Via Data",
+            "telefono": "(801) 432-7689"
+        },
+        {
+            "name": "Na Praia",
+            "tipo_comida": "Parrilla",
+            "distancia": "Av. Paquisha, y",
+            "telefono": "(801) 432-7689"
+        },
+        {
+            "name": "La Casa Grill Burguer",
+            "tipo_comida": "Restaurante",
+            "distancia": "Av Jaime Roldós Aguilera, y",
+            "telefono": "(801) 432-7689"
+        },
+        {
+            "name": "Rucutú Lounge Resto Bar",
+            "tipo_comida": "Restaurante",
+            "distancia": "9J72+7M",
+            "telefono": "(801) 432-7689"
         }
     ]
 }
