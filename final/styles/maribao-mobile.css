@@ -191,7 +191,7 @@ h1 {
     color: #333;
 }
 
-#comentario {
+.comentario {
     margin-bottom: 1rem;
     padding: 1rem;
     background: white;
@@ -199,13 +199,13 @@ h1 {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-#comentario #texto {
+.texto {
     font-style: italic;
     color: #444;
     margin-bottom: 0.5rem;
 }
 
-#comentario #autor {
+.autor {
     text-align: right;
     font-weight: bold;
     color: #666;
