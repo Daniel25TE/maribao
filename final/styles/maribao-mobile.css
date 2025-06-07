@@ -796,3 +796,25 @@ textarea:invalid {
     height: 28px;
     object-fit: contain;
 }
+
+#results {
+    max-width: 90%;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+#results h2 {
+    color: #e74c3c;
+    font-size: 1.5rem;
+}
+
+#results p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}

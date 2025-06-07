@@ -10,7 +10,7 @@ export function dataForm() {
             <img src="${data.image}" alt="${data.name}" loading="lazy" width="960" height="720">
         </div>
 
-        <form id="reservation-form">
+        <form method="GET" action="thanks.html" id="reservation-form">
             <h3>Ingresa tus datos</h3>
             <p>¡Ya casi terminas! Completa la información marcada con <strong>*</strong></p>
 
@@ -51,8 +51,8 @@ export function dataForm() {
 
             <fieldset>
                 <legend>¿Para quién es la reserva? (opcional)</legend>
-                <label><input type="radio" name="bookingFor" value="self" checked autocomplete="off"> Soy el huésped principal</label>
-                <label><input type="radio" name="bookingFor" value="other" autocomplete="off"> Estoy reservando para otra persona</label>
+                <label><input type="radio" name="bookingFor" value="Si" checked autocomplete="off"> Soy el huésped principal</label>
+                <label><input type="radio" name="bookingFor" value="Estoy reservando para otra persona" autocomplete="off"> Estoy reservando para otra persona</label>
             </fieldset>
 
             <fieldset>
