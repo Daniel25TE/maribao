@@ -4,7 +4,7 @@ export function dataForm() {
 
     const preview = document.getElementById("selected-room-preview");
     preview.innerHTML = `
-        <div class="room-preview">
+        <div id="room-preview">
             <h2>${data.name}</h2>
             
             <img src="${data.image}" alt="${data.name}" loading="lazy" width="960" height="720">
@@ -61,7 +61,7 @@ export function dataForm() {
                 <label><input type="radio" name="travelForWork" value="no" checked autocomplete="off"> No</label>
             </fieldset>
 
-            <div class="info-box">
+            <div id="info-box">
                 <h4>Información importante:</h4>
                 <ul>
                     <li>¡Tendrás toda la suite para ti!</li>

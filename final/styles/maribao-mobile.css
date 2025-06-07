@@ -178,20 +178,20 @@ h1 {
     color: #333;
 }
 
-.comentarios {
+#comentarios {
     padding: 1rem;
     background-color: #f9f9f9;
     border-radius: 12px;
     margin: 2rem 0;
 }
 
-.comentarios h2 {
+#comentarios h2 {
     font-size: 1.2rem;
     margin-bottom: 1rem;
     color: #333;
 }
 
-.comentario {
+#comentario {
     margin-bottom: 1rem;
     padding: 1rem;
     background: white;
@@ -199,13 +199,13 @@ h1 {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.comentario .texto {
+#comentario #texto {
     font-style: italic;
     color: #444;
     margin-bottom: 0.5rem;
 }
 
-.comentario .autor {
+#comentario #autor {
     text-align: right;
     font-weight: bold;
     color: #666;
@@ -364,7 +364,7 @@ details[open] {
     text-align: center;
 }
 
-.footer-links {
+#footer-links {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 15px;
@@ -377,7 +377,7 @@ a {
     color: black;
 }
 
-.social-icons {
+#social-icons {
     display: flex;
     gap: 15px;
     justify-content: center;
@@ -741,25 +741,25 @@ button[type="submit"]:hover {
     background-color: #005fa3;
 }
 
-.room-preview {
+#room-preview {
     text-align: center;
     margin-bottom: 1.5rem;
 }
 
-.room-preview img {
+#room-preview img {
     width: 80%;
     height: auto;
     border-radius: 0.5rem;
 }
 
-.info-box {
+#info-box {
     background-color: #f3f3f3;
     padding: 1rem;
     border-radius: 0.375rem;
     margin: 1rem 0;
 }
 
-.info-box ul {
+#info-box ul {
     list-style: disc inside;
     margin: 0;
     padding-left: 1rem;
