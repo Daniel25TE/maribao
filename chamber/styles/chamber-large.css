@@ -58,6 +58,12 @@ nav ul li a {
     padding: var(--small-padding);
 }
 
+#navigation a.active {
+    border-bottom: 2px solid #37a6aa;
+    color: #16494b;
+    padding-bottom: 0.3rem;
+}
+
 #menu-toggle {
     display: none;
 }
