@@ -50,8 +50,31 @@
 
 
     <main>
-        <h1>Maribao espera por ti!
-        </h1>
+        <div class="container-hero">
+            <div class="hero">
+                <picture>
+                    <source srcset="images/hero-image-maribao.webp" media="(min-width: 1000px)">
+                    <source srcset="images/hero-image-maribao-medium.webp" media="(min-width: 840px)">
+                    <img src="images/hero-image-maribao-mobile-test.webp" alt="Beautiful landscape of Madagascar"
+                        width="840" height="1080">
+                </picture>
+            </div>
+            <h1>Maribao espera por ti!
+            </h1>
+        </div>
+        <div class="video-container">
+
+            <section id="video-slider">
+                <h2>videos</h2>
+                <div class="slider-videos-track">
+                </div>
+                <button class="slider-videos-btn left">&#10094;</button>
+                <button class="slider-videos-btn right">&#10095;</button>
+                <div class="slider-videos-indicators"></div>
+            </section>
+        </div>
+
+
         <div id="hero-image">
             <button id="prevBtn" class="slider-btn left">&#10094;</button>
             <div class="slider-track">
@@ -133,7 +156,6 @@
         <section>
             <h2 class="restaurantes">Restaurantes cercanos</h2>
             <div id="restaurant-grid">
-                <!-- Las tarjetas de restaurantes van aquí, agregadas dinámicamente -->
             </div>
         </section>
 

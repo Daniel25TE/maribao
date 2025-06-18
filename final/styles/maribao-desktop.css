@@ -39,6 +39,35 @@
 
     h1 {
         font-size: 2.8rem;
+
+    }
+
+    .container-hero h1 {
+        padding: 3rem;
+        font-size: 2.8rem;
+    }
+
+    .hero img {
+
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+        margin-top: 15px;
+    }
+
+    .video-container {
+        margin: 2rem 7rem;
+        background: linear-gradient(to bottom, #d4a699, #3f84bd);
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 0 10px 10px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+
+    }
+
+    #video-slider {
+        overflow: visible;
     }
 
     #options-list {

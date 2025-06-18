@@ -4,10 +4,11 @@ import { setupMenuToggle } from './modules/menuToggle.js';
 import { loadOptions } from './modules/loadOptions.js';
 import { loadRestaurants } from './modules/loadRestaurants.js';
 import { initializeSlider } from './modules/slider.js';
+import { allVideos } from "./modules/videos.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     highlightActiveLink();
-
+    allVideos();
     setupMenuToggle();
     loadOptions();
     loadRestaurants();
