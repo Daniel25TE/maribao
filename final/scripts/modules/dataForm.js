@@ -10,7 +10,7 @@ export function dataForm() {
             <img src="${data.image}" alt="${data.name}" loading="lazy" width="960" height="720">
         </div>
 
-        <form method="GET" action="thanks.html" id="reservation-form">
+        <form method="POST" id="reservation-form">
             <h3>Ingresa tus datos</h3>
             <p>¡Ya casi terminas! Completa la información marcada con <strong>*</strong></p>
 
@@ -31,7 +31,7 @@ export function dataForm() {
             <fieldset>
             <legend>Datos Personales</legend>
             <label>Nombre* <input type="text" name="firstName" required autocomplete="given-name"></label>
-            <label>Apellido* <input type="text" name="lastName" required required autocomplete="family-name"></label>
+            <label>Apellido* <input type="text" name="lastName" required autocomplete="family-name"></label>
             <label>Email* <small>Se enviará la confirmación a este correo</small><input type="email" name="email" required required autocomplete="email"></label>
             
 
@@ -95,15 +95,82 @@ export function dataForm() {
                 </ul>
             </div>
 
-            
-
-            
-
-            
             <label>Firma <input type="text" name="fullGuestName" placeholder="Nombre completo del huésped" autocomplete="name"></label>
 
             <button type="submit">Confirmar reserva</button>
         </form>
     `;
+    const form = document.getElementById("reservation-form");
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const formData = {
+            checkin: form.checkin.value,
+            checkout: form.checkout.value,
+            firstName: form.firstName.value,
+            lastName: form.lastName.value,
+            email: form.email.value,
+            phone: form.phone.value,
+            country: form.country.value,
+            paperlessConfirm: form.paperlessConfirm.checked,
+            bookingFor: form.bookingFor.value,
+            travelForWork: form.travelForWork.value,
+            specialRequests: form.specialRequests.value,
+            arrivalTime: form.arrivalTime.value,
+            addFlights: form.addFlights.checked,
+            addCar: form.addCar.checked,
+            addTaxi: form.addTaxi.checked,
+            fullGuestName: form.fullGuestName.value,
+            // Agrega aquí cualquier otro campo que tengas
+            cuarto: data.name, // puedes mandar el nombre de la habitación que tienes en localStorage
+        };
+
+        try {
+            const response = await fetch("http://localhost:3000/reserva", {
+
+
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                alert(`Reserva confirmada! Tu número de reserva es: ${result.numeroReserva}`);
+                localStorage.setItem("reservaConfirmada", JSON.stringify({
+                    numeroReserva: result.numeroReserva,
+                    fullName: `${form.firstName.value} ${form.lastName.value}`,
+                    cuarto: data.name,
+                    checkin: form.checkin.value,
+                    checkout: form.checkout.value,
+                }));
+                const params = new URLSearchParams({
+                    checkin: form.checkin.value,
+                    checkout: form.checkout.value,
+                    firstName: form.firstName.value,
+                    lastName: form.lastName.value,
+                    email: form.email.value,
+                    phone: form.phone.value,
+                    country: form.country.value,
+                    paperlessConfirm: form.paperlessConfirm.checked,
+                    bookingFor: form.bookingFor.value,
+                    travelForWork: form.travelForWork.value,
+                    fullGuestName: form.fullGuestName.value,
+                    specialRequests: form.specialRequests.value,
+                    arrivalTime: form.arrivalTime.value,
+                });
+
+                window.location.href = `thanks.html?${params.toString()}`;
+
+            } else {
+                alert("Error al procesar la reserva. Intenta de nuevo.");
+            }
+        } catch (error) {
+            console.error("Error al conectar con el servidor:", error);
+            alert("No se pudo conectar con el servidor. Intenta más tarde.");
+        }
+    });
 }
 
