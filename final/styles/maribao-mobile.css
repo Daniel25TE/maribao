@@ -623,17 +623,27 @@ a {
 
 .play-pause-btn {
     position: absolute;
-    bottom: 10px;
-    right: 10px;
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
+    bottom: 1rem;
+    left: 1rem;
+    background: rgba(0, 0, 0, 0.6);
     border: none;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 18px;
+    padding: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+    transition: background 0.3s ease;
 }
+
+.play-pause-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.play-pause-btn .icon {
+    pointer-events: none;
+}
+
 
 #room-list {
     padding: 2rem 1rem;

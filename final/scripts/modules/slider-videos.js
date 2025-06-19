@@ -78,14 +78,19 @@ export function createVideoSlider(sliderContainer) {
             if (!video || !button) return;
 
             button.addEventListener("click", () => {
-                if (video.paused) {
+                const isPaused = video.paused;
+
+                if (isPaused) {
                     video.play();
-                    button.textContent = "⏸";
+                    button.querySelector(".play-icon").style.display = "none";
+                    button.querySelector(".pause-icon").style.display = "inline";
                 } else {
                     video.pause();
-                    button.textContent = "▶️";
+                    button.querySelector(".play-icon").style.display = "inline";
+                    button.querySelector(".pause-icon").style.display = "none";
                 }
             });
+
 
             // Actualizar botón si el video termina (opcional)
             video.addEventListener("ended", () => {
