@@ -78,18 +78,20 @@ export function createVideoSlider(sliderContainer) {
             if (!video || !button) return;
 
             button.addEventListener("click", () => {
-                const isPaused = video.paused;
+                const playIcon = button.querySelector(".play-icon");
+                const pauseIcon = button.querySelector(".pause-icon");
 
-                if (isPaused) {
+                if (video.paused) {
                     video.play();
-                    button.querySelector(".play-icon").style.display = "none";
-                    button.querySelector(".pause-icon").style.display = "inline";
+                    playIcon.style.display = "none";
+                    pauseIcon.style.display = "inline";
                 } else {
                     video.pause();
-                    button.querySelector(".play-icon").style.display = "inline";
-                    button.querySelector(".pause-icon").style.display = "none";
+                    playIcon.style.display = "inline";
+                    pauseIcon.style.display = "none";
                 }
             });
+
 
 
             // Actualizar botón si el video termina (opcional)

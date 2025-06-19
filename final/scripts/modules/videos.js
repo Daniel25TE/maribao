@@ -23,10 +23,11 @@ export async function allVideos() {
         </video>
         <button class="play-pause-btn" aria-label="Reproducir o pausar video">
   <svg class="icon" viewBox="0 0 24 24" fill="white" width="24" height="24">
-    <path d="M8 5v14l11-7z" class="play-icon"/>
-    <path d="M6 19h4V5H6zm8-14v14h4V5h-4z" class="pause-icon" style="display: none"/>
+    <path d="M8 5v14l11-7z" class="play-icon" style="display: none;" />
+    <path d="M6 19h4V5H6zm8-14v14h4V5h-4z" class="pause-icon" />
   </svg>
 </button>
+
 
       `;
       sliderTrack.appendChild(card);
