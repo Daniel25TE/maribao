@@ -621,6 +621,19 @@ a {
     background: #fff;
 }
 
+.play-pause-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    cursor: pointer;
+}
 
 #room-list {
     padding: 2rem 1rem;

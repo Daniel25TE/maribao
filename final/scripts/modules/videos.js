@@ -21,6 +21,7 @@ export async function allVideos() {
           <track default kind="captions" srclang="es">
           Tu navegador no soporta el video.
         </video>
+        <button class="play-pause-btn">⏸</button>
       `;
       sliderTrack.appendChild(card);
     });

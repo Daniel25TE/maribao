@@ -68,6 +68,32 @@ export function createVideoSlider(sliderContainer) {
             updateSlider();
         }
     });
+    function setupPlayPauseControls(sliderContainer) {
+        const videoCards = sliderContainer.querySelectorAll(".video-card");
+
+        videoCards.forEach(card => {
+            const video = card.querySelector("video");
+            const button = card.querySelector(".play-pause-btn");
+
+            if (!video || !button) return;
+
+            button.addEventListener("click", () => {
+                if (video.paused) {
+                    video.play();
+                    button.textContent = "⏸";
+                } else {
+                    video.pause();
+                    button.textContent = "▶️";
+                }
+            });
+
+            // Actualizar botón si el video termina (opcional)
+            video.addEventListener("ended", () => {
+                button.textContent = "▶️";
+            });
+        });
+    }
 
     updateSlider();
+    setupPlayPauseControls(sliderContainer);
 }
