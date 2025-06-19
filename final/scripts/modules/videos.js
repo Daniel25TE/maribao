@@ -16,7 +16,8 @@ export async function allVideos() {
       card.classList.add("video-card");
       card.innerHTML = `
         <h2>${video.title}</h2>
-        <video controls poster="${video.poster}" loading="lazy" preload="none">
+        <video playsinline 
+  webkit-playsinline controls poster="${video.poster}" loading="lazy" preload="none">
           <source src="${video.src}" type="video/webm">
           <track default kind="captions" srclang="es">
           Tu navegador no soporta el video.
