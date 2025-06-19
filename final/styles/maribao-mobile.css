@@ -85,13 +85,16 @@ nav {
     opacity: 0;
     transform: scaleY(0);
     transform-origin: top;
-    animation: closeMenu 0.4s ease-in-out;
     border-radius: 5px;
     margin-bottom: 0px;
 }
 
 nav.active {
     animation: openMenu 0.4s ease-out forwards;
+}
+
+nav.closing {
+    animation: closeMenu 0.4s ease-in-out forwards;
 }
 
 .navigation {
@@ -536,11 +539,25 @@ a {
     background: linear-gradient(to bottom, #e75a2f, #1b3479e7);
     padding: 3rem;
     text-align: center;
-
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-.video-container {
-    text-align: center;
+#video-slider.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.lazy-container {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.lazy-container.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .slider-videos-track {
@@ -640,8 +657,22 @@ a {
     background: rgba(0, 0, 0, 0.61);
 }
 
-.play-pause-btn .icon {
-    pointer-events: none;
+.mute-toggle-btn {
+    position: absolute;
+    top: 3rem;
+    right: 1rem;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
 }
 
 

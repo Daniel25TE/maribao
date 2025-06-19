@@ -4,6 +4,7 @@ import { setupMenuToggle } from './modules/menuToggle.js';
 import { loadOptions } from './modules/loadServices.js';
 import { allRestaurants } from './modules/allRestaurantes.js';
 import { loadPreguntas } from './modules/loadPreguntas.js';
+import { lazyLoadStaticContainers } from "./modules/lazyLoader.js"
 
 document.addEventListener('DOMContentLoaded', () => {
     highlightActiveLink();
@@ -11,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupMenuToggle();
     loadOptions();
     allRestaurants();
+    lazyLoadStaticContainers();
 
 
     const cta = document.getElementById('cta');

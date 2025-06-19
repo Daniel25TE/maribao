@@ -100,7 +100,26 @@ export function createVideoSlider(sliderContainer) {
             });
         });
     }
+    function setupMuteToggleControls(sliderContainer) {
+        const videoCards = sliderContainer.querySelectorAll(".video-card");
+
+        videoCards.forEach(card => {
+            const video = card.querySelector("video");
+            const muteBtn = card.querySelector(".mute-toggle-btn");
+
+            if (!video || !muteBtn) return;
+
+            // Establece estado inicial basado en atributo muted
+            muteBtn.textContent = video.muted ? "🔇" : "🔊";
+
+            muteBtn.addEventListener("click", () => {
+                video.muted = !video.muted;
+                muteBtn.textContent = video.muted ? "🔇" : "🔊";
+            });
+        });
+    }
 
     updateSlider();
     setupPlayPauseControls(sliderContainer);
+    setupMuteToggleControls(sliderContainer);
 }

@@ -27,6 +27,10 @@ export async function allVideos() {
     <path d="M6 19h4V5H6zm8-14v14h4V5h-4z" class="pause-icon" />
   </svg>
 </button>
+<button class="mute-toggle-btn" aria-label="Activar o silenciar audio">
+  🔇
+</button>
+
 
 
       `;
