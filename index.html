@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="This site is a introduction to myself, where it will show my web and computer programming courses, credits and information of each course.">
+    <meta name="author" content="Daniel Alejandro Llumiquinga Dominguez">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sansation:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/larger.css">
+    <link rel="stylesheet" href="styles/small.css">
+    <link rel="icon" href="images/maribaoLogo2.ico" type="image/x-icon">
+    <meta property="og:title" content="Course Home Page">
+    <meta property="og:description"
+        content="This site is a introduction to myself, where it will show my web and computer programming courses, credits and information of each course.">
+    <meta property="og:image"
+        content="https://raw.githubusercontent.com/Daniel25TE/wdd231/refs/heads/main/images/ecuadorflag.webp">
+    <meta property="og:url" content="https://daniel25te.github.io/wdd231/">
+    <meta property="og:type" content="website">
+    <script src="scripts/home.js" defer></script>
+    <title>Course Home Page by Daniel A. Llumiquinga</title>
+</head>
+
+<body>
+    <header>
+        <div class="header-top">
+            <img src="images/danielimage.webp" alt="Daniel A. Llumiquinga" width="95" height="120">
+            <span>Daniel A. Llumiquinga</span>
+        </div>
+        <button class="hamburger-menu" type="button">☰</button>
+
+        <nav id="animateme">
+            <ul class="navigation">
+                <li><a href="index.html" id="home" title="Home">Home</a></li>
+                <li><a href="chamber/index.html" id="chamber" title="Chamber">Chamber</a></li>
+                <li><a href="final/index.html" id="final" title="Final">Final</a></li>
+                <li><a href="https://github.com/Daniel25TE" id="github" title="GithubProfile">Github Profile</a></li>
+                <li><a href="https://www.linkedin.com/in/daniel-llumiquinga-219758311/" id="linkedin"
+                        title="LinkedIn">LinkedIn</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Home</h1>
+        <div class="section-container">
+            <section class="section-left">
+                <h2>Course Work</h2>
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+
+            </section>
+            <section class="section-right">
+                <h2>Quito, Ecuador</h2>
+                <figure class="historic-center">
+                    <picture>
+                        <source srcset="images/historic_center_mobile.webp 1x, images/historic_center_mobile2.webp 2x"
+                            media="(max-width: 800px)">
+                        <source srcset="images/historic_center.webp" media="(min-width: 1024px)">
+                        <img src="images/historic_center.webp" alt="Historic Center">
+                    </picture>
+                    <figcaption class="historic-center-description">Historic Center</figcaption>
+                </figure>
+
+            </section>
+        </div>
+        <section class="section-full">
+            <h2>Web and Computer Programming Certificate</h2>
+        </section>
+        <dialog id="mydialog">
+            <div>
+                <h2>Sample Title</h2>
+                <button>X</button>
+            </div>
+            <h4>Sample Title</h4>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+        </dialog>
+    </main>
+
+    <footer>
+        <p>
+            &copy; <span id="currentyear"></span> Daniel A. Llumiquinga Dominguez - Ecuador
+        </p>
+        <p id="lastModified">
+
+        </p>
+    </footer>
+</body>
+
+</html>

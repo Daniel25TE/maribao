@@ -1,0 +1,161 @@
+@media screen and (max-width: 768px) {
+
+
+    header {
+        position: relative;
+    }
+
+
+    .hamburger-menu {
+        display: block;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: 1000;
+    }
+
+    nav {
+        background-color: transparent;
+    }
+
+
+
+    #animateme {
+        display: flex;
+        flex-direction: column;
+        background-color: #222;
+        position: relative;
+        width: 100%;
+        z-index: 500;
+        padding: 10px;
+        height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transform: scaleY(0);
+        transform-origin: top;
+        animation: closeMenu 0.4s ease-in forwards;
+
+    }
+
+
+    #animateme.active {
+        animation: openMenu 0.4s ease-out forwards;
+    }
+
+
+    @keyframes openMenu {
+        0% {
+            height: 0;
+            opacity: 0;
+            transform: scaleY(0);
+        }
+
+        100% {
+            height: 300px;
+
+            opacity: 1;
+            transform: scaleY(1);
+        }
+    }
+
+
+    @keyframes closeMenu {
+        0% {
+            height: 200px;
+
+            opacity: 1;
+            transform: scaleY(1);
+        }
+
+        100% {
+            height: 0;
+            opacity: 0;
+            transform: scaleY(0);
+        }
+    }
+
+
+
+
+    header,
+    .navigation {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    main {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 0rem;
+    }
+
+    h1 {
+        margin-top: 1rem;
+        margin-bottom: 0rem;
+    }
+
+    .section-container {
+        flex-direction: column;
+    }
+
+    .section-left,
+    .section-right {
+        width: 100%;
+    }
+
+    .historic-center {
+        text-align: center;
+        color: black;
+    }
+
+
+
+    .historic-center-description {
+        margin: 1rem;
+    }
+
+    #courseContainer {
+        display: block;
+
+
+
+        padding: 0px;
+    }
+
+    #lineContainer {
+        height: 1px;
+
+        background-color: rgb(165, 164, 164);
+
+        width: 100%;
+
+        margin-bottom: 10px;
+
+        margin-top: 0px;
+    }
+
+    .course {
+        margin-bottom: 1rem;
+    }
+
+    .button-container {
+
+        gap: 0;
+    }
+
+    button {
+
+        background-color: #0077b6;
+        color: white;
+        border: none;
+        padding: 10px 40px;
+        margin: 5px;
+        font-size: 10px;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+
+    }
+}
