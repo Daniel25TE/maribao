@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
+import { insertarReserva } from './database.js';
+
 
 dotenv.config();
 
@@ -15,6 +17,21 @@ app.post('/reserva', async (req, res) => {
     const data = req.body;
     const numeroReserva = Math.floor(100000 + Math.random() * 900000);
 
+    // 💾 Guardar en Supabase
+    try {
+        await insertarReserva({
+            nombre: `${data.firstName} ${data.lastName}`,
+            email: data.email,
+            room_name: data.cuarto,
+            checkin_date: data.checkin,
+            checkout_date: data.checkout
+        });
+    } catch (err) {
+        console.error('Error al guardar en la base de datos:', err.message);
+        return res.status(500).json({ success: false, message: 'Error al guardar la reserva' });
+    }
+
+    // 📧 Enviar correo
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -46,11 +63,11 @@ Solicitudes especiales: ${data.specialRequests || 'Ninguna'}
         await transporter.sendMail(mailOptions);
         res.status(200).json({ success: true, numeroReserva });
     } catch (error) {
-        console.error('Error al enviar el correo:', error.message); // Aquí imprime el error completo
-        console.error(error.stack);
+        console.error('Error al enviar el correo:', error.message);
         res.status(500).json({ success: false, message: 'Error al enviar el correo' });
     }
 });
+
 
 
 
