@@ -35,6 +35,7 @@ app.post('/reserva', async (req, res) => {
         const mailOptions = {
             from: process.env.EMAIL,
             to: data.email, // al cliente
+            bcc: process.env.EMAIL_EMPLEADOR,
             subject: 'Confirmación de Reserva - Hotel Maribao',
             text: `
 Hola ${data.firstName} ${data.lastName}, gracias por tu reserva.
