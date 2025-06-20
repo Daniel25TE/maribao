@@ -1,14 +1,11 @@
+// database.js
 import { createClient } from '@supabase/supabase-js';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-// Función para insertar reserva en Supabase
 export async function insertarReserva(datos) {
     const {
         firstName,
@@ -26,7 +23,7 @@ export async function insertarReserva(datos) {
         addFlights,
         addCar,
         addTaxi,
-        fullGuestName,
+        fullGuestName
     } = datos;
 
     const { data, error } = await supabase
@@ -47,21 +44,19 @@ export async function insertarReserva(datos) {
                 add_flights: addFlights,
                 add_car: addCar,
                 add_taxi: addTaxi,
-                full_guest_name: fullGuestName,
-            },
+                full_guest_name: fullGuestName
+            }
         ])
-        .select();
+        .select(); // 👈 fuerza retorno de datos
 
     if (error) {
-        console.error('❌ Error al insertar en Supabase:', error);
+        console.error("❌ Error al insertar en Supabase:", error);
         throw error;
     }
 
-    console.log('✅ Reserva insertada con éxito:', data[0]);
+    console.log("✅ Reserva insertada con éxito:", data[0]);
     return data[0];
 }
-
-// Función para obtener todas las reservas desde Supabase
 export async function obtenerReservas() {
     const { data, error } = await supabase
         .from('reservas')
@@ -69,9 +64,10 @@ export async function obtenerReservas() {
         .order('created_at', { ascending: false });
 
     if (error) {
-        console.error('❌ Error al obtener reservas desde Supabase:', error);
+        console.error("❌ Error al obtener reservas desde Supabase:", error);
         throw error;
     }
 
     return data;
 }
+
