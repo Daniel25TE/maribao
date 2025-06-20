@@ -64,6 +64,7 @@ Solicitudes especiales: ${data.specialRequests || 'Ninguna'}
         res.status(200).json({ success: true, numeroReserva });
     } catch (error) {
         console.error('Error al enviar el correo:', error.message);
+        console.error(error.stack);
         res.status(500).json({ success: false, message: 'Error al enviar el correo' });
     }
 });
