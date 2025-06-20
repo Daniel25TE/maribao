@@ -1,28 +1,29 @@
 // database.js
-import pkg from 'pg';
-const { Pool } = pkg;
+import { createClient } from '@supabase/supabase-js';
 
-const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-        rejectUnauthorized: false // Necesario para conectar con Supabase
-    }
-});
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
+
+export const supabase = createClient(supabaseUrl, supabaseKey);
 
 export async function insertarReserva({ nombre, email, room_name, checkin_date, checkout_date }) {
-    const query = `
-    INSERT INTO reservas (nombre, email, room_name, checkin_date, checkout_date)
-    VALUES ($1, $2, $3, $4, $5)
-    RETURNING *;
-  `;
+    const { data, error } = await supabase
+        .from('reservas')
+        .insert([
+            {
+                nombre,
+                email,
+                room_name,
+                checkin_date,
+                checkout_date
+            }
+        ]);
 
-    const values = [nombre, email, room_name, checkin_date, checkout_date];
-
-    try {
-        const result = await pool.query(query, values);
-        return result.rows[0];
-    } catch (err) {
-        console.error('Error al insertar reserva:', err);
-        throw err;
+    if (error) {
+        console.error('Error al insertar en Supabase:', error);
+        throw error;
     }
+
+    return data[0];
 }
+
