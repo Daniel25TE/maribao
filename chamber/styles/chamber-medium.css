@@ -1,0 +1,28 @@
+@media (min-width: 54em) and (max-width: 70em) {
+    #cards-container div {
+
+
+        grid-template-areas:
+
+            "photo_url name"
+            "photo_url address"
+            "photo_url description"
+            "photo_url learn-more";
+    }
+
+    #cards-container div img {
+        width: 300px;
+        transition: none;
+    }
+
+    #cards-container {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .card img:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+}

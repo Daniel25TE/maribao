@@ -1,0 +1,22 @@
+[
+    {
+        "src": "videos/estrella.webm",
+        "poster": "images/estrella-poster.webp",
+        "title": "Estrella"
+    },
+    {
+        "src": "videos/estrella.webm",
+        "poster": "images/estrella-poster.webp",
+        "title": "Sol"
+    },
+    {
+        "src": "videos/estrella.webm",
+        "poster": "images/estrella-poster.webp",
+        "title": "Surf"
+    },
+    {
+        "src": "videos/estrella.webm",
+        "poster": "images/estrella-poster.webp",
+        "title": "Luna"
+    }
+]

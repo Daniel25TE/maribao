@@ -1,0 +1,69 @@
+{
+    "restaurants": [
+        {
+            "name": "Restaurante La Plaza",
+            "tipo_comida": "Mexicana",
+            "distancia": "0.5 millas",
+            "direccion": "123 Main St, West Jordan",
+            "telefono": "(801) 123-4567"
+        },
+        {
+            "name": "Café Sol",
+            "tipo_comida": "Italiana",
+            "distancia": "0.8 millas",
+            "direccion": "456 Elm St, West Jordan",
+            "telefono": "(801) 987-6543"
+        },
+        {
+            "name": "Delicias del Mar",
+            "tipo_comida": "Mariscos",
+            "distancia": "1.2 millas",
+            "direccion": "789 Oak St, West Jordan",
+            "telefono": "(801) 555-6789"
+        },
+        {
+            "name": "Café Aroma",
+            "tipo_comida": "Cafetería",
+            "distancia": "0.3 millas",
+            "direccion": "321 Pine St, West Jordan",
+            "telefono": "(801) 999-1111"
+        },
+        {
+            "name": "Café Rosado",
+            "tipo_comida": "Cafetería",
+            "distancia": "0.8 millas",
+            "direccion": "321 Sera St, West Jordan",
+            "telefono": "(801) 432-7689"
+        },
+        {
+            "name": "Restaurante Juan Ostras",
+            "tipo_comida": "Mariscos",
+            "distancia": "Av. Zenón Masías y Sisto Chán Calle Primera Playas Villamil",
+            "telefono": "(801) 432-7689"
+        },
+        {
+            "name": "El Kiosko del Gordo Daniel",
+            "tipo_comida": "Restaurante",
+            "distancia": "Km 5, Via Data",
+            "telefono": "(801) 432-7689"
+        },
+        {
+            "name": "Na Praia",
+            "tipo_comida": "Parrilla",
+            "distancia": "Av. Paquisha, y",
+            "telefono": "(801) 432-7689"
+        },
+        {
+            "name": "La Casa Grill Burguer",
+            "tipo_comida": "Restaurante",
+            "distancia": "Av Jaime Roldós Aguilera, y",
+            "telefono": "(801) 432-7689"
+        },
+        {
+            "name": "Rucutú Lounge Resto Bar",
+            "tipo_comida": "Restaurante",
+            "distancia": "9J72+7M",
+            "telefono": "(801) 432-7689"
+        }
+    ]
+}
