@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Panel de Reservas - Hotel Maribao</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 1rem;
+            background-color: #f3f3f3;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        @media (max-width: 768px) {
+
+            table,
+            thead,
+            tbody,
+            th,
+            td,
+            tr {
+                display: block;
+            }
+
+            th {
+                display: none;
+            }
+
+            td {
+                border: none;
+                position: relative;
+                padding-left: 50%;
+                margin-bottom: 1rem;
+            }
+
+            td::before {
+                position: absolute;
+                left: 0;
+                width: 45%;
+                padding-left: 0.75rem;
+                font-weight: bold;
+                white-space: nowrap;
+            }
+
+            td:nth-child(1)::before {
+                content: "Nombre";
+            }
+
+            td:nth-child(2)::before {
+                content: "Email";
+            }
+
+            td:nth-child(3)::before {
+                content: "Teléfono";
+            }
+
+            td:nth-child(4)::before {
+                content: "Check-in";
+            }
+
+            td:nth-child(5)::before {
+                content: "Check-out";
+            }
+
+            td:nth-child(6)::before {
+                content: "Cuarto";
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>📋 Panel de Reservas</h1>
+
+    <table id="reservas-table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Check-in</th>
+                <th>Check-out</th>
+                <th>Cuarto</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Las filas se llenan con JS -->
+        </tbody>
+    </table>
+
+    <script>
+        async function cargarReservas() {
+            try {
+                const response = await fetch('https://hotel-backend-3jw7.onrender.com/reservas');
+                const reservas = await response.json();
+
+                const tbody = document.querySelector('#reservas-table tbody');
+                tbody.innerHTML = ''; // Limpiar tabla
+
+                reservas.forEach(reserva => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+            <td>${reserva.nombre}</td>
+            <td>${reserva.email}</td>
+            <td>${reserva.telefono}</td>
+            <td>${reserva.checkin_date}</td>
+            <td>${reserva.checkout_date}</td>
+            <td>${reserva.room_name}</td>
+          `;
+                    tbody.appendChild(row);
+                });
+            } catch (err) {
+                console.error('Error al cargar reservas:', err);
+                alert('No se pudieron cargar las reservas');
+            }
+        }
+
+        cargarReservas();
+    </script>
+</body>
+
+</html>

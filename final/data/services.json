@@ -1,0 +1,92 @@
+[
+    {
+        "icon": "images/house.svg",
+        "alt": "house",
+        "label": "Apartamentos",
+        "rating": "&#9733"
+    },
+    {
+        "icon": "images/parking.svg",
+        "alt": "parking",
+        "label": "Parking gratis",
+        "rating": "&#9733"
+    },
+    {
+        "icon": "images/beach.svg",
+        "alt": "beach",
+        "label": "Vistas al mar",
+        "rating": "&#9733"
+    },
+    {
+        "icon": "images/footprints.svg",
+        "alt": "footprints",
+        "label": "Admite mascotas",
+        "rating": "&#9733"
+    },
+    {
+        "icon": "images/bathroom.svg",
+        "alt": "bathroom",
+        "label": "Baño privado",
+        "rating": "&#9733"
+    },
+    {
+        "icon": "images/snow.svg",
+        "alt": "snow",
+        "label": "Aire acondicionado",
+        "rating": "&#9733"
+    },
+    {
+        "icon": "images/balcony.svg",
+        "alt": "balcony",
+        "label": "Balcón",
+        "rating": "&#9733"
+    },
+    {
+        "icon": "images/vistas.svg",
+        "alt": "vista al mar",
+        "label": "Vistas",
+        "rating": "&#9733"
+    },
+    {
+        "icon": "images/family.svg",
+        "alt": "family",
+        "label": "Habitaciones familiares",
+        "rating": "&#9733"
+    },
+    {
+        "icon": "images/nosmoking.svg",
+        "alt": "nosmoking",
+        "label": "Libre de humo",
+        "rating": "&#9733"
+    },
+    {
+        "icon": "images/frontdesk.svg",
+        "alt": "frontdesk",
+        "label": "Recepcion",
+        "rating": "&#9733"
+    },
+    {
+        "icon": "images/safety.svg",
+        "alt": "safety",
+        "label": "Seguridad",
+        "rating": "&#9733"
+    },
+    {
+        "icon": "images/language.svg",
+        "alt": "language",
+        "label": "Idiomas Hablados",
+        "rating": "&#9733"
+    },
+    {
+        "icon": "images/kitchen.svg",
+        "alt": "kitchen",
+        "label": "Cocina",
+        "rating": "&#9733"
+    },
+    {
+        "icon": "images/bedroom.svg",
+        "alt": "bedroom",
+        "label": "Habitaciones equipadas",
+        "rating": "&#9733"
+    }
+]
