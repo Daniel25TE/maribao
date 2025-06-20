@@ -35,7 +35,6 @@ app.post('/reserva', async (req, res) => {
         const mailOptions = {
             from: process.env.EMAIL,
             to: data.email, // al cliente
-            bcc: process.env.EMAIL_EMPLEADOR,
             subject: 'Confirmación de Reserva - Hotel Maribao',
             text: `
 Hola ${data.firstName} ${data.lastName}, gracias por tu reserva.
@@ -54,8 +53,34 @@ Hotel Maribao
       `,
         };
 
+        // Enviar correo al cliente
         await transporter.sendMail(mailOptions);
         console.log("✅ Correo enviado a:", data.email);
+
+        // Enviar notificación al empleador
+        const mailToEmployer = {
+            from: process.env.EMAIL,
+            to: process.env.EMAIL_EMPLEADOR,
+            subject: '🔔 Nueva reserva en Hotel Maribao',
+            text: `
+Se ha realizado una nueva reserva en tu sitio web.
+
+👤 Nombre del huésped: ${data.firstName} ${data.lastName}
+📧 Correo: ${data.email}
+📅 Check-in: ${data.checkin}
+📅 Check-out: ${data.checkout}
+🛏️ Cuarto reservado: ${data.cuarto}
+
+🔍 Ver reservas: https://daniel25te.github.io/wdd231/final/backend/admin.html
+
+—
+Hotel Maribao - Notificación automática
+    `,
+        };
+
+        await transporter.sendMail(mailToEmployer);
+        console.log("📧 Notificación enviada al empleador:", process.env.EMAIL_EMPLEADOR);
+
 
         // 👉 Responder al frontend
         res.status(200).json({
