@@ -127,7 +127,7 @@ export function dataForm() {
         };
 
         try {
-            const response = await fetch("http://localhost:3000/reserva", {
+            const response = await fetch("https://hotel-backend-3jw7.onrender.com/reserva", {
 
 
                 method: "POST",
