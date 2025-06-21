@@ -4,7 +4,7 @@ import cors from 'cors';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 import { insertarReserva, obtenerReservas } from './database.js';
-
+import { basicAuth } from './auth.js';
 
 dotenv.config();
 
@@ -12,6 +12,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// POST /reserva - cliente hace una reserva
 app.post('/reserva', async (req, res) => {
     console.log("📩 Llega petición POST /reserva");
     console.log("🧾 Datos recibidos:", req.body);
@@ -23,7 +24,7 @@ app.post('/reserva', async (req, res) => {
         // 👉 Guardar en Supabase
         await insertarReserva(data);
 
-        // 👉 Enviar correo de confirmación al cliente
+        // 👉 Configurar transporte de correo
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -32,9 +33,10 @@ app.post('/reserva', async (req, res) => {
             },
         });
 
+        // 👉 Correo al cliente
         const mailOptions = {
             from: process.env.EMAIL,
-            to: data.email, // al cliente
+            to: data.email,
             subject: 'Confirmación de Reserva - Hotel Maribao',
             text: `
 Hola ${data.firstName} ${data.lastName}, gracias por tu reserva.
@@ -53,11 +55,10 @@ Hotel Maribao
       `,
         };
 
-        // Enviar correo al cliente
         await transporter.sendMail(mailOptions);
         console.log("✅ Correo enviado a:", data.email);
 
-        // Enviar notificación al empleador
+        // 👉 Correo al empleador
         const mailToEmployer = {
             from: process.env.EMAIL,
             to: process.env.EMAIL_EMPLEADOR,
@@ -71,16 +72,15 @@ Se ha realizado una nueva reserva en tu sitio web.
 📅 Check-out: ${data.checkout}
 🛏️ Cuarto reservado: ${data.cuarto}
 
-🔍 Ver reservas: https://daniel25te.github.io/wdd231/final/backend/admin.html
+🔍 Ver reservas: https://daniel25te.github.io/wdd231/final/admin.html
 
 —
 Hotel Maribao - Notificación automática
-    `,
+      `,
         };
 
         await transporter.sendMail(mailToEmployer);
         console.log("📧 Notificación enviada al empleador:", process.env.EMAIL_EMPLEADOR);
-
 
         // 👉 Responder al frontend
         res.status(200).json({
@@ -97,7 +97,9 @@ Hotel Maribao - Notificación automática
         });
     }
 });
-app.get('/reservas', async (req, res) => {
+
+// GET /reservas - protegido con login
+app.get('/reservas', basicAuth, async (req, res) => {
     console.log("📥 Petición GET /reservas recibida");
     try {
         const reservas = await obtenerReservas();
@@ -108,9 +110,8 @@ app.get('/reservas', async (req, res) => {
     }
 });
 
-
-const PORT = process.env.PORT; // 👈 Importante para Render
+// Puerto
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
 });
-
