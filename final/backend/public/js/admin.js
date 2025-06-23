@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     async function cargarReservas() {
         try {
             const response = await fetch("/reservas", {
-                credentials: "include"  // <== agrega esto
+                credentials: "include"
             });
 
             if (!response.ok) {
