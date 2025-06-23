@@ -19,6 +19,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+app.set('trust proxy', 1);
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
@@ -40,7 +41,7 @@ function protegerRuta(req, res, next) {
         res.redirect('/login');
     }
 }
-app.set('trust proxy', 1);
+
 
 const limiter = rateLimit({
     windowMs: 60 * 1000, // 1 minuto
