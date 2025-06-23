@@ -1,0 +1,94 @@
+{
+    "rooms": [
+        {
+            "name": "Suite Maribao Vista al Mar",
+            "price": 120,
+            "beds": 2,
+            "description": "Habitación de lujo con vista panorámica al mar y decoración moderna.",
+            "images": [
+                "images/room-maribao.webp",
+                "images/room-maribao.webp"
+            ],
+            "features": [
+                "cocina",
+                "baño",
+                "comedor",
+                "mini sala",
+                "mini bar"
+            ],
+            "fullDetails": "Incluye desayuno buffet, servicio de limpieza diario, aire acondicionado, TV por cable, WiFi gratuito y acceso a piscina privada."
+        },
+        {
+            "name": "Habitación Familiar Engabao",
+            "price": 95,
+            "beds": 3,
+            "description": "Ideal para familias, con espacio amplio y áreas de descanso cómodas.",
+            "images": [
+                "images/room-maribao.webp",
+                "images/room-maribao.webp"
+            ],
+            "features": [
+                "cocina",
+                "baño",
+                "comedor",
+                "mini sala",
+                "mini bar"
+            ],
+            "fullDetails": "Cuenta con camas adicionales, juegos de mesa, refrigerador grande, acceso a áreas comunes y estacionamiento incluido."
+        },
+        {
+            "name": "Estudio Playa Privada",
+            "price": 80,
+            "beds": 1,
+            "description": "Estudio moderno con acceso privado a la playa y cocina equipada.",
+            "images": [
+                "images/room-maribao.webp",
+                "images/room-maribao.webp"
+            ],
+            "features": [
+                "cocina",
+                "baño",
+                "comedor",
+                "mini sala",
+                "mini bar"
+            ],
+            "fullDetails": "Acceso directo a la playa, cocina totalmente equipada, ideal para parejas, incluye sombrilla y tumbonas."
+        },
+        {
+            "name": "Apartamento Vista Jardín",
+            "price": 110,
+            "beds": 2,
+            "description": "Apartamento con balcón privado y vista al jardín tropical.",
+            "images": [
+                "images/room-maribao.webp",
+                "images/room-maribao.webp"
+            ],
+            "features": [
+                "cocina",
+                "baño",
+                "comedor",
+                "mini sala",
+                "mini bar"
+            ],
+            "fullDetails": "Balcón con hamaca, cocina de inducción, cafetera, acceso a jardín privado, zona de parrilla disponible."
+        },
+        {
+            "name": "Suite Premium Relax",
+            "price": 135,
+            "beds": 2,
+            "description": "Suite elegante con jacuzzi y todas las comodidades para una estancia de relax.",
+            "images": [
+                "images/room-maribao.webp",
+                "images/room-maribao.webp"
+            ],
+            "features": [
+                "cocina",
+                "baño",
+                "comedor",
+                "mini sala",
+                "mini bar"
+            ],
+            "fullDetails": "Incluye jacuzzi privado, servicio a la habitación 24/7, minibar surtido, bata de baño y pantuflas, selección de almohadas."
+        }
+    ]
+}

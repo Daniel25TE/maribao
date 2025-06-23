@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="This website is a overall view of the Maribao Hotel, it has the information about the hotel along with photos, services, and prices.">
+    <meta name="author" content="Daniel Llumiquinga">
+    <link rel="icon" href="images/maribao-logo2.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sansation:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/maribao-mobile.css">
+    <link rel="stylesheet" href="styles/maribao-desktop.css">
+    <script src="scripts/maribao.js" type="module"></script>
+    <meta property="og:title" content="Maribao Hotel">
+    <meta property="og:description"
+        content="This website is a overall view of the Maribao Hotel, it has the information about the hotel along with photos, services, and prices.">
+    <meta property="og:image" content="https://daniel25te.github.io/wdd231/final/images/maribao-logo5.webp">
+    <meta property="og:url" content="https://daniel25te.github.io/wdd231/">
+    <meta property="og:type" content="website">
+    <title>Maribao el mejor Hotel de General Villamil</title>
+</head>
+
+<body>
+    <header>
+        <a href="index.html" aria-label="Ir al inicio">
+            <picture>
+                <source srcset="images/maribao-logo6.webp 90w, images/maribao-logo5.webp 180w"
+                    sizes="(min-width: 320px) 90px, (min-width: 1200px) 180px">
+                <img src="images/maribao-logo6.webp" alt="Logotipo de Hotel Maribao" width="90" height="84">
+            </picture>
+        </a>
+
+
+        <button class="hamburger-menu" type="button" aria-label="Abrir menú">☰</button>
+
+        <nav>
+            <ul class="navigation">
+                <li><a href="index.html" id="resumen" title="Resumen">Resumen</a></li>
+                <li><a href="reservar.html" id="reserva" title="Reserva">Reserva</a></li>
+                <li><a href="servicios.html" id="servicios" title="Servicios">Servicios</a></li>
+                <li><a href="https://github.com/Daniel25TE" id="futurelink" title="Servicios">Future Link</a></li>
+                <li><a href="https://github.com/Daniel25TE" id="futurelinks" title="Servicios">Future Link</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="sticky-cta" id="cta">
+        <a href="reservar.html">Reservar</a>
+    </div>
+    <div id="weather-note" class="sticky-note" aria-live="polite" hidden></div>
+
+
+    <main>
+        <div class="container-hero">
+            <div class="hero">
+                <picture>
+                    <source srcset="images/hero-image-maribao.webp" media="(min-width: 1000px)">
+                    <source srcset="images/hero-image-maribao-medium.webp" media="(min-width: 840px)">
+                    <img src="images/hero-image-maribao-mobile-test.webp" alt="Beautiful landscape of Madagascar"
+                        width="840" height="1080">
+                </picture>
+            </div>
+            <h1>Maribao espera por ti!
+            </h1>
+        </div>
+        <div class="video-container">
+
+            <section id="video-slider">
+                <h2>videos 6</h2>
+                <div class="slider-videos-track">
+                </div>
+                <button class="slider-videos-btn left">&#10094;</button>
+                <button class="slider-videos-btn right">&#10095;</button>
+                <div class="slider-videos-indicators"></div>
+            </section>
+        </div>
+
+
+        <div id="hero-image" class="lazy-container">
+            <button id="prevBtn" class="slider-btn left">&#10094;</button>
+            <div class="slider-track">
+                <img src="images/quito-medium-prueba1.webp"
+                    srcset="images/quito-mobile-prueba.webp 640w, images/quito-medium-prueba1.webp 1200w, images/quito-large-prueba.webp 1920w"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw" alt="Imagen 1" width="1200"
+                    height="675">
+
+                <img src="images/quito-medium-prueba1.webp"
+                    srcset="images/quito-mobile-prueba.webp 640w, images/quito-medium-prueba1.webp 1200w, images/quito-large-prueba.webp 1920w"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw" alt="Imagen 2" width="1200"
+                    height="675">
+
+                <img src="images/quito-medium-prueba1.webp"
+                    srcset="images/quito-mobile-prueba.webp 640w, images/quito-medium-prueba1.webp 1200w, images/quito-large-prueba.webp 1920w"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw" alt="Imagen 2" width="1200"
+                    height="675">
+
+                <img src="images/quito-medium-prueba1.webp"
+                    srcset="images/quito-mobile-prueba.webp 640w, images/quito-medium-prueba1.webp 1200w, images/quito-large-prueba.webp 1920w"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw" alt="Imagen 2" width="1200"
+                    height="675">
+
+                <img src="images/quito-medium-prueba1.webp"
+                    srcset="images/quito-mobile-prueba.webp 640w, images/quito-medium-prueba1.webp 1200w, images/quito-large-prueba.webp 1920w"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw" alt="Imagen 2" width="1200"
+                    height="675">
+
+            </div>
+            <button id="nextBtn" class="slider-btn right">&#10095;</button>
+        </div>
+
+        <div class="slider-indicators" id="sliderDots"></div>
+
+        <section id="options-list" class="lazy-container">
+            <h2>Comodidades del alojamiento</h2>
+            <ul class="options-list">
+                <li class="option-item">
+                    <img src="images/house.svg" alt="house">
+                    <span>Apartamentos</span>
+                </li>
+                <!-- more items dynamically added -->
+            </ul>
+        </section>
+        <section id="comentarios" class="lazy-container">
+            <h2>Comentarios de nuestros huéspedes</h2>
+
+            <article class="comentario">
+                <h2>Comentario de María G.</h2>
+                <p class="texto">“Excelente ubicación y atención. ¡Muy recomendado!”</p>
+                <p class="autor">– María G.</p>
+            </article>
+
+            <article class="comentario">
+                <h2>Comentario de Juan P.</h2>
+                <p class="texto">“La vista al mar fue espectacular. Volveremos pronto.”</p>
+                <p class="autor">– Juan P.</p>
+            </article>
+        </section>
+        <section class="ubicacion lazy-container">
+            <div class="container">
+
+                <div class="info">
+                    <h2 class="interactivemap">Ubicación excelente</h2>
+                    <p class="interactivetextmap">Maribao Playa Paraíso, Engabao, General Villamil, Ecuador</p>
+                    <a href="tel:+1(801)-509-2879" class="call-us-map-interactive">Tel: +1(801)-509-2879</a>
+                    <p class="interactivetextmap">Está ubicado en una de las mejores playas de General Villamil</p>
+                    <p class="interactivetextmap">106 km del aeropuerto</p>
+                    <p class="interactivetextmap">10 min de la playa</p>
+                    <p class="interactivetextmap">Restaurantes y cafeterías alrededor de 12 km</p>
+                    <a class="map-link"
+                        href="https://www.google.com/maps/place/MARIBAO/@-2.5783067,-80.4926402,13z/data=!4m6!3m5!1s0x90320dd0f236bb69:0x46376d112e4e3e9f!8m2!3d-2.5783067!4d-80.4926402!16s%2Fg%2F11sjtw8bl7?entry=ttu"
+                        target="_blank" rel="noopener noreferrer">
+                        📍 Ver mapa
+                    </a>
+                </div>
+            </div>
+        </section>
+        <section class="lazy-container">
+            <h2 class="restaurantes">Restaurantes cercanos</h2>
+            <div id="restaurant-grid">
+            </div>
+        </section>
+
+        <section class="faq-section lazy-container">
+            <h2>Preguntas Frecuentes</h2>
+
+            <details>
+                <summary>¿Cuál es la hora de check-in y check-out?</summary>
+                <p>El check-in es a partir de las 14:00 y el check-out hasta las 12:00.</p>
+            </details>
+
+            <details>
+                <summary>¿Se admiten mascotas en el alojamiento?</summary>
+                <p>Sí, admitimos mascotas sin costo adicional.</p>
+            </details>
+
+            <details>
+                <summary>¿El alojamiento cuenta con parqueadero?</summary>
+                <p>Sí, hay estacionamiento gratuito disponible para los huéspedes.</p>
+            </details>
+        </section>
+
+
+
+
+    </main>
+
+    <footer class="lazy-container">
+        <div id="footer-container">
+            <div id="footer-links">
+                <a
+                    href="https://www.loom.com/share/582e82d364454132b5eaa7e7f3740ee8?sid=d9f212c8-2a05-42f4-b0e8-6ed6d4b70e51">Video
+                    Demostration</a>
+                <a href="index.html">Contactanos</a>
+                <a href="index.html">Preguntas Frecuentes</a>
+                <a href="images/maribao-logo5.webp">Ayuda</a>
+            </div>
+
+            <div id="social-icons">
+                <a href="https://www.youtube.com/"><img src="images/youtube.svg" alt="YouTube" width="35" height="35"
+                        loading="lazy"></a>
+                <a href="https://github.com/Daniel25TE"><img src="images/twitter.svg" alt="Twitter" width="35"
+                        height="35" loading="lazy"></a>
+                <a href="https://www.indeed.com/"><img src="images/indeed.svg" alt="Indeed" width="35" height="35"
+                        loading="lazy"></a>
+            </div>
+
+            <p id="copyright">&copy; 2025 Maribao. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+
+
+
+
+</body>
+
+</html>
