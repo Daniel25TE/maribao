@@ -5,125 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Panel de Reservas - Hotel Maribao</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 1rem;
-            background-color: #f3f3f3;
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1.5rem;
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        th,
-        td {
-            padding: 0.75rem;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #333;
-            color: white;
-        }
-
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-
-        @media (max-width: 768px) {
-
-            table,
-            thead,
-            tbody,
-            th,
-            td,
-            tr {
-                display: block;
-            }
-
-            th {
-                display: none;
-            }
-
-            td {
-                border: none;
-                position: relative;
-                padding-left: 50%;
-                margin-bottom: 1rem;
-            }
-
-            td::before {
-                position: absolute;
-                left: 0;
-                width: 45%;
-                padding-left: 0.75rem;
-                font-weight: bold;
-                white-space: nowrap;
-            }
-
-            td:nth-child(1)::before {
-                content: "Nombre";
-            }
-
-            td:nth-child(2)::before {
-                content: "Email";
-            }
-
-            td:nth-child(3)::before {
-                content: "Teléfono";
-            }
-
-            td:nth-child(4)::before {
-                content: "Check-in";
-            }
-
-            td:nth-child(5)::before {
-                content: "Check-out";
-            }
-
-            td:nth-child(6)::before {
-                content: "Cuarto";
-            }
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="bg-gray-100 font-sans p-6">
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">📋 Panel de Reservas</h1>
 
-    <h1>📋 Panel de Reservas</h1>
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white shadow-md rounded-xl overflow-hidden">
+            <thead class="bg-gray-800 text-white">
+                <tr>
+                    <th class="py-3 px-4 text-left">Nombre</th>
+                    <th class="py-3 px-4 text-left">Email</th>
+                    <th class="py-3 px-4 text-left">Teléfono</th>
+                    <th class="py-3 px-4 text-left">Check-in</th>
+                    <th class="py-3 px-4 text-left">Check-out</th>
+                    <th class="py-3 px-4 text-left">Cuarto</th>
+                </tr>
+            </thead>
+            <tbody id="reservas-table" class="text-gray-700">
+                <!-- Las filas se insertan con JavaScript -->
+            </tbody>
+        </table>
+    </div>
 
-    <table id="reservas-table">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th>Teléfono</th>
-                <th>Entrada</th>
-                <th>Salida</th>
-                <th>Cuarto</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Las filas se llenan con JS -->
-        </tbody>
-    </table>
-
-    <script src="/js/admin.js" defer></script>
-
-
-
+    <script src="/public/js/admin.js"></script>
 </body>
 
 </html>
