@@ -1,0 +1,317 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    width: 100%;
+    margin: auto;
+    padding: 1rem;
+    background-color: #f4f4f4;
+    overflow-x: hidden;
+    font-family: "Sansation", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+
+}
+
+
+header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #333;
+    color: white;
+}
+
+
+.header-top {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem;
+    font-family: "Sansation", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+
+header img {
+    width: 95px;
+    height: 120px;
+    object-fit: cover;
+}
+
+
+header span {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+
+.hamburger-menu {
+    display: none;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 1rem;
+}
+
+
+nav {
+    width: 100%;
+    background-color: #222;
+    padding: 0.5rem 0;
+
+
+}
+
+.navigation {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.navigation li {
+    flex: 1;
+    text-align: center;
+}
+
+.navigation a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    padding: 0.75rem;
+    transition: background-color 0.3s ease-in-out;
+
+}
+
+
+.navigation a:hover {
+    background-color: #555;
+    border-radius: 5px;
+}
+
+
+main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+
+h1 {
+    text-align: left;
+    margin-bottom: 1rem;
+    font-family: "Sansation", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+h2 {
+    text-align: center;
+    font-family: "Sansation", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    background-color: lightblue;
+
+    margin: 0;
+
+    padding: 10px;
+
+    width: calc(100% + 40px);
+
+    position: relative;
+    left: -20px;
+
+    top: -20px;
+
+
+}
+
+
+.section-container {
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+}
+
+
+.section-left {
+    flex: 2;
+    background-color: white;
+
+    border-radius: 5px;
+    box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+
+    padding: 1.5rem;
+
+
+}
+
+.section-right {
+    flex: 1;
+    background-color: white;
+
+    border-radius: 5px;
+    box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+
+    padding: 1.5rem;
+
+}
+
+.section-full {
+    width: 100%;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+
+    padding: 1.5rem;
+
+    margin-top: 1.5rem;
+}
+
+.historic-center {
+    text-align: center;
+    color: black;
+}
+
+.historic-center-description {
+    margin: 1rem;
+}
+
+#courseContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
+
+    padding: 20px;
+}
+
+.course {
+    padding: 15px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.completed {
+    background-color: #d4edda;
+
+    border: 2px solid #155724;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+button {
+    background-color: #0077b6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 20%;
+
+}
+
+#lineContainer {
+    height: 1px;
+
+    background-color: rgb(165, 164, 164);
+
+    width: 100%;
+
+    margin: 5px 0;
+
+}
+
+button:hover {
+    background-color: #005f86;
+    transform: scale(1.05);
+}
+
+button.active {
+    background-color: #004c6d;
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transform: scale(1.1);
+}
+
+#mydialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background: white;
+    border: none;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8);
+}
+
+#mydialog div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    background-color: lightblue;
+    border-bottom: #aaa 1px solid;
+}
+
+#mydialog button {
+    margin: 0;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    box-shadow: 0 0 10px #aaa;
+}
+
+#mydialog h2 {
+    left: 0px;
+
+    top: 0px;
+
+
+}
+
+#mydialog p,
+h4 {
+    padding: 10px;
+    color: #202f41;
+}
+
+::backdrop {
+    background-color: rgba(97, 102, 104, 0.6);
+}
+
+footer {
+    text-align: center;
+    background-color: #222;
+    color: white;
+    padding: 1rem;
+    margin-top: 2rem;
+}
