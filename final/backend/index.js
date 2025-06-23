@@ -5,12 +5,34 @@ import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 import { insertarReserva, obtenerReservas } from './database.js';
 import { basicAuth } from './auth.js';
+import session from 'express-session';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 
 dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+app.use(session({
+    secret: 'clave_secreta_segura',
+    resave: false,
+    saveUninitialized: false
+}));
+
+function protegerRuta(req, res, next) {
+    if (req.session.usuarioAutenticado) {
+        next();
+    } else {
+        res.redirect('/login');
+    }
+}
+
 
 // POST /reserva - cliente hace una reserva
 app.post('/reserva', async (req, res) => {
@@ -72,7 +94,7 @@ Se ha realizado una nueva reserva en tu sitio web.
 📅 Check-out: ${data.checkout}
 🛏️ Cuarto reservado: ${data.cuarto}
 
-🔍 Ver reservas: https://daniel25te.github.io/wdd231/final/admin.html
+🔍 Ver reservas: https://hotel-backend-3jw7.onrender.com
 
 —
 Hotel Maribao - Notificación automática
@@ -98,8 +120,39 @@ Hotel Maribao - Notificación automática
     }
 });
 
+// Formulario de login
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'login.html'));
+});
+
+// Procesar login
+app.post('/login', (req, res) => {
+    const { usuario, contrasena } = req.body;
+
+    // Usa tus credenciales reales aquí
+    if (usuario === 'admin' && contrasena === '1234') {
+        req.session.usuarioAutenticado = true;
+        res.redirect('/admin');
+    } else {
+        res.send('Credenciales inválidas. <a href="/login">Intentar de nuevo</a>');
+    }
+});
+
+// Logout
+app.get('/logout', (req, res) => {
+    req.session.destroy(() => {
+        res.redirect('/login');
+    });
+});
+
+// Servir panel admin protegido
+app.get('/admin', protegerRuta, (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'admin.html'));
+});
+
 // GET /reservas - protegido con login
-app.get('/reservas', basicAuth, async (req, res) => {
+app.get('/reservas', protegerRuta, async (req, res) => {
+
     console.log("📥 Petición GET /reservas recibida");
     try {
         const reservas = await obtenerReservas();
