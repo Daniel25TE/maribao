@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 tbody.appendChild(row);
             });
         } catch (err) {
-            console.error("Error al cargar reservas muchas:", err);
+            console.error("Error al cargar reservas mucha:", err);
             alert("No se pudieron cargar las reservas");
         }
     }
