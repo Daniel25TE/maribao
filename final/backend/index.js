@@ -8,14 +8,18 @@ import { basicAuth } from './auth.js';
 import session from 'express-session';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
+import { body, validationResult } from 'express-validator';
 
 
 dotenv.config();
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
+app.use(helmet());
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -34,35 +38,53 @@ function protegerRuta(req, res, next) {
         res.redirect('/login');
     }
 }
+const limiter = rateLimit({
+    windowMs: 60 * 1000, // 1 minuto
+    max: 5, // máximo 5 peticiones por minuto
+    message: 'Demasiadas solicitudes desde esta IP. Inténtalo más tarde.'
+});
 
+app.use('/login', limiter);
+app.use('/reservas', limiter);
+app.use('/reserva', limiter);
 
-// POST /reserva - cliente hace una reserva
-app.post('/reserva', async (req, res) => {
-    console.log("📩 Llega petición POST /reserva");
-    console.log("🧾 Datos recibidos:", req.body);
+app.post('/reserva',
+    [
+        body('firstName').notEmpty().withMessage('Nombre es requerido'),
+        body('lastName').notEmpty().withMessage('Apellido es requerido'),
+        body('email').isEmail().withMessage('Email inválido'),
+        body('checkin').notEmpty(),
+        body('checkout').notEmpty(),
+        body('cuarto').notEmpty()
+    ],
+    async (req, res) => {
+        const errores = validationResult(req);
+        if (!errores.isEmpty()) {
+            return res.status(400).json({ errores: errores.array() });
+        }
 
-    const data = req.body;
-    const numeroReserva = Math.floor(100000 + Math.random() * 900000);
+        console.log("📩 Llega petición POST /reserva");
+        console.log("🧾 Datos recibidos:", req.body);
 
-    try {
-        // 👉 Guardar en Supabase
-        await insertarReserva(data);
+        const data = req.body;
+        const numeroReserva = Math.floor(100000 + Math.random() * 900000);
 
-        // 👉 Configurar transporte de correo
-        const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: process.env.EMAIL,
-                pass: process.env.PASSWORD,
-            },
-        });
+        try {
+            await insertarReserva(data);
 
-        // 👉 Correo al cliente
-        const mailOptions = {
-            from: process.env.EMAIL,
-            to: data.email,
-            subject: 'Confirmación de Reserva - Hotel Maribao',
-            text: `
+            const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: process.env.EMAIL,
+                    pass: process.env.PASSWORD,
+                },
+            });
+
+            const mailOptions = {
+                from: process.env.EMAIL,
+                to: data.email,
+                subject: 'Confirmación de Reserva - Hotel Maribao',
+                text: `
 Hola ${data.firstName} ${data.lastName}, gracias por tu reserva.
 
 Detalles de tu estadía:
@@ -76,18 +98,17 @@ Hora estimada de llegada: ${data.arrivalTime || 'No especificada'}
 
 ¡Te esperamos!
 Hotel Maribao
-      `,
-        };
+            `,
+            };
 
-        await transporter.sendMail(mailOptions);
-        console.log("✅ Correo enviado a:", data.email);
+            await transporter.sendMail(mailOptions);
+            console.log("✅ Correo enviado a:", data.email);
 
-        // 👉 Correo al empleador
-        const mailToEmployer = {
-            from: process.env.EMAIL,
-            to: process.env.EMAIL_EMPLEADOR,
-            subject: '🔔 Nueva reserva en Hotel Maribao',
-            text: `
+            const mailToEmployer = {
+                from: process.env.EMAIL,
+                to: process.env.EMAIL_EMPLEADOR,
+                subject: '🔔 Nueva reserva en Hotel Maribao',
+                text: `
 Se ha realizado una nueva reserva en tu sitio web.
 
 👤 Nombre del huésped: ${data.firstName} ${data.lastName}
@@ -100,27 +121,26 @@ Se ha realizado una nueva reserva en tu sitio web.
 
 —
 Hotel Maribao - Notificación automática
-      `,
-        };
+            `,
+            };
 
-        await transporter.sendMail(mailToEmployer);
-        console.log("📧 Notificación enviada al empleador:", process.env.EMAIL_EMPLEADOR);
+            await transporter.sendMail(mailToEmployer);
+            console.log("📧 Notificación enviada al empleador:", process.env.EMAIL_EMPLEADOR);
 
-        // 👉 Responder al frontend
-        res.status(200).json({
-            success: true,
-            numeroReserva,
-            message: 'Reserva completada con éxito',
-        });
+            res.status(200).json({
+                success: true,
+                numeroReserva,
+                message: 'Reserva completada con éxito',
+            });
 
-    } catch (error) {
-        console.error('❌ Error al guardar o enviar:', error.message);
-        res.status(500).json({
-            success: false,
-            message: 'Error al procesar la reserva. Intenta de nuevo.',
-        });
-    }
-});
+        } catch (error) {
+            console.error('❌ Error al guardar o enviar:', error.message);
+            res.status(500).json({
+                success: false,
+                message: 'Error al procesar la reserva. Intenta de nuevo.',
+            });
+        }
+    });
 
 // Formulario de login
 app.get('/login', (req, res) => {
