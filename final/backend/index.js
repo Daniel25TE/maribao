@@ -96,7 +96,7 @@ Se ha realizado una nueva reserva en tu sitio web.
 📅 Check-out: ${data.checkout}
 🛏️ Cuarto reservado: ${data.cuarto}
 
-🔍 Ver reservas: https://hotel-backend-3jw7.onrender.com
+🔍 Ver reservas: https://hotel-backend-3jw7.onrender.com/login
 
 —
 Hotel Maribao - Notificación automática
