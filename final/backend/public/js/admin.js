@@ -3,7 +3,10 @@
 document.addEventListener("DOMContentLoaded", () => {
     async function cargarReservas() {
         try {
-            const response = await fetch("/reservas");
+            const response = await fetch("/reservas", {
+                credentials: "include"  // <== agrega esto
+            });
+
             if (!response.ok) {
                 throw new Error("No autorizado o error de red");
             }
