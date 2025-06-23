@@ -23,6 +23,8 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 
 app.use(session({
@@ -38,6 +40,8 @@ function protegerRuta(req, res, next) {
         res.redirect('/login');
     }
 }
+app.set('trust proxy', 1);
+
 const limiter = rateLimit({
     windowMs: 60 * 1000, // 1 minuto
     max: 5, // máximo 5 peticiones por minuto
