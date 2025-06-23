@@ -132,7 +132,8 @@ app.post('/login', (req, res) => {
     const { usuario, contrasena } = req.body;
 
     // Usa tus credenciales reales aquí
-    if (usuario === 'admin' && contrasena === '1234') {
+    if (usuario === process.env.ADMIN_USER && contrasena === process.env.ADMIN_PASS) {
+
         req.session.usuarioAutenticado = true;
         res.redirect('/admin');
     } else {
