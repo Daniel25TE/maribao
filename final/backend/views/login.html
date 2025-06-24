@@ -2,17 +2,33 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
 </head>
 
-<body>
-    <h1>Iniciar sesión</h1>
-    <form method="POST" action="/login">
-        <label>Usuario: <input type="text" name="usuario" required></label><br>
-        <label>Contraseña: <input type="password" name="contrasena" required></label><br>
-        <button type="submit">Entrar</button>
-    </form>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
+        <form method="POST" action="/login" class="space-y-4">
+            <h1 class="text-3xl font-bold text-center text-blue-700 mb-2">Hotel Maribao</h1>
+            <p class="text-center text-gray-600 mb-4">Bienvenido al panel administrativo</p>
+            <label class="block text-gray-700 font-medium">
+                Usuario
+                <input type="text" name="usuario" required
+                    class="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
+            </label>
+            <label class="block text-gray-700 font-medium">
+                Contraseña
+                <input type="password" name="contrasena" required
+                    class="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
+            </label>
+            <button type="submit"
+                class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">Entrar</button>
+        </form>
+
+    </div>
 
 </body>
 
