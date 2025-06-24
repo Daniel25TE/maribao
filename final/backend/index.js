@@ -11,6 +11,8 @@ import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import { body, validationResult } from 'express-validator';
 import bcrypt from 'bcrypt';
+import fetch from 'node-fetch';
+
 
 
 dotenv.config();
@@ -172,7 +174,9 @@ app.post('/login',
             .notEmpty().withMessage('El usuario es requerido'),
         body('contrasena')
             .trim()
-            .notEmpty().withMessage('La contraseña es requerida')
+            .notEmpty().withMessage('La contraseña es requerida'),
+        body('g-recaptcha-response')
+            .notEmpty().withMessage('Por favor completa el captcha')
     ],
     async (req, res) => {
         const errores = validationResult(req);
@@ -186,14 +190,27 @@ app.post('/login',
             `);
         }
 
-        const { usuario, contrasena } = req.body;
-
-        // Verifica el usuario
-        if (usuario !== process.env.ADMIN_USER) {
-            return res.status(401).send('Credenciales inválidas. <a href="/login">Intentar de nuevo</a>');
-        }
+        const { usuario, contrasena, 'g-recaptcha-response': token } = req.body;
+        const secretKey = process.env.RECAPTCHA_SECRET_KEY;
 
         try {
+            // Validar captcha con Google
+            const response = await fetch(
+                `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${token}`,
+                { method: 'POST' }
+            );
+            const data = await response.json();
+
+            if (!data.success) {
+                return res.status(400).send('Captcha inválido. <a href="/login">Intentar de nuevo</a>');
+            }
+
+            // Validar usuario
+            if (usuario !== process.env.ADMIN_USER) {
+                return res.status(401).send('Credenciales inválidas. <a href="/login">Intentar de nuevo</a>');
+            }
+
+            // Validar contraseña
             const esValido = await bcrypt.compare(contrasena, process.env.ADMIN_HASH);
             if (esValido) {
                 req.session.usuarioAutenticado = true;
@@ -202,7 +219,7 @@ app.post('/login',
                 res.status(401).send('Credenciales inválidas. <a href="/login">Intentar de nuevo</a>');
             }
         } catch (error) {
-            console.error('Error al verificar contraseña:', error);
+            console.error('Error al verificar captcha:', error);
             res.status(500).send('Error interno. Intenta más tarde.');
         }
     }
