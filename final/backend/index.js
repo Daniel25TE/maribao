@@ -4,7 +4,6 @@ import cors from 'cors';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 import { insertarReserva, obtenerReservas } from './database.js';
-import { basicAuth } from './auth.js';
 import session from 'express-session';
 import path from 'path';
 import { fileURLToPath } from 'url';
