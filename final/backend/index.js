@@ -11,7 +11,6 @@ import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import { body, validationResult } from 'express-validator';
 import bcrypt from 'bcrypt';
-import fetch from 'node-fetch';
 
 
 
@@ -174,9 +173,7 @@ app.post('/login',
             .notEmpty().withMessage('El usuario es requerido'),
         body('contrasena')
             .trim()
-            .notEmpty().withMessage('La contraseña es requerida'),
-        body('g-recaptcha-response')
-            .notEmpty().withMessage('Por favor completa el captcha')
+            .notEmpty().withMessage('La contraseña es requerida')
     ],
     async (req, res) => {
         const errores = validationResult(req);
@@ -190,26 +187,11 @@ app.post('/login',
             `);
         }
 
-        const { usuario, contrasena, 'g-recaptcha-response': token } = req.body;
-        const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+        const { usuario, contrasena } = req.body;
+
 
         try {
-            // Validar captcha con Google
-            const response = await fetch('https://www.google.com/recaptcha/api/siteverify', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams({
-                    secret: secretKey,
-                    response: token
-                })
-            });
-            const data = await response.json();
 
-            if (!data.success) {
-                return res.status(400).send('Captcha inválido. <a href="/login">Intentar de nuevo</a>');
-            }
-
-            // Validar usuario
             if (usuario !== process.env.ADMIN_USER) {
                 return res.status(401).send('Credenciales inválidas. <a href="/login">Intentar de nuevo</a>');
             }
