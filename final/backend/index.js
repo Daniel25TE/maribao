@@ -195,10 +195,14 @@ app.post('/login',
 
         try {
             // Validar captcha con Google
-            const response = await fetch(
-                `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${token}`,
-                { method: 'POST' }
-            );
+            const response = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({
+                    secret: secretKey,
+                    response: token
+                })
+            });
             const data = await response.json();
 
             if (!data.success) {
