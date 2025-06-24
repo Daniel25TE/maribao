@@ -165,18 +165,39 @@ app.get('/login', (req, res) => {
 });
 
 // Procesar login
-app.post('/login', (req, res) => {
-    const { usuario, contrasena } = req.body;
+app.post('/login',
+    // Validaciones
+    [
+        body('usuario')
+            .trim()
+            .notEmpty().withMessage('El usuario es requerido'),
+        body('contrasena')
+            .trim()
+            .notEmpty().withMessage('La contraseña es requerida')
+    ],
+    (req, res) => {
+        const errores = validationResult(req);
+        if (!errores.isEmpty()) {
+            return res.status(400).send(`
+                <h1>Error en el formulario</h1>
+                <ul>
+                    ${errores.array().map(err => `<li>${err.msg}</li>`).join('')}
+                </ul>
+                <a href="/login">Volver</a>
+            `);
+        }
 
-    // Usa tus credenciales reales aquí
-    if (usuario === process.env.ADMIN_USER && contrasena === process.env.ADMIN_PASS) {
+        const { usuario, contrasena } = req.body;
 
-        req.session.usuarioAutenticado = true;
-        res.redirect('/admin');
-    } else {
-        res.send('Credenciales inválidas. <a href="/login">Intentar de nuevo</a>');
+        if (usuario === process.env.ADMIN_USER && contrasena === process.env.ADMIN_PASS) {
+            req.session.usuarioAutenticado = true;
+            res.redirect('/admin');
+        } else {
+            res.status(401).send('Credenciales inválidas. <a href="/login">Intentar de nuevo</a>');
+        }
     }
-});
+);
+
 
 // Logout
 app.get('/logout', (req, res) => {
