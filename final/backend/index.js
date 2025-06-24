@@ -11,6 +11,7 @@ import { fileURLToPath } from 'url';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import { body, validationResult } from 'express-validator';
+import bcrypt from 'bcrypt';
 
 
 dotenv.config();
@@ -164,7 +165,6 @@ app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'login.html'));
 });
 
-// Procesar login
 app.post('/login',
     // Validaciones
     [
@@ -175,7 +175,7 @@ app.post('/login',
             .trim()
             .notEmpty().withMessage('La contraseña es requerida')
     ],
-    (req, res) => {
+    async (req, res) => {
         const errores = validationResult(req);
         if (!errores.isEmpty()) {
             return res.status(400).send(`
@@ -189,14 +189,26 @@ app.post('/login',
 
         const { usuario, contrasena } = req.body;
 
-        if (usuario === process.env.ADMIN_USER && contrasena === process.env.ADMIN_PASS) {
-            req.session.usuarioAutenticado = true;
-            res.redirect('/admin');
-        } else {
-            res.status(401).send('Credenciales inválidas. <a href="/login">Intentar de nuevo</a>');
+        // Verifica el usuario
+        if (usuario !== process.env.ADMIN_USER) {
+            return res.status(401).send('Credenciales inválidas. <a href="/login">Intentar de nuevo</a>');
+        }
+
+        try {
+            const esValido = await bcrypt.compare(contrasena, process.env.ADMIN_HASH);
+            if (esValido) {
+                req.session.usuarioAutenticado = true;
+                res.redirect('/admin');
+            } else {
+                res.status(401).send('Credenciales inválidas. <a href="/login">Intentar de nuevo</a>');
+            }
+        } catch (error) {
+            console.error('Error al verificar contraseña:', error);
+            res.status(500).send('Error interno. Intenta más tarde.');
         }
     }
 );
+
 
 
 // Logout
