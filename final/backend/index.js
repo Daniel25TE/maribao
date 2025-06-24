@@ -18,10 +18,15 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const corsOptions = {
+    origin: 'https://daniel25te.github.io',  // Cambia por el URL de tu frontend
+    credentials: true,  // necesario para enviar cookies en requests cross-origin
+};
+
 const app = express();
 app.set('trust proxy', 1);
 app.use(helmet());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -29,10 +34,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use(session({
-    secret: 'clave_secreta_segura',
+    secret: process.env.SESSION_SECRET || 'una_clave_muy_segura_y_larga',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: {
+        httpOnly: true,     // No accesible desde JS del navegador (protege contra XSS)
+        secure: process.env.NODE_ENV === 'production',  // Solo envía cookie por HTTPS en producción
+        sameSite: 'lax',    // Protege contra CSRF básico
+        maxAge: 1000 * 60 * 60 * 24, // 1 día, ajusta si quieres
+    }
 }));
+
 
 function protegerRuta(req, res, next) {
     if (req.session.usuarioAutenticado) {
