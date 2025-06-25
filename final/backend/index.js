@@ -11,20 +11,114 @@ import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import { body, validationResult } from 'express-validator';
 import bcrypt from 'bcrypt';
-
-
+import Stripe from 'stripe';
+import bodyParser from 'body-parser';
 
 dotenv.config();
-
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
+const app = express();
 const corsOptions = {
     origin: 'https://daniel25te.github.io',  // Cambia por el URL de tu frontend
     credentials: true,  // necesario para enviar cookies en requests cross-origin
 };
+async function enviarCorreosReserva(datosReserva, numeroReserva = null, sessionId = null) {
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: process.env.EMAIL,
+            pass: process.env.PASSWORD,
+        },
+    });
 
-const app = express();
+    const mailOptionsCliente = {
+        from: process.env.EMAIL,
+        to: datosReserva.email,
+        subject: 'Confirmación de Reserva - Hotel Maribao',
+        text: `
+Hola ${datosReserva.firstName} ${datosReserva.lastName}, gracias por tu reserva${sessionId ? ' pagada con tarjeta' : ''}.
+
+Detalles de tu estadía:
+- Cuarto: ${datosReserva.cuarto}
+- Check-in: ${datosReserva.checkin}
+- Check-out: ${datosReserva.checkout}
+${numeroReserva ? `- Número de reserva: ${numeroReserva}` : ''}
+${datosReserva.metodoPago ? `- Método de pago: ${datosReserva.metodoPago === 'tarjeta' ? 'Tarjeta (Stripe)' : 'Efectivo'}` : ''}
+Solicitudes especiales: ${datosReserva.specialRequests || 'Ninguna'}
+Hora estimada de llegada: ${datosReserva.arrivalTime || 'No especificada'}
+
+¡Te esperamos!
+Hotel Maribao
+        `,
+    };
+
+    const mailOptionsEmpleador = {
+        from: process.env.EMAIL,
+        to: process.env.EMAIL_EMPLEADOR,
+        subject: `🔔 Nueva reserva${sessionId ? ' pagada con tarjeta' : ''} en Hotel Maribao`,
+        text: `
+Se ha realizado una nueva reserva${sessionId ? ' pagada con tarjeta' : ''} en tu sitio web.
+
+👤 Nombre del huésped: ${datosReserva.firstName} ${datosReserva.lastName}
+📧 Correo: ${datosReserva.email}
+📅 Check-in: ${datosReserva.checkin}
+📅 Check-out: ${datosReserva.checkout}
+🛏️ Cuarto reservado: ${datosReserva.cuarto}
+${datosReserva.metodoPago ? `💳 Método de pago: ${datosReserva.metodoPago === 'tarjeta' ? 'Tarjeta (Stripe)' : 'Efectivo'}` : ''}
+${numeroReserva ? `Número de reserva: ${numeroReserva}` : ''}
+
+🔍 Ver reservas: https://hotel-backend-3jw7.onrender.com/login
+
+—
+Hotel Maribao - Notificación automática
+        `,
+    };
+
+    await transporter.sendMail(mailOptionsCliente);
+    await transporter.sendMail(mailOptionsEmpleador);
+
+    console.log(`📧 Correos enviados para reserva${sessionId ? ' con sesión ' + sessionId : ''}`);
+}
+
+// Necesitas raw body para verificar firma
+app.post('/webhook', bodyParser.raw({ type: 'application/json' }), async (req, res) => {
+    const sig = req.headers['stripe-signature'];
+    let event;
+
+    try {
+        event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
+    } catch (err) {
+        console.log(`⚠️  Webhook signature verification failed.`, err.message);
+        return res.status(400).send(`Webhook Error: ${err.message}`);
+    }
+
+    if (event.type === 'checkout.session.completed') {
+        const session = event.data.object;
+
+        // Parsear metadata que enviaste en la sesión
+        if (session.metadata && session.metadata.datosReserva) {
+            const datosReserva = JSON.parse(session.metadata.datosReserva);
+
+            try {
+                // Insertar reserva en base de datos
+                await insertarReserva(datosReserva);
+                await enviarCorreosReserva(datosReserva, null, session.id);
+
+
+                console.log(`✅ Reserva procesada y correos enviados para sesión ${session.id}`);
+
+            } catch (error) {
+                console.error('❌ Error procesando reserva desde webhook:', error);
+            }
+        }
+    }
+
+    res.status(200).json({ received: true });
+});
+
+
+
 app.set('trust proxy', 1);
 app.use(helmet());
 app.use(cors(corsOptions));
@@ -73,7 +167,9 @@ app.post('/reserva',
         body('email').isEmail().withMessage('Email inválido'),
         body('checkin').notEmpty(),
         body('checkout').notEmpty(),
-        body('cuarto').notEmpty()
+        body('cuarto').notEmpty(),
+        body('metodoPago').isIn(['efectivo', 'tarjeta']).withMessage('Método de pago inválido'),
+
     ],
     async (req, res) => {
         const errores = validationResult(req);
@@ -89,60 +185,8 @@ app.post('/reserva',
 
         try {
             await insertarReserva(data);
+            await enviarCorreosReserva(data, numeroReserva);
 
-            const transporter = nodemailer.createTransport({
-                service: 'gmail',
-                auth: {
-                    user: process.env.EMAIL,
-                    pass: process.env.PASSWORD,
-                },
-            });
-
-            const mailOptions = {
-                from: process.env.EMAIL,
-                to: data.email,
-                subject: 'Confirmación de Reserva - Hotel Maribao',
-                text: `
-Hola ${data.firstName} ${data.lastName}, gracias por tu reserva.
-
-Detalles de tu estadía:
-- Cuarto: ${data.cuarto}
-- Check-in: ${data.checkin}
-- Check-out: ${data.checkout}
-- Número de reserva: ${numeroReserva}
-
-Solicitudes especiales: ${data.specialRequests || 'Ninguna'}
-Hora estimada de llegada: ${data.arrivalTime || 'No especificada'}
-
-¡Te esperamos!
-Hotel Maribao
-            `,
-            };
-
-            await transporter.sendMail(mailOptions);
-            console.log("✅ Correo enviado a:", data.email);
-
-            const mailToEmployer = {
-                from: process.env.EMAIL,
-                to: process.env.EMAIL_EMPLEADOR,
-                subject: '🔔 Nueva reserva en Hotel Maribao',
-                text: `
-Se ha realizado una nueva reserva en tu sitio web.
-
-👤 Nombre del huésped: ${data.firstName} ${data.lastName}
-📧 Correo: ${data.email}
-📅 Check-in: ${data.checkin}
-📅 Check-out: ${data.checkout}
-🛏️ Cuarto reservado: ${data.cuarto}
-
-🔍 Ver reservas: https://hotel-backend-3jw7.onrender.com/login
-
-—
-Hotel Maribao - Notificación automática
-            `,
-            };
-
-            await transporter.sendMail(mailToEmployer);
             console.log("📧 Notificación enviada al empleador:", process.env.EMAIL_EMPLEADOR);
 
             res.status(200).json({
@@ -210,6 +254,54 @@ app.post('/login',
         }
     }
 );
+
+app.post('/create-checkout-session', async (req, res) => {
+    try {
+        const { amount, currency, description, metadata } = req.body;
+
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            line_items: [{
+                price_data: {
+                    currency: currency || 'usd',
+                    product_data: {
+                        name: description || 'Reserva Hotel',
+                    },
+                    unit_amount: amount,
+                },
+                quantity: 1,
+            }],
+            mode: 'payment',
+            metadata,  // aquí enviamos la metadata para el webhook
+            success_url: `${process.env.FRONTEND_URL}/thanks.html?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${process.env.FRONTEND_URL}/cancel.html`,
+        });
+
+        res.json({ url: session.url });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error creando la sesión de pago' });
+    }
+});
+
+// GET /stripe-session?session_id=...
+app.get('/stripe-session', async (req, res) => {
+    const { session_id } = req.query;
+
+    try {
+        const session = await stripe.checkout.sessions.retrieve(session_id);
+
+        if (session && session.metadata && session.metadata.datosReserva) {
+            const datosReserva = JSON.parse(session.metadata.datosReserva);
+            res.json({ reserva: datosReserva });
+        } else {
+            res.status(404).json({ error: 'No se encontraron datos de reserva' });
+        }
+    } catch (error) {
+        console.error("❌ Error al obtener sesión de Stripe:", error.message);
+        res.status(500).json({ error: 'Error al recuperar datos de Stripe' });
+    }
+});
 
 
 

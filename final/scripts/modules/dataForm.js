@@ -94,6 +94,14 @@ export function dataForm() {
                     <li><strong>No se permite fumar</strong></li>
                 </ul>
             </div>
+            <div>
+              <label for="metodoPago">Método de pago:</label>
+              <select id="metodoPago" name="metodoPago">
+                <option value="efectivo">Efectivo</option>
+                <option value="tarjeta">Tarjeta (Stripe)</option>
+              </select>
+            </div>
+
 
             <label>Firma <input type="text" name="fullGuestName" placeholder="Nombre completo del huésped" autocomplete="name"></label>
 
@@ -104,6 +112,8 @@ export function dataForm() {
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
+
+        const metodoPago = form.metodoPago.value;
 
         const formData = {
             checkin: form.checkin.value,
@@ -122,55 +132,93 @@ export function dataForm() {
             addCar: form.addCar.checked,
             addTaxi: form.addTaxi.checked,
             fullGuestName: form.fullGuestName.value,
-            // Agrega aquí cualquier otro campo que tengas
-            cuarto: data.name, // puedes mandar el nombre de la habitación que tienes en localStorage
+            cuarto: data.name,
+            metodoPago: metodoPago
         };
 
-        try {
-            const response = await fetch("https://hotel-backend-3jw7.onrender.com/reserva", {
+        if (metodoPago === "tarjeta") {
+            // PAGO CON TARJETA (Stripe)
+            try {
+                const idReservaTemporal = Math.floor(100000 + Math.random() * 900000);
 
-
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData),
-            });
-
-            const result = await response.json();
-
-            if (result.success) {
-                alert(`Reserva confirmada! Tu número de reserva es: ${result.numeroReserva}`);
-                localStorage.setItem("reservaConfirmada", JSON.stringify({
-                    numeroReserva: result.numeroReserva,
-                    fullName: `${form.firstName.value} ${form.lastName.value}`,
-                    cuarto: data.name,
-                    checkin: form.checkin.value,
-                    checkout: form.checkout.value,
-                }));
-                const params = new URLSearchParams({
-                    checkin: form.checkin.value,
-                    checkout: form.checkout.value,
-                    firstName: form.firstName.value,
-                    lastName: form.lastName.value,
-                    email: form.email.value,
-                    phone: form.phone.value,
-                    country: form.country.value,
-                    paperlessConfirm: form.paperlessConfirm.checked,
-                    bookingFor: form.bookingFor.value,
-                    travelForWork: form.travelForWork.value,
-                    fullGuestName: form.fullGuestName.value,
-                    specialRequests: form.specialRequests.value,
-                    arrivalTime: form.arrivalTime.value,
+                const response = await fetch("https://hotel-backend-3jw7.onrender.com/create-checkout-session", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        amount: 5000, // Ajusta si usas precios reales
+                        currency: "usd",
+                        description: `Reserva para ${formData.firstName} ${formData.lastName}`,
+                        metadata: {
+                            reservaId: idReservaTemporal,
+                            datosReserva: JSON.stringify(formData)
+                        }
+                    }),
                 });
 
-                window.location.href = `thanks.html?${params.toString()}`;
+                const result = await response.json();
 
-            } else {
-                alert("Error al procesar la reserva. Intenta de nuevo.");
+                if (result.url) {
+                    window.location.href = result.url;
+                } else {
+                    alert("No se pudo iniciar el pago con tarjeta.");
+                }
+            } catch (error) {
+                console.error("Error iniciando pago con Stripe:", error);
+                alert("Error al procesar el pago. Intenta de nuevo.");
             }
-        } catch (error) {
-            console.error("Error al conectar con el servidor:", error);
-            alert("No se pudo conectar con el servidor. Intenta más tarde.");
+
+        } else {
+            // Pago en efectivo
+            try {
+                const response = await fetch("https://hotel-backend-3jw7.onrender.com/reserva", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(formData),
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert(`Reserva confirmada! Tu número de reserva es: ${result.numeroReserva}`);
+
+                    localStorage.setItem("reservaConfirmada", JSON.stringify({
+                        numeroReserva: result.numeroReserva,
+                        fullName: `${form.firstName.value} ${form.lastName.value}`,
+                        cuarto: data.name,
+                        checkin: form.checkin.value,
+                        checkout: form.checkout.value,
+                    }));
+
+                    const params = new URLSearchParams({
+                        checkin: form.checkin.value,
+                        checkout: form.checkout.value,
+                        firstName: form.firstName.value,
+                        lastName: form.lastName.value,
+                        email: form.email.value,
+                        phone: form.phone.value,
+                        country: form.country.value,
+                        paperlessConfirm: form.paperlessConfirm.checked,
+                        bookingFor: form.bookingFor.value,
+                        travelForWork: form.travelForWork.value,
+                        fullGuestName: form.fullGuestName.value,
+                        specialRequests: form.specialRequests.value,
+                        arrivalTime: form.arrivalTime.value,
+                    });
+
+                    window.location.href = `thanks.html?${params.toString()}`;
+                } else {
+                    alert("Error al procesar la reserva. Intenta de nuevo.");
+                }
+            } catch (error) {
+                console.error("Error al conectar con el servidor:", error);
+                alert("No se pudo conectar con el servidor. Intenta más tarde.");
+            }
         }
+
+
+
     });
+
+
 }
 

@@ -1,32 +1,49 @@
 export function thanksdetails() {
+    const params = new URLSearchParams(window.location.search);
+    const sessionId = params.get("session_id");
+    const results = document.querySelector('#results');
 
-    const myInfo = new URLSearchParams(window.location.search);
-    console.log(myInfo);
+    if (sessionId) {
+        // ✅ Pago con tarjeta: obtener los datos desde el backend usando el session_id
+        fetch(`https://hotel-backend-3jw7.onrender.com/stripe-session?session_id=${sessionId}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.reserva) {
+                    const reserva = data.reserva;
 
-    console.log(myInfo.get('checkin'));
-    console.log(myInfo.get('checkout'));
-    console.log(myInfo.get('firstName'));
-    console.log(myInfo.get('lastName'));
-    console.log(myInfo.get('email'));
-    console.log(myInfo.get('phone'));
-    console.log(myInfo.get('country'));
-    console.log(myInfo.get('paperlessConfirm'));
-    console.log(myInfo.get('bookingFor'));
-    console.log(myInfo.get('travelForWork'));
-    console.log(myInfo.get('fullGuestName'));
-    console.log(myInfo.get('specialRequests'));
-    console.log(myInfo.get('arrivalTime'));
+                    results.innerHTML = `
+                        <h2>✅ ¡Reserva confirmada con pago por tarjeta!</h2>
+                        <p>Gracias por tu reserva, ${reserva.firstName} ${reserva.lastName}.</p>
+                        <p><strong>Check-in:</strong> ${reserva.checkin}</p>
+                        <p><strong>Check-out:</strong> ${reserva.checkout}</p>
+                        <p><strong>Habitación:</strong> ${reserva.cuarto}</p>
+                        <p><strong>Correo:</strong> ${reserva.email}</p>
+                        <p><strong>Teléfono:</strong> ${reserva.phone}</p>
+                        <p><strong>Pago con:</strong> Tarjeta (Stripe)</p>
+                    `;
+                } else {
+                    results.innerHTML = `<p>❌ No se encontraron los datos de la reserva.</p>`;
+                }
+            })
+            .catch(err => {
+                console.error("Error al consultar sesión de Stripe:", err);
+                results.innerHTML = `<p>❌ Error al obtener la información de tu reserva. Intenta más tarde.</p>`;
+            });
 
-    document.querySelector('#results').innerHTML = `
-    <h2>¡Reserva confirmada! Pronto recibirás un correo electrónico con tu número de reserva y los detalles.</h2>
-<p>Reserva a nombre de ${myInfo.get('firstName')} ${myInfo.get('lastName')}</p>
-<p>Fecha de llegada: ${myInfo.get('checkin')}</p>
-<p>Fecha de salida: ${myInfo.get('checkout')}</p>
-<p>Teléfono de contacto: ${myInfo.get('phone')}</p>
-<p>Es el Huesped principal?: ${myInfo.get('bookingFor')}</p>
-<p>Reserva a nombre de: ${myInfo.get('fullGuestName')}</p>
-<p>Tiene algun solicitud especial?: ${myInfo.get('specialRequests')}</p>
-<p>Tiempo de llegada al hotel: ${myInfo.get('arrivalTime')}</p>
+    } else {
+        // ✅ Reserva con efectivo (desde localStorage o URL)
+        const myInfo = new URLSearchParams(window.location.search);
 
-`
+        results.innerHTML = `
+            <h2>✅ ¡Reserva confirmada con pago en efectivo!</h2>
+            <p>Gracias por tu reserva, ${myInfo.get('firstName')} ${myInfo.get('lastName')}</p>
+            <p><strong>Check-in:</strong> ${myInfo.get('checkin')}</p>
+            <p><strong>Check-out:</strong> ${myInfo.get('checkout')}</p>
+            <p><strong>Teléfono:</strong> ${myInfo.get('phone')}</p>
+            <p><strong>Reserva a nombre de:</strong> ${myInfo.get('fullGuestName')}</p>
+            <p><strong>Solicitudes especiales:</strong> ${myInfo.get('specialRequests') || 'Ninguna'}</p>
+            <p><strong>Hora de llegada:</strong> ${myInfo.get('arrivalTime') || 'No especificada'}</p>
+        `;
+    }
 }
+
