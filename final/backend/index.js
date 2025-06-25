@@ -59,7 +59,7 @@ function protegerRuta(req, res, next) {
 const limiter = rateLimit({
     windowMs: 60 * 1000, // 1 minuto
     max: 5, // máximo 5 peticiones por minuto
-    message: 'Demasiadas solicitudes desde esta IP. Inténtalo más tarde, porfavor, Gracias.'
+    message: 'Demasiadas solicitudes desde esta IP. Inténtalo más tarde, porfavor, Gracia.'
 });
 
 app.use('/login', limiter);
