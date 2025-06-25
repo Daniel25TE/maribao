@@ -193,7 +193,7 @@ app.post('/login',
         try {
 
             if (usuario !== process.env.ADMIN_USER) {
-                return res.status(401).send('Credenciales inválidas. <a href="/login">Intentar de nuevo</a>');
+                return res.status(401).send('Credenciales inválida. <a href="/login">Intentar de nuevo</a>');
             }
 
             // Validar contraseña
