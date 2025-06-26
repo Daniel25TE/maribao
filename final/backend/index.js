@@ -274,7 +274,7 @@ app.post('/create-checkout-session', async (req, res) => {
             mode: 'payment',
             metadata,  // aquí enviamos la metadata para el webhook
             success_url: `${process.env.FRONTEND_URL}/wdd231/final/thanks.html?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${process.env.FRONTEND_URL}/cancel.html`,
+            cancel_url: `${process.env.FRONTEND_URL}/wdd231/final/reservar.html`,
         });
 
         res.json({ url: session.url });
