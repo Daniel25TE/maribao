@@ -99,15 +99,34 @@ export function dataForm() {
               <select id="metodoPago" name="metodoPago">
                 <option value="efectivo">Efectivo</option>
                 <option value="tarjeta">Tarjeta (Stripe)</option>
+                <option value="transferencia">Transferencia</option>
               </select>
             </div>
 
 
             <label>Firma <input type="text" name="fullGuestName" placeholder="Nombre completo del huésped" autocomplete="name"></label>
 
-            <button type="submit">Confirmar reserva</button>
+            <button type="submit" id="submitBtn">Confirmar reserva</button>
         </form>
     `;
+    const metodoPagoSelect = document.getElementById("metodoPago");
+    const submitBtn = document.getElementById("submitBtn");
+
+    metodoPagoSelect.addEventListener("change", () => {
+        const metodo = metodoPagoSelect.value;
+
+        if (metodo === "efectivo") {
+            submitBtn.textContent = "Confirmar reserva";
+        } else if (metodo === "tarjeta") {
+            submitBtn.textContent = "Pagar";
+        } else if (metodo === "transferencia") {
+            submitBtn.textContent = "Continuar";
+        }
+    });
+    // Ejecutar al inicio para que el texto esté correcto desde el principio
+    metodoPagoSelect.dispatchEvent(new Event("change"));
+
+
     const form = document.getElementById("reservation-form");
 
     form.addEventListener("submit", async (e) => {
@@ -135,6 +154,89 @@ export function dataForm() {
             cuarto: data.name,
             metodoPago: metodoPago
         };
+        // Justo dentro del eventListener del submit
+        if (metodoPago === "transferencia") {
+            e.preventDefault(); // Detiene el envío normal
+
+            // Evita mostrar múltiples veces
+            if (document.querySelector('#transferencia-info')) return;
+
+            const numeroTransferencia = Math.floor(100000 + Math.random() * 900000);
+
+            // Guardamos temporalmente en memoria
+            localStorage.setItem("numeroTransferencia", numeroTransferencia);
+
+            const transferenciaInfo = document.createElement("div");
+            transferenciaInfo.id = "transferencia-info";
+            transferenciaInfo.innerHTML = `
+        <h3>Instrucciones para la transferencia</h3>
+        <p>Por favor realiza la transferencia bancaria incluyendo el siguiente número en la descripción:</p>
+        <p><strong style="font-size: 1.5rem;">${numeroTransferencia}</strong></p>
+        <p>Una vez que completes la transferencia, haz clic en "Confirmar reserva" más abajo.</p>
+
+        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+            <div>
+                <img src="images/banco1.png" alt="Banco 1" width="150" />
+                <p>Cuenta Banco 1</p>
+            </div>
+            <div>
+                <img src="images/banco2.png" alt="Banco 2" width="150" />
+                <p>Cuenta Banco 2</p>
+            </div>
+            <div>
+                <img src="images/banco3.png" alt="Banco 3" width="150" />
+                <p>Cuenta Venmo</p>
+            </div>
+        </div>
+
+        <button id="confirmar-transferencia" type="button" style="margin-top: 1rem;">Confirmar reserva</button>
+    `;
+
+            form.appendChild(transferenciaInfo);
+
+            // Agregar listener al botón de confirmar reserva
+            document.querySelector("#confirmar-transferencia").addEventListener("click", async () => {
+                // Enviar como una reserva en efectivo, pero incluyendo el número de transferencia generado
+                const reservaConTransferencia = {
+                    ...formData,
+                    numeroTransferencia: numeroTransferencia,
+                };
+
+                try {
+                    const response = await fetch("https://hotel-backend-3jw7.onrender.com/reserva", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(reservaConTransferencia),
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        localStorage.setItem("reservaConfirmada", JSON.stringify({
+                            numeroReserva: result.numeroReserva,
+                            fullName: `${formData.firstName} ${formData.lastName}`,
+                            cuarto: data.name,
+                            checkin: formData.checkin,
+                            checkout: formData.checkout,
+                        }));
+
+                        const params = new URLSearchParams({
+                            ...formData,
+                        });
+
+                        window.location.href = `thanks.html?${params.toString()}`;
+                    } else {
+                        alert("No se pudo completar la reserva. Intenta nuevamente.");
+                    }
+
+                } catch (error) {
+                    console.error("Error al enviar reserva por transferencia:", error);
+                    alert("Error al conectar con el servidor.");
+                }
+            });
+
+            return; // Evita que se siga procesando el submit normal
+        }
 
         if (metodoPago === "tarjeta") {
             // PAGO CON TARJETA (Stripe)
