@@ -134,28 +134,6 @@ export function dataForm() {
 
         const metodoPago = form.metodoPago.value;
 
-        const formData = {
-            checkin: form.checkin.value,
-            checkout: form.checkout.value,
-            firstName: form.firstName.value,
-            lastName: form.lastName.value,
-            email: form.email.value,
-            phone: form.phone.value,
-            country: form.country.value,
-            paperlessConfirm: form.paperlessConfirm.checked,
-            bookingFor: form.bookingFor.value,
-            travelForWork: form.travelForWork.value,
-            specialRequests: form.specialRequests.value,
-            arrivalTime: form.arrivalTime.value,
-            addFlights: form.addFlights.checked,
-            addCar: form.addCar.checked,
-            addTaxi: form.addTaxi.checked,
-            fullGuestName: form.fullGuestName.value,
-            cuarto: data.name,
-            metodoPago: metodoPago,
-            numeroTransferencia: numeroTransferencia
-
-        };
         // Justo dentro del eventListener del submit
         if (metodoPago === "transferencia") {
             e.preventDefault(); // Detiene el envío normal
@@ -198,17 +176,35 @@ export function dataForm() {
 
             // Agregar listener al botón de confirmar reserva
             document.querySelector("#confirmar-transferencia").addEventListener("click", async () => {
-                // Enviar como una reserva en efectivo, pero incluyendo el número de transferencia generado
-                const reservaConTransferencia = {
-                    ...formData,
-                    numeroTransferencia: numeroTransferencia,
+                const numeroTransferencia = localStorage.getItem("numeroTransferencia");
+
+                const formData = {
+                    checkin: form.checkin.value,
+                    checkout: form.checkout.value,
+                    firstName: form.firstName.value,
+                    lastName: form.lastName.value,
+                    email: form.email.value,
+                    phone: form.phone.value,
+                    country: form.country.value,
+                    paperlessConfirm: form.paperlessConfirm.checked,
+                    bookingFor: form.bookingFor.value,
+                    travelForWork: form.travelForWork.value,
+                    specialRequests: form.specialRequests.value,
+                    arrivalTime: form.arrivalTime.value,
+                    addFlights: form.addFlights.checked,
+                    addCar: form.addCar.checked,
+                    addTaxi: form.addTaxi.checked,
+                    fullGuestName: form.fullGuestName.value,
+                    cuarto: data.name,
+                    metodoPago: "transferencia",
+                    numeroTransferencia: numeroTransferencia
                 };
 
                 try {
                     const response = await fetch("https://hotel-backend-3jw7.onrender.com/reserva", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(reservaConTransferencia),
+                        body: JSON.stringify(formData),
                     });
 
                     const result = await response.json();
@@ -222,9 +218,8 @@ export function dataForm() {
                             checkout: formData.checkout
                         }));
 
-                        const params = new URLSearchParams({
-                            ...formData,
-                        });
+                        const params = new URLSearchParams({ ...formData });
+                        localStorage.removeItem("numeroTransferencia");
 
                         window.location.href = `thanks.html?${params.toString()}`;
                     } else {
@@ -239,7 +234,27 @@ export function dataForm() {
 
             return; // Evita que se siga procesando el submit normal
         }
-
+        const formData = {
+            checkin: form.checkin.value,
+            checkout: form.checkout.value,
+            firstName: form.firstName.value,
+            lastName: form.lastName.value,
+            email: form.email.value,
+            phone: form.phone.value,
+            country: form.country.value,
+            paperlessConfirm: form.paperlessConfirm.checked,
+            bookingFor: form.bookingFor.value,
+            travelForWork: form.travelForWork.value,
+            specialRequests: form.specialRequests.value,
+            arrivalTime: form.arrivalTime.value,
+            addFlights: form.addFlights.checked,
+            addCar: form.addCar.checked,
+            addTaxi: form.addTaxi.checked,
+            fullGuestName: form.fullGuestName.value,
+            cuarto: data.name,
+            metodoPago: metodoPago,
+            numeroTransferencia: "No aplica"
+        };
         if (metodoPago === "tarjeta") {
             // PAGO CON TARJETA (Stripe)
             try {
