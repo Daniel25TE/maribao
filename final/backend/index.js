@@ -44,7 +44,16 @@ Detalles de tu estadía:
 - Check-in: ${datosReserva.checkin}
 - Check-out: ${datosReserva.checkout}
 ${numeroReserva ? `- Número de reserva: ${numeroReserva}` : ''}
-${datosReserva.metodoPago ? `- Método de pago: ${datosReserva.metodoPago === 'tarjeta' ? 'Tarjeta (Stripe)' : 'Efectivo'}` : ''}
+${datosReserva.metodoPago ? `- Método de pago: ${datosReserva.metodoPago === 'tarjeta' ? 'Tarjeta (Stripe)' :
+                datosReserva.metodoPago === 'transferencia' ? 'Transferencia bancaria' :
+                    'Efectivo'
+                }` : ''}
+- Número de transferencia: ${datosReserva.metodoPago === 'transferencia'
+                ? datosReserva.numeroTransferencia
+                : 'No aplica'
+            }
+
+
 Solicitudes especiales: ${datosReserva.specialRequests || 'Ninguna'}
 Hora estimada de llegada: ${datosReserva.arrivalTime || 'No especificada'}
 
@@ -65,7 +74,15 @@ Se ha realizado una nueva reserva${sessionId ? ' pagada con tarjeta' : ''} en tu
 📅 Check-in: ${datosReserva.checkin}
 📅 Check-out: ${datosReserva.checkout}
 🛏️ Cuarto reservado: ${datosReserva.cuarto}
-${datosReserva.metodoPago ? `💳 Método de pago: ${datosReserva.metodoPago === 'tarjeta' ? 'Tarjeta (Stripe)' : 'Efectivo'}` : ''}
+${datosReserva.metodoPago ? `- Método de pago: ${datosReserva.metodoPago === 'tarjeta' ? 'Tarjeta (Stripe)' :
+                datosReserva.metodoPago === 'transferencia' ? 'Transferencia bancaria' :
+                    'Efectivo'
+                }` : ''}
+- Número de transferencia: ${datosReserva.metodoPago === 'transferencia'
+                ? datosReserva.numeroTransferencia
+                : 'No aplica'
+            }
+
 ${numeroReserva ? `Número de reserva: ${numeroReserva}` : ''}
 
 🔍 Ver reservas: https://hotel-backend-3jw7.onrender.com/login
