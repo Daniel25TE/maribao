@@ -217,7 +217,7 @@ export function dataForm() {
                             fullName: `${formData.firstName} ${formData.lastName}`,
                             cuarto: data.name,
                             checkin: formData.checkin,
-                            checkout: formData.checkout,
+                            checkout: formData.checkout
                         }));
 
                         const params = new URLSearchParams({
@@ -306,7 +306,9 @@ export function dataForm() {
                         specialRequests: form.specialRequests.value,
                         arrivalTime: form.arrivalTime.value,
                     });
-
+                    if (formData.metodoPago === 'transferencia' && formData.numeroTransferencia) {
+                        params.append("numeroTransferencia", formData.numeroTransferencia);
+                    }
                     window.location.href = `thanks.html?${params.toString()}`;
                 } else {
                     alert("Error al procesar la reserva. Intenta de nuevo.");
