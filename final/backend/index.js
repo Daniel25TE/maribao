@@ -168,7 +168,8 @@ app.post('/reserva',
         body('checkin').notEmpty(),
         body('checkout').notEmpty(),
         body('cuarto').notEmpty(),
-        body('metodoPago').isIn(['efectivo', 'tarjeta']).withMessage('Método de pago inválido'),
+        body('metodoPago').isIn(['efectivo', 'tarjeta', 'transferencia']).withMessage('Método de pago inválido'),
+
 
     ],
     async (req, res) => {
