@@ -152,7 +152,9 @@ export function dataForm() {
             addTaxi: form.addTaxi.checked,
             fullGuestName: form.fullGuestName.value,
             cuarto: data.name,
-            metodoPago: metodoPago
+            metodoPago: metodoPago,
+            numeroTransferencia: numeroTransferencia
+
         };
         // Justo dentro del eventListener del submit
         if (metodoPago === "transferencia") {
