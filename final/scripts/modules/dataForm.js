@@ -306,8 +306,8 @@ export function dataForm() {
                         specialRequests: form.specialRequests.value,
                         arrivalTime: form.arrivalTime.value,
                     });
-                    if (formData.metodoPago === 'transferencia' && formData.numeroTransferencia) {
-                        params.append("numeroTransferencia", formData.numeroTransferencia);
+                    if (metodoPago === 'transferencia' && numeroTransferencia) {
+                        params.append("numeroTransferencia", numeroTransferencia);
                     }
                     window.location.href = `thanks.html?${params.toString()}`;
                 } else {
