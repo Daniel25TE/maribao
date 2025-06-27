@@ -19,12 +19,16 @@ document.addEventListener("DOMContentLoaded", () => {
             reservas.forEach((reserva) => {
                 const row = document.createElement("tr");
                 row.innerHTML = `
+          <td>${reserva.created_at}</td>
           <td>${reserva.nombre}</td>
           <td>${reserva.email}</td>
           <td>${reserva.telefono}</td>
           <td>${reserva.checkin_date}</td>
           <td>${reserva.checkout_date}</td>
           <td>${reserva.room_name}</td>
+          <td>${reserva.metodo_pago}</td>
+          <td>${reserva.special_requests}</td>
+          <td>${reserva.arrival_time}</td>
         `;
                 tbody.appendChild(row);
             });
