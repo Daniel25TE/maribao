@@ -128,6 +128,11 @@ export function dataForm() {
         } else if (metodo === "transferencia") {
             submitBtn.textContent = "Continuar";
         }
+        const transferenciaInfo = document.getElementById("transferencia-info");
+        if (transferenciaInfo && metodo !== "transferencia") {
+            transferenciaInfo.remove();
+            localStorage.removeItem("numeroTransferencia");
+        }
     });
     // Ejecutar al inicio para que el texto esté correcto desde el principio
     metodoPagoSelect.dispatchEvent(new Event("change"));
