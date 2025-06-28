@@ -1,5 +1,8 @@
 export function dataForm() {
     const data = JSON.parse(localStorage.getItem("selectedRoom"));
+    data.price = Number(data.price.replace(/[^\d.]/g, '')) || 0;
+
+
     if (!data) return;
 
     const preview = document.getElementById("selected-room-preview");
@@ -8,6 +11,7 @@ export function dataForm() {
             <h2>${data.name}</h2>
             
             <img src="${data.image}" alt="${data.name}" loading="lazy" width="960" height="720">
+            <p>Precio: ${data.price}</p>
         </div>
 
         <form method="POST" id="reservation-form">
@@ -19,12 +23,13 @@ export function dataForm() {
                 <legend>Fechas de reserva</legend>
                 <label>
                     Fecha de entrada (Check-in)*
-                    <input type="date" name="checkin" required>
+                    <input type="date" name="checkin" id="checkin" required>
                 </label>
                 <label>
                     Fecha de salida (Check-out)*
-                    <input type="date" name="checkout" required>
+                    <input type="date" name="checkout" id="checkout" required>
                 </label>
+                <p><strong>Total a pagar:</strong> <span id="total-price">$0</span></p>
             </fieldset>
 
             <!-- Datos personales -->
@@ -102,6 +107,7 @@ export function dataForm() {
                 <option value="transferencia">Transferencia</option>
               </select>
             </div>
+            <p><strong>Total estimado:</strong> <span id="total-price-copy">$0</span></p>
 
 
             <label>Firma <input type="text" name="fullGuestName" placeholder="Nombre completo del huésped" autocomplete="name"></label>
@@ -125,6 +131,31 @@ export function dataForm() {
     });
     // Ejecutar al inicio para que el texto esté correcto desde el principio
     metodoPagoSelect.dispatchEvent(new Event("change"));
+
+    const checkinInput = document.getElementById("checkin");
+    const checkoutInput = document.getElementById("checkout");
+    const totalPriceDisplay = document.getElementById("total-price");
+    const totalPriceCopy = document.getElementById("total-price-copy");
+
+    let totalReserva = 0;
+
+    function calcularTotal() {
+        const checkinDate = new Date(checkinInput.value);
+        const checkoutDate = new Date(checkoutInput.value);
+        if (!isNaN(checkinDate) && !isNaN(checkoutDate) && checkoutDate > checkinDate) {
+            const dias = Math.ceil((checkoutDate - checkinDate) / (1000 * 60 * 60 * 24));
+            totalReserva = dias * data.price;
+            totalPriceDisplay.textContent = `$${totalReserva}`;
+            totalPriceCopy.textContent = `$${totalReserva}`;
+        } else {
+            totalReserva = 0;
+            totalPriceDisplay.textContent = "$0";
+            totalPriceCopy.textContent = "$0"
+        }
+    }
+
+    checkinInput.addEventListener("change", calcularTotal);
+    checkoutInput.addEventListener("change", calcularTotal);
 
 
     const form = document.getElementById("reservation-form");
@@ -197,7 +228,8 @@ export function dataForm() {
                     fullGuestName: form.fullGuestName.value,
                     cuarto: data.name,
                     metodoPago: "transferencia",
-                    numeroTransferencia: numeroTransferencia
+                    numeroTransferencia: numeroTransferencia,
+                    total: totalReserva
                 };
 
                 try {
@@ -215,7 +247,8 @@ export function dataForm() {
                             fullName: `${formData.firstName} ${formData.lastName}`,
                             cuarto: data.name,
                             checkin: formData.checkin,
-                            checkout: formData.checkout
+                            checkout: formData.checkout,
+                            total: totalReserva
                         }));
 
                         const params = new URLSearchParams({ ...formData });
@@ -253,7 +286,8 @@ export function dataForm() {
             fullGuestName: form.fullGuestName.value,
             cuarto: data.name,
             metodoPago: metodoPago,
-            numeroTransferencia: "No aplica"
+            numeroTransferencia: "No aplica",
+            total: totalReserva
         };
         if (metodoPago === "tarjeta") {
             // PAGO CON TARJETA (Stripe)
@@ -264,7 +298,7 @@ export function dataForm() {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
-                        amount: 5000, // Ajusta si usas precios reales
+                        amount: totalReserva * 100, // Ajusta si usas precios reales
                         currency: "usd",
                         description: `Reserva para ${formData.firstName} ${formData.lastName}`,
                         metadata: {
@@ -306,6 +340,7 @@ export function dataForm() {
                         cuarto: data.name,
                         checkin: form.checkin.value,
                         checkout: form.checkout.value,
+                        total: totalReserva
                     }));
 
                     const params = new URLSearchParams({

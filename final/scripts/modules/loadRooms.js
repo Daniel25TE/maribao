@@ -49,10 +49,12 @@ export async function loadRooms() {
             reservarBtn.addEventListener("click", () => {
                 const roomName = card.querySelector("h3").textContent;
                 const roomImage = card.querySelector(".slider-track img")?.getAttribute("src") || "";
+                const roomPrice = card.querySelector(".price").textContent;
 
                 localStorage.setItem("selectedRoom", JSON.stringify({
                     name: roomName,
-                    image: roomImage
+                    image: roomImage,
+                    price: roomPrice
                 }));
 
                 window.location.href = "form.html";
