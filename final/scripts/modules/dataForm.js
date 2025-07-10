@@ -113,6 +113,8 @@ export function dataForm() {
             <label>Firma <input type="text" name="fullGuestName" placeholder="Nombre completo del huésped" autocomplete="name"></label>
 
             <button type="submit" id="submitBtn">Confirmar reserva</button>
+            <div id="payment-message" style="display:none; margin: 1rem 0; padding: 1rem; background-color: #f3f3f3; border-radius: 8px;"></div>
+
         </form>
     `;
     const metodoPagoSelect = document.getElementById("metodoPago");
@@ -164,16 +166,28 @@ export function dataForm() {
     checkoutInput.addEventListener("change", calcularTotal);
 
     function mostrarContador(mensaje) {
+        const paymentMessage = document.getElementById("payment-message");
+
+        if (!paymentMessage) return;
+
         let contador = 20;
         paymentMessage.style.display = 'block';
-        paymentMessage.innerHTML = `<p>${mensaje}</p><p>Redirigiendo en <span id="contador">${contador}</span> segundos...</p>`;
+        paymentMessage.innerHTML = `
+        <p>${mensaje}</p>
+        <p>Redirigiendo en <span id="contador">${contador}</span> segundos...</p>
+    `;
 
         const intervalo = setInterval(() => {
             contador--;
-            document.getElementById("contador").textContent = contador;
-            if (contador <= 0) clearInterval(intervalo);
+            const contadorEl = document.getElementById("contador");
+            if (contadorEl) contadorEl.textContent = contador;
+
+            if (contador <= 0) {
+                clearInterval(intervalo);
+            }
         }, 1000);
     }
+
 
     const form = document.getElementById("reservation-form");
 
