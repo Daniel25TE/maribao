@@ -119,7 +119,6 @@ export function dataForm() {
     `;
     const metodoPagoSelect = document.getElementById("metodoPago");
     const submitBtn = document.getElementById("submitBtn");
-    const paymentMessage = document.getElementById("payment-message");
 
     metodoPagoSelect.addEventListener("change", () => {
         const metodo = metodoPagoSelect.value;
@@ -170,11 +169,11 @@ export function dataForm() {
 
         if (!paymentMessage) return;
 
-        let contador = 20;
+        let contador = 35;
         paymentMessage.style.display = 'block';
         paymentMessage.innerHTML = `
         <p>${mensaje}</p>
-        <p>Redirigiendo en <span id="contador">${contador}</span> segundos...</p>
+        <p>Procesando tu reserva en <span id="contador">${contador}</span> segundos...</p>
     `;
 
         const intervalo = setInterval(() => {
@@ -211,34 +210,39 @@ export function dataForm() {
             const transferenciaInfo = document.createElement("div");
             transferenciaInfo.id = "transferencia-info";
             transferenciaInfo.innerHTML = `
-        <h3>Instrucciones para la transferencia</h3>
-        <p>Por favor realiza la transferencia bancaria incluyendo el siguiente número en la descripción:</p>
-        <p><strong style="font-size: 1.5rem;">${numeroTransferencia}</strong></p>
-        <p>Una vez que completes la transferencia, haz clic en "Confirmar reserva" más abajo.</p>
+        <h3 style="margin-top: 1rem; font-size: 1.3rem;">Instrucciones para la transferencia</h3>
+        <p>Por favor realiza la transferencia bancaria en uno de los siguientes bancos, incluyendo el siguiente número en la descripción de la transferencia, de esta manera podremos localizar tu reserva en nuestro sistema de verificacion de pagos:</p>
+        <p style="text-align: center;"><strong style="font-size: 1.8rem; color: #333;">${numeroTransferencia}</strong></p>
+        <p>Una vez que completes la transferencia, haz clic en <strong>"Confirmar reserva"</strong> más abajo y listo! tu reserva sera confirmada automaticamente.</p>
 
-        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-            <div>
-                <img src="images/banco1.png" alt="Banco 1" width="150" />
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem; margin-top: 1.5rem;">
+            <div style="text-align: center;">
+                <img src="https://placeholdit.com/150x150/2b2626/f0ebeb?text=QR+CODE" alt="Banco 1" width="180" style="border-radius: 8px;" />
                 <p>Cuenta Banco 1</p>
             </div>
-            <div>
-                <img src="images/banco2.png" alt="Banco 2" width="150" />
+            <div style="text-align: center;">
+                <img src="https://placeholdit.com/150x150/2b2626/f0ebeb?text=QR+CODE" alt="Banco 2" width="180" style="border-radius: 8px;" />
                 <p>Cuenta Banco 2</p>
             </div>
-            <div>
-                <img src="images/banco3.png" alt="Banco 3" width="150" />
+            <div style="text-align: center;">
+                <img src="https://placeholdit.com/150x150/2b2626/f0ebeb?text=QR+CODE" alt="Banco 3" width="180" style="border-radius: 8px;" />
                 <p>Cuenta Venmo</p>
             </div>
         </div>
-
-        <button id="confirmar-transferencia" type="button" style="margin-top: 1rem;">Confirmar reserva</button>
+        <p>Nota: Para ofrecerte una mejor experiencia nuestro sistema de verificacion de pagos con transferencia 
+        verificara que la transferencia se haya completado correctamente despues de que tu confirmes la reserva. Si hubo algun problema con tu transferencia un miembro de nuestro equipo se contactara contigo por correo electronico dentro de 1 hora con futuras indicaciones sobre como
+        completar la transferencia exitosamente. (Si no nos contactamos contigo dentro de una hora, significa que todo salio bien con la transferencia y te estaremos esperando en Maribao!.)</p>
+            
+        <button id="confirmar-transferencia" type="button" style="margin-top: 1.5rem; padding: 0.75rem 1.5rem; background-color: #007bff; color: white; border: none; border-radius: 6px; font-size: 1rem; cursor: pointer;">
+            Confirmar reserva
+        </button>
     `;
 
             form.appendChild(transferenciaInfo);
 
             // Agregar listener al botón de confirmar reserva
             document.querySelector("#confirmar-transferencia").addEventListener("click", async () => {
-                mostrarContador("Gracias por hacer tu reserva. Se está procesando, esto solo tomará unos segundos.");
+                mostrarContador("Gracias por reservar con nosotros. Tu reserva se está procesando, esto solo tomará unos segundos.");
                 const numeroTransferencia = localStorage.getItem("numeroTransferencia");
 
                 const formData = {
@@ -322,7 +326,7 @@ export function dataForm() {
             total: totalReserva
         };
         if (metodoPago === "tarjeta") {
-            mostrarContador("Gracias por tu reserva. Serás redirigido a la plataforma de pagos en unos segundos.");
+            mostrarContador("Gracias por reservar con nosotros. Serás redirigido a la plataforma de pagos en unos segundos.");
             // PAGO CON TARJETA (Stripe)
             try {
                 const idReservaTemporal = Math.floor(100000 + Math.random() * 900000);
@@ -354,7 +358,7 @@ export function dataForm() {
             }
 
         } else {
-            mostrarContador("Gracias por hacer tu reserva. Se está procesando, esto solo tomará unos segundos.");
+            mostrarContador("Gracias por reservar con nosotros. Tu reserva se está procesando, esto solo tomará unos segundos.");
             // Pago en efectivo
             try {
                 const response = await fetch("https://hotel-backend-3jw7.onrender.com/reserva", {
@@ -366,7 +370,6 @@ export function dataForm() {
                 const result = await response.json();
 
                 if (result.success) {
-                    alert(`Reserva confirmada! Tu número de reserva es: ${result.numeroReserva}`);
 
                     localStorage.setItem("reservaConfirmada", JSON.stringify({
                         numeroReserva: result.numeroReserva,
