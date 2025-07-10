@@ -117,6 +117,7 @@ export function dataForm() {
     `;
     const metodoPagoSelect = document.getElementById("metodoPago");
     const submitBtn = document.getElementById("submitBtn");
+    const paymentMessage = document.getElementById("payment-message");
 
     metodoPagoSelect.addEventListener("change", () => {
         const metodo = metodoPagoSelect.value;
@@ -162,6 +163,17 @@ export function dataForm() {
     checkinInput.addEventListener("change", calcularTotal);
     checkoutInput.addEventListener("change", calcularTotal);
 
+    function mostrarContador(mensaje) {
+        let contador = 20;
+        paymentMessage.style.display = 'block';
+        paymentMessage.innerHTML = `<p>${mensaje}</p><p>Redirigiendo en <span id="contador">${contador}</span> segundos...</p>`;
+
+        const intervalo = setInterval(() => {
+            contador--;
+            document.getElementById("contador").textContent = contador;
+            if (contador <= 0) clearInterval(intervalo);
+        }, 1000);
+    }
 
     const form = document.getElementById("reservation-form");
 
@@ -212,6 +224,7 @@ export function dataForm() {
 
             // Agregar listener al botón de confirmar reserva
             document.querySelector("#confirmar-transferencia").addEventListener("click", async () => {
+                mostrarContador("Gracias por hacer tu reserva. Se está procesando, esto solo tomará unos segundos.");
                 const numeroTransferencia = localStorage.getItem("numeroTransferencia");
 
                 const formData = {
@@ -295,6 +308,7 @@ export function dataForm() {
             total: totalReserva
         };
         if (metodoPago === "tarjeta") {
+            mostrarContador("Gracias por tu reserva. Serás redirigido a la plataforma de pagos en unos segundos.");
             // PAGO CON TARJETA (Stripe)
             try {
                 const idReservaTemporal = Math.floor(100000 + Math.random() * 900000);
@@ -326,6 +340,7 @@ export function dataForm() {
             }
 
         } else {
+            mostrarContador("Gracias por hacer tu reserva. Se está procesando, esto solo tomará unos segundos.");
             // Pago en efectivo
             try {
                 const response = await fetch("https://hotel-backend-3jw7.onrender.com/reserva", {
