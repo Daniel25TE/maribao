@@ -116,6 +116,41 @@ export function dataForm() {
 
         </form>
     `;
+    if (!document.getElementById("contador-overlay")) {
+        const overlay = document.createElement("div");
+        overlay.id = "contador-overlay";
+        overlay.style = `
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0, 0, 0, 0.3);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        `;
+
+        const modal = document.createElement("div");
+        modal.id = "contador-modal";
+        modal.style = `
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 90%;
+            font-size: 1.2rem;
+        `;
+
+        modal.innerHTML = `
+            <p id="contador-mensaje" style="margin-bottom: 1rem;"></p>
+            <p style="font-size: 1.5rem;">Redirigiendo en <span id="contador">20</span> segundos...</p>
+        `;
+
+        overlay.appendChild(modal);
+        document.body.appendChild(overlay);
+    }
+
     const metodoPagoSelect = document.getElementById("metodoPago");
     const submitBtn = document.getElementById("submitBtn");
 
@@ -164,26 +199,23 @@ export function dataForm() {
     checkoutInput.addEventListener("change", calcularTotal);
 
     function mostrarContador(mensaje) {
-        let contador = 20;
-        paymentMessage.innerHTML = `
-        <div id="contador-overlay">
-            <div id="contador-modal">
-                <p style="font-size: 1.2rem; margin-bottom: 1rem;">${mensaje}</p>
-                <p style="font-size: 1.5rem;">Redirigiendo en <span id="contador">${contador}</span> segundos...</p>
-            </div>
-        </div>
-    `;
-        paymentMessage.style.display = 'block';
+        let contador = 35;
+        const overlay = document.getElementById("contador-overlay");
+        const mensajeElem = document.getElementById("contador-mensaje");
+        const contadorElem = document.getElementById("contador");
+
+        if (!overlay || !mensajeElem || !contadorElem) return;
+
+        mensajeElem.textContent = mensaje;
+        contadorElem.textContent = contador;
+        overlay.style.display = "flex";
 
         const intervalo = setInterval(() => {
             contador--;
-            const contadorSpan = document.getElementById("contador");
-            if (contadorSpan) contadorSpan.textContent = contador;
+            contadorElem.textContent = contador;
             if (contador <= 0) clearInterval(intervalo);
         }, 1000);
     }
-
-
 
     const form = document.getElementById("reservation-form");
 
