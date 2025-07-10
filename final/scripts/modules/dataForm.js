@@ -103,7 +103,7 @@ export function dataForm() {
               <label for="metodoPago">Método de pago:</label>
               <select id="metodoPago" name="metodoPago">
                 <option value="efectivo">Efectivo</option>
-                <option value="tarjeta">Tarjeta (Stripe)</option>
+                <option value="tarjeta">Tarjeta (Protected by Security-Stripe)</option>
                 <option value="transferencia">Transferencia</option>
               </select>
             </div>
@@ -126,7 +126,7 @@ export function dataForm() {
         if (metodo === "efectivo") {
             submitBtn.textContent = "Confirmar reserva";
         } else if (metodo === "tarjeta") {
-            submitBtn.textContent = "Pagar";
+            submitBtn.textContent = "Continuar";
         } else if (metodo === "transferencia") {
             submitBtn.textContent = "Continuar";
         }
