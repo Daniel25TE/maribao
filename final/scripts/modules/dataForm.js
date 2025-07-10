@@ -113,7 +113,7 @@ export function dataForm() {
             <label>Firma <input type="text" name="fullGuestName" placeholder="Nombre completo del huésped" autocomplete="name"></label>
 
             <button type="submit" id="submitBtn">Confirmar reserva</button>
-            <div id="payment-message" style="display:none; margin: 1rem 0; padding: 1rem; background-color: #f3f3f3; border-radius: 8px;"></div>
+
 
         </form>
     `;
