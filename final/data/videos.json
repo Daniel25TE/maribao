@@ -5,18 +5,18 @@
         "title": "Estrella"
     },
     {
-        "src": "videos/estrella.webm",
-        "poster": "images/estrella-poster.webp",
+        "src": "videos/luna.webm",
+        "poster": "images/luna.webp",
+        "title": "Luna"
+    },
+    {
+        "src": "videos/sol.webm",
+        "poster": "images/sol.webp",
         "title": "Sol"
     },
     {
-        "src": "videos/estrella.webm",
-        "poster": "images/estrella-poster.webp",
+        "src": "videos/surf.webm",
+        "poster": "images/surf.webp",
         "title": "Surf"
-    },
-    {
-        "src": "videos/estrella.webm",
-        "poster": "images/estrella-poster.webp",
-        "title": "Luna"
     }
 ]
