@@ -432,9 +432,15 @@ a {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-
     border-radius: 15px;
 
+}
+
+.image-card {
+    flex: 0 0 100%;
+    box-sizing: border-box;
+    padding: 0;
+    transition: transform 0.3s ease;
 }
 
 .slider-track {
@@ -442,7 +448,6 @@ a {
     transition: transform 0.5s ease-in-out;
     width: 100%;
     touch-action: none;
-
     border-radius: 15px;
 }
 
@@ -460,6 +465,17 @@ a {
     display: flex;
     justify-content: center;
     margin-top: 10px;
+}
+
+#sliderDots {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
 }
 
 .dot {
@@ -772,7 +788,7 @@ a {
     background: white;
     max-width: 500px;
     margin: 100px auto;
-    padding: 20px;
+    padding: 40px;
     border-radius: 12px;
     position: relative;
 }

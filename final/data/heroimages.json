@@ -1,0 +1,92 @@
+[
+    {
+        "src": "images/maribao_medium.webp",
+        "srcset": "images/maribao_mobile.webp 640w, images/maribao_medium.webp 1200w, images/maribao_large.webp 1920w",
+        "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
+        "alt": "Imagen 1",
+        "width": "1200",
+        "height": "675",
+        "title": "Estrella"
+    },
+    {
+        "src": "images/maribao_outside1_medium.webp",
+        "srcset": "images/maribao_outside1_mobile.webp 640w, images/maribao_outside1_medium.webp 1200w, images/maribao_outside1_large.webp 1920w",
+        "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
+        "alt": "Imagen 1",
+        "width": "1200",
+        "height": "675",
+        "title": "Estrella"
+    },
+    {
+        "src": "images/maribao_outside2_medium.webp",
+        "srcset": "images/maribao_outside2_mobile.webp 640w, images/maribao_outside2_medium.webp 1200w, images/maribao_outside2_large.webp 1920w",
+        "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
+        "alt": "Imagen 1",
+        "width": "1200",
+        "height": "675",
+        "title": "Estrella"
+    },
+    {
+        "src": "images/maribao_outside3_medium.webp",
+        "srcset": "images/maribao_outside3_mobile.webp 640w, images/maribao_outside3_medium.webp 1200w, images/maribao_outside3_large.webp 1920w",
+        "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
+        "alt": "Imagen 1",
+        "width": "1200",
+        "height": "675",
+        "title": "Estrella"
+    },
+    {
+        "src": "images/maribao_outside_medium.webp",
+        "srcset": "images/maribao_outside4_mobile.webp 640w, images/maribao_outside4_medium.webp 1200w, images/maribao_outside4_large.webp 1920w",
+        "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
+        "alt": "Imagen 1",
+        "width": "1200",
+        "height": "675",
+        "title": "Estrella"
+    },
+    {
+        "src": "images/maribao_outside5_medium.webp",
+        "srcset": "images/maribao_outside5_mobile.webp 640w, images/maribao_outside5_medium.webp 1200w, images/maribao_outside5_large.webp 1920w",
+        "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
+        "alt": "Imagen 1",
+        "width": "1200",
+        "height": "675",
+        "title": "Estrella"
+    },
+    {
+        "src": "images/maribao_outside6_medium.webp",
+        "srcset": "images/maribao_outside6_mobile.webp 640w, images/maribao_outside6_medium.webp 1200w, images/maribao_outside6_large.webp 1920w",
+        "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
+        "alt": "Imagen 1",
+        "width": "1200",
+        "height": "675",
+        "title": "Estrella"
+    },
+    {
+        "src": "images/maribao_outside7_medium.webp",
+        "srcset": "images/maribao_outside7_mobile.webp 640w, images/maribao_outside7_medium.webp 1200w, images/maribao_outside7_large.webp 1920w",
+        "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
+        "alt": "Imagen 1",
+        "width": "1200",
+        "height": "675",
+        "title": "Estrella"
+    },
+    {
+        "src": "images/maribao_outside8_medium.webp",
+        "srcset": "images/maribao_outside8_mobile.webp 640w, images/maribao_outside8_medium.webp 1200w, images/maribao_outside8_large.webp 1920w",
+        "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
+        "alt": "Imagen 1",
+        "width": "1200",
+        "height": "675",
+        "title": "Estrella"
+    },
+    {
+        "src": "images/maribao_outside9_medium.webp",
+        "srcset": "images/maribao_outside9_mobile.webp 640w, images/maribao_outside9_medium.webp 1200w, images/maribao_outside9_large.webp 1920w",
+        "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
+        "alt": "Imagen 1",
+        "width": "1200",
+        "height": "675",
+        "title": "Estrella"
+    }
+]

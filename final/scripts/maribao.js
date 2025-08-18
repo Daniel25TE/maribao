@@ -5,6 +5,7 @@ import { loadOptions } from './modules/loadOptions.js';
 import { loadRestaurants } from './modules/loadRestaurants.js';
 import { initializeSlider } from './modules/slider.js';
 import { allVideos } from "./modules/videos.js";
+import { allheroimages } from './modules/heroimages.js';
 import { lazyLoadStaticContainers } from "./modules/lazyLoader.js"
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -13,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadOptions();
     loadRestaurants();
     lazyLoadStaticContainers();
+    allheroimages();
     const { nextSlide, prevSlide } = initializeSlider();
 
     document.getElementById("nextBtn")?.addEventListener("click", nextSlide);

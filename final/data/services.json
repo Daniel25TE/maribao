@@ -3,90 +3,179 @@
         "icon": "images/house.svg",
         "alt": "house",
         "label": "Apartamentos",
-        "rating": "&#9733"
+        "rating": "&#9733",
+        "fullDetails": [
+            "Baño privado",
+            "Se admiten mascotas",
+            "Habitaciones familiares",
+            "Cocina Individual",
+            "Habitaciones para no fumadores",
+            "Mostrador de información turística"
+        ]
     },
     {
         "icon": "images/parking.svg",
         "alt": "parking",
         "label": "Parking gratis",
-        "rating": "&#9733"
+        "rating": "&#9733",
+        "fullDetails": [
+            "Hay aparcamiento privado gratuito (no es necesario reservar)."
+        ]
     },
     {
         "icon": "images/beach.svg",
         "alt": "beach",
         "label": "Vistas al mar",
-        "rating": "&#9733"
+        "rating": "&#9733",
+        "fullDetails": [
+            "Vista de punto de referencia",
+            "Vista al jardín",
+            "Vista al mar"
+        ]
     },
     {
         "icon": "images/footprints.svg",
         "alt": "footprints",
         "label": "Admite mascotas",
-        "rating": "&#9733"
+        "rating": "&#9733",
+        "fullDetails": [
+            "Se admiten mascotas. Sin cargos adicionales."
+        ]
     },
     {
         "icon": "images/bathroom.svg",
         "alt": "bathroom",
         "label": "Baño privado",
-        "rating": "&#9733"
+        "rating": "&#9733",
+        "fullDetails": [
+            "Papel higiénico",
+            "Baño de visitas",
+            "Bañera o ducha",
+            "Baño privado",
+            "Inodoro",
+            "Artículos de aseo gratuitos"
+        ]
     },
     {
         "icon": "images/snow.svg",
         "alt": "snow",
         "label": "Aire acondicionado",
-        "rating": "&#9733"
+        "rating": "&#9733",
+        "fullDetails": [
+            "Climatización",
+            "Habitaciones para no fumadores",
+            "Aire Acondicionado"
+        ]
     },
     {
         "icon": "images/balcony.svg",
         "alt": "balcony",
-        "label": "Balcón",
-        "rating": "&#9733"
+        "label": "Exteriores",
+        "rating": "&#9733",
+        "fullDetails": [
+            "Aislado",
+            "Zona de estar",
+            "Comedor al aire libre",
+            "Aparcamiento",
+            "Sala de juegos"
+        ]
     },
     {
         "icon": "images/vistas.svg",
         "alt": "vista al mar",
         "label": "Vistas",
-        "rating": "&#9733"
+        "rating": "&#9733",
+        "fullDetails": [
+            "Picnic",
+            "Muebles de exterior",
+            "Playa",
+            "Comedor al aire libre",
+            "Terraza",
+            "Zona de playa privada",
+            "Barbacoa",
+            "Patio",
+            "Jardín"
+        ]
     },
     {
         "icon": "images/family.svg",
         "alt": "family",
         "label": "Habitaciones familiares",
-        "rating": "&#9733"
+        "rating": "&#9733",
+        "fullDetails": [
+            "Habitaciones para no fumadores",
+            "Accesible para la audición",
+            "Unidad completa ubicada en la planta baja",
+            "Entrada privada",
+            "Juegos de mesa/Puzzles",
+            "Cubiertas de enchufes de seguridad para niños"
+        ]
     },
     {
         "icon": "images/nosmoking.svg",
         "alt": "nosmoking",
         "label": "Libre de humo",
-        "rating": "&#9733"
+        "rating": "&#9733",
+        "fullDetails": [
+            "Area estricta libre de humo, dentro y fuera del edificio."
+        ]
     },
     {
         "icon": "images/frontdesk.svg",
         "alt": "frontdesk",
         "label": "Recepcion",
-        "rating": "&#9733"
+        "rating": "&#9733",
+        "fullDetails": [
+            "Mostrador de información turística",
+            "Factura proporcionada"
+        ]
     },
     {
         "icon": "images/safety.svg",
         "alt": "safety",
         "label": "Seguridad",
-        "rating": "&#9733"
+        "rating": "&#9733",
+        "fullDetails": [
+            "Extintores",
+            "CCTV fuera de la propiedad",
+            "CCTV en áreas comunes",
+            "Alarmas de humo"
+        ]
     },
     {
         "icon": "images/language.svg",
         "alt": "language",
         "label": "Idiomas Hablados",
-        "rating": "&#9733"
+        "rating": "&#9733",
+        "fullDetails": [
+            "Inglés",
+            "Español"
+        ]
     },
     {
         "icon": "images/kitchen.svg",
         "alt": "kitchen",
         "label": "Cocina",
-        "rating": "&#9733"
+        "rating": "&#9733",
+        "fullDetails": [
+            "Cocina compartida",
+            "Mesa de comedor",
+            "Productos de limpieza",
+            "Estufa",
+            "Utensilios de cocina",
+            "Refrigerador"
+        ]
     },
     {
         "icon": "images/bedroom.svg",
         "alt": "bedroom",
         "label": "Habitaciones equipadas",
-        "rating": "&#9733"
+        "rating": "&#9733",
+        "fullDetails": [
+            "Enchufe cerca de la cama",
+            "Tendedero para ropa",
+            "Mosquitero",
+            "Entrada privada"
+        ]
     }
 ]

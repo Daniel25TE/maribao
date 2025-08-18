@@ -17,9 +17,16 @@ export async function loadOptions() {
             <p>${item.rating}</p>
               <img src="${item.icon}" alt="${item.alt}">
               <span>${item.label}</span>
-              
             </li>
         `).join("");
+        list.innerHTML += `
+            <li class="option-item ver-mas">
+                <a href="servicios.html" aria-label="Ir a todos los servicios">
+                <img src="images/arrow-right-square-fill.svg">
+                </a>
+                <span>Ver todos los servicios</span>
+            </li>
+        `;
     } catch (err) {
         console.error(err);
     }
