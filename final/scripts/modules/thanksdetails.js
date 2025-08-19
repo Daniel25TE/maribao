@@ -14,7 +14,6 @@ export function thanksdetails() {
                     results.innerHTML = `
                         <h2>✅ ¡Reserva confirmada con pago por tarjeta!</h2>
                         <p>Gracias por tu reserva, ${reserva.firstName} ${reserva.lastName}.</p>
-                        <p><strong>Número de reserva:</strong> ${reserva.numeroReserva}</p>
                         <p><strong>Check-in:</strong> ${reserva.checkin}</p>
                         <p><strong>Check-out:</strong> ${reserva.checkout}</p>
                         <p><strong>Habitación:</strong> ${reserva.cuarto}</p>
@@ -36,8 +35,6 @@ export function thanksdetails() {
         const myInfo = new URLSearchParams(window.location.search);
         const metodoPago = myInfo.get('metodoPago') || 'efectivo';
         const numeroTransferencia = myInfo.get('numeroTransferencia');
-        const numeroReserva = myInfo.get('numeroReserva') || 'No disponible';
-
 
         const titulo =
             metodoPago === 'transferencia'
@@ -47,7 +44,6 @@ export function thanksdetails() {
         results.innerHTML = `
             <h2>${titulo}</h2>
             <p>Gracias por tu reserva, ${myInfo.get('firstName')} ${myInfo.get('lastName')}</p>
-            <p><strong>Número de reserva:</strong> ${numeroReserva}</p>
             <p><strong>Check-in:</strong> ${myInfo.get('checkin')}</p>
             <p><strong>Check-out:</strong> ${myInfo.get('checkout')}</p>
             <p><strong>Teléfono:</strong> ${myInfo.get('phone')}</p>
