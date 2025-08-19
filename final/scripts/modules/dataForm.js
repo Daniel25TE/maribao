@@ -395,9 +395,8 @@ export function dataForm() {
                         specialRequests: form.specialRequests.value,
                         arrivalTime: form.arrivalTime.value,
                     });
-                    if (metodoPago === 'transferencia' && numeroTransferencia) {
-                        params.append("numeroTransferencia", numeroTransferencia);
-                    }
+                    params.append("numeroTransferencia", numeroTransferencia);
+
                     window.location.href = `thanks.html?${params.toString()}`;
                 } else {
                     alert("Error al procesar la reserva. Intenta de nuevo.");
