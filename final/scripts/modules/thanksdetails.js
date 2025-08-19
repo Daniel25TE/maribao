@@ -13,7 +13,6 @@ export function thanksdetails() {
 
                     results.innerHTML = `
                         <h2>✅ ¡Reserva confirmada con pago por tarjeta!</h2>
-                        <p><strong>Check-in:</strong> ${reserva.numeroTransferencia}</p>
                         <p>Gracias por tu reserva, ${reserva.firstName} ${reserva.lastName}.</p>
                         <p><strong>Check-in:</strong> ${reserva.checkin}</p>
                         <p><strong>Check-out:</strong> ${reserva.checkout}</p>
@@ -63,4 +62,3 @@ export function thanksdetails() {
         `;
     }
 }
-
