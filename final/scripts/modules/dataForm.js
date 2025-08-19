@@ -228,10 +228,32 @@ export function dataForm() {
             const transferenciaInfo = document.createElement("div");
             transferenciaInfo.id = "transferencia-info";
             transferenciaInfo.innerHTML = `
-                <h3>Instrucciones para la transferencia</h3>
-                <p>Número de transferencia: <strong>${numeroTransferencia}</strong></p>
-                <p>Escanea el QR o realiza la transferencia con este número.</p>
-                <button id="confirmar-transferencia" type="button">Confirmar reserva</button>
+                <h3 style="margin-top: 1rem; font-size: 1.3rem;">Instrucciones para la transferencia</h3>
+        <p>Por favor realiza la transferencia bancaria en uno de los siguientes bancos, incluyendo el siguiente número en la descripción de la transferencia, de esta manera podremos localizar tu reserva en nuestro sistema de verificacion de pagos:</p>
+        <p style="text-align: center;"><strong style="font-size: 1.8rem; color: #333;">${numeroTransferencia}</strong></p>
+        <p>Una vez que completes la transferencia, haz clic en <strong>"Confirmar reserva"</strong> más abajo y listo! tu reserva sera confirmada automaticamente.</p>
+
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem; margin-top: 1.5rem;">
+            <div style="text-align: center;">
+                <img src="https://placeholdit.com/150x150/2b2626/f0ebeb?text=QR+CODE" alt="Banco 1" width="180" style="border-radius: 8px;" />
+                <p>Cuenta Banco 1</p>
+            </div>
+            <div style="text-align: center;">
+                <img src="https://placeholdit.com/150x150/2b2626/f0ebeb?text=QR+CODE" alt="Banco 2" width="180" style="border-radius: 8px;" />
+                <p>Cuenta Banco 2</p>
+            </div>
+            <div style="text-align: center;">
+                <img src="https://placeholdit.com/150x150/2b2626/f0ebeb?text=QR+CODE" alt="Banco 3" width="180" style="border-radius: 8px;" />
+                <p>Cuenta Venmo</p>
+            </div>
+        </div>
+        <p>Nota: Para ofrecerte una mejor experiencia nuestro sistema de verificacion de pagos con transferencia 
+        verificara que la transferencia se haya completado correctamente despues de que tu confirmes la reserva. Si hubo algun problema con tu transferencia un miembro de nuestro equipo se contactara contigo por correo electronico dentro de 1 hora con futuras indicaciones sobre como
+        completar la transferencia exitosamente. (Si no nos contactamos contigo dentro de una hora, significa que todo salio bien con la transferencia y te estaremos esperando en Maribao!.)</p>
+            
+        <button id="confirmar-transferencia" type="button" style="margin-top: 1.5rem; padding: 0.75rem 1.5rem; background-color: #007bff; color: white; border: none; border-radius: 6px; font-size: 1rem; cursor: pointer;">
+            Confirmar reserva
+        </button>
             `;
             form.appendChild(transferenciaInfo);
 
