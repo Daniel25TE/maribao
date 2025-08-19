@@ -195,11 +195,6 @@ export function dataForm() {
 
         const metodoPago = form.metodoPago.value;
 
-        const numeroTransferencia = localStorage.getItem("numeroTransferencia")
-            || Math.floor(100000 + Math.random() * 900000);
-
-        localStorage.setItem("numeroTransferencia", numeroTransferencia);
-
         // Justo dentro del eventListener del submit
         if (metodoPago === "transferencia") {
             e.preventDefault(); // Detiene el envío normal
@@ -207,7 +202,10 @@ export function dataForm() {
             // Evita mostrar múltiples veces
             if (document.querySelector('#transferencia-info')) return;
 
+            const numeroTransferencia = Math.floor(100000 + Math.random() * 900000);
 
+            // Guardamos temporalmente en memoria
+            localStorage.setItem("numeroTransferencia", numeroTransferencia);
 
             const transferenciaInfo = document.createElement("div");
             transferenciaInfo.id = "transferencia-info";
@@ -324,7 +322,7 @@ export function dataForm() {
             fullGuestName: form.fullGuestName.value,
             cuarto: data.name,
             metodoPago: metodoPago,
-            numeroTransferencia: numeroTransferencia,
+            numeroTransferencia: "No aplica",
             total: totalReserva
         };
         if (metodoPago === "tarjeta") {
@@ -397,8 +395,9 @@ export function dataForm() {
                         specialRequests: form.specialRequests.value,
                         arrivalTime: form.arrivalTime.value,
                     });
-                    params.append("numeroTransferencia", numeroTransferencia);
-
+                    if (metodoPago === 'transferencia' && numeroTransferencia) {
+                        params.append("numeroTransferencia", numeroTransferencia);
+                    }
                     window.location.href = `thanks.html?${params.toString()}`;
                 } else {
                     alert("Error al procesar la reserva. Intenta de nuevo.");
