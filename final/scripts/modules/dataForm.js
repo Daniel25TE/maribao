@@ -329,7 +329,14 @@ export function dataForm() {
             mostrarContador("Gracias por reservar con nosotros. Serás redirigido a la plataforma de pagos en unos segundos.");
             // PAGO CON TARJETA (Stripe)
             try {
-                const idReservaTemporal = Math.floor(100000 + Math.random() * 900000);
+                const resultReserva = await fetch("https://hotel-backend-3jw7.onrender.com/reserva", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(formData),
+                }).then(res => res.json());
+
+                if (!resultReserva.success) return alert("No se pudo crear la reserva antes del pago");
+
 
                 const response = await fetch("https://hotel-backend-3jw7.onrender.com/create-checkout-session", {
                     method: "POST",
@@ -339,7 +346,7 @@ export function dataForm() {
                         currency: "usd",
                         description: `Reserva para ${formData.firstName} ${formData.lastName}`,
                         metadata: {
-                            reservaId: idReservaTemporal,
+                            reservaId: resultReserva.numeroReserva,
                             datosReserva: JSON.stringify(formData)
                         }
                     }),

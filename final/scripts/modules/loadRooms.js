@@ -37,12 +37,22 @@ export async function loadRooms() {
                 <button class="open-modal-btn" data-modal="${modalId}">Ver todo lo que incluye este cuarto</button>
                 <button class="cta-book">Reservar</button>
                 <div class="modal" id="${modalId}">
-                    <div class="modal-content">
-                        <span class="close-modal-btn" data-modal="${modalId}">&times;</span>
-                        <h4>${room.name} - Detalles</h4>
-                        <p>${room.fullDetails || 'Información adicional no disponible.'}</p>
-                    </div>
-                </div>
+  <div class="modal-content">
+    <span class="close-modal-btn" data-modal="${modalId}">&times;</span>
+    <h4>${room.name} - Detalles</h4>
+    ${Array.isArray(room.fullDetails)
+                    ? `<ul>${room.fullDetails.map(d =>
+                        `<li>${d.replace(/:\s*/g, ':<br>').replace(/\s{2,}/g, '<br>')
+                        }</li><hr>`
+                    ).join('')
+                    }</ul>`
+                    : `<p>${(room.fullDetails || 'Información adicional no disponible.')
+                        .replace(/:\s*/g, ':<br>')}</p>`
+                }
+  </div>
+</div>
+
+
             `;
             const reservarBtn = card.querySelector(".cta-book");
 

@@ -9,10 +9,12 @@ export async function allRestaurants() {
             card.classList.add("restaurant-card");
             card.innerHTML = `
               <h2>${restaurant.name}</h2>
-              <p><strong>Tipo de comida:</strong> ${restaurant.tipo_comida}</p>
+              <a href="${restaurant.direccion}" target="_blank">
+                <strong>Dirección:</strong> ${restaurant.direccion1}
+              </a>
               <p><strong>Distancia:</strong> ${restaurant.distancia}</p>
-              <p><strong>Dirección:</strong> ${restaurant.direccion}</p>
-              <p><strong>Teléfono:</strong> ${restaurant.telefono}</p>
+              <p><strong>Tipo de comida:</strong> ${restaurant.tipo_comida}</p>
+              <a href="${restaurant.telefono}" target="_blank"><strong>Teléfono:</strong> ${restaurant.telefono}</a>
             `;
             container.appendChild(card);
         });

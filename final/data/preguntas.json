@@ -1,60 +1,60 @@
 {
     "faqs": [
         {
-            "question": "¿Cuál es la hora de check-in y check-out?",
-            "answer": "El check-in es a partir de las 15:00 y el check-out es hasta las 12:00 del mediodía."
+            "question": "¿Hay servicio de transporte al aeropuerto?",
+            "answer": "El servicio de transporte al aeropuerto no está disponible en MARIBAO."
         },
         {
-            "question": "¿Se incluye el desayuno en la reserva?",
-            "answer": "Sí, todas las reservas incluyen desayuno continental gratuito."
+            "question": "¿Sirven desayuno?",
+            "answer": "Selecciona tus fechas y consulta la lista de habitaciones disponibles para ver si hay opciones de desayuno disponibles."
         },
         {
-            "question": "¿El hotel cuenta con WiFi gratuito?",
-            "answer": "Sí, ofrecemos WiFi gratuito en todas las habitaciones y áreas comunes."
+            "question": "¿Tiene restaurante?",
+            "answer": "Desafortunadamente, no hay restaurante en MARIBAO."
         },
         {
-            "question": "¿Tienen estacionamiento disponible?",
-            "answer": "Sí, contamos con estacionamiento privado y gratuito para nuestros huéspedes."
+            "question": "¿Qué restaurantes, atracciones y opciones de transporte público hay cerca?",
+            "answer": "Para saber qué hay cerca de MARIBAO, haga clic en el enlace a continuación."
         },
         {
-            "question": "¿Puedo hospedarme con mi mascota?",
-            "answer": "Sí, aceptamos mascotas pequeñas bajo solicitud previa."
+            "question": "¿Hay piscina?",
+            "answer": "MARIBAO no tiene piscina."
         },
         {
-            "question": "¿Ofrecen transporte al aeropuerto?",
-            "answer": "Sí, ofrecemos servicio de traslado al aeropuerto con costo adicional. Consulta disponibilidad con recepción."
+            "question": "¿Cuál es la política de Wi-Fi?",
+            "answer": "No hay acceso a Internet disponible."
         },
         {
-            "question": "¿El hotel tiene piscina?",
-            "answer": "Sí, contamos con piscina al aire libre disponible de 8:00 a 20:00."
+            "question": "¿Hay habitaciones con balcón?",
+            "answer": "Hay habitaciones con balcón en MARIBAO. Seleccione sus fechas para asegurarse de la disponibilidad."
         },
         {
-            "question": "¿Hay habitaciones familiares disponibles?",
-            "answer": "Sí, tenemos habitaciones para familias de hasta 5 personas."
+            "question": "¿Hay habitaciones con vista al mar?",
+            "answer": "Hay habitaciones con vista al mar en MARIBAO. Seleccione sus fechas para asegurarse de la disponibilidad."
         },
         {
-            "question": "¿Puedo cancelar mi reserva sin costo?",
-            "answer": "Sí, puedes cancelar sin cargo hasta 48 horas antes de tu llegada."
+            "question": "¿Hay habitaciones con baño privado?",
+            "answer": "Desafortunadamente, no hay spa ni centro de bienestar en MARIBAO."
         },
         {
-            "question": "¿Se puede pagar con tarjeta de crédito?",
+            "question": "¿Hay un spa?",
             "answer": "Sí, aceptamos todas las principales tarjetas de crédito y débito."
         },
         {
-            "question": "¿Tienen servicio a la habitación?",
-            "answer": "Sí, ofrecemos servicio a la habitación de 7:00 a 22:00."
+            "question": "¿Cuántas personas pueden dormir en MARIBAO?",
+            "answer": "Puede elegir entre varias opciones de alojamiento en MARIBAO (sujeto a disponibilidad) que pueden acomodar: 6 huéspedes - 7 huéspedes - 4 huéspedes"
         },
         {
             "question": "¿Qué idiomas habla el personal del hotel?",
             "answer": "Nuestro personal habla español e inglés."
         },
         {
-            "question": "¿El hotel ofrece tours o actividades?",
-            "answer": "Sí, contamos con convenios para tours locales. Puedes reservarlos en recepción."
+            "question": "¿Cuáles son los horarios de entrada y salida en MARIBAO?",
+            "answer": "Podrás hacer el check-in en MARIBAO a partir de las 15:00 y el check-out hasta las 11:00."
         },
         {
-            "question": "¿Tienen lavandería disponible?",
-            "answer": "Sí, ofrecemos servicio de lavandería por un costo adicional."
+            "question": "¿Cuánto cuesta alojarse en MARIBAO?",
+            "answer": "Los precios en MARIBAO pueden variar en función de la estancia (fechas, condiciones del hotel, etc.). Para ver los precios, introduce tus fechas."
         },
         {
             "question": "¿Cómo puedo hacer una solicitud especial?",

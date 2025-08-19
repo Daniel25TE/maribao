@@ -1,69 +1,84 @@
 {
     "restaurants": [
         {
-            "name": "Restaurante La Plaza",
-            "tipo_comida": "Mexicana",
-            "distancia": "0.5 millas",
-            "direccion": "123 Main St, West Jordan",
-            "telefono": "(801) 123-4567"
+            "name": "La Ostra que Fuma",
+            "tipo_comida": "Comida del Mar",
+            "distancia": "8 min",
+            "direccion": "https://maps.app.goo.gl/h9NdDVw88xeeaxTP7",
+            "direccion1": "19, Gral Villamil, Ecuador",
+            "telefono": "+593 98-405-2317"
         },
         {
-            "name": "Café Sol",
-            "tipo_comida": "Italiana",
-            "distancia": "0.8 millas",
-            "direccion": "456 Elm St, West Jordan",
-            "telefono": "(801) 987-6543"
+            "name": "Restaurante la Olla Chonera",
+            "tipo_comida": "Comida del Mar",
+            "distancia": "7 min",
+            "direccion": "https://maps.app.goo.gl/QSPaxESRLZvybdMj8",
+            "direccion1": "Av. Paquisha, Gral Villamil, Ecuador",
+            "telefono": "Desconocido"
         },
         {
-            "name": "Delicias del Mar",
-            "tipo_comida": "Mariscos",
-            "distancia": "1.2 millas",
-            "direccion": "789 Oak St, West Jordan",
-            "telefono": "(801) 555-6789"
+            "name": "Batidos R'shake",
+            "tipo_comida": "Bebidas",
+            "distancia": "6 min",
+            "direccion": "https://maps.app.goo.gl/92GYuNY4vHqHRg6GA",
+            "direccion1": "Av. Aurelio Yepez, Gral Villamil, Ecuador",
+            "telefono": "+593 99-069-3834"
         },
         {
-            "name": "Café Aroma",
-            "tipo_comida": "Cafetería",
-            "distancia": "0.3 millas",
-            "direccion": "321 Pine St, West Jordan",
-            "telefono": "(801) 999-1111"
+            "name": "Cevicheria La Chonerita de Don Sebas",
+            "tipo_comida": "Cevicheria",
+            "distancia": "10 min",
+            "direccion": "https://maps.app.goo.gl/XfcTami63PJKxTUGA",
+            "direccion1": "Gral Villamil, Ecuador",
+            "telefono": "+593 99-001-5428"
         },
         {
-            "name": "Café Rosado",
-            "tipo_comida": "Cafetería",
-            "distancia": "0.8 millas",
-            "direccion": "321 Sera St, West Jordan",
-            "telefono": "(801) 432-7689"
+            "name": "Restaurante Mariela",
+            "tipo_comida": "Cevicheria",
+            "distancia": "8 min",
+            "direccion": "https://maps.app.goo.gl/nVanCDAzqSRfNFdQA",
+            "direccion1": "Gral Villamil, Ecuador",
+            "telefono": "Desconocido"
         },
         {
-            "name": "Restaurante Juan Ostras",
-            "tipo_comida": "Mariscos",
-            "distancia": "Av. Zenón Masías y Sisto Chán Calle Primera Playas Villamil",
-            "telefono": "(801) 432-7689"
+            "name": "Picantería El Escorpión",
+            "tipo_comida": "Cevicheria",
+            "distancia": "9 min",
+            "direccion": "https://maps.app.goo.gl/9hWP8XmtNkv6BXUC9",
+            "direccion1": "Av. Sixto Chang, Gral Villamil, Ecuador",
+            "telefono": "+593 98-513-8565"
         },
         {
-            "name": "El Kiosko del Gordo Daniel",
-            "tipo_comida": "Restaurante",
-            "distancia": "Km 5, Via Data",
-            "telefono": "(801) 432-7689"
+            "name": "Picanteria EL CLASICO",
+            "tipo_comida": "Marisqueria - Desayunos",
+            "distancia": "6 min",
+            "direccion": "https://maps.app.goo.gl/7ncqcYeA4Nvf8YDR6",
+            "direccion1": "Calle Padre Luis Variara SN, Gral Villamil, Ecuador",
+            "telefono": "Desconocido"
         },
         {
-            "name": "Na Praia",
-            "tipo_comida": "Parrilla",
-            "distancia": "Av. Paquisha, y",
-            "telefono": "(801) 432-7689"
+            "name": "La Esquina del Sabor",
+            "tipo_comida": "Cevicheria",
+            "distancia": "7 min",
+            "direccion": "https://maps.app.goo.gl/fczaXMNvaF3aEFk46",
+            "direccion1": "Av Pedro Menéndez Gilbert & Av. La Merced, Gral Villamil, Ecuador",
+            "telefono": "+593 99-416-3729"
         },
         {
-            "name": "La Casa Grill Burguer",
-            "tipo_comida": "Restaurante",
-            "distancia": "Av Jaime Roldós Aguilera, y",
-            "telefono": "(801) 432-7689"
+            "name": "Cecilia Restaurante",
+            "tipo_comida": "Cevicheria",
+            "distancia": "8 min",
+            "direccion": "https://maps.app.goo.gl/VqC5b1b7RQ7fAZiX7",
+            "direccion1": "Malecón, Gral Villamil, Ecuador",
+            "telefono": "Desconocido"
         },
         {
-            "name": "Rucutú Lounge Resto Bar",
-            "tipo_comida": "Restaurante",
-            "distancia": "9J72+7M",
-            "telefono": "(801) 432-7689"
+            "name": "Parrilla De Lolita",
+            "tipo_comida": "Menestras y Parrilladas",
+            "distancia": "12 min",
+            "direccion": "https://maps.app.goo.gl/y7F8bqWHtSK51zgV7",
+            "direccion1": "Av. Paquisha, Gral Villamil, Ecuador",
+            "telefono": "Desconocido"
         }
     ]
 }

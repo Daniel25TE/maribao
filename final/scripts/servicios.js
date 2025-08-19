@@ -6,6 +6,7 @@ import { allRestaurants } from './modules/allRestaurantes.js';
 import { loadPreguntas } from './modules/loadPreguntas.js';
 import { lazyLoadStaticContainers } from "./modules/lazyLoader.js"
 
+
 document.addEventListener('DOMContentLoaded', () => {
     highlightActiveLink();
     loadPreguntas();
@@ -13,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
     loadOptions();
     allRestaurants();
     lazyLoadStaticContainers();
-
 
     const cta = document.getElementById('cta');
     const header = document.querySelector('header');

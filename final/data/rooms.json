@@ -1,94 +1,137 @@
 {
     "rooms": [
         {
-            "name": "Suite Maribao Vista al Mar",
+            "name": "Apartamento de un dormitorio",
             "price": 120,
-            "beds": 2,
-            "description": "Habitación de lujo con vista panorámica al mar y decoración moderna.",
+            "beds": "2 literas y 1 cama queen",
+            "description": "Tamaño del apartamento: 215 ft²",
             "images": [
                 "images/room-maribao.webp",
                 "images/room-maribao.webp"
             ],
             "features": [
-                "cocina",
-                "baño",
-                "comedor",
-                "mini sala",
-                "mini bar"
+                "Apartamento entero",
+                "Baño privado",
+                "Balcón",
+                "Vistas al mar",
+                "Climatización",
+                "Vista al patio interior",
+                "Barbacoa"
             ],
-            "fullDetails": "Incluye desayuno buffet, servicio de limpieza diario, aire acondicionado, TV por cable, WiFi gratuito y acceso a piscina privada."
+            "fullDetails": [
+                "Este apartamento cuenta con entrada privada, aire acondicionado, 1 sala de estar, 1 dormitorio independiente y 1 baño con bañera y ducha. Los huéspedes encontrarán fogones, nevera, utensilios de cocina y hervidor eléctrico en la cocina bien equipada. El apartamento también incluye barbacoa. El apartamento tiene un balcón con muebles de exterior y vistas al mar donde podrá relajarse. La unidad tiene 3 camas.",
+                "En tu cocina privada: -Productos de limpieza  -Refrigerador  -Utensilios de cocina  -Hervidor electrico  -Estufa  -Mesa de comedor.",
+                "En tu baño privado: -Articulos de aseo gratuitos  -Inodoro  -Ducha  -Baño de visitas  -Papel higiénico.",
+                "Vista: -Vistas al mar  -Vista al jardin  -Vista de punto de referencia  -Vista al patio interior.",
+                "Instalaciones del apartamento: -Balcón  -Climatización  -Cocina  -Suelos de madera o parquet  -Enchufe cerca de la cama  -Productos de limpieza  -Zona de estar  -Entrada privada  -Refrigerador  -Mosquitero  -Utensilios de cocina  -Cocina americana  -Hervidor eléctrico  -Muebles de exterior  -Comedor al aire libre  -Patio  -Estufa  -Barbacoa  -Mesa de comedor  -Unidad completa ubicada en la planta baja  -Aislado  -Tendedero para ropa  -Cubiertas de enchufes de seguridad para niños  -Juegos de mesa/puzzles  -Sofá cama  -Toda la unidad accesible para sillas de ruedas  -Desinfectante para manos  -Accesible para la audición",
+                "No se permite fumar en esta habitacion."
+            ]
         },
         {
-            "name": "Habitación Familiar Engabao",
-            "price": 95,
-            "beds": 3,
-            "description": "Ideal para familias, con espacio amplio y áreas de descanso cómodas.",
+            "name": "Habitación doble o doble",
+            "price": 0,
+            "beds": "1 cama completa y 1 cama queen",
+            "description": "Tamaño del apartamento: 194 ft²",
             "images": [
                 "images/room-maribao.webp",
                 "images/room-maribao.webp"
             ],
             "features": [
-                "cocina",
-                "baño",
-                "comedor",
-                "mini sala",
-                "mini bar"
+                "Cocina privada",
+                "Baño privado",
+                "Balcón",
+                "Vistas al mar",
+                "Climatización",
+                "Patio",
+                "Barbacoa"
             ],
-            "fullDetails": "Cuenta con camas adicionales, juegos de mesa, refrigerador grande, acceso a áreas comunes y estacionamiento incluido."
+            "fullDetails": [
+                "La cocina está bien equipada con fogones, nevera, utensilios de cocina y hervidor eléctrico. La habitación doble también ofrece barbacoa. La habitación doble dispone de aire acondicionado, entrada privada, balcón con vistas al mar y baño privado con ducha. La unidad ofrece 2 camas.",
+                "En tu cocina privada: -Productos de limpieza  -Refrigerador  -Utensilios de cocina  -Hervidor eléctrico  -Estufa  -Mesa de comedor.",
+                "En tu baño privado: -Artículos de aseo gratuitos  -Inodoro  -Bañera o ducha  -Baño de visitas  -Papel higiénico.",
+                "Vista: -Vistas al mar  -Vista al jardín  -Vista de punto de referencia  -Vista al patio interior.",
+                "Instalaciones: -Balcón  -Climatización  -Cocina  -Enchufe cerca de la cama  -Productos de limpieza  -Suelo de baldosas/mármol  -Zona de estar  -Entrada privada  -Refrigerador  -Mosquitero  -Utensilios de cocina  -Cocina americana  -Hervidor eléctrico  -Muebles de exterior  -Comedor al aire libre  -Patio  -Estufa  -Barbacoa  -Mesa de comedor  -Unidad completa ubicada en la planta baja  -Aislado  -Tendedero para ropa  -Cubiertas de enchufes de seguridad para niños  -Juegos de mesa/puzzles  -Sofá cama  -Toda la unidad accesible para sillas de ruedas  -Desinfectante para manos  -Accesible para la audición.",
+                "No se permite fumar en esta habitacion."
+            ]
         },
         {
-            "name": "Estudio Playa Privada",
-            "price": 80,
-            "beds": 1,
-            "description": "Estudio moderno con acceso privado a la playa y cocina equipada.",
+            "name": "Suite",
+            "price": 0,
+            "beds": "2 literas y 1 cama queen",
+            "description": "Tamaño 215 ft²",
             "images": [
                 "images/room-maribao.webp",
                 "images/room-maribao.webp"
             ],
             "features": [
-                "cocina",
-                "baño",
-                "comedor",
-                "mini sala",
-                "mini bar"
+                "Suite privada",
+                "Baño privado",
+                "Balcón",
+                "Vistas al mar",
+                "Climatización",
+                "Vista al patio interior",
+                "Barbacoa"
             ],
-            "fullDetails": "Acceso directo a la playa, cocina totalmente equipada, ideal para parejas, incluye sombrilla y tumbonas."
+            "fullDetails": [
+                "Esta suite cuenta con entrada privada, aire acondicionado, cocina, 1 dormitorio y 1 baño con bañera y ducha. Los huéspedes encontrarán fogones, nevera, utensilios de cocina y tostadora en la cocina bien equipada. La suite también ofrece barbacoa. La suite cuenta con un balcón con muebles de exterior y vistas al mar para su comodidad. La unidad ofrece 3 camas.",
+                "En tu cocina privada: -Productos de limpieza  -Refrigerador  -Utensilios de cocina  -Hervidor eléctrico  -Estufa  -Tostador  -Mesa de comedor.",
+                "En tu baño privado: -Artículos de aseo gratuitos  -Inodoro  -Bañera o ducha  -Baño de visitas  -Papel higiénico.",
+                "Vista: -Vistas al mar  -Vista al jardín  -Vista de punto de referencia  -Vista al patio interior.",
+                "Instalaciones del apartamento: -Balcón  -Climatización  -Cocina  -Suelos de madera o parquet  -Enchufe cerca de la cama  -Productos de limpieza  -Zona de estar  -Entrada privada  -Refrigerador  -Mosquitero  -Utensilios de cocina  -Cocina americana  -Abanicar  -Hervidor eléctrico  -Muebles de exterior  -Comedor al aire libre  -Patio  -Estufa  -Tostador  -Barbacoa  -Mesa de comedor  -Unidad completa ubicada en la planta baja  -Aislado  -Tendedero para ropa  -Cubiertas de enchufes de seguridad para niños  -Juegos de mesa/puzzles  -Toda la unidad accesible para sillas de ruedas  -Desinfectante para manos  -Accesible para la audición",
+                "No se permite fumar en esta habitacion."
+            ]
         },
         {
-            "name": "Apartamento Vista Jardín",
-            "price": 110,
-            "beds": 2,
-            "description": "Apartamento con balcón privado y vista al jardín tropical.",
+            "name": "Estudio Deluxe King",
+            "price": 0,
+            "beds": "Dormitorio: 1 cama individual y 1 cama queen  - Salón: 1 sofá cama",
+            "description": "Tamaño 226 ft²",
             "images": [
                 "images/room-maribao.webp",
                 "images/room-maribao.webp"
             ],
             "features": [
-                "cocina",
-                "baño",
-                "comedor",
-                "mini sala",
-                "mini bar"
+                "Suite privada",
+                "Baño privado",
+                "Vistas al mar",
+                "Climatización",
+                "Patio",
+                "Barbacoa"
             ],
-            "fullDetails": "Balcón con hamaca, cocina de inducción, cafetera, acceso a jardín privado, zona de parrilla disponible."
+            "fullDetails": [
+                "Esta suite cuenta con entrada privada, aire acondicionado, 1 sala de estar, 1 dormitorio independiente y 1 baño con ducha. Los huéspedes encontrarán fogones, nevera y utensilios de cocina en la cocina. La suite también incluye barbacoa. Entre las comodidades de las habitaciones se encuentran una zona de estar, un sofá, un suelo de baldosa, así como un patio y vistas al mar. La unidad tiene 3 camas.",
+                "En tu cocina privada: -Productos de limpieza  -Refrigerador  -Utensilios de cocina  -Estufa  -Mesa de comedor.",
+                "En tu baño privado: -Artículos de aseo gratuitos  -Inodoro  -Bañera o ducha  -Baño de visitas  -Papel higiénico.",
+                "Vista: -Vistas al mar  -Vista al jardín  -Vista de punto de referencia.",
+                "Instalaciones del apartamento: -Climatización  -Cocina  -Sofá  -Enchufe cerca de la cama  -Productos de limpieza  -Suelo de baldosas/mármol  -Zona de estar  -Entrada privada  -Refrigerador  -Mosquitero  -Utensilios de cocina  -Cocina americana  -Abanicar  -Muebles de exterior  -Comedor al aire libre  -Patio  -Estufa  -Barbacoa  -Mesa de comedor  -Unidad completa ubicada en la planta baja  -Aislado  -Tendedero para ropa  -Cubiertas de enchufes de seguridad para niños  -Juegos de mesa/puzzles  -Desinfectante para manos  -Accesible para la audición",
+                "No se permite fumar en esta habitacion."
+            ]
         },
         {
-            "name": "Suite Premium Relax",
-            "price": 135,
-            "beds": 2,
-            "description": "Suite elegante con jacuzzi y todas las comodidades para una estancia de relax.",
+            "name": "Habitación Familiar Deluxe",
+            "price": 0,
+            "beds": "2 camas individuales y 1 cama completa y 2 camas queen",
+            "description": "Tamaño 431 ft²",
             "images": [
                 "images/room-maribao.webp",
                 "images/room-maribao.webp"
             ],
             "features": [
-                "cocina",
-                "baño",
-                "comedor",
-                "mini sala",
-                "mini bar"
+                "1 habitación",
+                "Baño privado",
+                "Vistas al mar",
+                "Climatización",
+                "Patio",
+                "Barbacoa"
             ],
-            "fullDetails": "Incluye jacuzzi privado, servicio a la habitación 24/7, minibar surtido, bata de baño y pantuflas, selección de almohadas."
+            "fullDetails": [
+                "Los huéspedes encontrarán fogones, nevera y utensilios de cocina en la cocina. La sala familiar también tiene una barbacoa. Esta habitación familiar cuenta con aire acondicionado, zona de estar, patio, vistas al mar y baño privado. La unidad ofrece 5 camas.",
+                "En tu cocina privada: -Productos de limpieza  -Refrigerador  -Utensilios de cocina  -Estufa  -Mesa de comedor.",
+                "En tu baño privado: -Artículos de aseo gratuitos  -Inodoro  -Bañera o ducha  -Baño de visitas  -Papel higiénico.",
+                "Vista: -Vistas al mar  -Vista al jardín  -Vista de punto de referencia.",
+                "Instalaciones del apartamento: -Climatización  -Cocina  -Sofá  -Enchufe cerca de la cama  -Productos de limpieza  -Suelo de baldosas/mármol  -Zona de estar  -Entrada privada  -Refrigerador  -Mosquitero  -Utensilios de cocina  -Cocina americana  -Abanicar  -Muebles de exterior  -Comedor al aire libre  -Patio  -Estufa  -Barbacoa  -Mesa de comedor  -Unidad completa ubicada en la planta baja  -Aislado  -Tendedero para ropa  -Cubiertas de enchufes de seguridad para niños  -Juegos de mesa/puzzles  -Desinfectante para manos  -Accesible para la audición",
+                "Fumar: Se permite fumar"
+            ]
         }
     ]
 }

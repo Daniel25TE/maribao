@@ -22,7 +22,7 @@ export async function loadOptions() {
         list.innerHTML += `
             <li class="option-item ver-mas">
                 <a href="servicios.html" aria-label="Ir a todos los servicios">
-                <img src="images/arrow-right-square-fill.svg">
+                <img src="images/arrow-right-square-fill.svg" alt="Todos los servicios.">
                 </a>
                 <span>Ver todos los servicios</span>
             </li>
