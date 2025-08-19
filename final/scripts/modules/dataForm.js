@@ -195,114 +195,10 @@ export function dataForm() {
 
         const metodoPago = form.metodoPago.value;
 
-        // Justo dentro del eventListener del submit
-        if (metodoPago === "transferencia") {
-            e.preventDefault(); // Detiene el envío normal
+        // 🔹 Generamos el número de transferencia siempre
+        const numeroTransferencia = Math.floor(100000 + Math.random() * 900000);
 
-            // Evita mostrar múltiples veces
-            if (document.querySelector('#transferencia-info')) return;
-
-            const numeroTransferencia = Math.floor(100000 + Math.random() * 900000);
-
-            // Guardamos temporalmente en memoria
-            localStorage.setItem("numeroTransferencia", numeroTransferencia);
-
-            const transferenciaInfo = document.createElement("div");
-            transferenciaInfo.id = "transferencia-info";
-            transferenciaInfo.innerHTML = `
-        <h3 style="margin-top: 1rem; font-size: 1.3rem;">Instrucciones para la transferencia</h3>
-        <p>Por favor realiza la transferencia bancaria en uno de los siguientes bancos, incluyendo el siguiente número en la descripción de la transferencia, de esta manera podremos localizar tu reserva en nuestro sistema de verificacion de pagos:</p>
-        <p style="text-align: center;"><strong style="font-size: 1.8rem; color: #333;">${numeroTransferencia}</strong></p>
-        <p>Una vez que completes la transferencia, haz clic en <strong>"Confirmar reserva"</strong> más abajo y listo! tu reserva sera confirmada automaticamente.</p>
-
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem; margin-top: 1.5rem;">
-            <div style="text-align: center;">
-                <img src="https://placeholdit.com/150x150/2b2626/f0ebeb?text=QR+CODE" alt="Banco 1" width="180" style="border-radius: 8px;" />
-                <p>Cuenta Banco 1</p>
-            </div>
-            <div style="text-align: center;">
-                <img src="https://placeholdit.com/150x150/2b2626/f0ebeb?text=QR+CODE" alt="Banco 2" width="180" style="border-radius: 8px;" />
-                <p>Cuenta Banco 2</p>
-            </div>
-            <div style="text-align: center;">
-                <img src="https://placeholdit.com/150x150/2b2626/f0ebeb?text=QR+CODE" alt="Banco 3" width="180" style="border-radius: 8px;" />
-                <p>Cuenta Venmo</p>
-            </div>
-        </div>
-        <p>Nota: Para ofrecerte una mejor experiencia nuestro sistema de verificacion de pagos con transferencia 
-        verificara que la transferencia se haya completado correctamente despues de que tu confirmes la reserva. Si hubo algun problema con tu transferencia un miembro de nuestro equipo se contactara contigo por correo electronico dentro de 1 hora con futuras indicaciones sobre como
-        completar la transferencia exitosamente. (Si no nos contactamos contigo dentro de una hora, significa que todo salio bien con la transferencia y te estaremos esperando en Maribao!.)</p>
-            
-        <button id="confirmar-transferencia" type="button" style="margin-top: 1.5rem; padding: 0.75rem 1.5rem; background-color: #007bff; color: white; border: none; border-radius: 6px; font-size: 1rem; cursor: pointer;">
-            Confirmar reserva
-        </button>
-    `;
-
-            form.appendChild(transferenciaInfo);
-
-            // Agregar listener al botón de confirmar reserva
-            document.querySelector("#confirmar-transferencia").addEventListener("click", async () => {
-                mostrarContador("Gracias por reservar con nosotros. Tu reserva se está procesando, esto solo tomará unos segundos.");
-                const numeroTransferencia = localStorage.getItem("numeroTransferencia");
-
-                const formData = {
-                    checkin: form.checkin.value,
-                    checkout: form.checkout.value,
-                    firstName: form.firstName.value,
-                    lastName: form.lastName.value,
-                    email: form.email.value,
-                    phone: form.phone.value,
-                    country: form.country.value,
-                    paperlessConfirm: form.paperlessConfirm.checked,
-                    bookingFor: form.bookingFor.value,
-                    travelForWork: form.travelForWork.value,
-                    specialRequests: form.specialRequests.value,
-                    arrivalTime: form.arrivalTime.value,
-                    addFlights: form.addFlights.checked,
-                    addCar: form.addCar.checked,
-                    addTaxi: form.addTaxi.checked,
-                    fullGuestName: form.fullGuestName.value,
-                    cuarto: data.name,
-                    metodoPago: "transferencia",
-                    numeroTransferencia: numeroTransferencia,
-                    total: totalReserva
-                };
-
-                try {
-                    const response = await fetch("https://hotel-backend-3jw7.onrender.com/reserva", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(formData),
-                    });
-
-                    const result = await response.json();
-
-                    if (result.success) {
-                        localStorage.setItem("reservaConfirmada", JSON.stringify({
-                            numeroReserva: result.numeroReserva,
-                            fullName: `${formData.firstName} ${formData.lastName}`,
-                            cuarto: data.name,
-                            checkin: formData.checkin,
-                            checkout: formData.checkout,
-                            total: totalReserva
-                        }));
-
-                        const params = new URLSearchParams({ ...formData });
-                        localStorage.removeItem("numeroTransferencia");
-
-                        window.location.href = `thanks.html?${params.toString()}`;
-                    } else {
-                        alert("No se pudo completar la reserva. Intenta nuevamente.");
-                    }
-
-                } catch (error) {
-                    console.error("Error al enviar reserva por transferencia:", error);
-                    alert("Error al conectar con el servidor.");
-                }
-            });
-
-            return; // Evita que se siga procesando el submit normal
-        }
+        // Datos comunes a todos los métodos
         const formData = {
             checkin: form.checkin.value,
             checkout: form.checkout.value,
@@ -322,95 +218,87 @@ export function dataForm() {
             fullGuestName: form.fullGuestName.value,
             cuarto: data.name,
             metodoPago: metodoPago,
-            numeroTransferencia: "No aplica",
+            numeroTransferencia: numeroTransferencia, // siempre presente
             total: totalReserva
         };
+
+        if (metodoPago === "transferencia") {
+            if (document.querySelector('#transferencia-info')) return;
+
+            const transferenciaInfo = document.createElement("div");
+            transferenciaInfo.id = "transferencia-info";
+            transferenciaInfo.innerHTML = `
+                <h3>Instrucciones para la transferencia</h3>
+                <p>Número de transferencia: <strong>${numeroTransferencia}</strong></p>
+                <p>Escanea el QR o realiza la transferencia con este número.</p>
+                <button id="confirmar-transferencia" type="button">Confirmar reserva</button>
+            `;
+            form.appendChild(transferenciaInfo);
+
+            document.querySelector("#confirmar-transferencia").addEventListener("click", async () => {
+                mostrarContador("Procesando tu reserva...");
+                try {
+                    const response = await fetch("https://hotel-backend-3jw7.onrender.com/reserva", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(formData),
+                    });
+                    const result = await response.json();
+                    if (result.success) {
+                        const params = new URLSearchParams(formData);
+                        window.location.href = `thanks.html?${params.toString()}`;
+                    } else {
+                        alert("No se pudo completar la reserva.");
+                    }
+                } catch (error) {
+                    console.error(error);
+                    alert("Error al conectar con el servidor.");
+                }
+            });
+
+            return; // detener submit normal
+        }
+
         if (metodoPago === "tarjeta") {
-            mostrarContador("Gracias por reservar con nosotros. Serás redirigido a la plataforma de pagos en unos segundos.");
-            // PAGO CON TARJETA (Stripe)
+            mostrarContador("Redirigiéndote a Stripe...");
             try {
                 const idReservaTemporal = Math.floor(100000 + Math.random() * 900000);
-
                 const response = await fetch("https://hotel-backend-3jw7.onrender.com/create-checkout-session", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
-                        amount: totalReserva * 100, // Ajusta si usas precios reales
+                        amount: totalReserva * 100,
                         currency: "usd",
                         description: `Reserva para ${formData.firstName} ${formData.lastName}`,
-                        metadata: {
-                            reservaId: idReservaTemporal,
-                            datosReserva: JSON.stringify(formData)
-                        }
+                        metadata: { reservaId: idReservaTemporal, datosReserva: JSON.stringify(formData) }
                     }),
                 });
-
                 const result = await response.json();
-
-                if (result.url) {
-                    window.location.href = result.url;
-                } else {
-                    alert("No se pudo iniciar el pago con tarjeta.");
-                }
+                if (result.url) window.location.href = result.url;
+                else alert("No se pudo iniciar el pago con tarjeta.");
             } catch (error) {
-                console.error("Error iniciando pago con Stripe:", error);
-                alert("Error al procesar el pago. Intenta de nuevo.");
+                console.error(error);
+                alert("Error al procesar el pago.");
             }
-
         } else {
-            mostrarContador("Gracias por reservar con nosotros. Tu reserva se está procesando, esto solo tomará unos segundos.");
-            // Pago en efectivo
+            mostrarContador("Procesando tu reserva en efectivo...");
             try {
                 const response = await fetch("https://hotel-backend-3jw7.onrender.com/reserva", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(formData),
                 });
-
                 const result = await response.json();
-
                 if (result.success) {
-
-                    localStorage.setItem("reservaConfirmada", JSON.stringify({
-                        numeroReserva: result.numeroReserva,
-                        fullName: `${form.firstName.value} ${form.lastName.value}`,
-                        cuarto: data.name,
-                        checkin: form.checkin.value,
-                        checkout: form.checkout.value,
-                        total: totalReserva
-                    }));
-
-                    const params = new URLSearchParams({
-                        checkin: form.checkin.value,
-                        checkout: form.checkout.value,
-                        firstName: form.firstName.value,
-                        lastName: form.lastName.value,
-                        email: form.email.value,
-                        phone: form.phone.value,
-                        country: form.country.value,
-                        paperlessConfirm: form.paperlessConfirm.checked,
-                        bookingFor: form.bookingFor.value,
-                        travelForWork: form.travelForWork.value,
-                        fullGuestName: form.fullGuestName.value,
-                        specialRequests: form.specialRequests.value,
-                        arrivalTime: form.arrivalTime.value,
-                    });
-                    if (metodoPago === 'transferencia' && numeroTransferencia) {
-                        params.append("numeroTransferencia", numeroTransferencia);
-                    }
+                    const params = new URLSearchParams(formData);
                     window.location.href = `thanks.html?${params.toString()}`;
                 } else {
-                    alert("Error al procesar la reserva. Intenta de nuevo.");
+                    alert("Error al procesar la reserva.");
                 }
             } catch (error) {
-                console.error("Error al conectar con el servidor:", error);
-                alert("No se pudo conectar con el servidor. Intenta más tarde.");
+                console.error(error);
+                alert("Error al conectar con el servidor.");
             }
         }
-
-
-
     });
-
-
 }
