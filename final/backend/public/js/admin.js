@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <td>${reserva.metodo_pago}</td>
           <td>${reserva.special_requests}</td>
           <td>${reserva.arrival_time}</td>
+          <td>${reserva.numero_Transferencia}</td>
         `;
                 tbody.appendChild(row);
             });
