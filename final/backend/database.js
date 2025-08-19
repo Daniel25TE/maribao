@@ -24,7 +24,8 @@ export async function insertarReserva(datos) {
         addCar,
         addTaxi,
         fullGuestName,
-        metodoPago
+        metodoPago,
+        numeroTransferencia
     } = datos;
 
     const { data, error } = await supabase
@@ -46,7 +47,8 @@ export async function insertarReserva(datos) {
                 add_car: addCar,
                 add_taxi: addTaxi,
                 full_guest_name: fullGuestName,
-                metodo_pago: metodoPago
+                metodo_pago: metodoPago,
+                numero_Transferencia: numeroTransferencia
             }
         ])
         .select(); // 👈 fuerza retorno de datos
