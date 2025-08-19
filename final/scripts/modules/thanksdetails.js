@@ -43,6 +43,10 @@ export function thanksdetails() {
 
         results.innerHTML = `
             <h2>${titulo}</h2>
+            <p><strong>Número de Reserva: </strong> ${metodoPago === 'transferencia'
+                ? numeroTransferencia
+                : 'No aplica'
+            }</p>
             <p>Gracias por tu reserva, ${myInfo.get('firstName')} ${myInfo.get('lastName')}</p>
             <p><strong>Check-in:</strong> ${myInfo.get('checkin')}</p>
             <p><strong>Check-out:</strong> ${myInfo.get('checkout')}</p>

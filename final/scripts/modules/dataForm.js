@@ -204,6 +204,7 @@ export function dataForm() {
 
             const numeroTransferencia = Math.floor(100000 + Math.random() * 900000);
 
+
             // Guardamos temporalmente en memoria
             localStorage.setItem("numeroTransferencia", numeroTransferencia);
 
