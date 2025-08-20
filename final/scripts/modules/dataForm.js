@@ -117,20 +117,6 @@ export function dataForm() {
 
         </form>
     `;
-    const picker = new Litepicker({
-        element: document.getElementById('checkin'),
-        elementEnd: document.getElementById('checkout'),
-        format: 'YYYY-MM-DD',
-        singleMode: false,
-        numberOfMonths: 2,
-        numberOfColumns: 2,
-        minDate: new Date(),
-    });
-
-    picker.on('selected', () => {
-        calcularTotal();
-    });
-
     async function cargarFechasOcupadas() {
         try {
             const res = await fetch('https://hotel-backend-3jw7.onrender.com/fechas-ocupadas');
@@ -147,7 +133,17 @@ export function dataForm() {
                 to: normalizarFecha(f.checkout)
             }));
 
-            picker.setOptions({
+            console.log('📅 Fechas ocupadas cargadas:', rangosBloqueados);
+
+            // 🔹 Crear picker con fechas bloqueadas desde el inicio
+            const picker = new Litepicker({
+                element: document.getElementById('checkin'),
+                elementEnd: document.getElementById('checkout'),
+                format: 'YYYY-MM-DD',
+                singleMode: false,
+                numberOfMonths: 2,
+                numberOfColumns: 2,
+                minDate: new Date(),
                 disallow: rangosBloqueados,
                 highlightedDays: rangosBloqueados.map(r => ({
                     from: r.from,
@@ -157,7 +153,7 @@ export function dataForm() {
                 tooltipText: 'Fecha ocupada'
             });
 
-            console.log('📅 Fechas ocupadas cargadas:', rangosBloqueados);
+            picker.on('selected', () => calcularTotal());
 
         } catch (error) {
             console.error('❌ Error cargando fechas ocupadas:', error);
@@ -165,6 +161,7 @@ export function dataForm() {
     }
 
     cargarFechasOcupadas();
+
 
 
     const metodoPagoSelect = document.getElementById("metodoPago");
