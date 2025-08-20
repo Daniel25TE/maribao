@@ -134,7 +134,7 @@ export function dataForm() {
     async function cargarFechasOcupadas() {
         try {
             const res = await fetch('https://hotel-backend-3jw7.onrender.com/reservas-fechas', {
-                credentials: 'include' // necesario si usas sesiones
+                // credentials: 'include' // necesario si usas sesiones
             });
             const fechas = await res.json();
 
