@@ -1067,3 +1067,10 @@ textarea:invalid {
     max-width: 90%;
     font-family: system-ui, sans-serif;
 }
+
+/* Resalta las fechas ocupadas en rojo */
+.litepicker .fecha-ocupada {
+    background-color: #ff6b6b !important;
+    color: white !important;
+    border-radius: 4px;
+}
