@@ -121,9 +121,9 @@ export function dataForm() {
     async function cargarFechasOcupadas() {
         try {
             const res = await fetch('https://hotel-backend-3jw7.onrender.com/fechas-ocupadas');
+            console.log('✅ Fetch ejecutado, status:', res.status);  // 🔹
             const fechas = await res.json();
-
-            // Convertir a rangos que Litepicker puede entender
+            console.log('📅 Fechas recibidas:', fechas);            // 🔹
             return fechas.map(f => ({
                 from: f.checkin,
                 to: f.checkout
