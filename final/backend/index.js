@@ -346,15 +346,16 @@ app.get('/reservas', protegerRuta, async (req, res) => {
         res.status(500).json({ error: 'No se pudieron obtener las reservas' });
     }
 });
-// GET /reservas-fechas - retorna solo checkin y checkout
-app.get('/reservas-fechas', protegerRuta, async (req, res) => {
+
+// GET /fechas-ocupadas - público
+app.get('/fechas-ocupadas', async (req, res) => {
     try {
         const reservas = await obtenerReservas();
         const fechas = reservas.map(r => ({
             checkin: r.checkin_date,
             checkout: r.checkout_date
         }));
-        res.status(200).json(fechas);
+        res.json(fechas);
     } catch (error) {
         console.error('❌ Error al obtener fechas de reservas:', error.message);
         res.status(500).json({ error: 'No se pudieron obtener las fechas de reservas' });
