@@ -117,53 +117,46 @@ export function dataForm() {
 
         </form>
     `;
-    const picker = new Litepicker({
-        element: document.getElementById('checkin'),
-        elementEnd: document.getElementById('checkout'),
-        format: 'YYYY-MM-DD',
-        singleMode: false,
-        numberOfMonths: 2,
-        numberOfColumns: 2,
-        minDate: new Date(),
-    });
-    picker.on('selected', () => {
-        calcularTotal();
-    });
-    // 1️⃣ Traer fechas ocupadas del backend
-    // 1️⃣ Traer fechas ocupadas del backend
+    // 1️⃣ Función para traer fechas ocupadas del backend
     async function cargarFechasOcupadas() {
         try {
             const res = await fetch('https://hotel-backend-3jw7.onrender.com/fechas-ocupadas');
-
             const fechas = await res.json();
 
-            // 2️⃣ Convertir a rangos que Litepicker puede entender
-            const rangosBloqueados = fechas.map(f => ({
-                from: f.checkin,
-                to: f.checkout
+            // Convertir a rangos que Litepicker puede entender
+            return fechas.map(f => ({
+                from: f.checkin_date,   // 👈 coincide con tu database.js
+                to: f.checkout_date
             }));
-
-            // 3️⃣ Actualizar Litepicker con fechas bloqueadas
-            picker.setOptions({
-                disallow: rangosBloqueados,
-                tooltipText: 'Fecha ocupada',
-                highlightedDays: rangosBloqueados.map(r => ({
-                    from: r.from,
-                    to: r.to,
-                    className: 'fecha-ocupada' // clase CSS que pondremos
-                }))
-            });
-
-            console.log('📅 Fechas ocupadas cargadas:', rangosBloqueados);
-
         } catch (error) {
             console.error('❌ Error cargando fechas ocupadas:', error);
+            return [];
         }
     }
 
+    // 2️⃣ Inicializar Litepicker después de cargar fechas
+    (async () => {
+        const rangosBloqueados = await cargarFechasOcupadas();
 
-    // Ejecutar la función al cargar el formulario
-    cargarFechasOcupadas();
+        const picker = new Litepicker({
+            element: document.getElementById('checkin'),
+            elementEnd: document.getElementById('checkout'),
+            format: 'YYYY-MM-DD',
+            singleMode: false,
+            numberOfMonths: 2,
+            numberOfColumns: 2,
+            minDate: new Date(),
+            disallow: rangosBloqueados,          // ❌ Bloquea fechas ocupadas
+            highlightedDays: rangosBloqueados.map(r => ({
+                from: r.from,
+                to: r.to,
+                className: 'fecha-ocupada'      // 🔴 Colorea en rojo
+            })),
+            tooltipText: 'Fecha ocupada'
+        });
+
+        picker.on('selected', () => calcularTotal());
+    })();
 
     const metodoPagoSelect = document.getElementById("metodoPago");
     const submitBtn = document.getElementById("submitBtn");
