@@ -139,20 +139,20 @@ export function dataForm() {
 
             // 2️⃣ Convertir a rangos que Litepicker puede entender
             const rangosBloqueados = fechas.map(f => ({
-                from: f.checkin,
-                to: f.checkout
+                from: new Date(f.checkin),
+                to: new Date(f.checkout)
             }));
 
-            // 3️⃣ Actualizar Litepicker con fechas bloqueadas
             picker.setOptions({
                 disallow: rangosBloqueados,
-                tooltipText: 'Fecha ocupada',
                 highlightedDays: rangosBloqueados.map(r => ({
                     from: r.from,
                     to: r.to,
-                    className: 'fecha-ocupada' // clase CSS que pondremos
-                }))
+                    className: 'fecha-ocupada'
+                })),
+                tooltipText: 'Fecha ocupada'
             });
+
 
             console.log('📅 Fechas ocupadas cargadas:', rangosBloqueados);
 
