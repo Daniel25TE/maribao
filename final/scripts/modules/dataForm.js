@@ -139,8 +139,8 @@ export function dataForm() {
 
             // 2️⃣ Convertir a rangos que Litepicker puede entender
             const rangosBloqueados = fechas.map(f => ({
-                from: f.checkin,
-                to: f.checkout
+                from: f.checkin_date,
+                to: f.checkout_date
             }));
 
             // 3️⃣ Actualizar Litepicker con fechas bloqueadas
