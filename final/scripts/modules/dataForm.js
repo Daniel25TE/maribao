@@ -1,7 +1,3 @@
-import Litepicker from 'litepicker';
-import 'litepicker/dist/css/litepicker.css';
-
-
 export function dataForm() {
     const data = JSON.parse(localStorage.getItem("selectedRoom"));
     data.price = Number(data.price.replace(/[^\d.]/g, '')) || 0;
@@ -129,6 +125,9 @@ export function dataForm() {
         numberOfMonths: 2,
         numberOfColumns: 2,
         minDate: new Date(),
+    });
+    picker.on('selected', () => {
+        calcularTotal();
     });
     const metodoPagoSelect = document.getElementById("metodoPago");
     const submitBtn = document.getElementById("submitBtn");
