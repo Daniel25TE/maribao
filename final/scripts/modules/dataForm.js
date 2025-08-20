@@ -1,3 +1,7 @@
+import Litepicker from 'litepicker';
+import 'litepicker/dist/css/litepicker.css';
+
+
 export function dataForm() {
     const data = JSON.parse(localStorage.getItem("selectedRoom"));
     data.price = Number(data.price.replace(/[^\d.]/g, '')) || 0;
@@ -23,11 +27,11 @@ export function dataForm() {
                 <legend>Fechas de reserva</legend>
                 <label>
                     Fecha de entrada (Check-in)*
-                    <input type="date" name="checkin" id="checkin" required>
+                    <input type="text" name="checkin" id="checkin" required>
                 </label>
                 <label>
                     Fecha de salida (Check-out)*
-                    <input type="date" name="checkout" id="checkout" required>
+                    <input type="text" name="checkout" id="checkout" required>
                 </label>
                 <p><strong>Total a pagar:</strong> <span id="total-price">$0</span></p>
             </fieldset>
@@ -117,6 +121,15 @@ export function dataForm() {
 
         </form>
     `;
+    const picker = new Litepicker({
+        element: document.getElementById('checkin'),
+        elementEnd: document.getElementById('checkout'),
+        format: 'YYYY-MM-DD',
+        singleMode: false,
+        numberOfMonths: 2,
+        numberOfColumns: 2,
+        minDate: new Date(),
+    });
     const metodoPagoSelect = document.getElementById("metodoPago");
     const submitBtn = document.getElementById("submitBtn");
 
