@@ -48,10 +48,8 @@ ${datosReserva.metodoPago ? `- Método de pago: ${datosReserva.metodoPago === 't
                 datosReserva.metodoPago === 'transferencia' ? 'Transferencia bancaria' :
                     'Efectivo'
                 }` : ''}
-- Número de transferencia: ${datosReserva.metodoPago === 'transferencia'
-                ? datosReserva.numeroTransferencia
-                : 'No aplica'
-            }
+- Número de transferencia: ${datosReserva.numeroTransferencia}
+
 
 
 Solicitudes especiales: ${datosReserva.specialRequests || 'Ninguna'}
@@ -78,10 +76,8 @@ ${datosReserva.metodoPago ? `- Método de pago: ${datosReserva.metodoPago === 't
                 datosReserva.metodoPago === 'transferencia' ? 'Transferencia bancaria' :
                     'Efectivo'
                 }` : ''}
-- Número de transferencia: ${datosReserva.metodoPago === 'transferencia'
-                ? datosReserva.numeroTransferencia
-                : 'No aplica'
-            }
+- Número de transferencia: ${datosReserva.numeroTransferencia}
+
 
 ${numeroReserva ? `Número de reserva: ${numeroReserva}` : ''}
 
