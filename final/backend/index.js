@@ -39,6 +39,8 @@ async function enviarCorreosReserva(datosReserva, sessionId = null) {
         text: `
 Hola ${datosReserva.firstName} ${datosReserva.lastName}, gracias por tu reserva${sessionId ? ' pagada con tarjeta' : ''}.
 
+- Número de Reserva: ${datosReserva.numeroTransferencia}
+
 Detalles de tu estadía:
 - Cuarto: ${datosReserva.cuarto}
 - Check-in: ${datosReserva.checkin}
@@ -48,7 +50,7 @@ ${datosReserva.metodoPago ? `- Método de pago: ${datosReserva.metodoPago === 't
                 datosReserva.metodoPago === 'transferencia' ? 'Transferencia bancaria' :
                     'Efectivo'
                 }` : ''}
-- Número de transferencia: ${datosReserva.numeroTransferencia}
+
 
 
 
@@ -67,6 +69,8 @@ Hotel Maribao
         text: `
 Se ha realizado una nueva reserva${sessionId ? ' pagada con tarjeta' : ''} en tu sitio web.
 
+- Número de Reserva: ${datosReserva.numeroTransferencia}
+
 👤 Nombre del huésped: ${datosReserva.firstName} ${datosReserva.lastName}
 📧 Correo: ${datosReserva.email}
 📅 Check-in: ${datosReserva.checkin}
@@ -76,7 +80,7 @@ ${datosReserva.metodoPago ? `- Método de pago: ${datosReserva.metodoPago === 't
                 datosReserva.metodoPago === 'transferencia' ? 'Transferencia bancaria' :
                     'Efectivo'
                 }` : ''}
-- Número de transferencia: ${datosReserva.numeroTransferencia}
+
 
 
 
