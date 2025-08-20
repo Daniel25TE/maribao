@@ -23,7 +23,7 @@ const corsOptions = {
     origin: 'https://daniel25te.github.io',  // Cambia por el URL de tu frontend
     credentials: true,  // necesario para enviar cookies en requests cross-origin
 };
-async function enviarCorreosReserva(datosReserva, numeroReserva = null, sessionId = null) {
+async function enviarCorreosReserva(datosReserva, sessionId = null) {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -43,7 +43,7 @@ Detalles de tu estadía:
 - Cuarto: ${datosReserva.cuarto}
 - Check-in: ${datosReserva.checkin}
 - Check-out: ${datosReserva.checkout}
-${numeroReserva ? `- Número de reserva: ${numeroReserva}` : ''}
+
 ${datosReserva.metodoPago ? `- Método de pago: ${datosReserva.metodoPago === 'tarjeta' ? 'Tarjeta (Stripe)' :
                 datosReserva.metodoPago === 'transferencia' ? 'Transferencia bancaria' :
                     'Efectivo'
@@ -79,7 +79,7 @@ ${datosReserva.metodoPago ? `- Método de pago: ${datosReserva.metodoPago === 't
 - Número de transferencia: ${datosReserva.numeroTransferencia}
 
 
-${numeroReserva ? `Número de reserva: ${numeroReserva}` : ''}
+
 
 🔍 Ver reservas: https://hotel-backend-3jw7.onrender.com/login
 
@@ -195,17 +195,16 @@ app.post('/reserva',
         console.log("🧾 Datos recibidos:", req.body);
 
         const data = req.body;
-        const numeroReserva = Math.floor(100000 + Math.random() * 900000);
+
 
         try {
             await insertarReserva(data);
-            await enviarCorreosReserva(data, numeroReserva);
+            await enviarCorreosReserva(data);
 
             console.log("📧 Notificación enviada al empleador:", process.env.EMAIL_EMPLEADOR);
 
             res.status(200).json({
                 success: true,
-                numeroReserva,
                 message: 'Reserva completada con éxito',
             });
 
