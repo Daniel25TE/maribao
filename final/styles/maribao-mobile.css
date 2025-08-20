@@ -1070,7 +1070,7 @@ textarea:invalid {
 
 /* Resalta las fechas ocupadas en rojo */
 .litepicker .fecha-ocupada {
-    background-color: #ff6b6b !important;
-    color: white !important;
+    background-color: #ff6b6b;
+    color: white;
     border-radius: 4px;
 }
