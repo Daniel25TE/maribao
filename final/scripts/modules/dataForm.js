@@ -125,8 +125,8 @@ export function dataForm() {
 
             // Convertir a rangos que Litepicker puede entender
             return fechas.map(f => ({
-                from: f.checkin_date,   // 👈 coincide con tu database.js
-                to: f.checkout_date
+                from: f.checkin,
+                to: f.checkout
             }));
         } catch (error) {
             console.error('❌ Error cargando fechas ocupadas:', error);
