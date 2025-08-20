@@ -126,21 +126,25 @@ export function dataForm() {
         numberOfColumns: 2,
         minDate: new Date(),
     });
+
     picker.on('selected', () => {
         calcularTotal();
     });
-    // 1️⃣ Traer fechas ocupadas del backend
-    // 1️⃣ Traer fechas ocupadas del backend
+
     async function cargarFechasOcupadas() {
         try {
             const res = await fetch('https://hotel-backend-3jw7.onrender.com/fechas-ocupadas');
-
             const fechas = await res.json();
 
-            // 2️⃣ Convertir a rangos que Litepicker puede entender
+            function normalizarFecha(d) {
+                const date = new Date(d);
+                date.setHours(0, 0, 0, 0);
+                return date;
+            }
+
             const rangosBloqueados = fechas.map(f => ({
-                from: new Date(f.checkin),
-                to: new Date(f.checkout)
+                from: normalizarFecha(f.checkin),
+                to: normalizarFecha(f.checkout)
             }));
 
             picker.setOptions({
@@ -153,7 +157,6 @@ export function dataForm() {
                 tooltipText: 'Fecha ocupada'
             });
 
-
             console.log('📅 Fechas ocupadas cargadas:', rangosBloqueados);
 
         } catch (error) {
@@ -161,9 +164,8 @@ export function dataForm() {
         }
     }
 
-
-    // Ejecutar la función al cargar el formulario
     cargarFechasOcupadas();
+
 
     const metodoPagoSelect = document.getElementById("metodoPago");
     const submitBtn = document.getElementById("submitBtn");
