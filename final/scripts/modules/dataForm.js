@@ -117,6 +117,27 @@ export function dataForm() {
 
         </form>
     `;
+    // Inicializar flatpickr por defecto (sin bloqueos)
+    const checkinPicker = flatpickr("#checkin", {
+        altInput: true,
+        altFormat: "F j, Y",
+        dateFormat: "Y-m-d",
+        minDate: "today",
+        onChange: function (selectedDates, dateStr, instance) {
+            if (selectedDates.length > 0) {
+                checkoutPicker.set("minDate", dateStr);
+            }
+        }
+    });
+
+    const checkoutPicker = flatpickr("#checkout", {
+        altInput: true,
+        altFormat: "F j, Y",
+        dateFormat: "Y-m-d",
+        minDate: "today"
+    });
+
+    // Luego cargas las fechas ocupadas y actualizas los calendarios
     async function cargarFechasOcupadas(roomName) {
         try {
             const res = await fetch(`https://hotel-backend-3jw7.onrender.com/fechas-ocupadas?roomName=${encodeURIComponent(roomName)}`);
@@ -129,35 +150,18 @@ export function dataForm() {
 
             console.log(`📅 Fechas ocupadas para ${roomName}:`, rangosBloqueados);
 
-            // Aquí inicializas flatpickr igual que antes pero con rangosBloqueados
-            flatpickr("#checkin", {
-                altInput: true,
-                altFormat: "F j, Y",
-                dateFormat: "Y-m-d",
-                minDate: "today",
-                disable: rangosBloqueados,
-                onChange: function (selectedDates, dateStr, instance) {
-                    if (selectedDates.length > 0) {
-                        checkoutPicker.set("minDate", dateStr);
-                    }
-                }
-            });
-
-            const checkoutPicker = flatpickr("#checkout", {
-                altInput: true,
-                altFormat: "F j, Y",
-                dateFormat: "Y-m-d",
-                minDate: "today",
-                disable: rangosBloqueados
-            });
+            // Actualizar flatpickr con las fechas bloqueadas
+            checkinPicker.set("disable", rangosBloqueados);
+            checkoutPicker.set("disable", rangosBloqueados);
 
         } catch (error) {
             console.error("❌ Error cargando fechas ocupadas:", error);
         }
     }
 
-
+    // Ejecutar
     cargarFechasOcupadas(data.name);
+
 
 
     const metodoPagoSelect = document.getElementById("metodoPago");
