@@ -117,33 +117,30 @@ export function dataForm() {
 
         </form>
     `;
+    const picker = new Litepicker({
+        element: document.getElementById('checkin'),
+        elementEnd: document.getElementById('checkout'),
+        format: 'YYYY-MM-DD',
+        singleMode: false,
+        numberOfMonths: 2,
+        numberOfColumns: 2,
+        minDate: new Date(),
+    });
+
+    picker.on('selected', () => calcularTotal());
+
     async function cargarFechasOcupadas() {
         try {
             const res = await fetch('https://hotel-backend-3jw7.onrender.com/fechas-ocupadas');
             const fechas = await res.json();
 
-            function normalizarFecha(d) {
-                const date = new Date(d);
-                date.setHours(0, 0, 0, 0);
-                return date;
-            }
-
             const rangosBloqueados = fechas.map(f => ({
-                from: normalizarFecha(f.checkin),
-                to: normalizarFecha(f.checkout)
+                from: f.checkin,
+                to: f.checkout
             }));
 
-            console.log('📅 Fechas ocupadas cargadas:', rangosBloqueados);
-
-            // 🔹 Crear picker con fechas bloqueadas desde el inicio
-            const picker = new Litepicker({
-                element: document.getElementById('checkin'),
-                elementEnd: document.getElementById('checkout'),
-                format: 'YYYY-MM-DD',
-                singleMode: false,
-                numberOfMonths: 2,
-                numberOfColumns: 2,
-                minDate: new Date(),
+            // 🔹 Actualizar picker
+            picker.setOptions({
                 disallow: rangosBloqueados,
                 highlightedDays: rangosBloqueados.map(r => ({
                     from: r.from,
@@ -153,14 +150,14 @@ export function dataForm() {
                 tooltipText: 'Fecha ocupada'
             });
 
-            picker.on('selected', () => calcularTotal());
-
+            console.log('📅 Fechas ocupadas cargadas:', rangosBloqueados);
         } catch (error) {
             console.error('❌ Error cargando fechas ocupadas:', error);
         }
     }
 
     cargarFechasOcupadas();
+
 
 
 
