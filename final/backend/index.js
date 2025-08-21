@@ -3,7 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
-import { insertarReserva, obtenerReservas } from './database.js';
+import { insertarReserva, obtenerReservas, obtenerFechasOcupadasPorCuarto } from './database.js';
 import session from 'express-session';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -347,20 +347,22 @@ app.get('/reservas', protegerRuta, async (req, res) => {
     }
 });
 
-// GET /fechas-ocupadas - público
+// GET /fechas-ocupadas - público (filtra por room)
 app.get('/fechas-ocupadas', async (req, res) => {
+    const roomName = req.query.roomName;
+    if (!roomName) {
+        return res.status(400).json({ error: 'Parámetro "roomName" es requerido' });
+    }
+
     try {
-        const reservas = await obtenerReservas();
-        const fechas = reservas.map(r => ({
-            checkin: r.checkin_date,
-            checkout: r.checkout_date
-        }));
+        const fechas = await obtenerFechasOcupadasPorCuarto(roomName);
         res.json(fechas);
     } catch (error) {
         console.error('❌ Error al obtener fechas de reservas:', error.message);
         res.status(500).json({ error: 'No se pudieron obtener las fechas de reservas' });
     }
 });
+
 
 app.get('/', (req, res) => {
     res.send('Servidor del Hotel Maribao funcionando correctamente ✅');

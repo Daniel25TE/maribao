@@ -74,4 +74,22 @@ export async function obtenerReservas() {
 
     return data;
 }
+export async function obtenerFechasOcupadasPorCuarto(roomName) {
+    const { data, error } = await supabase
+        .from('reservas')
+        .select('checkin_date, checkout_date')
+        .eq('room_name', roomName);
+
+    if (error) {
+        console.error("❌ Error al obtener fechas ocupadas:", error);
+        throw error;
+    }
+
+    // Normalizamos a las claves que consumirá el front
+    return (data || []).map(r => ({
+        checkin: r.checkin_date,
+        checkout: r.checkout_date,
+    }));
+}
+
 

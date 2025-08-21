@@ -117,42 +117,38 @@ export function dataForm() {
 
         </form>
     `;
-    async function cargarFechasOcupadas() {
+    async function cargarFechasOcupadas(roomName) {
         try {
-            const res = await fetch('https://hotel-backend-3jw7.onrender.com/fechas-ocupadas');
+            const res = await fetch(`https://hotel-backend-3jw7.onrender.com/fechas-ocupadas?roomName=${encodeURIComponent(roomName)}`);
             const fechas = await res.json();
 
-            // 🔹 Generar array de fechas ocupadas en formato YYYY-MM-DD
-            const fechasOcupadas = [];
-            fechas.forEach(f => {
-                let inicio = new Date(f.checkin);
-                let fin = new Date(f.checkout);
+            const rangosBloqueados = fechas.map(f => ({
+                from: f.checkin,
+                to: f.checkout
+            }));
 
-                while (inicio <= fin) {
-                    fechasOcupadas.push(inicio.toISOString().split('T')[0]);
-                    inicio.setDate(inicio.getDate() + 1);
-                }
-            });
+            console.log(`📅 Fechas ocupadas para ${roomName}:`, rangosBloqueados);
 
-            console.log("📅 Fechas ocupadas:", fechasOcupadas);
-
-            // 🔹 Inicializar flatpickr para Check-in
-            const checkinPicker = flatpickr("#checkin", {
+            // Aquí inicializas flatpickr igual que antes pero con rangosBloqueados
+            flatpickr("#checkin", {
+                altInput: true,
+                altFormat: "F j, Y",
                 dateFormat: "Y-m-d",
                 minDate: "today",
-                disable: fechasOcupadas,
-                onChange: function (selectedDates) {
+                disable: rangosBloqueados,
+                onChange: function (selectedDates, dateStr, instance) {
                     if (selectedDates.length > 0) {
-                        checkoutPicker.set("minDate", selectedDates[0]); // Check-out no puede ser antes del check-in
+                        checkoutPicker.set("minDate", dateStr);
                     }
                 }
             });
 
-            // 🔹 Inicializar flatpickr para Check-out
             const checkoutPicker = flatpickr("#checkout", {
+                altInput: true,
+                altFormat: "F j, Y",
                 dateFormat: "Y-m-d",
                 minDate: "today",
-                disable: fechasOcupadas,
+                disable: rangosBloqueados
             });
 
         } catch (error) {
@@ -160,7 +156,8 @@ export function dataForm() {
         }
     }
 
-    cargarFechasOcupadas();
+
+    cargarFechasOcupadas(data.name);
 
 
     const metodoPagoSelect = document.getElementById("metodoPago");

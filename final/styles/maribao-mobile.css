@@ -1067,9 +1067,3 @@ textarea:invalid {
     max-width: 90%;
     font-family: system-ui, sans-serif;
 }
-
-.flatpickr-day.fecha-ocupada {
-    background-color: #ff6b6b;
-    color: white;
-    cursor: not-allowed;
-}
