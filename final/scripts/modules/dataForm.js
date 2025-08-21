@@ -122,23 +122,21 @@ export function dataForm() {
             const res = await fetch(`https://hotel-backend-3jw7.onrender.com/fechas-ocupadas?roomName=${encodeURIComponent(roomName)}`);
             const fechas = await res.json();
 
-            const rangosBloqueados = fechas.length > 0
-                ? fechas.map(f => ({
-                    from: f.checkin,
-                    to: f.checkout
-                }))
-                : []; // 👈 si no hay fechas, enviamos array vacío
+            const rangosBloqueados = fechas.map(f => ({
+                from: f.checkin,
+                to: f.checkout
+            }));
 
             console.log(`📅 Fechas ocupadas para ${roomName}:`, rangosBloqueados);
 
-            // inicializar flatpickr SIEMPRE
-            const checkinPicker = flatpickr("#checkin", {
+            // Aquí inicializas flatpickr igual que antes pero con rangosBloqueados
+            flatpickr("#checkin", {
                 altInput: true,
                 altFormat: "F j, Y",
                 dateFormat: "Y-m-d",
                 minDate: "today",
                 disable: rangosBloqueados,
-                onChange: function (selectedDates, dateStr) {
+                onChange: function (selectedDates, dateStr, instance) {
                     if (selectedDates.length > 0) {
                         checkoutPicker.set("minDate", dateStr);
                     }
@@ -155,15 +153,11 @@ export function dataForm() {
 
         } catch (error) {
             console.error("❌ Error cargando fechas ocupadas:", error);
-            // fallback: calendario básico
-            flatpickr("#checkin", {});
-            flatpickr("#checkout", {});
         }
     }
 
+
     cargarFechasOcupadas(data.name);
-
-
 
 
     const metodoPagoSelect = document.getElementById("metodoPago");
