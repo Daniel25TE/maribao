@@ -117,50 +117,52 @@ export function dataForm() {
 
         </form>
     `;
-    // Inicializar flatpickr por defecto (sin bloqueos)
-    const checkinPicker = flatpickr("#checkin", {
-        altInput: true,
-        altFormat: "F j, Y",
-        dateFormat: "Y-m-d",
-        minDate: "today",
-        onChange: function (selectedDates, dateStr, instance) {
-            if (selectedDates.length > 0) {
-                checkoutPicker.set("minDate", dateStr);
-            }
-        }
-    });
-
-    const checkoutPicker = flatpickr("#checkout", {
-        altInput: true,
-        altFormat: "F j, Y",
-        dateFormat: "Y-m-d",
-        minDate: "today"
-    });
-
-    // Luego cargas las fechas ocupadas y actualizas los calendarios
     async function cargarFechasOcupadas(roomName) {
         try {
             const res = await fetch(`https://hotel-backend-3jw7.onrender.com/fechas-ocupadas?roomName=${encodeURIComponent(roomName)}`);
             const fechas = await res.json();
 
-            const rangosBloqueados = fechas.map(f => ({
-                from: f.checkin,
-                to: f.checkout
-            }));
+            const rangosBloqueados = fechas.length > 0
+                ? fechas.map(f => ({
+                    from: f.checkin,
+                    to: f.checkout
+                }))
+                : []; // 👈 si no hay fechas, enviamos array vacío
 
             console.log(`📅 Fechas ocupadas para ${roomName}:`, rangosBloqueados);
 
-            // Actualizar flatpickr con las fechas bloqueadas
-            checkinPicker.set("disable", rangosBloqueados);
-            checkoutPicker.set("disable", rangosBloqueados);
+            // inicializar flatpickr SIEMPRE
+            const checkinPicker = flatpickr("#checkin", {
+                altInput: true,
+                altFormat: "F j, Y",
+                dateFormat: "Y-m-d",
+                minDate: "today",
+                disable: rangosBloqueados,
+                onChange: function (selectedDates, dateStr) {
+                    if (selectedDates.length > 0) {
+                        checkoutPicker.set("minDate", dateStr);
+                    }
+                }
+            });
+
+            const checkoutPicker = flatpickr("#checkout", {
+                altInput: true,
+                altFormat: "F j, Y",
+                dateFormat: "Y-m-d",
+                minDate: "today",
+                disable: rangosBloqueados
+            });
 
         } catch (error) {
             console.error("❌ Error cargando fechas ocupadas:", error);
+            // fallback: calendario básico
+            flatpickr("#checkin", {});
+            flatpickr("#checkout", {});
         }
     }
 
-    // Ejecutar
     cargarFechasOcupadas(data.name);
+
 
 
 
