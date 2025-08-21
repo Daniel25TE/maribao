@@ -122,48 +122,46 @@ export function dataForm() {
             const res = await fetch('https://hotel-backend-3jw7.onrender.com/fechas-ocupadas');
             const fechas = await res.json();
 
-            // Convertir a rangos de Flatpickr
-            const disabledRanges = fechas.map(f => ({
-                from: f.checkin,
-                to: f.checkout
-            }));
+            // 🔹 Generar array de fechas ocupadas en formato YYYY-MM-DD
+            const fechasOcupadas = [];
+            fechas.forEach(f => {
+                let inicio = new Date(f.checkin);
+                let fin = new Date(f.checkout);
 
-            // Inicializar Flatpickr
-            flatpickr("#checkin", {
-                mode: "range",
-                minDate: "today",
-                disable: disabledRanges,
-                onChange: calcularTotal,
-                onDayCreate: function (dObj, dStr, fp, dayElem) {
-                    // Resaltar fechas ocupadas en rojo
-                    disabledRanges.forEach(range => {
-                        const day = dayElem.dateObj;
-                        const from = new Date(range.from);
-                        const to = new Date(range.to);
-                        from.setHours(0, 0, 0, 0);
-                        to.setHours(0, 0, 0, 0);
-                        day.setHours(0, 0, 0, 0);
-                        if (day >= from && day <= to) {
-                            dayElem.classList.add('fecha-ocupada');
-                        }
-                    });
+                while (inicio <= fin) {
+                    fechasOcupadas.push(inicio.toISOString().split('T')[0]);
+                    inicio.setDate(inicio.getDate() + 1);
                 }
             });
 
-            // Para checkout si quieres un input separado
-            flatpickr("#checkout", {
+            console.log("📅 Fechas ocupadas:", fechasOcupadas);
+
+            // 🔹 Inicializar flatpickr para Check-in
+            const checkinPicker = flatpickr("#checkin", {
+                dateFormat: "Y-m-d",
                 minDate: "today",
-                disable: disabledRanges
+                disable: fechasOcupadas,
+                onChange: function (selectedDates) {
+                    if (selectedDates.length > 0) {
+                        checkoutPicker.set("minDate", selectedDates[0]); // Check-out no puede ser antes del check-in
+                    }
+                }
             });
 
-            console.log('📅 Fechas ocupadas cargadas:', disabledRanges);
+            // 🔹 Inicializar flatpickr para Check-out
+            const checkoutPicker = flatpickr("#checkout", {
+                dateFormat: "Y-m-d",
+                minDate: "today",
+                disable: fechasOcupadas,
+            });
 
         } catch (error) {
-            console.error('❌ Error cargando fechas ocupadas:', error);
+            console.error("❌ Error cargando fechas ocupadas:", error);
         }
     }
 
     cargarFechasOcupadas();
+
 
     const metodoPagoSelect = document.getElementById("metodoPago");
     const submitBtn = document.getElementById("submitBtn");
