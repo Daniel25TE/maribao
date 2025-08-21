@@ -13,6 +13,8 @@ import { body, validationResult } from 'express-validator';
 import bcrypt from 'bcrypt';
 import Stripe from 'stripe';
 import bodyParser from 'body-parser';
+import { supabase } from './database.js';
+
 
 dotenv.config();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);

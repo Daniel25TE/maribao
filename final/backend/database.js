@@ -91,5 +91,6 @@ export async function obtenerFechasOcupadasPorCuarto(roomName) {
         checkout: r.checkout_date,
     }));
 }
+export { supabase };
 
 
