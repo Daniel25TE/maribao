@@ -129,7 +129,7 @@ export function dataForm() {
 
             console.log(`📅 Fechas ocupadas para ${roomName}:`, rangosBloqueados);
 
-            // Aquí inicializas flatpickr igual que antes pero con rangosBloqueados
+
             flatpickr("#checkin", {
                 altInput: true,
                 altFormat: "F j, Y",
