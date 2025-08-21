@@ -1068,9 +1068,8 @@ textarea:invalid {
     font-family: system-ui, sans-serif;
 }
 
-/* Resalta las fechas ocupadas en rojo */
-.litepicker .fecha-ocupada {
-    background-color: rgba(255, 0, 0, 0.3);
-    color: rgb(255, 0, 0);
-    border-radius: 4px;
+.flatpickr-day.fecha-ocupada {
+    background-color: #ff6b6b;
+    color: white;
+    cursor: not-allowed;
 }

@@ -122,32 +122,41 @@ export function dataForm() {
             const res = await fetch('https://hotel-backend-3jw7.onrender.com/fechas-ocupadas');
             const fechas = await res.json();
 
-            const rangosBloqueados = fechas.map(f => ({
+            // Convertir a rangos de Flatpickr
+            const disabledRanges = fechas.map(f => ({
                 from: f.checkin,
                 to: f.checkout
             }));
 
-            console.log('📅 Fechas ocupadas cargadas:', rangosBloqueados);
-
-            // 🔹 Crear picker con rangos bloqueados desde el inicio
-            const picker = new Litepicker({
-                element: document.getElementById('checkin'),
-                elementEnd: document.getElementById('checkout'),
-                format: 'YYYY-MM-DD',
-                singleMode: false,
-                numberOfMonths: 2,
-                numberOfColumns: 2,
-                minDate: new Date(),
-                disallow: rangosBloqueados,
-                highlightedDays: rangosBloqueados.map(r => ({
-                    from: r.from,
-                    to: r.to,
-                    className: 'fecha-ocupada'
-                })),
-                tooltipText: 'Fecha ocupada'
+            // Inicializar Flatpickr
+            flatpickr("#checkin", {
+                mode: "range",
+                minDate: "today",
+                disable: disabledRanges,
+                onChange: calcularTotal,
+                onDayCreate: function (dObj, dStr, fp, dayElem) {
+                    // Resaltar fechas ocupadas en rojo
+                    disabledRanges.forEach(range => {
+                        const day = dayElem.dateObj;
+                        const from = new Date(range.from);
+                        const to = new Date(range.to);
+                        from.setHours(0, 0, 0, 0);
+                        to.setHours(0, 0, 0, 0);
+                        day.setHours(0, 0, 0, 0);
+                        if (day >= from && day <= to) {
+                            dayElem.classList.add('fecha-ocupada');
+                        }
+                    });
+                }
             });
 
-            picker.on('selected', () => calcularTotal());
+            // Para checkout si quieres un input separado
+            flatpickr("#checkout", {
+                minDate: "today",
+                disable: disabledRanges
+            });
+
+            console.log('📅 Fechas ocupadas cargadas:', disabledRanges);
 
         } catch (error) {
             console.error('❌ Error cargando fechas ocupadas:', error);
@@ -155,10 +164,6 @@ export function dataForm() {
     }
 
     cargarFechasOcupadas();
-
-
-
-
 
     const metodoPagoSelect = document.getElementById("metodoPago");
     const submitBtn = document.getElementById("submitBtn");
