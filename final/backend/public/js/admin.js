@@ -19,6 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
             reservas.forEach((reserva) => {
                 const row = document.createElement("tr");
                 row.innerHTML = `
+                <td class="py-2 px-4">
+        <input type="checkbox" class="row-checkbox" value="${reserva.id}">
+    </td>
           <td>${reserva.created_at}</td>
           <td>${reserva.nombre}</td>
           <td>${reserva.email}</td>
@@ -41,3 +44,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
     cargarReservas();
 });
+document.getElementById("delete-selected").addEventListener("click", async () => {
+    const selected = Array.from(document.querySelectorAll(".row-checkbox:checked"))
+        .map(cb => cb.value);
+
+    if (selected.length === 0) {
+        alert("No has seleccionado ninguna reserva.");
+        return;
+    }
+
+    if (!confirm(`¿Seguro que deseas eliminar ${selected.length} reserva(s)?`)) {
+        return;
+    }
+
+    try {
+        const response = await fetch("/delete-reservas", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ ids: selected })
+        });
+
+        if (response.ok) {
+            alert("Reservas eliminadas correctamente.");
+            window.location.reload(); // refrescamos la tabla
+        } else {
+            alert("Error eliminando reservas.");
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Error de conexión con el servidor.");
+    }
+});
+

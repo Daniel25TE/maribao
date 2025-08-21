@@ -271,6 +271,27 @@ app.post('/login',
         }
     }
 );
+app.post("/delete-reservas", async (req, res) => {
+    try {
+        const { ids } = req.body;
+
+        if (!ids || ids.length === 0) {
+            return res.status(400).json({ error: "No se enviaron IDs para eliminar." });
+        }
+
+        const { error } = await supabase
+            .from("reservas")
+            .delete()
+            .in("id", ids);
+
+        if (error) throw error;
+
+        res.json({ success: true, message: "Reservas eliminadas correctamente." });
+    } catch (error) {
+        console.error("Error eliminando reservas:", error);
+        res.status(500).json({ error: "Error interno del servidor" });
+    }
+});
 
 app.post('/create-checkout-session', async (req, res) => {
     try {
