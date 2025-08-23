@@ -125,17 +125,17 @@ export function dataForm() {
     `;
     async function cargarFechasOcupadas(roomName) {
         try {
-            // Consulta a Supabase, filtrando por el nombre del cuarto
             const { data: fechas, error } = await supabaseClient
                 .from("reservas")
-                .select("checkin, checkout")
-                .eq("room", roomName);
+                .select("checkin_date, checkout_date")
+                .eq("room_name", roomName);
 
             if (error) {
                 console.error("❌ Error cargando fechas ocupadas:", error);
                 return;
             }
 
+            // Normalizamos a las claves que usa tu frontend
             const rangosBloqueados = fechas.map(f => ({
                 from: f.checkin,
                 to: f.checkout
@@ -169,9 +169,7 @@ export function dataForm() {
         }
     }
 
-    // Llamada inicial
     cargarFechasOcupadas(data.name);
-
 
 
     const metodoPagoSelect = document.getElementById("metodoPago");
