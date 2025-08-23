@@ -13,8 +13,8 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-// Función para enviar correos de cancelación
-async function enviarCorreoCancelacion(datosReserva, canceladoPorAdmin = false) {
+// Función para enviar correo al cliente
+async function enviarCorreoClienteCancelacion(datosReserva) {
     const mailCliente = {
         from: process.env.EMAIL,
         to: datosReserva.email,
@@ -36,80 +36,120 @@ Hotel Maribao
     };
 
     await transporter.sendMail(mailCliente);
-
-    // Solo enviar al admin si NO fue cancelado por el admin
-    if (!canceladoPorAdmin) {
-        const mailAdmin = {
-            from: process.env.EMAIL,
-            to: process.env.EMAIL_EMPLEADOR,
-            subject: `Reserva Cancelada - Hotel Maribao`,
-            text: `
-La siguiente reserva ha sido cancelada:
-
-- Nombre del huésped: ${datosReserva.nombre}
-- Email: ${datosReserva.email}
-- Número de transferencia: ${datosReserva.numero_Transferencia}
-- Cuarto: ${datosReserva.room_name}
-- Check-in: ${datosReserva.checkin_date}
-- Check-out: ${datosReserva.checkout_date}
-            `
-        };
-        await transporter.sendMail(mailAdmin);
-    }
 }
 
-// DELETE para clientes (frontend)
-router.delete("/:numeroTransferencia", async (req, res) => {
+// ----------------------------------------------------
+// RUTA GET - Buscar reserva por número de transferencia (frontend)
+router.get("/:numeroTransferencia", async (req, res) => {
     const { numeroTransferencia } = req.params;
 
     try {
-        const { data, error: fetchError } = await supabase
+        const { data, error } = await supabase
             .from("reservas")
             .select("*")
             .eq("numero_Transferencia", numeroTransferencia)
             .single();
 
-        if (fetchError || !data) return res.status(404).json({ error: "Reserva no encontrada" });
+        if (error || !data) {
+            return res.status(404).json({ error: "Reserva no encontrada" });
+        }
 
-        const { error: deleteError } = await supabase
-            .from("reservas")
-            .delete()
-            .eq("numero_Transferencia", numeroTransferencia);
-
-        if (deleteError) return res.status(500).json({ error: "Error al eliminar la reserva" });
-
-        await enviarCorreoCancelacion(data, false); // cancelado por cliente
-
-        res.json({ message: "Reserva cancelada con éxito, correos enviados" });
+        res.json(data);
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Error interno del servidor" });
     }
 });
 
-// DELETE para admin (panel)
-router.delete("/admin/:numeroTransferencia", async (req, res) => {
+// ----------------------------------------------------
+// RUTA DELETE - Cancelación hecha por cliente (frontend)
+// Envía correo tanto a cliente como a admin
+router.delete("/:numeroTransferencia", async (req, res) => {
     const { numeroTransferencia } = req.params;
 
     try {
+        // Obtener reserva antes de eliminar
         const { data, error: fetchError } = await supabase
             .from("reservas")
             .select("*")
             .eq("numero_Transferencia", numeroTransferencia)
             .single();
 
-        if (fetchError || !data) return res.status(404).json({ error: "Reserva no encontrada" });
+        if (fetchError || !data) {
+            return res.status(404).json({ error: "Reserva no encontrada" });
+        }
 
+        // Eliminar reserva
         const { error: deleteError } = await supabase
             .from("reservas")
             .delete()
             .eq("numero_Transferencia", numeroTransferencia);
 
-        if (deleteError) return res.status(500).json({ error: "Error al eliminar la reserva" });
+        if (deleteError) {
+            return res.status(500).json({ error: "Error al eliminar la reserva" });
+        }
 
-        await enviarCorreoCancelacion(data, true); // cancelado por admin
+        // Enviar correos: cliente y admin
+        const mailAdmin = {
+            from: process.env.EMAIL,
+            to: process.env.EMAIL_EMPLEADOR,
+            subject: `Reserva Cancelada - Hotel Maribao`,
+            text: `
+La siguiente reserva ha sido cancelada por el cliente:
 
-        res.json({ message: "Reserva cancelada por admin, correo enviado al cliente" });
+- Nombre del huésped: ${data.nombre}
+- Email: ${data.email}
+- Número de transferencia: ${data.numero_Transferencia}
+- Cuarto: ${data.room_name}
+- Check-in: ${data.checkin_date}
+- Check-out: ${data.checkout_date}
+            `
+        };
+
+        await enviarCorreoClienteCancelacion(data);
+        await transporter.sendMail(mailAdmin);
+
+        res.json({ message: "Reserva cancelada con éxito, correos enviados" });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Error interno del servidor" });
+    }
+});
+
+// ----------------------------------------------------
+// RUTA DELETE - Cancelación hecha por administrador (panel admin)
+// Envía correo solo al cliente
+router.delete("/admin/:numeroTransferencia", async (req, res) => {
+    const { numeroTransferencia } = req.params;
+
+    try {
+        // Obtener reserva antes de eliminar
+        const { data, error: fetchError } = await supabase
+            .from("reservas")
+            .select("*")
+            .eq("numero_Transferencia", numeroTransferencia)
+            .single();
+
+        if (fetchError || !data) {
+            return res.status(404).json({ error: "Reserva no encontrada" });
+        }
+
+        // Eliminar reserva
+        const { error: deleteError } = await supabase
+            .from("reservas")
+            .delete()
+            .eq("numero_Transferencia", numeroTransferencia);
+
+        if (deleteError) {
+            return res.status(500).json({ error: "Error al eliminar la reserva" });
+        }
+
+        // Enviar correo solo al cliente
+        await enviarCorreoClienteCancelacion(data);
+
+        res.json({ message: "Reserva cancelada con éxito, correo enviado al cliente" });
+
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Error interno del servidor" });
