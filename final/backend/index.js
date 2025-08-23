@@ -101,6 +101,38 @@ Hotel Maribao - Notificación automática
 
     console.log(`📧 Correos enviados para reserva${sessionId ? ' con sesión ' + sessionId : ''}`);
 }
+async function enviarCorreoClienteCancelacion(datosReserva) {
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: process.env.EMAIL,
+            pass: process.env.PASSWORD,
+        },
+    });
+
+    const mailCliente = {
+        from: process.env.EMAIL,
+        to: datosReserva.email,
+        subject: 'Reserva Cancelada - Hotel Maribao',
+        text: `
+Hola ${datosReserva.nombre || (datosReserva.firstName + ' ' + datosReserva.lastName)},
+
+Tu reserva con número de transferencia ${datosReserva.numero_Transferencia || datosReserva.numeroTransferencia} ha sido cancelada por el administrador.
+
+Detalles de la reserva:
+- Cuarto: ${datosReserva.room_name || datosReserva.cuarto}
+- Check-in: ${datosReserva.checkin_date || datosReserva.checkin}
+- Check-out: ${datosReserva.checkout_date || datosReserva.checkout}
+
+Si tienes alguna duda, contáctanos.
+
+Hotel Maribao
+        `
+    };
+
+    await transporter.sendMail(mailCliente);
+    console.log(`📧 Correo de cancelación enviado al cliente ${datosReserva.email}`);
+}
 
 // Necesitas raw body para verificar firma
 app.post('/webhook', bodyParser.raw({ type: 'application/json' }), async (req, res) => {
@@ -285,19 +317,34 @@ app.post("/delete-reservas", async (req, res) => {
             return res.status(400).json({ error: "No se enviaron IDs para eliminar." });
         }
 
-        const { error } = await supabase
+        // Primero obtenemos las reservas seleccionadas
+        const { data: reservas, error: fetchError } = await supabase
+            .from("reservas")
+            .select("*")
+            .in("id", ids);
+
+        if (fetchError) throw fetchError;
+
+        // Borrar reservas
+        const { error: deleteError } = await supabase
             .from("reservas")
             .delete()
             .in("id", ids);
 
-        if (error) throw error;
+        if (deleteError) throw deleteError;
 
-        res.json({ success: true, message: "Reservas eliminadas correctamente." });
+        // Enviar correos de cancelación solo al cliente
+        for (const reserva of reservas) {
+            await enviarCorreoClienteCancelacion(reserva);
+        }
+
+        res.json({ success: true, message: "Reservas eliminadas y correos enviados al cliente." });
     } catch (error) {
         console.error("Error eliminando reservas:", error);
         res.status(500).json({ error: "Error interno del servidor" });
     }
 });
+
 
 app.post('/create-checkout-session', async (req, res) => {
     try {

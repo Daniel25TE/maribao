@@ -4,7 +4,7 @@ import nodemailer from "nodemailer";
 
 const router = express.Router();
 
-// Configuración del transportador de correo
+// Configuración del transportador de correo (reutilizable de index.js)
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -13,13 +13,14 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-// Función para enviar correo al cliente
-async function enviarCorreoClienteCancelacion(datosReserva) {
-    const mailCliente = {
-        from: process.env.EMAIL,
-        to: datosReserva.email,
-        subject: 'Reserva Cancelada - Hotel Maribao',
-        text: `
+// Función para enviar correos de cancelación
+async function enviarCorreoCancelacion(datosReserva) {
+    try {
+        const mailCliente = {
+            from: process.env.EMAIL,
+            to: datosReserva.email,
+            subject: 'Reserva Cancelada - Hotel Maribao',
+            text: `
 Hola ${datosReserva.nombre},
 
 Tu reserva con número de transferencia ${datosReserva.numero_Transferencia} ha sido cancelada exitosamente.
@@ -32,14 +33,35 @@ Detalles de la reserva:
 Si tienes alguna duda, contáctanos.
 
 Hotel Maribao
-        `
-    };
+            `
+        };
 
-    await transporter.sendMail(mailCliente);
+        const mailAdmin = {
+            from: process.env.EMAIL,
+            to: process.env.EMAIL_EMPLEADOR,
+            subject: `Reserva Cancelada - Hotel Maribao`,
+            text: `
+La siguiente reserva ha sido cancelada:
+
+- Nombre del huésped: ${datosReserva.nombre}
+- Email: ${datosReserva.email}
+- Número de transferencia: ${datosReserva.numero_Transferencia}
+- Cuarto: ${datosReserva.room_name}
+- Check-in: ${datosReserva.checkin_date}
+- Check-out: ${datosReserva.checkout_date}
+            `
+        };
+
+        await transporter.sendMail(mailCliente);
+        await transporter.sendMail(mailAdmin);
+
+    } catch (err) {
+        console.error("❌ Error enviando correos de cancelación:", err);
+        // No lanzamos error para que no rompa la respuesta JSON
+    }
 }
 
-// ----------------------------------------------------
-// RUTA GET - Buscar reserva por número de transferencia (frontend)
+// Buscar reserva por número de transferencia
 router.get("/:numeroTransferencia", async (req, res) => {
     const { numeroTransferencia } = req.params;
 
@@ -61,14 +83,12 @@ router.get("/:numeroTransferencia", async (req, res) => {
     }
 });
 
-// ----------------------------------------------------
-// RUTA DELETE - Cancelación hecha por cliente (frontend)
-// Envía correo tanto a cliente como a admin
+// Eliminar reserva por número de transferencia y enviar correos
 router.delete("/:numeroTransferencia", async (req, res) => {
     const { numeroTransferencia } = req.params;
 
     try {
-        // Obtener reserva antes de eliminar
+        // 1️⃣ Buscar la reserva
         const { data, error: fetchError } = await supabase
             .from("reservas")
             .select("*")
@@ -79,7 +99,7 @@ router.delete("/:numeroTransferencia", async (req, res) => {
             return res.status(404).json({ error: "Reserva no encontrada" });
         }
 
-        // Eliminar reserva
+        // 2️⃣ Eliminar la reserva
         const { error: deleteError } = await supabase
             .from("reservas")
             .delete()
@@ -89,66 +109,11 @@ router.delete("/:numeroTransferencia", async (req, res) => {
             return res.status(500).json({ error: "Error al eliminar la reserva" });
         }
 
-        // Enviar correos: cliente y admin
-        const mailAdmin = {
-            from: process.env.EMAIL,
-            to: process.env.EMAIL_EMPLEADOR,
-            subject: `Reserva Cancelada - Hotel Maribao`,
-            text: `
-La siguiente reserva ha sido cancelada por el cliente:
+        // 3️⃣ Enviar correos (no bloquea la respuesta aunque falle)
+        enviarCorreoCancelacion(data);
 
-- Nombre del huésped: ${data.nombre}
-- Email: ${data.email}
-- Número de transferencia: ${data.numero_Transferencia}
-- Cuarto: ${data.room_name}
-- Check-in: ${data.checkin_date}
-- Check-out: ${data.checkout_date}
-            `
-        };
-
-        await enviarCorreoClienteCancelacion(data);
-        await transporter.sendMail(mailAdmin);
-
-        res.json({ message: "Reserva cancelada con éxito, correos enviados" });
-
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "Error interno del servidor" });
-    }
-});
-
-// ----------------------------------------------------
-// RUTA DELETE - Cancelación hecha por administrador (panel admin)
-// Envía correo solo al cliente
-router.delete("/admin/:numeroTransferencia", async (req, res) => {
-    const { numeroTransferencia } = req.params;
-
-    try {
-        // Obtener reserva antes de eliminar
-        const { data, error: fetchError } = await supabase
-            .from("reservas")
-            .select("*")
-            .eq("numero_Transferencia", numeroTransferencia)
-            .single();
-
-        if (fetchError || !data) {
-            return res.status(404).json({ error: "Reserva no encontrada" });
-        }
-
-        // Eliminar reserva
-        const { error: deleteError } = await supabase
-            .from("reservas")
-            .delete()
-            .eq("numero_Transferencia", numeroTransferencia);
-
-        if (deleteError) {
-            return res.status(500).json({ error: "Error al eliminar la reserva" });
-        }
-
-        // Enviar correo solo al cliente
-        await enviarCorreoClienteCancelacion(data);
-
-        res.json({ message: "Reserva cancelada con éxito, correo enviado al cliente" });
+        // 4️⃣ Responder al frontend
+        res.json({ message: "✅ Reserva cancelada correctamente. Correos enviados." });
 
     } catch (err) {
         console.error(err);
@@ -157,5 +122,4 @@ router.delete("/admin/:numeroTransferencia", async (req, res) => {
 });
 
 export default router;
-
 
