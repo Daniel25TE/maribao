@@ -62,7 +62,7 @@ cancelarBtn.addEventListener("click", async () => {
 
         detalleDiv.style.display = "none";
         buscarForm.style.display = "none";
-        messageDiv.textContent = "✅ Reserva cancelada correctamente";
+        messageDiv.textContent = "✅ Reserva cancelada correctamente, puedes cerrar esta pagina.";
     } catch (err) {
         console.error(err);
         messageDiv.textContent = "Error al cancelar la reserva";
