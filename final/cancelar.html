@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancelar Reserva</title>
+    <link rel="stylesheet" href="styles/maribao-mobile.css">
+    <link rel="stylesheet" href="styles/maribao-desktop.css">
+</head>
+
+<body>
+    <main class="form-layout">
+        <h1>Cancelar Reserva</h1>
+
+        <!-- Paso 1: Buscar reserva -->
+        <form id="buscar-form">
+            <label for="reservation-number">Número de Reserva (transferencia):</label>
+            <input type="text" id="reservation-number" name="reservation-number" required>
+            <button type="submit">Buscar Reserva</button>
+        </form>
+
+        <!-- Paso 2: Mostrar detalles -->
+        <div id="reserva-detalles" style="display:none;">
+            <h2>Detalles de tu reserva:</h2>
+            <p id="detalle-text"></p>
+            <button id="cancelar-btn">Cancelar Reserva</button>
+        </div>
+
+        <div id="cancel-message"></div>
+    </main>
+
+    <script src="scripts/cancel.js" type="module"></script>
+</body>
+
+</html>

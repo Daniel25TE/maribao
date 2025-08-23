@@ -58,7 +58,8 @@ ${datosReserva.metodoPago ? `- Método de pago: ${datosReserva.metodoPago === 't
 
 Solicitudes especiales: ${datosReserva.specialRequests || 'Ninguna'}
 Hora estimada de llegada: ${datosReserva.arrivalTime || 'No especificada'}
-
+<p>Si deseas cancelar tu reserva, ingresa tu número de reserva <strong>${datosReserva.numeroTransferencia}</strong> en <a href="https://daniel25te.github.io/wdd231/final/cancelar.html
+">esta página</a> y cancélala fácilmente.</p>
 ¡Te esperamos!
 Hotel Maribao
         `,
