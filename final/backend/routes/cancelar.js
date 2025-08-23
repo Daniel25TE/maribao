@@ -10,7 +10,7 @@ router.get("/:numeroTransferencia", async (req, res) => {
         const { data, error } = await supabase
             .from("reservas")
             .select("*")
-            .eq("numeroTransferencia", numeroTransferencia)
+            .eq("numero_Transferencia", numeroTransferencia)
             .single();
 
         if (error || !data) {
@@ -31,7 +31,7 @@ router.delete("/:numeroTransferencia", async (req, res) => {
         const { error } = await supabase
             .from("reservas")
             .delete()
-            .eq("numeroTransferencia", numeroTransferencia);
+            .eq("numero_Transferencia", numeroTransferencia)
 
         if (error) {
             return res.status(500).json({ error: "Error al eliminar la reserva" });
