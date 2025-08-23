@@ -1,3 +1,9 @@
+const SUPABASE_URL = "https://ceggjyfcazathwqazmtp.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNlZ2dqeWZjYXphdGh3cWF6bXRwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA0NDA2OTcsImV4cCI6MjA2NjAxNjY5N30.ZD6_6Cactwxm3Rfr0_pKpMEw_4jEzQvhFFHBwmdQJOc";
+
+
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
 export function dataForm() {
     const data = JSON.parse(localStorage.getItem("selectedRoom"));
     data.price = Number(data.price.replace(/[^\d.]/g, '')) || 0;
@@ -119,8 +125,16 @@ export function dataForm() {
     `;
     async function cargarFechasOcupadas(roomName) {
         try {
-            const res = await fetch(`https://hotel-backend-3jw7.onrender.com/fechas-ocupadas?roomName=${encodeURIComponent(roomName)}`);
-            const fechas = await res.json();
+            // Consulta a Supabase, filtrando por el nombre del cuarto
+            const { data: fechas, error } = await supabaseClient
+                .from("reservas")
+                .select("checkin, checkout")
+                .eq("room", roomName);
+
+            if (error) {
+                console.error("❌ Error cargando fechas ocupadas:", error);
+                return;
+            }
 
             const rangosBloqueados = fechas.map(f => ({
                 from: f.checkin,
@@ -128,7 +142,6 @@ export function dataForm() {
             }));
 
             console.log(`📅 Fechas ocupadas para ${roomName}:`, rangosBloqueados);
-
 
             flatpickr("#checkin", {
                 altInput: true,
@@ -156,8 +169,9 @@ export function dataForm() {
         }
     }
 
-
+    // Llamada inicial
     cargarFechasOcupadas(data.name);
+
 
 
     const metodoPagoSelect = document.getElementById("metodoPago");
