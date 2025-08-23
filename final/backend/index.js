@@ -14,6 +14,7 @@ import bcrypt from 'bcrypt';
 import Stripe from 'stripe';
 import bodyParser from 'body-parser';
 import { supabase } from './database.js';
+import cancelarRoutes from "./routes/cancelar.js";
 
 
 dotenv.config();
@@ -58,8 +59,8 @@ ${datosReserva.metodoPago ? `- Método de pago: ${datosReserva.metodoPago === 't
 
 Solicitudes especiales: ${datosReserva.specialRequests || 'Ninguna'}
 Hora estimada de llegada: ${datosReserva.arrivalTime || 'No especificada'}
-<p>Si deseas cancelar tu reserva, ingresa tu número de reserva <strong>${datosReserva.numeroTransferencia}</strong> en <a href="https://daniel25te.github.io/wdd231/final/cancelar.html
-">esta página</a> y cancélala fácilmente.</p>
+Si deseas cancelar tu reserva, ingresa tu número de reserva ${datosReserva.numeroTransferencia} en "https://daniel25te.github.io/wdd231/final/cancelar.html
+"esta página y cancélala fácilmente.
 ¡Te esperamos!
 Hotel Maribao
         `,
@@ -179,6 +180,8 @@ const limiter = rateLimit({
 app.use('/login', limiter);
 app.use('/reservas', limiter);
 app.use('/reserva', limiter);
+app.use("/cancelar", cancelarRoutes);
+
 
 app.post('/reserva',
     [
