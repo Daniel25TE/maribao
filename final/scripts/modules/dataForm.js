@@ -137,8 +137,8 @@ export function dataForm() {
 
             // Normalizamos a las claves que usa tu frontend
             const rangosBloqueados = fechas.map(f => ({
-                from: f.checkin,
-                to: f.checkout
+                from: f.checkin_date,
+                to: f.checkout_date
             }));
 
             console.log(`📅 Fechas ocupadas para ${roomName}:`, rangosBloqueados);
