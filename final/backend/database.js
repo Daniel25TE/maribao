@@ -92,5 +92,6 @@ export async function obtenerFechasOcupadasPorCuarto(roomName) {
     }));
 }
 export { supabase };
+export default supabase;
 
 
