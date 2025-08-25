@@ -3,7 +3,7 @@ export async function cargarComentarios() {
     if (!contenedor) return;
 
     try {
-        const res = await fetch('/api/comentarios');
+        const res = await fetch('https://hotel-backend-3jw7.onrender.com/api/comentarios');
         const comentarios = await res.json();
 
         if (comentarios.length === 0) {

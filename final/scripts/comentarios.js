@@ -13,7 +13,7 @@ document.getElementById('enviarComentario').addEventListener('click', async () =
 
     try {
         // Enviar comentario al backend
-        const res = await fetch('/api/comentario', {
+        const res = await fetch('https://hotel-backend-3jw7.onrender.com/api/comentario', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ numReserva, comentario })
