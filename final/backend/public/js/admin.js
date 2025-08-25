@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <td>${reserva.special_requests}</td>
                     <td>${reserva.arrival_time}</td>
                     <td>${reserva.numero_Transferencia}</td>
+                    <td>${reserva.estado}</td>
                 `;
                 tbody.appendChild(row);
             });

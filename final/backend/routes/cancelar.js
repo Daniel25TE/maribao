@@ -58,6 +58,22 @@ La siguiente reserva ha sido cancelada:
         console.error("❌ Error enviando correos de cancelación:", err);
     }
 }
+// Obtener datos de la reserva (para mostrar detalles en cancelar.html)
+router.get("/cliente/:numeroTransferencia", async (req, res) => {
+    const { numeroTransferencia } = req.params;
+    try {
+        const { data, error } = await supabase
+            .from("reservas")
+            .select("*")
+            .eq("numero_Transferencia", numeroTransferencia)
+            .single();
+        if (error || !data) return res.status(404).json({ error: "Reserva no encontrada" });
+        res.json(data);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Error interno del servidor" });
+    }
+});
 
 // --------------------------
 // Cancelación por cliente

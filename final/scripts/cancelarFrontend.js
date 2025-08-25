@@ -17,7 +17,7 @@ buscarForm.addEventListener("submit", async (e) => {
     if (!numero) return;
 
     try {
-        const res = await fetch(`https://hotel-backend-3jw7.onrender.com/cancelar/${numero}`);
+        const res = await fetch(`https://hotel-backend-3jw7.onrender.com/cancelar/cliente/${numero}`);
         const data = await res.json();
 
         if (res.status !== 200) {
