@@ -4,7 +4,7 @@ import nodemailer from "nodemailer";
 
 const router = express.Router();
 
-// Configuración del transportador de correo (reutilizable de index.js)
+// Configuración del transportador de correo
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
 });
 
 // Función para enviar correos de cancelación
-async function enviarCorreoCancelacion(datosReserva) {
+async function enviarCorreoCancelacion(datosReserva, esCliente) {
     try {
         const mailCliente = {
             from: process.env.EMAIL,
@@ -53,42 +53,19 @@ La siguiente reserva ha sido cancelada:
         };
 
         await transporter.sendMail(mailCliente);
-        await transporter.sendMail(mailAdmin);
-
+        if (esCliente) await transporter.sendMail(mailAdmin); // solo si lo cancela el cliente
     } catch (err) {
         console.error("❌ Error enviando correos de cancelación:", err);
-        // No lanzamos error para que no rompa la respuesta JSON
     }
 }
 
-// Buscar reserva por número de transferencia
-router.get("/:numeroTransferencia", async (req, res) => {
+// --------------------------
+// Cancelación por cliente
+// --------------------------
+router.put("/cliente/:numeroTransferencia", async (req, res) => {
     const { numeroTransferencia } = req.params;
 
     try {
-        const { data, error } = await supabase
-            .from("reservas")
-            .select("*")
-            .eq("numero_Transferencia", numeroTransferencia)
-            .single();
-
-        if (error || !data) {
-            return res.status(404).json({ error: "Reserva no encontrada" });
-        }
-
-        res.json(data);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "Error interno del servidor" });
-    }
-});
-
-// Eliminar reserva por número de transferencia y enviar correos
-router.delete("/:numeroTransferencia", async (req, res) => {
-    const { numeroTransferencia } = req.params;
-
-    try {
-        // 1️⃣ Buscar la reserva
         const { data, error: fetchError } = await supabase
             .from("reservas")
             .select("*")
@@ -99,22 +76,53 @@ router.delete("/:numeroTransferencia", async (req, res) => {
             return res.status(404).json({ error: "Reserva no encontrada" });
         }
 
-        // 2️⃣ Eliminar la reserva
-        const { error: deleteError } = await supabase
+        const { error: updateError } = await supabase
             .from("reservas")
-            .delete()
+            .update({ estado: "cancelada_cliente" })
             .eq("numero_Transferencia", numeroTransferencia);
 
-        if (deleteError) {
-            return res.status(500).json({ error: "Error al eliminar la reserva" });
+        if (updateError) {
+            return res.status(500).json({ error: "Error al actualizar la reserva" });
         }
 
-        // 3️⃣ Enviar correos (no bloquea la respuesta aunque falle)
-        enviarCorreoCancelacion(data);
+        enviarCorreoCancelacion(data, true);
 
-        // 4️⃣ Responder al frontend
-        res.json({ message: "✅ Reserva cancelada correctamente. Correos enviados." });
+        res.json({ message: "✅ Reserva cancelada por cliente. Correos enviados." });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Error interno del servidor" });
+    }
+});
 
+// --------------------------
+// Cancelación por admin
+// --------------------------
+router.put("/admin/:numeroTransferencia", async (req, res) => {
+    const { numeroTransferencia } = req.params;
+
+    try {
+        const { data, error: fetchError } = await supabase
+            .from("reservas")
+            .select("*")
+            .eq("numero_Transferencia", numeroTransferencia)
+            .single();
+
+        if (fetchError || !data) {
+            return res.status(404).json({ error: "Reserva no encontrada" });
+        }
+
+        const { error: updateError } = await supabase
+            .from("reservas")
+            .update({ estado: "cancelada_admin" })
+            .eq("numero_Transferencia", numeroTransferencia);
+
+        if (updateError) {
+            return res.status(500).json({ error: "Error al actualizar la reserva" });
+        }
+
+        enviarCorreoCancelacion(data, false);
+
+        res.json({ message: "✅ Reserva cancelada por admin. Correo enviado al cliente." });
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Error interno del servidor" });
@@ -122,4 +130,5 @@ router.delete("/:numeroTransferencia", async (req, res) => {
 });
 
 export default router;
+
 

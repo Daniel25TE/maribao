@@ -50,9 +50,10 @@ cancelarBtn.addEventListener("click", async () => {
     if (!confirmCancel) return;
 
     try {
-        const res = await fetch(`https://hotel-backend-3jw7.onrender.com/cancelar/${currentNumero}`, {
-            method: "DELETE"
+        const res = await fetch(`https://hotel-backend-3jw7.onrender.com/cancelar/cliente/${currentNumero}`, {
+            method: "PUT"
         });
+
         const data = await res.json();
 
         if (res.status !== 200) {
