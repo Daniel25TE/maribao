@@ -70,5 +70,30 @@ document.getElementById("delete-selected").addEventListener("click", async () =>
         alert("Error de conexión con el servidor.");
     }
 });
+document.getElementById("delete-permanent").addEventListener("click", async () => {
+    const selected = Array.from(document.querySelectorAll(".row-checkbox:checked"))
+        .map(cb => cb.value);
+
+    if (selected.length === 0) {
+        alert("No has seleccionado ninguna reserva.");
+        return;
+    }
+
+    if (!confirm(`¿Seguro que deseas eliminar permanentemente ${selected.length} reserva(s)?`)) {
+        return;
+    }
+
+    try {
+        for (const numero of selected) {
+            await fetch(`/cancelar/admin/${numero}`, { method: "DELETE" });
+        }
+        alert("Reservas eliminadas permanentemente.");
+        window.location.reload(); // refrescamos la tabla
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Error de conexión con el servidor.");
+    }
+});
+
 
 

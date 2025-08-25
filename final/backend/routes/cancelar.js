@@ -144,6 +144,25 @@ router.put("/admin/:numeroTransferencia", async (req, res) => {
         res.status(500).json({ error: "Error interno del servidor" });
     }
 });
+// Eliminar reservas permanentemente
+router.delete("/admin/:numeroTransferencia", async (req, res) => {
+    const { numeroTransferencia } = req.params;
+
+    try {
+        const { error } = await supabase
+            .from("reservas")
+            .delete()
+            .eq("numero_Transferencia", numeroTransferencia);
+
+        if (error) return res.status(500).json({ error: "Error eliminando la reserva" });
+
+        res.json({ message: "✅ Reserva eliminada permanentemente" });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Error interno del servidor" });
+    }
+});
+
 
 export default router;
 
