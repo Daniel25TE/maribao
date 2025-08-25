@@ -8,6 +8,7 @@ import { allVideos } from "./modules/videos.js";
 import { allheroimages } from './modules/heroimages.js';
 import { lazyLoadStaticContainers } from "./modules/lazyLoader.js"
 import { loadQuestions } from './modules/somequestions.js';
+import { cargarComentarios } from './modules/comentariosmostrar.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     highlightActiveLink();
@@ -17,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     lazyLoadStaticContainers();
     allheroimages();
     loadQuestions();
+    cargarComentarios();
     const { nextSlide, prevSlide } = initializeSlider();
 
     document.getElementById("nextBtn")?.addEventListener("click", nextSlide);

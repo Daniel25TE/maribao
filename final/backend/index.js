@@ -374,6 +374,51 @@ app.post('/create-checkout-session', async (req, res) => {
         res.status(500).json({ error: 'Error creando la sesión de pago' });
     }
 });
+// Ruta para guardar comentarios
+app.post('/api/comentario', async (req, res) => {
+    const { numReserva, comentario } = req.body;
+
+    if (!numReserva || !comentario) {
+        return res.json({ ok: false, error: 'Por favor completa todos los campos.' });
+    }
+
+    try {
+        // Buscar la reserva en la base de datos
+        const reserva = await db.collection('reservas').findOne({ numero: numReserva });
+
+        if (!reserva) {
+            return res.json({ ok: false, error: 'Número de reserva no encontrado.' });
+        }
+
+        // Guardar el comentario en la reserva
+        // Si quieres permitir varios comentarios por reserva, usa $push en lugar de $set
+        await db.collection('reservas').updateOne(
+            { numero: numReserva },
+            { $set: { comentario: comentario } } // reemplaza cualquier comentario anterior
+            // Para múltiples comentarios: { $push: { comentarios: comentario } }
+        );
+
+        res.json({ ok: true });
+    } catch (err) {
+        console.error(err);
+        res.json({ ok: false, error: 'Error en el servidor.' });
+    }
+});
+// Ruta para obtener todos los comentarios
+app.get('/api/comentarios', async (req, res) => {
+    try {
+        // Traer todas las reservas que tengan un comentario
+        const comentarios = await db.collection('reservas')
+            .find({ comentario: { $exists: true, $ne: "" } })
+            .project({ numero: 1, comentario: 1, _id: 0 })
+            .toArray();
+
+        res.json(comentarios);
+    } catch (err) {
+        console.error(err);
+        res.json([]);
+    }
+});
 
 // GET /stripe-session?session_id=...
 app.get('/stripe-session', async (req, res) => {
