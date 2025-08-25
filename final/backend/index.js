@@ -414,7 +414,7 @@ app.get('/api/comentarios', async (req, res) => {
     try {
         const { data: comentarios, error } = await supabase
             .from('reservas')
-            .select('numero_Transferencia, comentario')
+            .select('numero_Transferencia, nombre, comentario')
             .not('comentario', 'is', null);
 
         if (error) throw error;
