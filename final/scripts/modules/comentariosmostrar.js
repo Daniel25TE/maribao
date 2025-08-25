@@ -12,7 +12,7 @@ export async function cargarComentarios() {
         }
 
         contenedor.innerHTML = comentarios
-            .map(c => `<div class="comentario"><strong>Reserva ${c.numero}:</strong> ${c.comentario}</div>`)
+            .map(c => `<div class="comentario"><strong>${c.nombre}:</strong> ${c.comentario}</div>`)
             .join('');
     } catch (err) {
         contenedor.innerHTML = "<p>Error al cargar comentarios.</p>";

@@ -22,10 +22,16 @@ document.getElementById('enviarComentario').addEventListener('click', async () =
         const data = await res.json();
 
         if (data.ok) {
-            mensaje.textContent = "¡Comentario guardado exitosamente!";
+            // Ocultar los fields
+            document.getElementById('numReserva').style.display = 'none';
+            document.getElementById('comentario').style.display = 'none';
+            document.getElementById('enviarComentario').style.display = 'none';
+
+            // Mostrar mensaje final
+            mensaje.textContent = "Gracias por tu comentario. Ahora puedes cerrar esta página.";
             mensaje.style.color = "green";
-            document.getElementById('comentario').value = '';
-        } else {
+        }
+        else {
             mensaje.textContent = data.error;
             mensaje.style.color = "red";
         }
