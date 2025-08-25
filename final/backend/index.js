@@ -383,20 +383,24 @@ app.post('/api/comentario', async (req, res) => {
     }
 
     try {
-        // Buscar la reserva en la base de datos
-        const reserva = await db.collection('reservas').findOne({ numero: numReserva });
+        // Verificar que la reserva exista
+        const { data: reserva, error: errorReserva } = await supabase
+            .from('reservas')
+            .select('*')
+            .eq('numero_Transferencia', numReserva) // coincide con tu campo en la DB
+            .single();
 
-        if (!reserva) {
+        if (errorReserva || !reserva) {
             return res.json({ ok: false, error: 'Número de reserva no encontrado.' });
         }
 
-        // Guardar el comentario en la reserva
-        // Si quieres permitir varios comentarios por reserva, usa $push en lugar de $set
-        await db.collection('reservas').updateOne(
-            { numero: numReserva },
-            { $set: { comentario: comentario } } // reemplaza cualquier comentario anterior
-            // Para múltiples comentarios: { $push: { comentarios: comentario } }
-        );
+        // Guardar comentario
+        const { error: errorUpdate } = await supabase
+            .from('reservas')
+            .update({ comentario })
+            .eq('numero_Transferencia', numReserva);
+
+        if (errorUpdate) throw errorUpdate;
 
         res.json({ ok: true });
     } catch (err) {
@@ -404,14 +408,16 @@ app.post('/api/comentario', async (req, res) => {
         res.json({ ok: false, error: 'Error en el servidor.' });
     }
 });
+
 // Ruta para obtener todos los comentarios
 app.get('/api/comentarios', async (req, res) => {
     try {
-        // Traer todas las reservas que tengan un comentario
-        const comentarios = await db.collection('reservas')
-            .find({ comentario: { $exists: true, $ne: "" } })
-            .project({ numero: 1, comentario: 1, _id: 0 })
-            .toArray();
+        const { data: comentarios, error } = await supabase
+            .from('reservas')
+            .select('numero_Transferencia, comentario')
+            .not('comentario', 'is', null);
+
+        if (error) throw error;
 
         res.json(comentarios);
     } catch (err) {
@@ -419,6 +425,7 @@ app.get('/api/comentarios', async (req, res) => {
         res.json([]);
     }
 });
+
 
 // GET /stripe-session?session_id=...
 app.get('/stripe-session', async (req, res) => {
