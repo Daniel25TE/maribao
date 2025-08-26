@@ -28,10 +28,14 @@ export async function loadRestaurants() {
             container.appendChild(card);
         });
         container.innerHTML += `
-    <article class="restaurant-card ver-mas">
+    <article class="option-item ver-mas">
         <a href="servicios.html" aria-label="Ir a todos los servicios">
+        
         Ver todos los restaurantes
-            <img src="images/arrow-right-square-fill.svg" alt="Todos los servicios.">
+            
+        </a>
+        <a href="servicios.html" aria-label="Ir a todos los servicios">
+        <img src="images/arrow-right-square-fill.svg" alt="Todos los servicios.">
         </a>
     </article>
 `;

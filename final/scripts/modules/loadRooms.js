@@ -18,10 +18,20 @@ export async function loadRooms() {
                 <div class="room-images-slider" data-index="0">
                     <button class="slider-btn left">&#10094;</button>
                     <div class="slider-track">
-                        ${room.images.map(img => `
-                            <img src="${img}" alt="${room.name}" loading="lazy" width="960" height="720">
-                        `).join('')}
-                    </div>
+  ${room.images.map(img => `
+    <img 
+      src="${img.src}" 
+      srcset="${img.srcset}" 
+      sizes="${img.sizes}" 
+      alt="${img.alt || room.name}" 
+      loading="lazy" 
+      width="${img.width}" 
+      height="${img.height}" 
+      title="${img.title || ''}"
+    >
+  `).join('')}
+</div>
+
                     <button class="slider-btn right">&#10095;</button>
                     <div class="slider-indicators"></div>
                 </div>

@@ -26,10 +26,13 @@ export async function loadQuestions() {
             container.appendChild(details);
         });
         container.innerHTML += `
-    <article class="restaurant-card ver-mas">
+    <article class="option-item ver-mas">
         <a href="servicios.html" aria-label="Ir a todos los servicios">
         Ver todas las preguntas frequentes
-            <img src="images/arrow-right-square-fill.svg" alt="Todos los servicios.">
+            
+        </a>
+        <a href="servicios.html" aria-label="Ir a todos los servicios">
+        <img src="images/arrow-right-square-fill.svg" alt="Todos los servicios.">
         </a>
     </article>
 `;

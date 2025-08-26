@@ -6,8 +6,51 @@
             "beds": "2 literas y 1 cama queen",
             "description": "Tamaño del apartamento: 215 ft²",
             "images": [
-                "images/room-maribao.webp",
-                "images/room-maribao.webp"
+                {
+                    "src": "images/maribao_outside3_medium.webp",
+                    "srcset": "images/maribao_outside3_mobile.webp 640w, images/maribao_outside3_medium.webp 1200w, images/maribao_outside3_large.webp 1920w",
+                    "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
+                    "alt": "Imagen 1",
+                    "width": "1200",
+                    "height": "675",
+                    "title": "Estrella"
+                },
+                {
+                    "src": "images/maribao_outside6_medium.webp",
+                    "srcset": "images/maribao_outside6_mobile.webp 640w, images/maribao_outside6_medium.webp 1200w, images/maribao_outside6_large.webp 1920w",
+                    "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
+                    "alt": "Imagen 1",
+                    "width": "1200",
+                    "height": "675",
+                    "title": "Estrella"
+                },
+                {
+                    "src": "images/cuartouno_medium.webp",
+                    "srcset": "images/cuartouno_mobile.webp 640w, images/cuartouno_medium.webp 1200w, images/cuartouno_large.webp 1920w",
+                    "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
+                    "alt": "Imagen 1",
+                    "width": "1200",
+                    "height": "675",
+                    "title": "Estrella"
+                },
+                {
+                    "src": "images/cuartounocuatro_medium.webp",
+                    "srcset": "images/cuartounocuatro_mobile.webp 640w, images/cuartounocuatro_medium.webp 1200w, images/cuartounocuatro_large.webp 1920w",
+                    "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
+                    "alt": "Imagen 1",
+                    "width": "1200",
+                    "height": "675",
+                    "title": "Estrella"
+                },
+                {
+                    "src": "images/cuartounotres_medium.webp",
+                    "srcset": "images/cuartounotres_mobile.webp 640w, images/cuartounotres_medium.webp 1200w, images/cuartounotres_large.webp 1920w",
+                    "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
+                    "alt": "Imagen 1",
+                    "width": "1200",
+                    "height": "675",
+                    "title": "Estrella"
+                }
             ],
             "features": [
                 "Apartamento entero",
@@ -33,8 +76,24 @@
             "beds": "1 cama completa y 1 cama queen",
             "description": "Tamaño del apartamento: 194 ft²",
             "images": [
-                "images/room-maribao.webp",
-                "images/room-maribao.webp"
+                {
+                    "src": "images/maribao_medium.webp",
+                    "srcset": "images/maribao_mobile.webp 640w, images/maribao_medium.webp 1200w, images/maribao_large.webp 1920w",
+                    "sizes": "(max-width: 840px) 100vw, 50vw",
+                    "alt": "Habitación con vista al mar",
+                    "width": "1200",
+                    "height": "675",
+                    "title": "Habitación Deluxe"
+                },
+                {
+                    "src": "images/maribao_medium.webp",
+                    "srcset": "images/maribao_mobile.webp 640w, images/maribao_medium.webp 1200w, images/maribao_large.webp 1920w",
+                    "sizes": "(max-width: 840px) 100vw, 50vw",
+                    "alt": "Habitación con vista al mar",
+                    "width": "1200",
+                    "height": "675",
+                    "title": "Habitación Deluxe"
+                }
             ],
             "features": [
                 "Cocina privada",
@@ -60,8 +119,24 @@
             "beds": "2 literas y 1 cama queen",
             "description": "Tamaño 215 ft²",
             "images": [
-                "images/room-maribao.webp",
-                "images/room-maribao.webp"
+                {
+                    "src": "images/maribao_medium.webp",
+                    "srcset": "images/maribao_mobile.webp 640w, images/maribao_medium.webp 1200w, images/maribao_large.webp 1920w",
+                    "sizes": "(max-width: 840px) 100vw, 50vw",
+                    "alt": "Habitación con vista al mar",
+                    "width": "1200",
+                    "height": "675",
+                    "title": "Habitación Deluxe"
+                },
+                {
+                    "src": "images/maribao_medium.webp",
+                    "srcset": "images/maribao_mobile.webp 640w, images/maribao_medium.webp 1200w, images/maribao_large.webp 1920w",
+                    "sizes": "(max-width: 840px) 100vw, 50vw",
+                    "alt": "Habitación con vista al mar",
+                    "width": "1200",
+                    "height": "675",
+                    "title": "Habitación Deluxe"
+                }
             ],
             "features": [
                 "Suite privada",
@@ -87,8 +162,24 @@
             "beds": "Dormitorio: 1 cama individual y 1 cama queen  - Salón: 1 sofá cama",
             "description": "Tamaño 226 ft²",
             "images": [
-                "images/room-maribao.webp",
-                "images/room-maribao.webp"
+                {
+                    "src": "images/maribao_medium.webp",
+                    "srcset": "images/maribao_mobile.webp 640w, images/maribao_medium.webp 1200w, images/maribao_large.webp 1920w",
+                    "sizes": "(max-width: 840px) 100vw, 50vw",
+                    "alt": "Habitación con vista al mar",
+                    "width": "1200",
+                    "height": "675",
+                    "title": "Habitación Deluxe"
+                },
+                {
+                    "src": "images/maribao_medium.webp",
+                    "srcset": "images/maribao_mobile.webp 640w, images/maribao_medium.webp 1200w, images/maribao_large.webp 1920w",
+                    "sizes": "(max-width: 840px) 100vw, 50vw",
+                    "alt": "Habitación con vista al mar",
+                    "width": "1200",
+                    "height": "675",
+                    "title": "Habitación Deluxe"
+                }
             ],
             "features": [
                 "Suite privada",
@@ -113,8 +204,24 @@
             "beds": "2 camas individuales y 1 cama completa y 2 camas queen",
             "description": "Tamaño 431 ft²",
             "images": [
-                "images/room-maribao.webp",
-                "images/room-maribao.webp"
+                {
+                    "src": "images/maribao_medium.webp",
+                    "srcset": "images/maribao_mobile.webp 640w, images/maribao_medium.webp 1200w, images/maribao_large.webp 1920w",
+                    "sizes": "(max-width: 840px) 100vw, 50vw",
+                    "alt": "Habitación con vista al mar",
+                    "width": "1200",
+                    "height": "675",
+                    "title": "Habitación Deluxe"
+                },
+                {
+                    "src": "images/maribao_medium.webp",
+                    "srcset": "images/maribao_mobile.webp 640w, images/maribao_medium.webp 1200w, images/maribao_large.webp 1920w",
+                    "sizes": "(max-width: 840px) 100vw, 50vw",
+                    "alt": "Habitación con vista al mar",
+                    "width": "1200",
+                    "height": "675",
+                    "title": "Habitación Deluxe"
+                }
             ],
             "features": [
                 "1 habitación",

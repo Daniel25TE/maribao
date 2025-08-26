@@ -217,6 +217,10 @@ h1 {
     color: #333;
 }
 
+.option-item a {
+    padding-bottom: 1rem;
+}
+
 #comentarios {
     padding: 1rem;
     background-color: #f9f9f9;
