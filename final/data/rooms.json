@@ -3,6 +3,32 @@
         {
             "name": "Apartamento de un dormitorio",
             "price": 120,
+            "rates": [
+                {
+                    "people": 1,
+                    "price": 45
+                },
+                {
+                    "people": 2,
+                    "price": 48
+                },
+                {
+                    "people": 3,
+                    "price": 51
+                },
+                {
+                    "people": 4,
+                    "price": 54
+                },
+                {
+                    "people": 5,
+                    "price": 57
+                },
+                {
+                    "people": 6,
+                    "price": 60
+                }
+            ],
             "beds": "2 literas y 1 cama queen",
             "description": "Tamaño del apartamento: 215 ft²",
             "images": [
@@ -72,6 +98,24 @@
         {
             "name": "Habitación doble o doble",
             "price": 0,
+            "rates": [
+                {
+                    "people": 1,
+                    "price": 24
+                },
+                {
+                    "people": 2,
+                    "price": 27
+                },
+                {
+                    "people": 3,
+                    "price": 30
+                },
+                {
+                    "people": 4,
+                    "price": 32
+                }
+            ],
             "beds": "1 cama completa y 1 cama queen",
             "description": "Tamaño del apartamento: 194 ft²",
             "images": [

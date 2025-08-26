@@ -5,12 +5,14 @@ const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 export function dataForm() {
-    const data = JSON.parse(localStorage.getItem("selectedRoom"));
-    data.price = Number(data.price.replace(/[^\d.]/g, '')) || 0;
+    const data = JSON.parse(localStorage.getItem("selectedRoom") || "{}");
 
+    if (!data || Object.keys(data).length === 0) return;
 
-    if (!data) return;
+    // 🔹 Ajustar precio (limpia símbolos como $, , etc.)
+    data.price = Number(data.price?.toString().replace(/[^\d.]/g, '')) || 0;
 
+    // 🔹 Obtener el contenedor una sola vez
     const preview = document.getElementById("selected-room-preview");
     preview.innerHTML = `
         <div id="room-preview">
@@ -123,6 +125,12 @@ export function dataForm() {
 
         </form>
     `;
+    if (data.people) {
+        const peopleSummary = document.createElement("p");
+        peopleSummary.id = "people-summary";
+        peopleSummary.textContent = `${data.people} ${data.people === 1 ? "persona" : "personas"}`;
+        preview.querySelector("#room-preview").appendChild(peopleSummary);
+    }
     async function cargarFechasOcupadas(roomName) {
         try {
             const { data: fechas, error } = await supabaseClient
