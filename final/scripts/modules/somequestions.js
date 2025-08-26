@@ -28,7 +28,7 @@ export async function loadQuestions() {
         container.innerHTML += `
     <article class="restaurant-card ver-mas">
         <a href="servicios.html" aria-label="Ir a todos los servicios">
-        Ver todas los preguntas frequentes
+        Ver todas las preguntas frequentes
             <img src="images/arrow-right-square-fill.svg" alt="Todos los servicios.">
         </a>
     </article>
