@@ -19,7 +19,7 @@ export function dataForm() {
             <h2>${data.name}</h2>
             
             <img src="${data.image}" alt="${data.name}" loading="lazy" width="960" height="720">
-            <p>Precio: ${data.price}</p>
+            <p>Precio: $${data.price} x noche</p>
         </div>
 
         <form method="POST" id="reservation-form">

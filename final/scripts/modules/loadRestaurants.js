@@ -18,7 +18,7 @@ export async function loadRestaurants() {
             card.innerHTML = `
               <h2>${restaurant.name}</h2>
               <a href="${restaurant.direccion}" target="_blank">
-                <strong>Dirección:</strong> ${restaurant.direccion1}
+                <strong>📌Dirección:</strong> 👉${restaurant.direccion1}
               </a>
               <p><strong>Distancia:</strong> ${restaurant.distancia}</p>
               <p><strong>Tipo de comida:</strong> ${restaurant.tipo_comida}</p>
