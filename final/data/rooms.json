@@ -79,12 +79,10 @@
                 }
             ],
             "features": [
-                "1 persona - $45 x noche",
-                "2 personas - $48 x noche",
-                "3 personas - $51 x noche",
-                "4 personas - $54 x noche",
-                "5 personas - $57 x noche",
-                "6 personas - $60 x noche"
+                "Refrigerador",
+                "Utensilios de cocina",
+                "Hervidor eléctrico",
+                "Mesa de comedor..."
             ],
             "fullDetails": [
                 "Este apartamento cuenta con entrada privada, aire acondicionado, 1 sala de estar, 1 dormitorio independiente y 1 baño con bañera y ducha. Los huéspedes encontrarán fogones, nevera, utensilios de cocina y hervidor eléctrico en la cocina bien equipada. El apartamento también incluye barbacoa. El apartamento tiene un balcón con muebles de exterior y vistas al mar donde podrá relajarse. La unidad tiene 3 camas.",
@@ -166,10 +164,10 @@
                 }
             ],
             "features": [
-                "1 persona - $24 x noche",
-                "2 personas - $27 x noche",
-                "3 personas - $30 x noche",
-                "4 personas - $32 x noche"
+                "Estufa",
+                "Mesa de comedor",
+                "Refrigerador",
+                "Utensilios de cocina..."
             ],
             "fullDetails": [
                 "La cocina está bien equipada con fogones, nevera, utensilios de cocina y hervidor eléctrico. La habitación doble también ofrece barbacoa. La habitación doble dispone de aire acondicionado, entrada privada, balcón con vistas al mar y baño privado con ducha. La unidad ofrece 2 camas.",
@@ -183,7 +181,7 @@
         {
             "name": "Suite",
             "price": 70,
-            "beds": "2 literas y 1 cama queen",
+            "beds": "2 literas y 1 cama queen - 7 personas - $70 x noche",
             "description": "Tamaño 215 ft²",
             "images": [
                 {
@@ -242,7 +240,10 @@
                 }
             ],
             "features": [
-                "7 personas - $70 x noche"
+                "Tostador",
+                "Refrigerador",
+                "Utensilios de cocina",
+                "Mesa de comedor..."
             ],
             "fullDetails": [
                 "Esta suite cuenta con entrada privada, aire acondicionado, cocina, 1 dormitorio y 1 baño con bañera y ducha. Los huéspedes encontrarán fogones, nevera, utensilios de cocina y tostadora en la cocina bien equipada. La suite también ofrece barbacoa. La suite cuenta con un balcón con muebles de exterior y vistas al mar para su comodidad. La unidad ofrece 3 camas.",
@@ -256,7 +257,7 @@
         {
             "name": "Estudio Deluxe King",
             "price": 60,
-            "beds": "1 cama individual y 1 cama queen  - Salón: 1 sofá cama",
+            "beds": "1 cama individual y 1 cama queen  - Salón: 1 sofá cama - 4 personas - $60 x noche",
             "description": "Tamaño 226 ft²",
             "images": [
                 {
@@ -306,7 +307,10 @@
                 }
             ],
             "features": [
-                "4 personas - $60 x noche"
+                "Refrigerador",
+                "Utensilios de cocina",
+                "Estufa",
+                "Mesa de comedor..."
             ],
             "fullDetails": [
                 "Esta suite cuenta con entrada privada, aire acondicionado, 1 sala de estar, 1 dormitorio independiente y 1 baño con ducha. Los huéspedes encontrarán fogones, nevera y utensilios de cocina en la cocina. La suite también incluye barbacoa. Entre las comodidades de las habitaciones se encuentran una zona de estar, un sofá, un suelo de baldosa, así como un patio y vistas al mar. La unidad tiene 3 camas.",
@@ -320,7 +324,7 @@
         {
             "name": "Habitación Familiar Deluxe",
             "price": 95,
-            "beds": "2 camas individuales y 1 cama completa y 2 camas queen",
+            "beds": "2 camas individuales y 1 cama completa y 2 camas queen - 8 personas - $95 x noche",
             "description": "Tamaño 431 ft²",
             "images": [
                 {
@@ -352,7 +356,10 @@
                 }
             ],
             "features": [
-                "8 personas - $95 x noche"
+                "Utensilios de cocina",
+                "Refrigerador",
+                "Estufa",
+                "Mesa de comedor..."
             ],
             "fullDetails": [
                 "Los huéspedes encontrarán fogones, nevera y utensilios de cocina en la cocina. La sala familiar también tiene una barbacoa. Esta habitación familiar cuenta con aire acondicionado, zona de estar, patio, vistas al mar y baño privado. La unidad ofrece 5 camas.",

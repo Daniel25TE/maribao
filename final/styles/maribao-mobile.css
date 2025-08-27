@@ -800,11 +800,24 @@ a {
 .close-modal-btn {
     position: absolute;
     top: 10px;
-    right: 15px;
-    font-size: 24px;
-    cursor: pointer;
-    background: none;
+    right: 10px;
+    font-size: 2.8rem;
+    background: rgba(255, 255, 255, 0.9);
     border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s ease, background 0.2s ease;
+    z-index: 1002;
+}
+
+.close-modal-btn:hover {
+    transform: scale(1.1);
+    background: rgb(190, 188, 188);
 }
 
 .cta-book {
@@ -1070,4 +1083,168 @@ textarea:invalid {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     max-width: 90%;
     font-family: system-ui, sans-serif;
+}
+
+.gallery {
+    column-width: 250px;
+    /* cada columna mide al menos 250px */
+    column-gap: 12px;
+    /* espacio entre columnas */
+    padding: 10px;
+}
+
+.gallery img {
+    width: 100%;
+    /* la imagen ocupa todo el ancho de su columna */
+    margin-bottom: 12px;
+    /* espacio inferior */
+    border-radius: 10px;
+    /* esquinas redondeadas */
+    display: block;
+    object-fit: cover;
+    /* mantiene proporción */
+    cursor: pointer;
+}
+
+.lazy-img {
+    opacity: 0;
+    min-height: 150px;
+    /* reserva espacio */
+    background: #eee;
+    /* gris de fondo como placeholder */
+    transition: opacity 0.5s ease-in;
+}
+
+.lazy-img[src] {
+    opacity: 1;
+}
+
+.gallery-filters {
+    display: flex;
+    /* alineamos los botones en fila */
+    flex-wrap: wrap;
+    /* se mueven a la siguiente línea si no caben */
+    gap: 8px;
+    /* espacio entre botones */
+    margin-bottom: 16px;
+    /* espacio con la galería */
+    justify-content: center;
+    /* opcional: centrado horizontal */
+}
+
+
+.filter-btn {
+    padding: 12px 18px;
+    margin: 4px;
+    border: none;
+    background-color: #c5c1c1;
+    color: #000000;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.filter-btn:hover {
+    background-color: #ccc;
+}
+
+.filter-btn.active {
+    background-color: #00375f;
+    color: #fff;
+}
+
+/* Contenedor del modal */
+.modal-gallery {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.3s ease;
+}
+
+/* Oculto */
+.modal-gallery[hidden] {
+    display: none;
+}
+
+/* Overlay oscuro con blur */
+.modal-overlay-gallery {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    transition: background 0.3s ease;
+
+}
+
+/* Contenido del modal con animación de aparición */
+.modal-content-gallery {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    z-index: 1001;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    transform: scale(0.8);
+    opacity: 0;
+    animation: modalShow 0.3s forwards;
+    padding: 0;
+}
+
+/* Animación de apertura */
+@keyframes modalShow {
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Imagen dentro del modal */
+.modal-content-gallery img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    object-fit: contain;
+}
+
+/* Botón de cerrar */
+.modal-close-gallery {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.8rem;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s ease, background 0.2s ease;
+    z-index: 1002;
+}
+
+/* Efecto hover en cerrar */
+.modal-close-gallery:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 1);
+}
+
+/* Animación de fade-out cuando se cierra */
+.modal-gallery[hidden] .modal-content-gallery {
+    animation: modalHide 0.2s forwards;
+}
+
+@keyframes modalHide {
+    to {
+        transform: scale(0.8);
+        opacity: 0;
+    }
 }

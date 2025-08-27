@@ -6,7 +6,7 @@ import { loadRestaurants } from './modules/loadRestaurants.js';
 import { initializeSlider } from './modules/slider.js';
 import { allVideos } from "./modules/videos.js";
 import { allheroimages } from './modules/heroimages.js';
-import { lazyLoadStaticContainers } from "./modules/lazyLoader.js"
+import { lazyLoadStaticContainers } from "./modules/lazyLoader.js";
 import { loadQuestions } from './modules/somequestions.js';
 import { cargarComentarios } from './modules/comentariosmostrar.js';
 

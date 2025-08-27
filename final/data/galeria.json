@@ -100,8 +100,28 @@
         "room": "Habitacion doble"
     },
     {
+        "src": "images/cuartounodos_medium.webp",
+        "srcset": "images/cuartounodos_mobile.webp 640w, images/cuartounodos_medium.webp 1200w, images/cuartounodos_large.webp 1920w",
+        "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
+        "alt": "Imagen 1",
+        "width": "1200",
+        "height": "675",
+        "title": "Estrella",
+        "room": "Apartamento de un dormitorio"
+    },
+    {
         "src": "images/cuartouno_medium.webp",
         "srcset": "images/cuartouno_mobile.webp 640w, images/cuartouno_medium.webp 1200w, images/cuartouno_large.webp 1920w",
+        "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
+        "alt": "Imagen 1",
+        "width": "1200",
+        "height": "675",
+        "title": "Estrella",
+        "room": "Apartamento de un dormitorio"
+    },
+    {
+        "src": "images/cuartounocuatro_medium.webp",
+        "srcset": "images/cuartounocuatro_mobile.webp 640w, images/cuartounocuatro_medium.webp 1200w, images/cuartounocuatro_large.webp 1920w",
         "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
         "alt": "Imagen 1",
         "width": "1200",
