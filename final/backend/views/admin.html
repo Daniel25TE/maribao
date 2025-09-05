@@ -10,53 +10,61 @@
 
 <body class="bg-gray-100 min-h-screen flex flex-col">
 
+    <!-- HEADER -->
     <header class="bg-gray-800 text-white py-4 shadow-md">
         <div class="container mx-auto px-4 flex justify-between items-center">
             <h1 class="text-xl font-bold">📋 Panel de Reservas</h1>
-            <a href="/logout" class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md text-sm">Cerrar sesión</a>
+            <a href="/logout" class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md text-sm">
+                Cerrar sesión
+            </a>
         </div>
     </header>
 
-    <main class="flex-1 flex flex-col items-start justify-start p-6">
-        <div class="w-full max-w-6xl mx-auto bg-white p-6 rounded-xl shadow-lg overflow-x-auto">
-            <div class="mb-4">
-                <button id="delete-selected" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md">
+    <!-- MAIN -->
+    <main class="flex-1 flex flex-col items-start justify-start p-4 sm:p-6">
+        <div class="w-full max-w-6xl mx-auto bg-white p-4 sm:p-6 rounded-xl shadow-lg overflow-x-auto">
+
+            <!-- BOTONES -->
+            <div class="mb-4 flex flex-col sm:flex-row gap-2">
+                <button id="delete-selected"
+                    class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md w-full sm:w-auto">
                     🗑️ Eliminar seleccionados
                 </button>
-                <button id="delete-permanent" class="bg-red-700 hover:bg-red-800 text-white px-4 py-2 rounded-md ml-2">
+                <button id="delete-permanent"
+                    class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md w-full sm:w-auto">
                     ❌ Eliminar permanentemente
                 </button>
-
             </div>
 
-            <table class="min-w-full table-auto">
-                <thead class="bg-gray-800 text-white">
-                    <tr>
-                        <th class="py-3 px-4 text-left"><!-- espacio para los checkboxes --></th>
-                        <th class="py-3 px-4 text-left">Fecha</th>
-                        <th class="py-3 px-4 text-left">Nombre</th>
-                        <th class="py-3 px-4 text-left">Email</th>
-                        <th class="py-3 px-4 text-left">Teléfono</th>
-                        <th class="py-3 px-4 text-left">Check-in</th>
-                        <th class="py-3 px-4 text-left">Check-out</th>
-                        <th class="py-3 px-4 text-left">Cuarto</th>
-                        <th class="py-3 px-4 text-left">Metodo de Pago</th>
-                        <th class="py-3 px-4 text-left">Solicitudes Especiales</th>
-                        <th class="py-3 px-4 text-left">Hora de Llegada</th>
-                        <th class="py-3 px-4 text-left">Numero de Reserva</th>
-                        <th class="py-3 px-4 text-left">Estado</th>
-                    </tr>
-                </thead>
-                <tbody id="reservas-table" class="text-gray-700">
-                    <!-- Las filas se insertan con JavaScript -->
-                </tbody>
-            </table>
+            <!-- TABLA -->
+            <div class="overflow-x-auto">
+                <table class="min-w-full border border-gray-300 text-sm sm:text-base">
+                    <thead class="bg-gray-800 text-white">
+                        <tr>
+                            <th class="py-3 px-4 border border-gray-300"></th>
+                            <th class="py-3 px-4 border border-gray-300">Fecha</th>
+                            <th class="py-3 px-4 border border-gray-300">Nombre</th>
+                            <th class="py-3 px-4 border border-gray-300">Email</th>
+                            <th class="py-3 px-4 border border-gray-300">Teléfono</th>
+                            <th class="py-3 px-4 border border-gray-300">Check-in</th>
+                            <th class="py-3 px-4 border border-gray-300">Check-out</th>
+                            <th class="py-3 px-4 border border-gray-300">Cuarto</th>
+                            <th class="py-3 px-4 border border-gray-300">Método de Pago</th>
+                            <th class="py-3 px-4 border border-gray-300">Solicitudes Especiales</th>
+                            <th class="py-3 px-4 border border-gray-300">Hora de Llegada</th>
+                            <th class="py-3 px-4 border border-gray-300">Número de Reserva</th>
+                            <th class="py-3 px-4 border border-gray-300">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reservas-table" class="text-gray-700">
+                        <!-- FILAS SE AGREGAN DINÁMICAMENTE CON admin.js -->
+                    </tbody>
+                </table>
+            </div>
         </div>
     </main>
 
-
     <script src="/js/admin.js"></script>
-
 </body>
 
 </html>

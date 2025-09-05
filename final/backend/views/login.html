@@ -6,7 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* 🔒 Eliminar ojo nativo en navegadores */
+        input::-ms-reveal,
+        input::-ms-clear {
+            display: none !important;
+        }
 
+        input::-webkit-credentials-auto-fill-button,
+        input::-webkit-password-toggle-button {
+            display: none !important;
+        }
+    </style>
 </head>
 
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
@@ -14,24 +25,60 @@
         <form method="POST" action="/login" class="space-y-4">
             <h1 class="text-3xl font-bold text-center text-blue-700 mb-2">Hotel Maribao</h1>
             <p class="text-center text-gray-600 mb-4">Bienvenido al panel administrativo</p>
+
             <label class="block text-gray-700 font-medium">
                 Usuario
                 <input type="text" name="usuario" required
                     class="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
             </label>
+
+            <!-- Campo de contraseña con solo nuestro ojo SVG -->
             <label class="block text-gray-700 font-medium">
                 Contraseña
-                <input type="password" name="contrasena" required
-                    class="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
+                <div class="relative">
+                    <input type="password" name="contrasena" id="contrasena" required
+                        class="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 pr-10">
+                    <!-- Botón ojo -->
+                    <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 flex items-center pr-3">
+                        <!-- Ícono ojo abierto (oculto por defecto) -->
+                        <svg id="iconEye" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24"
+                            stroke="black" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                        <!-- Ícono ojo tachado (visible por defecto) -->
+                        <svg id="iconEyeOff" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="black" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M13.875 18.825A10.05 10.05 0 0112 19c-4.477 0-8.268-2.943-9.542-7a9.96 9.96 0 012.042-3.272m3.636-2.511A9.956 9.956 0 0112 5c4.477 0 8.268 2.943 9.542 7a9.96 9.96 0 01-4.042 5.272M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 3l18 18" />
+                        </svg>
+                    </button>
+                </div>
+
             </label>
 
             <button type="submit"
                 class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">Entrar</button>
         </form>
-
-
     </div>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const togglePassword = document.getElementById("togglePassword");
+            const passwordInput = document.getElementById("contrasena");
+            const iconEye = document.getElementById("iconEye");
+            const iconEyeOff = document.getElementById("iconEyeOff");
+
+            togglePassword.addEventListener("click", () => {
+                const isPassword = passwordInput.type === "password";
+                passwordInput.type = isPassword ? "text" : "password";
+                iconEye.classList.toggle("hidden", !isPassword);
+                iconEyeOff.classList.toggle("hidden", isPassword);
+            });
+        });
+    </script>
 </body>
 
 </html>
