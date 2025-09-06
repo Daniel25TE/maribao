@@ -64,21 +64,8 @@
         </form>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const togglePassword = document.getElementById("togglePassword");
-            const passwordInput = document.getElementById("contrasena");
-            const iconEye = document.getElementById("iconEye");
-            const iconEyeOff = document.getElementById("iconEyeOff");
+    <script src="/js/login.js"></script>
 
-            togglePassword.addEventListener("click", () => {
-                const isPassword = passwordInput.type === "password";
-                passwordInput.type = isPassword ? "text" : "password";
-                iconEye.classList.toggle("hidden", !isPassword);
-                iconEyeOff.classList.toggle("hidden", isPassword);
-            });
-        });
-    </script>
 </body>
 
 </html>
