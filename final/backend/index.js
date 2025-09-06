@@ -18,6 +18,8 @@ import cancelarRoutes from "./routes/cancelar.js";
 
 
 dotenv.config();
+console.log("Node version:", process.version);
+console.log("Render PORT:", process.env.PORT);
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -496,7 +498,7 @@ app.get('/', (req, res) => {
 
 // Puerto
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, '0.0.0.0', () => {
-
-    console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
+app.listen(PORT, () => {
+    console.log(`🚀 Servidor corriendo en puerto ${PORT}`);
 });
+
