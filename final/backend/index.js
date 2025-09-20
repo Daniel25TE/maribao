@@ -1,7 +1,6 @@
 // index.js
 import express from 'express';
 import cors from 'cors';
-import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 import { insertarReserva, obtenerReservas, obtenerFechasOcupadasPorCuarto } from './database.js';
 import session from 'express-session';
@@ -15,9 +14,11 @@ import Stripe from 'stripe';
 import bodyParser from 'body-parser';
 import { supabase } from './database.js';
 import cancelarRoutes from "./routes/cancelar.js";
+import sgMail from "@sendgrid/mail";
 
 
 dotenv.config();
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 console.log("Node version:", process.version);
 console.log("Render PORT:", process.env.PORT);
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
@@ -29,19 +30,13 @@ const corsOptions = {
     credentials: true,  // necesario para enviar cookies en requests cross-origin
 };
 async function enviarCorreosReserva(datosReserva, sessionId = null) {
-    const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: process.env.EMAIL,
-            pass: process.env.PASSWORD,
-        },
-    });
-
-    const mailOptionsCliente = {
-        from: process.env.EMAIL,
-        to: datosReserva.email,
-        subject: 'Confirmación de Reserva - Hotel Maribao',
-        text: `
+    try {
+        // 📧 correo al cliente
+        const msgCliente = {
+            to: datosReserva.email,
+            from: process.env.EMAIL, // remitente verificado en SendGrid
+            subject: 'Confirmación de Reserva - Hotel Maribao',
+            text: `
 Hola ${datosReserva.firstName} ${datosReserva.lastName}, gracias por tu reserva${sessionId ? ' pagada con tarjeta' : ''}.
 
 - Número de Reserva: ${datosReserva.numeroTransferencia}
@@ -52,27 +47,27 @@ Detalles de tu estadía:
 - Check-out: ${datosReserva.checkout}
 
 ${datosReserva.metodoPago ? `- Método de pago: ${datosReserva.metodoPago === 'tarjeta' ? 'Tarjeta (Stripe)' :
-                datosReserva.metodoPago === 'transferencia' ? 'Transferencia bancaria' :
-                    'Efectivo'
-                }` : ''}
-
-
-
+        datosReserva.metodoPago === 'transferencia' ? 'Transferencia bancaria' :
+        'Efectivo'
+    }` : ''}
 
 Solicitudes especiales: ${datosReserva.specialRequests || 'Ninguna'}
 Hora estimada de llegada: ${datosReserva.arrivalTime || 'No especificada'}
-Si deseas cancelar tu reserva, ingresa tu número de reserva ${datosReserva.numeroTransferencia} en "https://daniel25te.github.io/wdd231/final/cancelar.html
-"esta página y cancélala fácilmente.
+
+Si deseas cancelar tu reserva, ingresa tu número de reserva ${datosReserva.numeroTransferencia} en:
+https://daniel25te.github.io/wdd231/final/cancelar.html
+
 ¡Te esperamos!
 Hotel Maribao
-        `,
-    };
+            `,
+        };
 
-    const mailOptionsEmpleador = {
-        from: process.env.EMAIL,
-        to: process.env.EMAIL_EMPLEADOR,
-        subject: `🔔 Nueva reserva${sessionId ? ' pagada con tarjeta' : ''} en Hotel Maribao`,
-        text: `
+        // 📧 correo al empleador
+        const msgEmpleador = {
+            to: process.env.EMAIL_EMPLEADOR,
+            from: process.env.EMAIL,
+            subject: `🔔 Nueva reserva${sessionId ? ' pagada con tarjeta' : ''} en Hotel Maribao`,
+            text: `
 Se ha realizado una nueva reserva${sessionId ? ' pagada con tarjeta' : ''} en tu sitio web.
 
 - Número de Reserva: ${datosReserva.numeroTransferencia}
@@ -83,40 +78,33 @@ Se ha realizado una nueva reserva${sessionId ? ' pagada con tarjeta' : ''} en tu
 📅 Check-out: ${datosReserva.checkout}
 🛏️ Cuarto reservado: ${datosReserva.cuarto}
 ${datosReserva.metodoPago ? `- Método de pago: ${datosReserva.metodoPago === 'tarjeta' ? 'Tarjeta (Stripe)' :
-                datosReserva.metodoPago === 'transferencia' ? 'Transferencia bancaria' :
-                    'Efectivo'
-                }` : ''}
-
-
-
-
+        datosReserva.metodoPago === 'transferencia' ? 'Transferencia bancaria' :
+        'Efectivo'
+    }` : ''}
 
 🔍 Ver reservas: https://hotel-backend-3jw7.onrender.com/login
 
 —
 Hotel Maribao - Notificación automática
-        `,
-    };
+            `,
+        };
 
-    await transporter.sendMail(mailOptionsCliente);
-    await transporter.sendMail(mailOptionsEmpleador);
+        await sgMail.send(msgCliente);
+        await sgMail.send(msgEmpleador);
 
-    console.log(`📧 Correos enviados para reserva${sessionId ? ' con sesión ' + sessionId : ''}`);
+        console.log(`📧 Correos enviados para reserva${sessionId ? ' con sesión ' + sessionId : ''}`);
+    } catch (error) {
+        console.error("❌ Error al enviar correos:", error.response?.body || error);
+    }
 }
-async function enviarCorreoClienteCancelacion(datosReserva) {
-    const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: process.env.EMAIL,
-            pass: process.env.PASSWORD,
-        },
-    });
 
-    const mailCliente = {
-        from: process.env.EMAIL,
-        to: datosReserva.email,
-        subject: 'Reserva Cancelada - Hotel Maribao',
-        text: `
+async function enviarCorreoClienteCancelacion(datosReserva) {
+    try {
+        const msgCliente = {
+            from: process.env.EMAIL,
+            to: datosReserva.email,
+            subject: 'Reserva Cancelada - Hotel Maribao',
+            text: `
 Hola ${datosReserva.nombre || (datosReserva.firstName + ' ' + datosReserva.lastName)},
 
 Tu reserva con número de transferencia ${datosReserva.numero_Transferencia || datosReserva.numeroTransferencia} ha sido cancelada por el administrador.
@@ -129,11 +117,14 @@ Detalles de la reserva:
 Si tienes alguna duda, contáctanos.
 
 Hotel Maribao
-        `
-    };
+            `
+        };
 
-    await transporter.sendMail(mailCliente);
-    console.log(`📧 Correo de cancelación enviado al cliente ${datosReserva.email}`);
+        await sgMail.send(msgCliente);
+        console.log(`📧 Correo de cancelación enviado al cliente ${datosReserva.email}`);
+    } catch (error) {
+        console.error("❌ Error al enviar correo de cancelación:", error.response?.body || error);
+    }
 }
 
 // Necesitas raw body para verificar firma

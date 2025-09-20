@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@sendgrid/mail": "^8.1.6",
     "cors": "^2.8.5",
     "litepicker": "^2.0.12",
     "stripe": "^18.2.1"
