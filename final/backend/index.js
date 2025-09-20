@@ -34,7 +34,7 @@ async function enviarCorreosReserva(datosReserva, sessionId = null) {
         // 📧 correo al cliente
         const msgCliente = {
             to: datosReserva.email,
-            from: process.env.EMAIL, // remitente verificado en SendGrid
+            from: process.env.EMAIL,
             subject: 'Confirmación de Reserva - Hotel Maribao',
             text: `
 Hola ${datosReserva.firstName} ${datosReserva.lastName}, gracias por tu reserva${sessionId ? ' pagada con tarjeta' : ''}.
@@ -54,12 +54,30 @@ ${datosReserva.metodoPago ? `- Método de pago: ${datosReserva.metodoPago === 't
 Solicitudes especiales: ${datosReserva.specialRequests || 'Ninguna'}
 Hora estimada de llegada: ${datosReserva.arrivalTime || 'No especificada'}
 
-Si deseas cancelar tu reserva, ingresa tu número de reserva ${datosReserva.numeroTransferencia} en:
+Si deseas cancelar tu reserva, ingresa tu número de reserva en:
 https://daniel25te.github.io/wdd231/final/cancelar.html
 
 ¡Te esperamos!
 Hotel Maribao
             `,
+            html: `
+                <p>Hola <strong>${datosReserva.firstName} ${datosReserva.lastName}</strong>, gracias por tu reserva${sessionId ? ' pagada con tarjeta' : ''}.</p>
+                <p><b>Número de Reserva:</b> ${datosReserva.numeroTransferencia}</p>
+                <p>
+                  <b>Detalles de tu estadía:</b><br>
+                  - Cuarto: ${datosReserva.cuarto}<br>
+                  - Check-in: ${datosReserva.checkin}<br>
+                  - Check-out: ${datosReserva.checkout}<br>
+                  ${datosReserva.metodoPago ? `- Método de pago: ${datosReserva.metodoPago === 'tarjeta' ? 'Tarjeta (Stripe)' :
+                        datosReserva.metodoPago === 'transferencia' ? 'Transferencia bancaria' :
+                        'Efectivo'
+                    }<br>` : ''}
+                </p>
+                <p>Solicitudes especiales: ${datosReserva.specialRequests || 'Ninguna'}</p>
+                <p>Hora estimada de llegada: ${datosReserva.arrivalTime || 'No especificada'}</p>
+                <p>Si deseas cancelar tu reserva, <a href="https://daniel25te.github.io/wdd231/final/cancelar.html"><strong>haz clic aquí</strong></a>.</p>
+                <p>¡Te esperamos!<br>Hotel Maribao</p>
+            `
         };
 
         // 📧 correo al empleador
@@ -83,10 +101,24 @@ ${datosReserva.metodoPago ? `- Método de pago: ${datosReserva.metodoPago === 't
     }` : ''}
 
 🔍 Ver reservas: https://hotel-backend-3jw7.onrender.com/login
-
-—
-Hotel Maribao - Notificación automática
             `,
+            html: `
+                <p>Se ha realizado una nueva reserva${sessionId ? ' pagada con tarjeta' : ''} en tu sitio web.</p>
+                <p><b>Número de Reserva:</b> ${datosReserva.numeroTransferencia}</p>
+                <p>
+                  👤 Nombre del huésped: ${datosReserva.firstName} ${datosReserva.lastName}<br>
+                  📧 Correo: ${datosReserva.email}<br>
+                  📅 Check-in: ${datosReserva.checkin}<br>
+                  📅 Check-out: ${datosReserva.checkout}<br>
+                  🛏️ Cuarto reservado: ${datosReserva.cuarto}<br>
+                  ${datosReserva.metodoPago ? `- Método de pago: ${datosReserva.metodoPago === 'tarjeta' ? 'Tarjeta (Stripe)' :
+                        datosReserva.metodoPago === 'transferencia' ? 'Transferencia bancaria' :
+                        'Efectivo'
+                    }<br>` : ''}
+                </p>
+                <p>🔍 <a href="https://hotel-backend-3jw7.onrender.com/login"><strong>Ver reservas</strong></a></p>
+                <p>—<br>Hotel Maribao - Notificación automática</p>
+            `
         };
 
         await sgMail.send(msgCliente);
@@ -117,6 +149,18 @@ Detalles de la reserva:
 Si tienes alguna duda, contáctanos.
 
 Hotel Maribao
+            `,
+            html: `
+                <p>Hola <strong>${datosReserva.nombre || (datosReserva.firstName + ' ' + datosReserva.lastName)}</strong>,</p>
+                <p>Tu reserva con número de transferencia <b>${datosReserva.numero_Transferencia || datosReserva.numeroTransferencia}</b> ha sido cancelada por el administrador.</p>
+                <p>
+                  <b>Detalles de la reserva:</b><br>
+                  - Cuarto: ${datosReserva.room_name || datosReserva.cuarto}<br>
+                  - Check-in: ${datosReserva.checkin_date || datosReserva.checkin}<br>
+                  - Check-out: ${datosReserva.checkout_date || datosReserva.checkout}<br>
+                </p>
+                <p>Si tienes alguna duda, <a href="mailto:${process.env.EMAIL}"><strong>contáctanos</strong></a>.</p>
+                <p>Hotel Maribao</p>
             `
         };
 
@@ -126,6 +170,7 @@ Hotel Maribao
         console.error("❌ Error al enviar correo de cancelación:", error.response?.body || error);
     }
 }
+
 
 // Necesitas raw body para verificar firma
 app.post('/webhook', bodyParser.raw({ type: 'application/json' }), async (req, res) => {
