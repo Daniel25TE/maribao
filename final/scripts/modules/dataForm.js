@@ -57,10 +57,19 @@ export function dataForm() {
                     <option value="Otro">Otro</option>
                 </select>
             </label>
-
-            <label>
-                <input type="checkbox" name="paperlessConfirm" checked autocomplete="section-reservation paperless-confirm">
-                Sí, quiero confirmación digital gratuita (recomendado)
+            <label>Hora estimada de llegada*
+                <select name="arrivalTime" required autocomplete="off">
+                    <option value="">Selecciona una hora</option>
+                    <option value="14:00">14:00</option>
+                    <option value="15:00">15:00</option>
+                    <option value="16:00">16:00</option>
+                    <option value="17:00">17:00</option>
+                    <option value="18:00">18:00</option>
+                    <option value="19:00">19:00</option>
+                    <option value="20:00">20:00</option>
+                    <option value="21:00">21:00</option>
+                </select>
+                <small>Check-in disponible a partir de las 14:00 (zona horaria de Playas)</small>
             </label>
             </fieldset>
 
@@ -78,32 +87,14 @@ export function dataForm() {
                 <textarea name="specialRequests" placeholder="..." autocomplete="off"></textarea>
             </label>
 
-            <label>Hora estimada de llegada (opcional)
-                <select name="arrivalTime" autocomplete="off">
-                    <option value="">Selecciona una hora</option>
-                    <option value="15:00">15:00</option>
-                    <option value="16:00">16:00</option>
-                    <option value="17:00">17:00</option>
-                    <option value="18:00">18:00</option>
-                </select>
-                <small>Check-in disponible entre las 15:00 y 18:00 (zona horaria de Playas)</small>
-            </label>
-            </fieldset>
-
-            <fieldset>
-                <legend>Agrega a tu reserva</legend>
-                <label><input type="checkbox" name="addFlights" autocomplete="off"> Vuelos (te mostraremos opciones en la confirmación)</label>
-                <label><input type="checkbox" name="addCar" autocomplete="off"> Renta de autos</label>
-                <label><input type="checkbox" name="addTaxi" autocomplete="off"> Taxis privados desde el aeropuerto</label>
+            
             </fieldset>
 
             <div id="info-box">
                 <h4>Información importante:</h4>
                 <ul>
-                    <li>¡Tendrás toda la suite para ti!</li>
-                    <li>No se requiere pago anticipado. Se paga durante la estancia.</li>
-                    <li><strong>Suite:</strong> Cancelación gratuita hasta el primer día</li>
-                    <li><strong>Huéspedes:</strong> 7 adultos</li>
+                    <li>Se requiere pago anticipado.</li>
+                    <li><strong>Checkout:</strong> El checkout es antes de las 12:00 p.m.</li>
                     <li><strong>No se permite fumar</strong></li>
                 </ul>
             </div>
@@ -270,14 +261,10 @@ export function dataForm() {
             email: form.email.value,
             phone: form.phone.value,
             country: form.country.value,
-            paperlessConfirm: form.paperlessConfirm.checked,
             bookingFor: form.bookingFor.value,
             travelForWork: form.travelForWork.value,
             specialRequests: form.specialRequests.value,
             arrivalTime: form.arrivalTime.value,
-            addFlights: form.addFlights.checked,
-            addCar: form.addCar.checked,
-            addTaxi: form.addTaxi.checked,
             fullGuestName: form.fullGuestName.value,
             cuarto: data.name,
             metodoPago: metodoPago,
