@@ -1248,3 +1248,105 @@ textarea:invalid {
         opacity: 0;
     }
 }
+.whatsapp-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #25D366;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.whatsapp-btn:hover {
+    background-color: #1ebc59;
+}
+
+.contact-list {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 280px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    animation: fadeIn 0.3s ease forwards;
+    font-family: 'Sansation', sans-serif;
+    z-index: 999;
+}
+.contact-header {
+    background-color: #25D366;
+    color: white;
+    padding: 12px 16px;
+    font-size: 14px;
+    text-align: center;
+    line-height: 1.4;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    border: none;
+    background-color: #fff;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    border-bottom: 1px solid #eee;
+}
+
+.contact-item:last-child {
+    border-bottom: none;
+}
+
+.contact-item:hover {
+    background-color: #f5f5f5;
+}
+
+.avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 0 2px #25D366;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+}
+
+.contact-info strong {
+    font-weight: 600;
+    color: #333;
+}
+
+.status {
+    font-size: 12px;
+    color: #888;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

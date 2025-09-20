@@ -4,7 +4,7 @@ import { setupCTAObserver } from './modules/ctaObserver.js';
 import { setupMenuToggle } from './modules/menuToggle.js';
 import { lazyLoadStaticContainers } from "./modules/lazyLoader.js"
 import { lazyLoadFooterIcons } from './modules/footerLazy.js';
-
+import { toggleContactList, openWhatsApp } from './modules/whatsapp.js';
 
 import { loadGallery } from "./modules/gallery.js";
 
@@ -20,6 +20,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setupCTAObserver(cta, header, weather);
     lazyLoadFooterIcons();
+    const whatsappBtn = document.getElementById('whatsappBtn');
+  const contactButtons = document.querySelectorAll('#contactList button');
 
+  if (whatsappBtn) {
+    whatsappBtn.addEventListener('click', toggleContactList);
+  }
+
+  contactButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const number = btn.dataset.number;
+      openWhatsApp(number);
+    });
+  });
 
 });

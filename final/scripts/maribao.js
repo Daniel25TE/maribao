@@ -9,6 +9,7 @@ import { allheroimages } from './modules/heroimages.js';
 import { lazyLoadStaticContainers } from "./modules/lazyLoader.js";
 import { loadQuestions } from './modules/somequestions.js';
 import { cargarComentarios } from './modules/comentariosmostrar.js';
+import { toggleContactList, openWhatsApp } from './modules/whatsapp.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     highlightActiveLink();
@@ -19,6 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
     allheroimages();
     loadQuestions();
     cargarComentarios();
+
+    
+
     const { nextSlide, prevSlide } = initializeSlider();
 
     document.getElementById("nextBtn")?.addEventListener("click", nextSlide);
@@ -52,5 +56,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         observer.observe(sliderSection);
     }
+  const whatsappBtn = document.getElementById('whatsappBtn');
+  const contactButtons = document.querySelectorAll('#contactList button');
+
+  if (whatsappBtn) {
+    whatsappBtn.addEventListener('click', toggleContactList);
+  }
+
+  contactButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const number = btn.dataset.number;
+      openWhatsApp(number);
+    });
+  });
+
 
 });

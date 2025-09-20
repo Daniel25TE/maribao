@@ -43,6 +43,15 @@
         ]
     },
     {
+        "icon": "images/wifi-2.svg",
+        "alt": "wifi",
+        "label": "Wifi",
+        "rating": "&#9733",
+        "fullDetails": [
+            "Cada habitacion tiene Wifi."
+        ]
+    },
+    {
         "icon": "images/bathroom.svg",
         "alt": "bathroom",
         "label": "Baño privado",

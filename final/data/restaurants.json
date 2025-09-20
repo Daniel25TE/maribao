@@ -79,6 +79,30 @@
             "direccion": "https://maps.app.goo.gl/y7F8bqWHtSK51zgV7",
             "direccion1": "Av. Paquisha, Gral Villamil, Ecuador",
             "telefono": "Desconocido"
+        },
+        {
+            "name": "La Casa del Cacique",
+            "tipo_comida": "Comida del Mar",
+            "distancia": "3 min",
+            "direccion": "https://maps.app.goo.gl/Zth8c238wXDzoei77",
+            "direccion1": "Playa paraíso de Engabao, Gral Villamil, Ecuador",
+            "telefono": "Desconocido"
+        },
+        {
+            "name": "Resto-bar `Mary Cris`",
+            "tipo_comida": "Comida del Mar",
+            "distancia": "2 min",
+            "direccion": "https://maps.app.goo.gl/Euth31Tf9rqdpNci7",
+            "direccion1": "Playa paraíso de Engabao, Gral Villamil, Ecuador",
+            "telefono": "Desconocido"
+        },
+        {
+            "name": "Sabor Manabita - Cabaña",
+            "tipo_comida": "Comida del Mar y Cocteles",
+            "distancia": "3 min",
+            "direccion": "https://maps.app.goo.gl/SC7a81QKY1HifP5D9",
+            "direccion1": "Playa paraíso de Engabao, Gral Villamil, Ecuador",
+            "telefono": "+593 99-995-2099"
         }
     ]
 }
