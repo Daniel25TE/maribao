@@ -1,35 +1,35 @@
 {
     "rooms": [
         {
-            "name": "Apartamento de un dormitorio",
+            "name": "Luna",
             "price": 120,
             "rates": [
                 {
                     "people": 1,
-                    "price": 45
+                    "price": 24
                 },
                 {
                     "people": 2,
-                    "price": 48
+                    "price": 35
                 },
                 {
                     "people": 3,
-                    "price": 51
+                    "price": 45
                 },
                 {
                     "people": 4,
-                    "price": 54
+                    "price": 50
                 },
                 {
                     "people": 5,
-                    "price": 57
+                    "price": 60
                 },
                 {
                     "people": 6,
-                    "price": 60
+                    "price": 72
                 }
             ],
-            "beds": "2 literas y 1 cama queen",
+            "beds": "2 literas y 1 cama queen (Max. 6 personas)",
             "description": "Tamaño del apartamento: 215 ft²",
             "images": [
                 {
@@ -87,14 +87,14 @@
             "fullDetails": [
                 "Este apartamento cuenta con entrada privada, aire acondicionado, 1 sala de estar, 1 dormitorio independiente y 1 baño con bañera y ducha. Los huéspedes encontrarán fogones, nevera, utensilios de cocina y hervidor eléctrico en la cocina bien equipada. El apartamento también incluye barbacoa. El apartamento tiene un balcón con muebles de exterior y vistas al mar donde podrá relajarse. La unidad tiene 3 camas.",
                 "En tu cocina privada: -Productos de limpieza  -Refrigerador  -Utensilios de cocina  -Hervidor electrico  -Estufa  -Mesa de comedor.",
-                "En tu baño privado: -Articulos de aseo gratuitos  -Inodoro  -Ducha  -Baño de visitas  -Papel higiénico.",
+                "En tu baño privado: -Articulos de aseo gratuitos  -Inodoro  -Ducha  -Baño de visitas  -Papel higiénico  -No se incluyen toallas.",
                 "Vista: -Vistas al mar  -Vista al jardin  -Vista de punto de referencia  -Vista al patio interior.",
                 "Instalaciones del apartamento: -Balcón  -Climatización  -Cocina  -Suelos de madera o parquet  -Enchufe cerca de la cama  -Productos de limpieza  -Zona de estar  -Entrada privada  -Refrigerador  -Mosquitero  -Utensilios de cocina  -Cocina americana  -Hervidor eléctrico  -Muebles de exterior  -Comedor al aire libre  -Patio  -Estufa  -Barbacoa  -Mesa de comedor  -Unidad completa ubicada en la planta baja  -Aislado  -Tendedero para ropa  -Cubiertas de enchufes de seguridad para niños  -Juegos de mesa/puzzles  -Sofá cama  -Toda la unidad accesible para sillas de ruedas  -Desinfectante para manos  -Accesible para la audición",
                 "No se permite fumar en esta habitacion."
             ]
         },
         {
-            "name": "Habitación doble o doble",
+            "name": "Estrella",
             "price": 0,
             "rates": [
                 {
@@ -103,18 +103,18 @@
                 },
                 {
                     "people": 2,
-                    "price": 27
+                    "price": 35
                 },
                 {
                     "people": 3,
-                    "price": 30
+                    "price": 45
                 },
                 {
                     "people": 4,
-                    "price": 32
+                    "price": 50
                 }
             ],
-            "beds": "1 cama completa y 1 cama queen",
+            "beds": "1 cama completa y 1 cama queen (Max. 4 personas)",
             "description": "Tamaño del apartamento: 194 ft²",
             "images": [
                 {
@@ -172,16 +172,46 @@
             "fullDetails": [
                 "La cocina está bien equipada con fogones, nevera, utensilios de cocina y hervidor eléctrico. La habitación doble también ofrece barbacoa. La habitación doble dispone de aire acondicionado, entrada privada, balcón con vistas al mar y baño privado con ducha. La unidad ofrece 2 camas.",
                 "En tu cocina privada: -Productos de limpieza  -Refrigerador  -Utensilios de cocina  -Hervidor eléctrico  -Estufa  -Mesa de comedor.",
-                "En tu baño privado: -Artículos de aseo gratuitos  -Inodoro  -Bañera o ducha  -Baño de visitas  -Papel higiénico.",
+                "En tu baño privado: -Artículos de aseo gratuitos  -Inodoro  -Bañera o ducha  -Baño de visitas  -Papel higiénico  -No se incluyen toallas.",
                 "Vista: -Vistas al mar  -Vista al jardín  -Vista de punto de referencia  -Vista al patio interior.",
                 "Instalaciones: -Balcón  -Climatización  -Cocina  -Enchufe cerca de la cama  -Productos de limpieza  -Suelo de baldosas/mármol  -Zona de estar  -Entrada privada  -Refrigerador  -Mosquitero  -Utensilios de cocina  -Cocina americana  -Hervidor eléctrico  -Muebles de exterior  -Comedor al aire libre  -Patio  -Estufa  -Barbacoa  -Mesa de comedor  -Unidad completa ubicada en la planta baja  -Aislado  -Tendedero para ropa  -Cubiertas de enchufes de seguridad para niños  -Juegos de mesa/puzzles  -Sofá cama  -Toda la unidad accesible para sillas de ruedas  -Desinfectante para manos  -Accesible para la audición.",
                 "No se permite fumar en esta habitacion."
             ]
         },
         {
-            "name": "Suite",
+            "name": "Surf",
             "price": 70,
-            "beds": "2 literas y 1 cama queen - 7 personas - $70 x noche",
+            "rates": [
+                {
+                    "people": 1,
+                    "price": 24
+                },
+                {
+                    "people": 2,
+                    "price": 35
+                },
+                {
+                    "people": 3,
+                    "price": 45
+                },
+                {
+                    "people": 4,
+                    "price": 50
+                },
+                {
+                    "people": 5,
+                    "price": 60
+                },
+                {
+                    "people": 6,
+                    "price": 72
+                },
+                {
+                    "people": 7,
+                    "price": 84
+                }
+            ],
+            "beds": "2 literas y 1 cama queen (Max. 7 personas)",
             "description": "Tamaño 215 ft²",
             "images": [
                 {
@@ -248,16 +278,58 @@
             "fullDetails": [
                 "Esta suite cuenta con entrada privada, aire acondicionado, cocina, 1 dormitorio y 1 baño con bañera y ducha. Los huéspedes encontrarán fogones, nevera, utensilios de cocina y tostadora en la cocina bien equipada. La suite también ofrece barbacoa. La suite cuenta con un balcón con muebles de exterior y vistas al mar para su comodidad. La unidad ofrece 3 camas.",
                 "En tu cocina privada: -Productos de limpieza  -Refrigerador  -Utensilios de cocina  -Hervidor eléctrico  -Estufa  -Tostador  -Mesa de comedor.",
-                "En tu baño privado: -Artículos de aseo gratuitos  -Inodoro  -Bañera o ducha  -Baño de visitas  -Papel higiénico.",
+                "En tu baño privado: -Artículos de aseo gratuitos  -Inodoro  -Bañera o ducha  -Baño de visitas  -Papel higiénico  -No se incluyen toallas.",
                 "Vista: -Vistas al mar  -Vista al jardín  -Vista de punto de referencia  -Vista al patio interior.",
                 "Instalaciones del apartamento: -Balcón  -Climatización  -Cocina  -Suelos de madera o parquet  -Enchufe cerca de la cama  -Productos de limpieza  -Zona de estar  -Entrada privada  -Refrigerador  -Mosquitero  -Utensilios de cocina  -Cocina americana  -Abanicar  -Hervidor eléctrico  -Muebles de exterior  -Comedor al aire libre  -Patio  -Estufa  -Tostador  -Barbacoa  -Mesa de comedor  -Unidad completa ubicada en la planta baja  -Aislado  -Tendedero para ropa  -Cubiertas de enchufes de seguridad para niños  -Juegos de mesa/puzzles  -Toda la unidad accesible para sillas de ruedas  -Desinfectante para manos  -Accesible para la audición",
                 "No se permite fumar en esta habitacion."
             ]
         },
         {
-            "name": "Estudio Deluxe King",
+            "name": "Sol",
             "price": 60,
-            "beds": "1 cama individual y 1 cama queen  - Salón: 1 sofá cama - 4 personas - $60 x noche",
+            "rates": [
+                {
+                    "people": 1,
+                    "price": 50
+                },
+                {
+                    "people": 2,
+                    "price": 50
+                },
+                {
+                    "people": 3,
+                    "price": 50
+                },
+                {
+                    "people": 4,
+                    "price": 50
+                },
+                {
+                    "people": 5,
+                    "price": 60
+                },
+                {
+                    "people": 6,
+                    "price": 72
+                },
+                {
+                    "people": 7,
+                    "price": 84
+                },
+                {
+                    "people": 8,
+                    "price": 96
+                },
+                {
+                    "people": 9,
+                    "price": 108
+                },
+                {
+                    "people": 10,
+                    "price": 120
+                }
+            ],
+            "beds": "1 cama individual y 1 cama queen  - Salón: 1 sofá cama (Max. 10 personas)",
             "description": "Tamaño 226 ft²",
             "images": [
                 {
@@ -304,29 +376,7 @@
                     "width": "1200",
                     "height": "675",
                     "title": "Habitación Deluxe"
-                }
-            ],
-            "features": [
-                "Refrigerador",
-                "Utensilios de cocina",
-                "Estufa",
-                "Mesa de comedor..."
-            ],
-            "fullDetails": [
-                "Esta suite cuenta con entrada privada, aire acondicionado, 1 sala de estar, 1 dormitorio independiente y 1 baño con ducha. Los huéspedes encontrarán fogones, nevera y utensilios de cocina en la cocina. La suite también incluye barbacoa. Entre las comodidades de las habitaciones se encuentran una zona de estar, un sofá, un suelo de baldosa, así como un patio y vistas al mar. La unidad tiene 3 camas.",
-                "En tu cocina privada: -Productos de limpieza  -Refrigerador  -Utensilios de cocina  -Estufa  -Mesa de comedor.",
-                "En tu baño privado: -Artículos de aseo gratuitos  -Inodoro  -Bañera o ducha  -Baño de visitas  -Papel higiénico.",
-                "Vista: -Vistas al mar  -Vista al jardín  -Vista de punto de referencia.",
-                "Instalaciones del apartamento: -Climatización  -Cocina  -Sofá  -Enchufe cerca de la cama  -Productos de limpieza  -Suelo de baldosas/mármol  -Zona de estar  -Entrada privada  -Refrigerador  -Mosquitero  -Utensilios de cocina  -Cocina americana  -Abanicar  -Muebles de exterior  -Comedor al aire libre  -Patio  -Estufa  -Barbacoa  -Mesa de comedor  -Unidad completa ubicada en la planta baja  -Aislado  -Tendedero para ropa  -Cubiertas de enchufes de seguridad para niños  -Juegos de mesa/puzzles  -Desinfectante para manos  -Accesible para la audición",
-                "No se permite fumar en esta habitacion."
-            ]
-        },
-        {
-            "name": "Habitación Familiar Deluxe",
-            "price": 95,
-            "beds": "2 camas individuales y 1 cama completa y 2 camas queen - 8 personas - $95 x noche",
-            "description": "Tamaño 431 ft²",
-            "images": [
+                },
                 {
                     "src": "images/cuartocinco_uno_medium.webp",
                     "srcset": "images/cuartocinco_uno_mobile.webp 640w, images/cuartocinco_uno_medium.webp 1200w, images/cuartocinco_uno_large.webp 1920w",
@@ -356,18 +406,18 @@
                 }
             ],
             "features": [
-                "Utensilios de cocina",
                 "Refrigerador",
+                "Utensilios de cocina",
                 "Estufa",
                 "Mesa de comedor..."
             ],
             "fullDetails": [
-                "Los huéspedes encontrarán fogones, nevera y utensilios de cocina en la cocina. La sala familiar también tiene una barbacoa. Esta habitación familiar cuenta con aire acondicionado, zona de estar, patio, vistas al mar y baño privado. La unidad ofrece 5 camas.",
+                "Esta suite cuenta con entrada privada, aire acondicionado, 1 sala de estar, 1 dormitorio independiente y 1 baño con ducha. Los huéspedes encontrarán fogones, nevera y utensilios de cocina en la cocina. La suite también incluye barbacoa. Entre las comodidades de las habitaciones se encuentran una zona de estar, un sofá, un suelo de baldosa, así como un patio y vistas al mar. La unidad tiene 3 camas.",
                 "En tu cocina privada: -Productos de limpieza  -Refrigerador  -Utensilios de cocina  -Estufa  -Mesa de comedor.",
-                "En tu baño privado: -Artículos de aseo gratuitos  -Inodoro  -Bañera o ducha  -Baño de visitas  -Papel higiénico.",
+                "En tu baño privado: -Artículos de aseo gratuitos  -Inodoro  -Bañera o ducha  -Baño de visitas  -Papel higiénico  -No se incluyen toallas.",
                 "Vista: -Vistas al mar  -Vista al jardín  -Vista de punto de referencia.",
                 "Instalaciones del apartamento: -Climatización  -Cocina  -Sofá  -Enchufe cerca de la cama  -Productos de limpieza  -Suelo de baldosas/mármol  -Zona de estar  -Entrada privada  -Refrigerador  -Mosquitero  -Utensilios de cocina  -Cocina americana  -Abanicar  -Muebles de exterior  -Comedor al aire libre  -Patio  -Estufa  -Barbacoa  -Mesa de comedor  -Unidad completa ubicada en la planta baja  -Aislado  -Tendedero para ropa  -Cubiertas de enchufes de seguridad para niños  -Juegos de mesa/puzzles  -Desinfectante para manos  -Accesible para la audición",
-                "Fumar: Se permite fumar"
+                "No se permite fumar en esta habitacion."
             ]
         }
     ]

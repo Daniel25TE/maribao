@@ -1,4 +1,4 @@
-// index.js
+
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -26,12 +26,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
 const corsOptions = {
-    origin: 'https://daniel25te.github.io',  // Cambia por el URL de tu frontend
-    credentials: true,  // necesario para enviar cookies en requests cross-origin
+    origin: 'https://daniel25te.github.io',
+    credentials: true,
 };
 async function enviarCorreosReserva(datosReserva, sessionId = null) {
     try {
-        // 📧 correo al cliente
+    
         const msgCliente = {
             to: datosReserva.email,
             from: process.env.EMAIL,
@@ -80,7 +80,7 @@ Hotel Maribao
             `
         };
 
-        // 📧 correo al empleador
+      
         const msgEmpleador = {
             to: process.env.EMAIL_EMPLEADOR,
             from: process.env.EMAIL,
@@ -172,7 +172,7 @@ Hotel Maribao
 }
 
 
-// Necesitas raw body para verificar firma
+
 app.post('/webhook', bodyParser.raw({ type: 'application/json' }), async (req, res) => {
     const sig = req.headers['stripe-signature'];
     let event;
@@ -187,12 +187,12 @@ app.post('/webhook', bodyParser.raw({ type: 'application/json' }), async (req, r
     if (event.type === 'checkout.session.completed') {
         const session = event.data.object;
 
-        // Parsear metadata que enviaste en la sesión
+   
         if (session.metadata && session.metadata.datosReserva) {
             const datosReserva = JSON.parse(session.metadata.datosReserva);
 
             try {
-                // Insertar reserva en base de datos
+             
                 await insertarReserva(datosReserva);
                 await enviarCorreosReserva(datosReserva, null, session.id);
 
@@ -224,10 +224,10 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        httpOnly: true,     // No accesible desde JS del navegador (protege contra XSS)
-        secure: process.env.NODE_ENV === 'production',  // Solo envía cookie por HTTPS en producción
-        sameSite: 'lax',    // Protege contra CSRF básico
-        maxAge: 1000 * 60 * 60 * 24, // 1 día, ajusta si quieres
+        httpOnly: true,   
+        secure: process.env.NODE_ENV === 'production', 
+        sameSite: 'lax', 
+        maxAge: 1000 * 60 * 60 * 24,
     }
 }));
 
@@ -242,8 +242,8 @@ function protegerRuta(req, res, next) {
 
 
 const limiter = rateLimit({
-    windowMs: 60 * 1000, // 1 minuto
-    max: 5, // máximo 5 peticiones por minuto
+    windowMs: 60 * 1000, 
+    max: 5,
     message: 'Demasiadas solicitudes desde esta IP. Inténtalo más tarde, porfavor, Gracia.'
 });
 
@@ -297,13 +297,13 @@ app.post('/reserva',
         }
     });
 
-// Formulario de login
+
 app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'login.html'));
 });
 
 app.post('/login',
-    // Validaciones
+
     [
         body('usuario')
             .trim()
@@ -333,7 +333,7 @@ app.post('/login',
                 return res.status(401).send('Credenciales inválidas. <a href="/login">Intentar de nuevo</a>');
             }
 
-            // Validar contraseña
+    
             const esValido = await bcrypt.compare(contrasena, process.env.ADMIN_HASH);
             if (esValido) {
                 req.session.usuarioAutenticado = true;
@@ -355,7 +355,7 @@ app.post("/delete-reservas", async (req, res) => {
             return res.status(400).json({ error: "No se enviaron IDs para eliminar." });
         }
 
-        // Primero obtenemos las reservas seleccionadas
+     
         const { data: reservas, error: fetchError } = await supabase
             .from("reservas")
             .select("*")
@@ -363,7 +363,7 @@ app.post("/delete-reservas", async (req, res) => {
 
         if (fetchError) throw fetchError;
 
-        // Borrar reservas
+      
         const { error: deleteError } = await supabase
             .from("reservas")
             .delete()
@@ -371,7 +371,7 @@ app.post("/delete-reservas", async (req, res) => {
 
         if (deleteError) throw deleteError;
 
-        // Enviar correos de cancelación solo al cliente
+      
         for (const reserva of reservas) {
             await enviarCorreoClienteCancelacion(reserva);
         }
@@ -401,7 +401,7 @@ app.post('/create-checkout-session', async (req, res) => {
                 quantity: 1,
             }],
             mode: 'payment',
-            metadata,  // aquí enviamos la metadata para el webhook
+            metadata, 
             success_url: `${process.env.FRONTEND_URL}/wdd231/final/thanks.html?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${process.env.FRONTEND_URL}/wdd231/final/reservar.html`,
         });
@@ -412,7 +412,7 @@ app.post('/create-checkout-session', async (req, res) => {
         res.status(500).json({ error: 'Error creando la sesión de pago' });
     }
 });
-// Ruta para guardar comentarios
+
 app.post('/api/comentario', async (req, res) => {
     const { numReserva, comentario } = req.body;
 
@@ -421,18 +421,18 @@ app.post('/api/comentario', async (req, res) => {
     }
 
     try {
-        // Verificar que la reserva exista
+     
         const { data: reserva, error: errorReserva } = await supabase
             .from('reservas')
             .select('*')
-            .eq('numero_Transferencia', numReserva) // coincide con tu campo en la DB
+            .eq('numero_Transferencia', numReserva) 
             .single();
 
         if (errorReserva || !reserva) {
             return res.json({ ok: false, error: 'Número de reserva no encontrado.' });
         }
 
-        // Guardar comentario
+       
         const { error: errorUpdate } = await supabase
             .from('reservas')
             .update({ comentario })
@@ -447,7 +447,7 @@ app.post('/api/comentario', async (req, res) => {
     }
 });
 
-// Ruta para obtener todos los comentarios
+
 app.get('/api/comentarios', async (req, res) => {
     try {
         const { data: comentarios, error } = await supabase
@@ -465,7 +465,7 @@ app.get('/api/comentarios', async (req, res) => {
 });
 
 
-// GET /stripe-session?session_id=...
+
 app.get('/stripe-session', async (req, res) => {
     const { session_id } = req.query;
 
@@ -486,19 +486,17 @@ app.get('/stripe-session', async (req, res) => {
 
 
 
-// Logout
 app.get('/logout', (req, res) => {
     req.session.destroy(() => {
         res.redirect('/login');
     });
 });
 
-// Servir panel admin protegido
 app.get('/admin', protegerRuta, (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'admin.html'));
 });
 
-// GET /reservas - protegido con login
+
 app.get('/reservas', protegerRuta, async (req, res) => {
 
     console.log("📥 Petición GET /reservas recibida");
@@ -511,7 +509,7 @@ app.get('/reservas', protegerRuta, async (req, res) => {
     }
 });
 
-// GET /fechas-ocupadas - público (filtra por room)
+
 app.get('/fechas-ocupadas', async (req, res) => {
     const roomName = req.query.roomName;
     if (!roomName) {
@@ -532,7 +530,7 @@ app.get('/', (req, res) => {
     res.send('Servidor del Hotel Maribao funcionando correctamente ✅');
 });
 
-// Puerto
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`🚀 Servidor corriendo en puerto ${PORT}`);
