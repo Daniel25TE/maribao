@@ -122,53 +122,118 @@ export function dataForm() {
         peopleSummary.textContent = `${data.people} ${data.people === 1 ? "persona" : "personas"}`;
         preview.querySelector("#room-preview").appendChild(peopleSummary);
     }
-    async function cargarFechasOcupadas(roomName) {
-        try {
-            const { data: fechas, error } = await supabaseClient
-                .from("reservas")
-                .select("checkin_date, checkout_date")
-                .eq("room_name", roomName);
+    async function cargarFechasOcupadas(roomName, discountsMap = {}) {
+    try {
+        const { data: fechas, error } = await supabaseClient
+            .from("reservas")
+            .select("checkin_date, checkout_date")
+            .eq("room_name", roomName);
 
-            if (error) {
-                console.error("❌ Error cargando fechas ocupadas:", error);
-                return;
-            }
-
-            // Normalizamos a las claves que usa tu frontend
-            const rangosBloqueados = fechas.map(f => ({
-                from: f.checkin_date,
-                to: f.checkout_date
-            }));
-
-            console.log(`📅 Fechas ocupadas para ${roomName}:`, rangosBloqueados);
-
-            flatpickr("#checkin", {
-                altInput: true,
-                altFormat: "F j, Y",
-                dateFormat: "Y-m-d",
-                minDate: "today",
-                disable: rangosBloqueados,
-                onChange: function (selectedDates, dateStr, instance) {
-                    if (selectedDates.length > 0) {
-                        checkoutPicker.set("minDate", dateStr);
-                    }
-                }
-            });
-
-            const checkoutPicker = flatpickr("#checkout", {
-                altInput: true,
-                altFormat: "F j, Y",
-                dateFormat: "Y-m-d",
-                minDate: "today",
-                disable: rangosBloqueados
-            });
-
-        } catch (error) {
+        if (error) {
             console.error("❌ Error cargando fechas ocupadas:", error);
+            return;
         }
-    }
 
-    cargarFechasOcupadas(data.name);
+        const rangosBloqueados = fechas.map(f => ({
+            from: f.checkin_date,
+            to: f.checkout_date
+        }));
+
+        console.log(`📅 Fechas ocupadas para ${roomName}:`, rangosBloqueados);
+        console.log('📌 discountsMap:', discountsMap);
+
+        // Helper para formatear fecha a yyyy-mm-dd
+        const toYMD = d => d.toISOString().split('T')[0];
+
+        // primer picker (checkin)
+        flatpickr("#checkin", {
+            altInput: true,
+            altFormat: "F j, Y",
+            dateFormat: "Y-m-d",
+            minDate: "today",
+            disable: rangosBloqueados,
+            onDayCreate: function(dObj, dStr, fp, dayElem) {
+    const dateKey = toYMD(dayElem.dateObj);
+    const pct = discountsMap[dateKey];
+    if (pct) {
+        dayElem.classList.add('discount-day');
+        const badge = document.createElement('span');
+        badge.className = 'discount-badge';
+        
+        if (pct < 0) {
+            badge.textContent = `${pct}%`; // descuento verde
+            badge.style.backgroundColor = "#28a745";
+        } else {
+            badge.textContent = `+${pct}%`; // aumento rojo
+            badge.style.backgroundColor = "#dc3545";
+        }
+
+        dayElem.appendChild(badge);
+    }
+}
+,
+            onChange: function (selectedDates, dateStr, instance) {
+                if (selectedDates.length > 0) {
+                    checkoutPicker.set("minDate", dateStr);
+                }
+            }
+        });
+
+        // segundo picker (checkout)
+        const checkoutPicker = flatpickr("#checkout", {
+            altInput: true,
+            altFormat: "F j, Y",
+            dateFormat: "Y-m-d",
+            minDate: "today",
+            disable: rangosBloqueados,
+            onDayCreate: function(dObj, dStr, fp, dayElem) {
+    const dateKey = toYMD(dayElem.dateObj);
+    const pct = discountsMap[dateKey];
+    if (pct) {
+        dayElem.classList.add('discount-day');
+        const badge = document.createElement('span');
+        badge.className = 'discount-badge';
+        
+        if (pct < 0) {
+            badge.textContent = `${pct}%`; // descuento verde
+            badge.style.backgroundColor = "#28a745";
+        } else {
+            badge.textContent = `+${pct}%`; // aumento rojo
+            badge.style.backgroundColor = "#dc3545";
+        }
+
+        dayElem.appendChild(badge);
+    }
+}
+
+        });
+
+    } catch (error) {
+        console.error("❌ Error cargando fechas ocupadas:", error);
+    }
+}
+
+
+    // cargar descuentos y luego inicializar el calendario
+let discountsMap = {}; // mapa yyyy-mm-dd -> porcentaje
+
+fetch('./data/discounts.json')
+  .then(res => {
+    if (!res.ok) throw new Error('No se pudo cargar discounts.json');
+    return res.json();
+  })
+  .then(json => {
+    discountsMap = json || {};
+  })
+  .catch(err => {
+    console.warn('No se pudo cargar discounts.json, continua sin descuentos', err);
+    discountsMap = {};
+  })
+  .finally(() => {
+    // ahora que tenemos discountsMap (o vacío), pasamos al calendario
+    cargarFechasOcupadas(data.name, discountsMap);
+  });
+
 
 
     const metodoPagoSelect = document.getElementById("metodoPago");
@@ -201,19 +266,37 @@ export function dataForm() {
     let totalReserva = 0;
 
     function calcularTotal() {
-        const checkinDate = new Date(checkinInput.value);
-        const checkoutDate = new Date(checkoutInput.value);
-        if (!isNaN(checkinDate) && !isNaN(checkoutDate) && checkoutDate > checkinDate) {
-            const dias = Math.ceil((checkoutDate - checkinDate) / (1000 * 60 * 60 * 24));
-            totalReserva = dias * data.price;
-            totalPriceDisplay.textContent = `$${totalReserva}`;
-            totalPriceCopy.textContent = `$${totalReserva}`;
-        } else {
-            totalReserva = 0;
-            totalPriceDisplay.textContent = "$0";
-            totalPriceCopy.textContent = "$0"
+    const checkinDate = new Date(checkinInput.value);
+    const checkoutDate = new Date(checkoutInput.value);
+    if (!isNaN(checkinDate) && !isNaN(checkoutDate) && checkoutDate > checkinDate) {
+        const msPerDay = 1000 * 60 * 60 * 24;
+        const diffDays = Math.ceil((checkoutDate - checkinDate) / msPerDay);
+
+        // calculo por noche, aplicando descuentos por fecha
+        let total = 0;
+        const toYMD = d => d.toISOString().split('T')[0];
+
+        for (let i = 0; i < diffDays; i++) {
+            const night = new Date(checkinDate);
+            night.setDate(checkinDate.getDate() + i);
+            const key = toYMD(night);
+            const pct = discountsMap[key] || 0; // usar discountsMap desde outer scope
+            const nightlyPrice = data.price * (1 + pct / 100);
+            total += nightlyPrice;
         }
+
+        // redondear a 2 decimales
+        totalReserva = Math.round((total + Number.EPSILON) * 100) / 100;
+
+        totalPriceDisplay.textContent = `$${totalReserva}`;
+        totalPriceCopy.textContent = `$${totalReserva}`;
+    } else {
+        totalReserva = 0;
+        totalPriceDisplay.textContent = "$0";
+        totalPriceCopy.textContent = "$0";
     }
+}
+
 
     checkinInput.addEventListener("change", calcularTotal);
     checkoutInput.addEventListener("change", calcularTotal);

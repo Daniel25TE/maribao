@@ -1393,3 +1393,24 @@ textarea:invalid {
     background-color: #d1e7dd;
     border-color: #4caf50;
 }
+/* Día con descuento */
+.flatpickr-day.discount-day {
+    position: relative;
+}
+
+/* Badge pequeño arriba a la derecha */
+.flatpickr-day .discount-badge {
+    position: absolute;
+    top: .1px;
+    right: .1px;
+    background-color: #28a745;
+    /* Verde */
+    color: white;
+    font-size: 0.55rem;
+    /* más pequeño */
+    font-weight: bold;
+    padding: 2px 3px;
+    border-radius: 3px;
+    line-height: 1;
+    pointer-events: none;
+}

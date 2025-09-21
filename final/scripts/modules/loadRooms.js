@@ -168,18 +168,34 @@ export async function loadRooms() {
 
             const reservarBtn = card.querySelector(".cta-book");
             reservarBtn.addEventListener("click", () => {
-                const roomName = card.querySelector("h3").textContent;
-                const roomImage = card.querySelector(".slider-track img")?.getAttribute("src") || "";
+    const roomName = card.querySelector("h3").textContent;
+    const roomImage = card.querySelector(".slider-track img")?.getAttribute("src") || "";
 
-                localStorage.setItem("selectedRoom", JSON.stringify({
-                    name: roomName,
-                    image: roomImage,
-                    price: `$${selectedPrice.toFixed(2)} por noche`,
-                    priceNumber: selectedPrice
-                }));
+    const totalSelected = Array.from(ageContainer.querySelectorAll('input[type="checkbox"]:checked')).length;
 
-                window.location.href = "form.html";
-            });
+    // Validación: que no sea 0 y coincida con totalPeople
+    if (totalSelected === 0) {
+        alert("Debes seleccionar al menos una persona.");
+        return;
+    }
+
+    if (totalSelected !== totalPeople) {
+        alert(`Debes seleccionar exactamente ${totalPeople} personas en los checkboxes.`);
+        return;
+    }
+
+    // Si pasa validación, guardamos en localStorage
+    localStorage.setItem("selectedRoom", JSON.stringify({
+        name: roomName,
+        image: roomImage,
+        price: `$${selectedPrice.toFixed(2)} por noche`,
+        priceNumber: selectedPrice,
+        people: totalPeople
+    }));
+
+    window.location.href = "form.html";
+});
+
         });
 
         setupModalListeners();
