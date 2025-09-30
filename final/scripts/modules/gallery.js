@@ -1,7 +1,9 @@
 export async function loadGallery() {
     try {
-        const res = await fetch("data/galeria.json");
+        // 👉 Fetch desde tu endpoint backend de Supabase
+        const res = await fetch("https://hotel-backend-3jw7.onrender.com/api/media");
         const images = await res.json();
+
         const gallery = document.getElementById("gallery");
         const filterContainer = document.getElementById("gallery-filters"); // contenedor para botones
 
@@ -23,11 +25,13 @@ export async function loadGallery() {
         // 👉 Creamos las imágenes y guardamos el room
         images.forEach((img, index) => {
             const imageEl = document.createElement("img");
-            imageEl.dataset.src = img.src;
-            if (img.srcset) imageEl.dataset.srcset = img.srcset;
-            if (img.sizes) imageEl.sizes = img.sizes;
+
+            // 👉 Aquí armamos src y srcset desde las 3 versiones de la imagen
+            imageEl.dataset.src = img.url_medium;
+            imageEl.dataset.srcset = `${img.url_mobile} 640w, ${img.url_medium} 1200w, ${img.url_large} 1920w`;
+            imageEl.sizes = "(max-width: 840px) 100vw, 50vw";
             imageEl.alt = img.alt;
-            imageEl.dataset.room = img.room; // 👈 guardamos tipo de habitación
+            imageEl.dataset.room = img.room;
             imageEl.classList.add("lazy-img");
 
             gallery.appendChild(imageEl);
@@ -35,7 +39,7 @@ export async function loadGallery() {
             // Primeras imágenes hero se cargan de inmediato
             if (index === 0 || index === 1) {
                 imageEl.src = imageEl.dataset.src;
-                if (imageEl.dataset.srcset) imageEl.srcset = imageEl.dataset.srcset;
+                imageEl.srcset = imageEl.dataset.srcset;
             } else {
                 observer.observe(imageEl);
             }
@@ -53,15 +57,11 @@ export async function loadGallery() {
             filterContainer.appendChild(btn);
 
             btn.addEventListener("click", () => {
-                // quitar clase active de todos
                 filterContainer.querySelectorAll("button").forEach(b => b.classList.remove("active"));
                 btn.classList.add("active");
                 filterImages(room);
             });
-            if (room === "all") {
-                btn.classList.add("active");
-            }
-
+            if (room === "all") btn.classList.add("active");
         });
 
         // 👉 Función de filtrado
@@ -77,10 +77,10 @@ export async function loadGallery() {
                 } else {
                     img.style.display = "none";
                 }
-
             });
-
         }
+
+        // 👉 Modal para ver imagen
         const modal = document.getElementById("image-modal");
         const modalImg = modal.querySelector("img");
         const modalClose = modal.querySelector(".modal-close-gallery");
@@ -92,18 +92,12 @@ export async function loadGallery() {
                 modalImg.srcset = img.srcset || "";
                 modalImg.sizes = img.sizes || "";
                 modalImg.alt = img.alt || "";
-
                 modal.hidden = false;
             });
         });
 
-        modalClose.addEventListener("click", () => {
-            modal.hidden = true;
-        });
-
-        modalOverlay.addEventListener("click", () => {
-            modal.hidden = true;
-        });
+        modalClose.addEventListener("click", () => modal.hidden = true);
+        modalOverlay.addEventListener("click", () => modal.hidden = true);
 
     } catch (err) {
         console.error("Error cargando galería:", err);
