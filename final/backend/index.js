@@ -15,6 +15,7 @@ import bodyParser from 'body-parser';
 import { supabase } from './database.js';
 import cancelarRoutes from "./routes/cancelar.js";
 import sgMail from "@sendgrid/mail";
+import mediaRoutes from './routes/media.js';
 
 
 dotenv.config();
@@ -216,6 +217,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/api', mediaRoutes);
 
 
 
