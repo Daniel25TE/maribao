@@ -55,7 +55,7 @@ Solicitudes especiales: ${datosReserva.specialRequests || 'Ninguna'}
 Hora estimada de llegada: ${datosReserva.arrivalTime || 'No especificada'}
 
 Si deseas cancelar tu reserva, ingresa tu número de reserva en:
-https://daniel25te.github.io/wdd231/final/cancelar.html
+https://daniel25te.github.io/maribao/final/cancelar.html
 
 ¡Te esperamos!
 Hotel Maribao
@@ -75,7 +75,7 @@ Hotel Maribao
                 </p>
                 <p>Solicitudes especiales: ${datosReserva.specialRequests || 'Ninguna'}</p>
                 <p>Hora estimada de llegada: ${datosReserva.arrivalTime || 'No especificada'}</p>
-                <p>Si deseas cancelar tu reserva, <a href="https://daniel25te.github.io/wdd231/final/cancelar.html"><strong>haz clic aquí</strong></a>.</p>
+                <p>Si deseas cancelar tu reserva, <a href="https://daniel25te.github.io/maribao/final/cancelar.html"><strong>haz clic aquí</strong></a>.</p>
                 <p>¡Te esperamos!<br>Hotel Maribao</p>
             `
         };
@@ -402,8 +402,8 @@ app.post('/create-checkout-session', async (req, res) => {
             }],
             mode: 'payment',
             metadata, 
-            success_url: `${process.env.FRONTEND_URL}/wdd231/final/thanks.html?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${process.env.FRONTEND_URL}/wdd231/final/reservar.html`,
+            success_url: `${process.env.FRONTEND_URL}/maribao/final/thanks.html?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${process.env.FRONTEND_URL}/maribao/final/reservar.html`,
         });
 
         res.json({ url: session.url });
