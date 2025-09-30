@@ -9,6 +9,7 @@ router.get('/media', async (req, res) => {
     .from('media')
     .select('*')
     .order('created_at', { ascending: false });
+    console.log(data, error);
 
   if (error) return res.status(500).json({ error: error.message });
   res.json(data);
