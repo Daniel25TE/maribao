@@ -1,4 +1,18 @@
 export async function loadGallery() {
+    const overlay = document.getElementById("loader-overlay");
+    const loaderCount = document.getElementById("loader-count");
+    let firstImageLoaded = false;
+
+    let count = 50;
+    const interval = setInterval(() => {
+        if (count > 0) {
+            count--;
+            loaderCount.textContent = count;
+        } else {
+            clearInterval(interval);
+        }
+    }, 1000);
+    
     try {
         const res = await fetch("https://hotel-backend-3jw7.onrender.com/api/media");
         const images = await res.json();
@@ -28,6 +42,13 @@ export async function loadGallery() {
             imageEl.alt = img.alt;
             imageEl.dataset.room = img.room;
             imageEl.classList.add("lazy-img");
+
+            imageEl.onload = () => {
+                if (!firstImageLoaded) {
+                    firstImageLoaded = true;
+                    overlay.classList.add("hidden");
+                }
+            };
 
             gallery.appendChild(imageEl);
 
@@ -92,5 +113,6 @@ export async function loadGallery() {
 
     } catch (err) {
         console.error("Error cargando galería:", err);
+        overlay.classList.add("hidden");
     }
 }

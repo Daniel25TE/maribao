@@ -1511,3 +1511,70 @@ textarea:invalid {
 .modal-galeria[hidden] .modal-content-galeria {
     animation: modalHide 0.2s forwards;
 }
+
+/* This is the message and the animation that appears while the server in render is waking up to make the fetch with supabase and show the images.*/
+#galeria-section {
+    position: relative;
+    min-height: 200px;
+}
+#loader-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 90%;
+    max-width: 320px;
+    z-index: 5;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+.spinner {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border: 5px solid #ccc;
+    border-top-color: #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#loader-count {
+    position: absolute;
+    font-weight: bold;
+    color: #3498db;
+    font-size: 1.1rem;
+    animation: counterSpin 1s linear infinite;
+}
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+@keyframes counterSpin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+#loader-overlay p {
+    font-size: 0.95rem;
+    color: #333;
+    line-height: 1.4;
+}
+#loader-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+}

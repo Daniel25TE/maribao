@@ -94,8 +94,16 @@
         </div>
         <div id="weather-note" class="sticky-note" aria-live="polite" hidden></div>
         <h1>Galería del Hotel</h1>
-        <div id="galeria-filtros" class="galeria-filtros"></div>
-        <div id="galeria" class="galeria"></div>
+        <section id="galeria-section">
+            <div id="loader-overlay">
+                <div class="spinner">
+                    <span id="loader-count">50</span>
+                </div>
+                <p>La galería se está cargando, esto solo suele tomar unos segundos, gracias por tu paciencia.</p>
+            </div>
+            <div id="galeria-filtros" class="galeria-filtros"></div>
+            <div id="galeria" class="galeria"></div>
+        </section>
 
     </main>
     <footer class="lazy-container">
