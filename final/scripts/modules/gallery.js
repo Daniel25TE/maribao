@@ -1,13 +1,11 @@
 export async function loadGallery() {
     try {
-        // 👉 Fetch desde tu endpoint backend de Supabase
         const res = await fetch("https://hotel-backend-3jw7.onrender.com/api/media");
         const images = await res.json();
 
         const gallery = document.getElementById("gallery");
-        const filterContainer = document.getElementById("gallery-filters"); // contenedor para botones
+        const filterContainer = document.getElementById("gallery-filters");
 
-        // 👉 Observer para lazy loading
         const observer = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -22,11 +20,9 @@ export async function loadGallery() {
             threshold: 0.01
         });
 
-        // 👉 Creamos las imágenes y guardamos el room
         images.forEach((img, index) => {
             const imageEl = document.createElement("img");
 
-            // 👉 Aquí armamos src y srcset desde las 3 versiones de la imagen
             imageEl.dataset.src = img.url_medium;
             imageEl.dataset.srcset = `${img.url_mobile} 640w, ${img.url_medium} 1200w, ${img.url_large} 1920w`;
             imageEl.sizes = "(max-width: 840px) 100vw, 50vw";
@@ -36,7 +32,6 @@ export async function loadGallery() {
 
             gallery.appendChild(imageEl);
 
-            // Primeras imágenes hero se cargan de inmediato
             if (index === 0 || index === 1) {
                 imageEl.src = imageEl.dataset.src;
                 imageEl.srcset = imageEl.dataset.srcset;
@@ -45,9 +40,8 @@ export async function loadGallery() {
             }
         });
 
-        // 👉 Creamos botones de filtro automáticamente
         const roomTypes = [...new Set(images.map(img => img.room))];
-        roomTypes.unshift("all"); // opción todos
+        roomTypes.unshift("all");
 
         roomTypes.forEach(room => {
             const btn = document.createElement("button");
@@ -64,7 +58,6 @@ export async function loadGallery() {
             if (room === "all") btn.classList.add("active");
         });
 
-        // 👉 Función de filtrado
         function filterImages(room) {
             const allImages = gallery.querySelectorAll("img");
             allImages.forEach(img => {
@@ -80,7 +73,6 @@ export async function loadGallery() {
             });
         }
 
-        // 👉 Modal para ver imagen
         const modal = document.getElementById("image-modal");
         const modalImg = modal.querySelector("img");
         const modalClose = modal.querySelector(".modal-close-gallery");
