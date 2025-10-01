@@ -1414,3 +1414,100 @@ textarea:invalid {
     line-height: 1;
     pointer-events: none;
 }
+
+/* rules for the gallery page */
+
+.galeria {
+    column-width: 250px;
+    column-gap: 12px;
+    padding: 10px;
+}
+
+.galeria img {
+    width: 100%;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    display: block;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.galeria-filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+    justify-content: center;
+}
+
+.modal-galeria {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.3s ease;
+}
+
+.modal-galeria[hidden] {
+    display: none;
+}
+
+.modal-overlay-galeria {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    transition: background 0.3s ease;
+
+}
+
+.modal-content-galeria {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    z-index: 1001;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    transform: scale(0.8);
+    opacity: 0;
+    animation: modalShow 0.3s forwards;
+    padding: 0;
+}
+
+.modal-content-galeria img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    object-fit: contain;
+}
+
+.modal-close-galeria {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.8rem;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s ease, background 0.2s ease;
+    z-index: 1002;
+}
+
+.modal-close-galeria:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 1);
+}
+
+.modal-galeria[hidden] .modal-content-galeria {
+    animation: modalHide 0.2s forwards;
+}

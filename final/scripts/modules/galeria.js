@@ -2,9 +2,8 @@ export async function loadGallery() {
     try {
         const res = await fetch("https://hotel-backend-3jw7.onrender.com/api/media");
         const images = await res.json();
-
-        const gallery = document.getElementById("gallery");
-        const filterContainer = document.getElementById("gallery-filters");
+        const gallery = document.getElementById("galeria");
+        const filterContainer = document.getElementById("galeria-filtros");
 
         const observer = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
