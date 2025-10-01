@@ -95,8 +95,8 @@ export async function loadGallery() {
 
         const modal = document.getElementById("image-modal");
         const modalImg = modal.querySelector("img");
-        const modalClose = modal.querySelector(".modal-close-gallery");
-        const modalOverlay = modal.querySelector(".modal-overlay-gallery");
+        const modalClose = modal.querySelector(".modal-close-galeria");
+        const modalOverlay = modal.querySelector(".modal-overlay-galeria");
 
         gallery.querySelectorAll("img").forEach(img => {
             img.addEventListener("click", () => {

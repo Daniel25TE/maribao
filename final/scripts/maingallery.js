@@ -1,4 +1,3 @@
-// final/scripts/main.js
 import { highlightActiveLink } from './modules/header.js';
 import { setupCTAObserver } from './modules/ctaObserver.js';
 import { setupMenuToggle } from './modules/menuToggle.js';
