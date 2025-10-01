@@ -95,6 +95,3 @@ export async function loadGallery() {
         console.error("Error cargando galería:", err);
     }
 }
-
-
-

@@ -6,7 +6,7 @@ import { lazyLoadStaticContainers } from "./modules/lazyLoader.js"
 import { lazyLoadFooterIcons } from './modules/footerLazy.js';
 import { toggleContactList, openWhatsApp } from './modules/whatsapp.js';
 
-import { loadGallery } from "./modules/gallery.js";
+import { loadGallery } from "./modules/galeria.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     highlightActiveLink();
