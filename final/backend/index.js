@@ -16,6 +16,7 @@ import { supabase } from './database.js';
 import cancelarRoutes from "./routes/cancelar.js";
 import sgMail from "@sendgrid/mail";
 import mediaRoutes from './routes/media.js';
+import pdfRoutes from './routes/pdf.js';
 
 
 dotenv.config();
@@ -173,7 +174,6 @@ Hotel Maribao
 }
 
 
-
 app.post('/webhook', bodyParser.raw({ type: 'application/json' }), async (req, res) => {
     const sig = req.headers['stripe-signature'];
     let event;
@@ -218,6 +218,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', mediaRoutes);
+app.use('/api', pdfRoutes);
 
 
 
