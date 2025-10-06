@@ -38,42 +38,23 @@ router.post('/generate-pdf', (req, res) => {
     doc.fontSize(18).text('Factura / Comprobante de Reserva', { align: 'center' });
     doc.moveDown(1);
 
-    const leftX = doc.x;
-    doc.fontSize(11);
-    doc.text(`Nombre: ${data.nombre || data.firstName || ''}`);
-    doc.text(`Email: ${data.email || ''}`);
-    doc.text(`Teléfono: ${data.phone || ''}`);
-    doc.text(`Reserva ID: ${data.reservationid || data.numeroTransferencia || ''}`);
-    doc.moveDown(0.5);
-    doc.text(`Check-in: ${data.checkin_date || data.checkIn || ''}`);
-    doc.text(`Check-out: ${data.checkout_date || data.checkOut || ''}`);
-    doc.text(`Método de pago: ${data.metodo_pago || data.metodoPago || ''}`);
+    doc.fontSize(12);
+
+    doc.text(`Nombre: ${data.nombre || 'No especificado'}`);
+    doc.text(`Email: ${data.email || 'No especificado'}`);
+    doc.text(`Teléfono: ${data.telefono || 'No especificado'}`);
+    doc.text(`Reserva ID: ${data.reservationid || data.numero_Transferencia || 'No aplica'}`);
+    doc.text(`Check-in: ${data.checkin_date || 'No especificado'}`);
+    doc.text(`Check-out: ${data.checkout_date || 'No especificado'}`);
+    doc.text(`Habitación: ${data.room_name || 'No especificado'}`);
+    doc.text(`Solicitudes especiales: ${data.special_requests || 'Ninguna'}`);
+    doc.text(`Hora de llegada: ${data.arrival_time || 'No especificada'}`);
+    doc.text(`Método de pago: ${data.metodo_pago || 'No especificado'}`);
     doc.moveDown();
 
-    const habitaciones = data.habitaciones || data.rooms || [];
-    if (Array.isArray(habitaciones) && habitaciones.length) {
-      doc.font('Helvetica-Bold');
-      const tableTop = doc.y;
-      doc.text('Habitación', leftX, tableTop);
-      doc.text('Precio', 350, tableTop, { width: 90, align: 'right' });
-      doc.text('Noches', 460, tableTop, { width: 60, align: 'right' });
-      doc.moveDown(0.5);
-      doc.font('Helvetica');
-
-      habitaciones.forEach((h) => {
-        const y = doc.y;
-        doc.text(h.tipo || h.name || '-', leftX, y);
-        const price = (h.precio ?? h.price ?? 0);
-        doc.text(`$${Number(price).toFixed(2)}`, 350, y, { width: 90, align: 'right' });
-        doc.text(String(h.noches ?? h.nights ?? ''), 460, y, { width: 60, align: 'right' });
-        doc.moveDown(0.5);
-      });
-    }
-
-    doc.moveDown(1);
-    doc.fontSize(13).font('Helvetica-Bold');
-    const totalNum = data.total ?? data.totalAmount ?? 0;
-    doc.text(`Total: $${Number(totalNum).toFixed(2)}`, { align: 'right' });
+    const totalNum = data.total ?? 'No especificado';
+    doc.fontSize(14).font('Helvetica-Bold');
+    doc.text(`Total: $${totalNum}`, { align: 'right' });
 
     doc.moveDown(2);
     doc.fontSize(10).font('Helvetica');
@@ -88,4 +69,3 @@ router.post('/generate-pdf', (req, res) => {
 });
 
 export default router;
-
