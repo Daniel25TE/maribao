@@ -1,10 +1,13 @@
-
 import express from 'express';
 import PDFDocument from 'pdfkit';
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 const router = express.Router();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 router.post('/generate-pdf', (req, res) => {
   try {
@@ -85,3 +88,4 @@ router.post('/generate-pdf', (req, res) => {
 });
 
 export default router;
+
