@@ -28,7 +28,7 @@ router.post('/generate-pdf', (req, res) => {
     const logoPng = path.join(templatesDir, 'maribao-logo.png');
     if (fs.existsSync(logoPng)) {
       try {
-        doc.image(logoPng, { fit: [140, 80], align: 'center' });
+        doc.image(logoPng, { fit: [84, 90], align: 'center' });
       } catch (e) {
         console.warn('No se pudo incrustar logo:', e);
       }
@@ -36,11 +36,11 @@ router.post('/generate-pdf', (req, res) => {
 
     doc.moveDown();
 
-    doc.fillColor('#1e40af').fontSize(20).font('Helvetica-Bold')
+    doc.fillColor('#000000ff').fontSize(20).font('Helvetica-Bold')
        .text('Factura / Comprobante de Reserva', { align: 'center' });
     doc.moveDown(1);
 
-    doc.moveTo(40, doc.y).lineTo(555, doc.y).strokeColor('#2563eb').lineWidth(1).stroke();
+    doc.moveTo(40, doc.y).lineTo(555, doc.y).strokeColor('#001033ff').lineWidth(1).stroke();
     doc.moveDown(1);
 
     doc.fillColor('black').fontSize(12).font('Helvetica');
@@ -60,19 +60,20 @@ router.post('/generate-pdf', (req, res) => {
     info.forEach(([key, value]) => {
       doc.font('Helvetica-Bold').text(key, { continued: true });
       doc.font('Helvetica').text(` ${value}`);
+      doc.moveDown(0.3);
     });
 
     doc.moveDown();
 
     const totalNum = data.total ?? 'No especificado';
-    doc.moveTo(40, doc.y).lineTo(555, doc.y).strokeColor('#e5e7eb').lineWidth(1).stroke();
+    doc.moveTo(40, doc.y).lineTo(555, doc.y).strokeColor('#000000ff').lineWidth(1).stroke();
     doc.moveDown(0.5);
-    doc.fontSize(16).font('Helvetica-Bold').fillColor('#10b981')
+    doc.fontSize(16).font('Helvetica-Bold').fillColor('#000000ff')
        .text(`Total a pagar: $${totalNum}`, { align: 'right' });
     doc.fillColor('black');
     doc.moveDown(2);
 
-    doc.fontSize(10).font('Helvetica').fillColor('#6b7280');
+    doc.fontSize(10).font('Helvetica').fillColor('#000f2cff');
     doc.text('Gracias por reservar con nosotros.', { align: 'center' });
     doc.text('Maribao Hotel • danielalejandrosud25@gmail.com • +1 (801)-509-2879', { align: 'center' });
 
