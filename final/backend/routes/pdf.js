@@ -36,11 +36,11 @@ router.post('/generate-pdf', (req, res) => {
 
     doc.moveDown();
 
-    doc.fillColor('#000000ff').fontSize(20).font('Helvetica-Bold')
+    doc.fillColor('black').fontSize(20).font('Helvetica-Bold')
        .text('Factura / Comprobante de Reserva', { align: 'center' });
     doc.moveDown(1);
 
-    doc.moveTo(40, doc.y).lineTo(555, doc.y).strokeColor('#000000ff').lineWidth(1).stroke();
+    doc.moveTo(40, doc.y).lineTo(555, doc.y).strokeColor('black').lineWidth(1).stroke();
     doc.moveDown(1);
 
     doc.fillColor('black').fontSize(12).font('Helvetica');
@@ -66,14 +66,14 @@ router.post('/generate-pdf', (req, res) => {
     doc.moveDown();
 
     const totalNum = data.total ?? 'No especificado';
-    doc.moveTo(40, doc.y).lineTo(555, doc.y).strokeColor('#000000ff').lineWidth(1).stroke();
+    doc.moveTo(40, doc.y).lineTo(555, doc.y).strokeColor('black').lineWidth(1).stroke();
     doc.moveDown(0.5);
-    doc.fontSize(16).font('Helvetica-Bold').fillColor('#000000ff')
+    doc.fontSize(16).font('Helvetica-Bold').fillColor('black')
        .text(`Total a pagar: $${totalNum}`, { align: 'right' });
     doc.fillColor('black');
     doc.moveDown(2);
 
-    doc.fontSize(10).font('Helvetica').fillColor('#000000ff');
+    doc.fontSize(10).font('Helvetica').fillColor('black');
     doc.text('Gracias por reservar con nosotros.', { align: 'center' });
     doc.text('Maribao Hotel • danielalejandrosud25@gmail.com • +1 (801)-509-2879', { align: 'center' });
 
