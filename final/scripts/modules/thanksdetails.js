@@ -9,12 +9,10 @@ export function thanksdetails() {
         showPDFModal();
 
 
-        await generarPDFComprobante(datosReserva);
+        const pdfUrl = await generarPDFComprobante(datosReserva);
 
 
         setTimeout(() => {
-            const pdfUrl = 'https://hotel-backend-3jw7.onrender.com/api/generate-pdf-visual?reservationid=' + datosReserva.reservationid; 
-
             window.open(pdfUrl, '_blank');
         }, 3000);
     });
