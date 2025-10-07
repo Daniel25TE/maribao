@@ -21,19 +21,24 @@ export function thanksdetails() {
                         <p><strong>Teléfono:</strong> ${reserva.phone}</p>
                         <p><strong>Pago con:</strong> Tarjeta (Stripe)</p>
                         <button id="btn-descargar-pdf" class="btn-pdf">📄 Descargar comprobante</button>
-                        
                     `;
-                    document
-                    .getElementById("btn-descargar-pdf")
-                    .addEventListener("click", () => {
-                      generarPDFComprobante({
-                        name: `${reserva.firstName} ${reserva.lastName}`,
-                        date: new Date().toLocaleDateString(),
-                        total: reserva.total || 'No especificado',
-                        reservationId: reserva.numeroTransferencia || 'No aplica',
-                        paymentMethod: 'tarjeta',
-                      });
+
+                    document.getElementById("btn-descargar-pdf").addEventListener("click", () => {
+                        generarPDFComprobante({
+                            nombre: reserva.firstName + ' ' + reserva.lastName,
+                            email: reserva.email,
+                            telefono: reserva.phone,
+                            checkin_date: reserva.checkin,
+                            checkout_date: reserva.checkout,
+                            room_name: reserva.cuarto,
+                            total: reserva.total || 'No especificado',
+                            reservationid: reserva.numeroTransferencia || 'No aplica',
+                            metodo_pago: 'tarjeta',
+                            special_requests: reserva.specialRequests || 'Ninguna',
+                            arrival_time: reserva.arrivalTime || 'No especificada'
+                        });
                     });
+
                 } else {
                     results.innerHTML = `<p>❌ No se encontraron los datos de la reserva.</p>`;
                 }
@@ -44,7 +49,6 @@ export function thanksdetails() {
             });
 
     } else {
-        
         const myInfo = new URLSearchParams(window.location.search);
         const metodoPago = myInfo.get('metodoPago') || 'efectivo';
         const numeroTransferencia = myInfo.get('numeroTransferencia') || 'No aplica';
@@ -64,58 +68,53 @@ export function thanksdetails() {
             <p><strong>Check-out:</strong> ${myInfo.get('checkout')}</p>
             <p><strong>Teléfono:</strong> ${myInfo.get('phone')}</p>
             <p><strong>Reserva a nombre de:</strong> ${myInfo.get('fullGuestName')}</p>
+            <p><strong>Habitación:</strong> ${myInfo.get('room_name') || 'No especificada'}</p>
             <p><strong>Solicitudes especiales:</strong> ${myInfo.get('specialRequests') || 'Ninguna'}</p>
             <p><strong>Hora de llegada:</strong> ${myInfo.get('arrivalTime') || 'No especificada'}</p>
             <p><strong>Método de pago:</strong> ${metodoPago}</p>
             <button id="btn-descargar-pdf" class="btn-pdf">📄 Descargar comprobante</button>
         `;
-        document
-        .getElementById("btn-descargar-pdf")
-        .addEventListener("click", () => {
-          generarPDFComprobante({
-            name: `${myInfo.get('firstName')} ${myInfo.get('lastName')}`,
-            date: new Date().toLocaleDateString(),
-            total: myInfo.get('total') || 'No especificado',
-            reservationId: numeroTransferencia,
-            paymentMethod: metodoPago,
-          });
+
+        document.getElementById("btn-descargar-pdf").addEventListener("click", () => {
+            generarPDFComprobante({
+                nombre: myInfo.get('firstName') + ' ' + myInfo.get('lastName'),
+                email: myInfo.get('email') || 'No especificado',
+                telefono: myInfo.get('phone') || 'No especificado',
+                checkin_date: myInfo.get('checkin'),
+                checkout_date: myInfo.get('checkout'),
+                room_name: myInfo.get('room_name') || 'No especificada',
+                total: myInfo.get('total') || 'No especificado',
+                reservationid: numeroTransferencia,
+                metodo_pago: metodoPago,
+                special_requests: myInfo.get('specialRequests') || 'Ninguna',
+                arrival_time: myInfo.get('arrivalTime') || 'No especificada'
+            });
         });
     }
 }
 
-async function generarPDFComprobante({ name, date, total, reservationId, paymentMethod }) {
-  try {
-    const response = await fetch("https://hotel-backend-3jw7.onrender.com/api/generate-pdf", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        date,
-        total,
-        reservationId,
-        paymentMethod,
-      }),
-    });
+async function generarPDFComprobante(datosReserva) {
+    try {
+        const response = await fetch("https://hotel-backend-3jw7.onrender.com/api/generate-pdf", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(datosReserva),
+        });
 
-    if (!response.ok) {
-      throw new Error("No se pudo generar el PDF");
+        if (!response.ok) throw new Error("No se pudo generar el PDF");
+
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "comprobante.pdf";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url);
+
+    } catch (error) {
+        console.error("Error al descargar PDF:", error);
     }
-
-    const blob = await response.blob();
-    const url = window.URL.createObjectURL(blob);
-
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "comprobante.pdf";
-    document.body.appendChild(a);
-    a.click();
-
-    a.remove();
-    window.URL.revokeObjectURL(url);
-
-  } catch (error) {
-    console.error("Error al descargar PDF:", error);
-  }
 }
