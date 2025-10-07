@@ -17,29 +17,29 @@ export function thanksdetails() {
                     const r = data.reserva;
                     results.innerHTML = `
                         <h2>✅ ¡Reserva confirmada con pago por tarjeta!</h2>
-                        <p><strong>Número de Reserva:</strong> ${r.numero_Transferencia || 'No aplica'}</p>
-                        <p>Gracias por tu reserva, ${r.nombre}</p>
-                        <p><strong>Check-in:</strong> ${r.checkin_date}</p>
-                        <p><strong>Check-out:</strong> ${r.checkout_date}</p>
-                        <p><strong>Habitación:</strong> ${r.room_name}</p>
+                        <p><strong>Número de Reserva:</strong> ${r.numeroTransferencia || 'No aplica'}</p>
+                        <p>Gracias por tu reserva, ${r.fullGuestName}</p>
+                        <p><strong>Check-in:</strong> ${r.checkin}</p>
+                        <p><strong>Check-out:</strong> ${r.checkout}</p>
+                        <p><strong>Habitación:</strong> ${r.cuarto}</p>
                         <p><strong>Correo:</strong> ${r.email}</p>
-                        <p><strong>Teléfono:</strong> ${r.telefono}</p>
+                        <p><strong>Teléfono:</strong> ${r.phone}</p>
                         <p><strong>Pago con:</strong> Tarjeta (Stripe)</p>
                         <button id="btn-descargar-pdf" class="btn-pdf">📄 Descargar comprobante</button>
                     `;
 
                     attachPDFButton({
-                        nombre: r.nombre,
+                        nombre: r.fullGuestName,
                         email: r.email,
-                        telefono: r.telefono,
-                        checkin_date: r.checkin_date,
-                        checkout_date: r.checkout_date,
-                        room_name: r.room_name,
+                        telefono: r.phone,
+                        checkin_date: r.checkin,
+                        checkout_date: r.checkout,
+                        room_name: r.cuarto,
                         total: r.total || 'No especificado',
-                        reservationid: r.numero_Transferencia || 'No aplica',
+                        reservationid: r.numeroTransferencia || 'No aplica',
                         metodo_pago: 'tarjeta',
-                        special_requests: r.special_requests || 'Ninguna',
-                        arrival_time: r.arrival_time || 'No especificada'
+                        special_requests: r.specialRequests || 'Ninguna',
+                        arrival_time: r.arrivalTime || 'No especificada'
                     });
                 } else {
                     results.innerHTML = `<p>❌ No se encontraron los datos de la reserva.</p>`;
@@ -68,7 +68,7 @@ export function thanksdetails() {
             <p><strong>Check-in:</strong> ${myInfo.get('checkin')}</p>
             <p><strong>Check-out:</strong> ${myInfo.get('checkout')}</p>
             <p><strong>Teléfono:</strong> ${myInfo.get('phone')}</p>
-            <p><strong>Habitación:</strong> ${myInfo.get('room_name') || 'No especificada'}</p>
+            <p><strong>Habitación:</strong> ${myInfo.get('cuarto') || 'No especificada'}</p>
             <p><strong>Solicitudes especiales:</strong> ${myInfo.get('specialRequests') || 'Ninguna'}</p>
             <p><strong>Hora de llegada:</strong> ${myInfo.get('arrivalTime') || 'No especificada'}</p>
             <p><strong>Método de pago:</strong> ${metodoPago}</p>
@@ -81,7 +81,7 @@ export function thanksdetails() {
             telefono: myInfo.get('phone') || 'No especificado',
             checkin_date: myInfo.get('checkin'),
             checkout_date: myInfo.get('checkout'),
-            room_name: myInfo.get('room_name') || 'No especificada',
+            room_name: myInfo.get('cuarto') || 'No especificada',
             total: myInfo.get('total') || 'No especificado',
             reservationid: numeroTransferencia,
             metodo_pago: metodoPago,
