@@ -4,9 +4,49 @@ export function thanksdetails() {
     const results = document.querySelector('#results');
 
     function attachPDFButton(datosReserva) {
-        document.getElementById("btn-descargar-pdf").addEventListener("click", () => {
-            generarPDFComprobante(datosReserva);
-        });
+    document.getElementById("btn-descargar-pdf").addEventListener("click", async () => {
+
+        showPDFModal();
+
+
+        await generarPDFComprobante(datosReserva);
+
+
+        setTimeout(() => {
+            const pdfUrl = 'https://hotel-backend-3jw7.onrender.com/api/generate-pdf-visual?reservationid=' + datosReserva.reservationid; 
+
+            window.open(pdfUrl, '_blank');
+        }, 3000);
+    });
+    }
+
+    function showPDFModal() {
+        let modal = document.createElement('div');
+        modal.id = 'pdf-modal';
+        modal.style.position = 'fixed';
+        modal.style.top = '0';
+        modal.style.left = '0';
+        modal.style.width = '100%';
+        modal.style.height = '100%';
+        modal.style.backgroundColor = 'rgba(0,0,0,0.5)';
+        modal.style.display = 'flex';
+        modal.style.justifyContent = 'center';
+        modal.style.alignItems = 'center';
+        modal.style.zIndex = '9999';
+        modal.innerHTML = `<div style="
+            background:white; 
+            padding:20px 40px; 
+            border-radius:8px; 
+            font-weight:bold; 
+            font-size:18px;">
+            PDF descargado ✅
+        </div>`;
+
+        document.body.appendChild(modal);
+
+        setTimeout(() => {
+        modal.remove();
+        }, 3000);
     }
 
     if (sessionId) {
@@ -110,7 +150,7 @@ async function generarPDFComprobante(datosReserva) {
         document.body.appendChild(a);
         a.click();
         a.remove();
-        window.URL.revokeObjectURL(url);
+        return url;
 
     } catch (error) {
         console.error("Error al descargar PDF:", error);
