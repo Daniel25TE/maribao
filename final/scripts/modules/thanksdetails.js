@@ -19,32 +19,23 @@ export function thanksdetails() {
     }
 
     function showPDFModal() {
-        let modal = document.createElement('div');
-        modal.id = 'pdf-modal';
-        modal.style.position = 'fixed';
-        modal.style.top = '0';
-        modal.style.left = '0';
-        modal.style.width = '100%';
-        modal.style.height = '100%';
-        modal.style.backgroundColor = 'rgba(0,0,0,0.5)';
-        modal.style.display = 'flex';
-        modal.style.justifyContent = 'center';
-        modal.style.alignItems = 'center';
-        modal.style.zIndex = '9999';
-        modal.innerHTML = `<div style="
-            background:white; 
-            padding:20px 40px; 
-            border-radius:8px; 
-            font-weight:bold; 
-            font-size:18px;">
-            PDF descargado ✅
-        </div>`;
+      let count = parseInt(localStorage.getItem('pdfDownloadCount')) || 0;
+      count += 1;
+      localStorage.setItem('pdfDownloadCount', count);
 
-        document.body.appendChild(modal);
+      let mensaje = 'PDF descargado ✅';
+      if (count === 2) mensaje = 'PDF descargado segunda vez ✅';
+      else if (count === 3) mensaje = 'PDF descargado tercera vez ✅';
+      else if (count > 3) mensaje = `PDF descargado ${count} veces ✅`;
 
-        setTimeout(() => {
+      let modal = document.createElement('div');
+      modal.id = 'pdf-modal';
+      modal.innerHTML = `<div class="modal-content">${mensaje}</div>`;
+      document.body.appendChild(modal);
+
+      setTimeout(() => {
         modal.remove();
-        }, 3000);
+      }, 3000);
     }
 
     if (sessionId) {
