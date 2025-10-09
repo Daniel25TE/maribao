@@ -28,7 +28,7 @@ router.post('/generate-pdf', (req, res) => {
     const logoPng = path.join(templatesDir, 'maribao-logo.png');
     if (fs.existsSync(logoPng)) {
       try {
-        doc.image(logoPng, { fit: [84, 90], align: 'center' });
+        doc.image(logoPng, { fit: [64, 70], align: 'center' });
       } catch (e) {
         console.warn('No se pudo incrustar logo:', e);
       }
