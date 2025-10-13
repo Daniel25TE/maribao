@@ -1412,7 +1412,6 @@ textarea:invalid {
     padding: 2px 3px;
     border-radius: 3px;
     line-height: 1;
-    pointer-events: none;
 }
 
 /* rules for the gallery page */
