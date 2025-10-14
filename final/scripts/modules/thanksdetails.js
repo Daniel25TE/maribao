@@ -8,6 +8,9 @@ export function thanksdetails() {
 
         showPDFModal();
 
+        localStorage.setItem("clientName", datosReserva.nombre);
+        localStorage.setItem("lastDownloadDate", new Date().toISOString());
+        updateLastDownloadMessage();
 
         const pdfUrl = await generarPDFComprobante(datosReserva);
 
@@ -16,7 +19,41 @@ export function thanksdetails() {
             window.open(pdfUrl, '_blank');
         }, 3000);
     });
+        
+    updateLastDownloadMessage();
+        
     }
+
+    function updateLastDownloadMessage() {
+      const name = localStorage.getItem("clientName");
+      const date = localStorage.getItem("lastDownloadDate");
+
+      let infoElement = document.querySelector("#last-download-info");
+
+      if (!infoElement) {
+        infoElement = document.createElement("p");
+        infoElement.id = "last-download-info";
+        document.querySelector("#btn-descargar-pdf")?.after(infoElement);
+      }
+
+      if (name && date) {
+        const dateObj = new Date(date);
+        const formattedDate = dateObj.toLocaleDateString('es-ES', {
+          weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+        });
+        const formattedTime = dateObj.toLocaleTimeString('es-ES', {
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: true
+        });
+
+        infoElement.textContent = `${name}, la última vez que descargaste tu comprobante fue ${formattedDate} a las ${formattedTime}`;
+      } else {
+        infoElement.textContent = "";
+      }
+    }
+
+
 
     function showPDFModal() {
       let count = parseInt(localStorage.getItem('pdfDownloadCount')) || 0;
@@ -145,4 +182,45 @@ async function generarPDFComprobante(datosReserva) {
         console.error("Error al descargar PDF:", error);
     }
 }
+
+function addIphoneHelpButton() {
+  const pdfButton = document.getElementById("btn-descargar-pdf");
+  if (!pdfButton) return;
+
+  const iphoneBtn = document.createElement("button");
+  iphoneBtn.id = "btn-iphone-help";
+  iphoneBtn.textContent = "📱 Para dispositivos iPhone";
+  iphoneBtn.classList.add("btn-iphone");
+
+  pdfButton.insertAdjacentElement("afterend", iphoneBtn);
+
+  const modal = document.createElement("div");
+  modal.id = "iphone-modal";
+  modal.classList.add("hidden");
+  modal.innerHTML = `
+    <div class="iphone-modal-content">
+      <h3>📄 Cómo guardar tu comprobante en iPhone</h3>
+      <ol>
+        <li> Cierra este mensaje y haz clic en el botón <strong>"Descargar comprobante"</strong>.</li>
+        <li> iPhone mostrará automáticamente una vista previa de tu comprobante.</li>
+        <li> En la parte inferior de Safari, selecciona el ícono de <strong>Compartir</strong>.</li>
+        <li> Desliza hacia abajo y elige <strong>"Guardar en Archivos"</strong> o <strong>"Save to Files"</strong>.</li>
+      </ol>
+      <button id="close-iphone-modal" class="btn-close-iphone">Cerrar</button>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  iphoneBtn.addEventListener("click", () => {
+    modal.classList.remove("hidden");
+  });
+
+  document.getElementById("close-iphone-modal").addEventListener("click", () => {
+    modal.classList.add("hidden");
+  });
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  setTimeout(() => addIphoneHelpButton(), 1000);
+});
 
