@@ -28,6 +28,8 @@ export async function insertarReserva(datos) {
         numeroTransferencia
     } = datos;
 
+    const estado = metodoPago === 'transferencia' ? 'pendiente de pago' : 'activa';
+
     const { data, error } = await supabase
         .from('reservas')
         .insert([
@@ -48,7 +50,8 @@ export async function insertarReserva(datos) {
                 add_taxi: addTaxi,
                 full_guest_name: fullGuestName,
                 metodo_pago: metodoPago,
-                numero_Transferencia: numeroTransferencia
+                numero_Transferencia: numeroTransferencia,
+                estado: estado
             }
         ])
         .select(); // 👈 fuerza retorno de datos
