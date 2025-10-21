@@ -1,26 +1,20 @@
 import express from "express";
 import supabase from "../database.js";
-import nodemailer from "nodemailer";
+import sgMail from "@sendgrid/mail";
 
 const router = express.Router();
 
-// Configuración del transportador de correo
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: process.env.EMAIL,
-        pass: process.env.PASSWORD,
-    },
-});
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // Función para enviar correos de cancelación
 async function enviarCorreoCancelacion(datosReserva, esCliente) {
-    try {
-        const mailCliente = {
-            from: process.env.EMAIL,
-            to: datosReserva.email,
-            subject: 'Reserva Cancelada - Hotel Maribao',
-            text: `
+  try {
+    // 📧 correo al cliente
+    const msgCliente = {
+      to: datosReserva.email,
+      from: process.env.EMAIL, // remitente verificado en SendGrid
+      subject: "Reserva Cancelada - Hotel Maribao",
+      text: `
 Hola ${datosReserva.nombre},
 
 Tu reserva con número de transferencia ${datosReserva.numero_Transferencia} ha sido cancelada exitosamente.
@@ -33,14 +27,15 @@ Detalles de la reserva:
 Si tienes alguna duda, contáctanos.
 
 Hotel Maribao
-            `
-        };
+      `,
+    };
 
-        const mailAdmin = {
-            from: process.env.EMAIL,
-            to: process.env.EMAIL_EMPLEADOR,
-            subject: `Reserva Cancelada - Hotel Maribao`,
-            text: `
+    // 📧 correo al administrador
+    const msgAdmin = {
+      to: process.env.EMAIL_EMPLEADOR,
+      from: process.env.EMAIL,
+      subject: "Reserva Cancelada - Hotel Maribao",
+      text: `
 La siguiente reserva ha sido cancelada:
 
 - Nombre del huésped: ${datosReserva.nombre}
@@ -49,15 +44,18 @@ La siguiente reserva ha sido cancelada:
 - Cuarto: ${datosReserva.room_name}
 - Check-in: ${datosReserva.checkin_date}
 - Check-out: ${datosReserva.checkout_date}
-            `
-        };
+      `,
+    };
 
-        await transporter.sendMail(mailCliente);
-        if (esCliente) await transporter.sendMail(mailAdmin); // solo si lo cancela el cliente
-    } catch (err) {
-        console.error("❌ Error enviando correos de cancelación:", err);
-    }
+    await sgMail.send(msgCliente);
+    if (esCliente) await sgMail.send(msgAdmin);
+
+    console.log("📨 Correos de cancelación enviados con éxito");
+  } catch (err) {
+    console.error("❌ Error enviando correos de cancelación:", err.response?.body || err);
+  }
 }
+
 // Obtener datos de la reserva (para mostrar detalles en cancelar.html)
 router.get("/cliente/:numeroTransferencia", async (req, res) => {
     const { numeroTransferencia } = req.params;

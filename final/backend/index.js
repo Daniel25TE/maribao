@@ -180,6 +180,7 @@ ${datosReserva.metodoPago ? `- Método de pago: ${datosReserva.metodoPago === 't
 
 async function enviarCorreoClienteCancelacion(datosReserva) {
     try {
+        console.log("📨 Intentando enviar correo de cancelación:", datosReserva.email);
         const msgCliente = {
             from: process.env.EMAIL,
             to: datosReserva.email,
