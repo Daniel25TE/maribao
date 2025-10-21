@@ -85,4 +85,38 @@ router.post('/generate-pdf', (req, res) => {
   }
 });
 
+export function generarPdfReserva(datosReserva) {
+    return new Promise((resolve, reject) => {
+        const doc = new PDFDocument({ size: 'A4', margin: 40 });
+        const chunks = [];
+
+        doc.on('data', (chunk) => chunks.push(chunk));
+        doc.on('end', () => resolve(Buffer.concat(chunks)));
+        doc.on('error', reject);
+
+        const templatesDir = path.join(process.cwd(), 'templates');
+        const logoPng = path.join(templatesDir, 'maribao-logo.png');
+        if (fs.existsSync(logoPng)) {
+            doc.image(logoPng, { fit: [64, 70], align: 'center' });
+        }
+
+        doc.moveDown();
+        doc.fontSize(20).text('Factura / Comprobante de Reserva', { align: 'center' });
+        doc.moveDown();
+
+        doc.fontSize(12);
+        doc.text(`Nombre: ${datosReserva.firstName} ${datosReserva.lastName}`);
+        doc.text(`Email: ${datosReserva.email}`);
+        doc.text(`Reserva ID: ${datosReserva.numeroTransferencia}`);
+        doc.text(`Cuarto: ${datosReserva.cuarto}`);
+        doc.text(`Check-in: ${datosReserva.checkin}`);
+        doc.text(`Check-out: ${datosReserva.checkout}`);
+        doc.text(`Método de pago: ${datosReserva.metodoPago || 'No especificado'}`);
+        doc.text(`Solicitudes especiales: ${datosReserva.specialRequests || 'Ninguna'}`);
+        doc.text(`Hora de llegada: ${datosReserva.arrivalTime || 'No especificada'}`);
+
+        doc.end();
+    });
+}
+
 export default router;

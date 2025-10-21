@@ -302,29 +302,47 @@ fetch('./data/discounts.json')
     checkoutInput.addEventListener("change", calcularTotal);
 
     function mostrarContador(mensaje) {
-        const paymentMessage = document.getElementById("payment-message");
+    let modal = document.getElementById("reservation-modal");
+    let paymentMessage;
 
-        if (!paymentMessage) return;
+    if (!modal) {
+        modal = document.createElement("div");
+        modal.id = "reservation-modal";
+        modal.className = "overlay-reservation-message";
 
-        let contador = 35;
-        paymentMessage.style.display = 'block';
-        paymentMessage.innerHTML = `
-        <p>${mensaje}</p>
-        <p>Procesando tu reserva en <span id="contador">${contador}</span> segundos...</p>
-    `;
+        const content = document.createElement("div");
+        content.className = "content-reservation-message";
 
-        const intervalo = setInterval(() => {
-            contador--;
-            const contadorEl = document.getElementById("contador");
-            if (contadorEl) contadorEl.textContent = contador;
+        paymentMessage = document.createElement("div");
+        paymentMessage.id = "payment-message";
+        content.appendChild(paymentMessage);
 
-            if (contador <= 0) {
-                clearInterval(intervalo);
-            }
-        }, 1000);
+        modal.appendChild(content);
+        document.body.appendChild(modal);
+    } else {
+        paymentMessage = modal.querySelector("#payment-message");
     }
 
+    let contador = 45;
 
+    paymentMessage.innerHTML = `
+        <p>${mensaje}</p>
+        <p>Esto solo suele tomar unos segundos.</p>
+        <p><span id="contador">${contador}</span> segundos...</p>
+    `;
+
+    const intervalo = setInterval(() => {
+        contador--;
+        const contadorEl = paymentMessage.querySelector("#contador");
+        if (contadorEl) contadorEl.textContent = contador;
+
+        if (contador <= 0) {
+            clearInterval(intervalo);
+            modal.remove();
+        }
+    }, 1000);
+    }
+    
     const form = document.getElementById("reservation-form");
 
     form.addEventListener("submit", async (e) => {

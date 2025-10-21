@@ -17,6 +17,9 @@ import cancelarRoutes from "./routes/cancelar.js";
 import sgMail from "@sendgrid/mail";
 import mediaRoutes from './routes/media.js';
 import pdfRoutes from './routes/pdf.js';
+import { generarPdfReserva } from './routes/pdf.js';
+
+const pdfBuffer = await generarPdfReserva(datosReserva);
 
 
 dotenv.config();
@@ -33,7 +36,9 @@ const corsOptions = {
 };
 async function enviarCorreosReserva(datosReserva, sessionId = null) {
     try {
-    
+        
+        const pdfBuffer = await generarPdfReserva(datosReserva);
+
         const msgCliente = {
             to: datosReserva.email,
             from: process.env.EMAIL,
@@ -79,7 +84,15 @@ Hotel Maribao
                 <p>Hora estimada de llegada: ${datosReserva.arrivalTime || 'No especificada'}</p>
                 <p>Si deseas cancelar tu reserva, <a href="https://daniel25te.github.io/maribao/final/cancelar.html"><strong>haz clic aquí</strong></a>.</p>
                 <p>¡Te esperamos!<br>Hotel Maribao</p>
-            `
+            `,
+            attachments: [
+                {
+                    content: pdfBuffer.toString('base64'),
+                    filename: `reserva-${datosReserva.numeroTransferencia}.pdf`,
+                    type: 'application/pdf',
+                    disposition: 'attachment',
+                }
+            ]
         };
 
       
@@ -120,7 +133,15 @@ ${datosReserva.metodoPago ? `- Método de pago: ${datosReserva.metodoPago === 't
                 </p>
                 <p>🔍 <a href="https://hotel-backend-3jw7.onrender.com/login"><strong>Ver reservas</strong></a></p>
                 <p>—<br>Hotel Maribao - Notificación automática</p>
-            `
+            `,
+            attachments: [
+                {
+                    content: pdfBuffer.toString('base64'),
+                    filename: `reserva-${datosReserva.numeroTransferencia}.pdf`,
+                    type: 'application/pdf',
+                    disposition: 'attachment',
+                }
+            ]
         };
 
         await sgMail.send(msgCliente);
