@@ -33,13 +33,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     <td>${reserva.special_requests}</td>
                     <td>${reserva.arrival_time}</td>
                     <td>${reserva.numero_Transferencia}</td>
-                    <td>${reserva.estado}</td>
-                    <td>
-                      <button class="btn-cambiar-estado bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded"
+                    <td class="flex flex-col items-start gap-1">
+                      <span>${reserva.estado}</span>
+                      <button class="btn-cambiar-estado bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded text-sm"
                         data-id="${reserva.id}" data-estado="${reserva.estado}">
                         ${reserva.estado === 'pendiente de pago' ? 'Marcar como pagado' : 'Pagado'}
                       </button>
                     </td>
+
                     <td>
                       ${reserva.pdf_url
                         ? `<a href="${reserva.pdf_url}" target="_blank" class="text-blue-600 hover:underline">Ver PDF</a>`
@@ -94,16 +95,16 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("delete-selected").addEventListener("click", async () => {
         const selected = Array.from(document.querySelectorAll(".row-checkbox:checked"))
             .map(cb => cb.value);
-    
+
         if (selected.length === 0) {
             alert("No has seleccionado ninguna reserva.");
             return;
         }
-    
+
         if (!confirm(`¿Seguro que deseas cancelar ${selected.length} reserva(s)?`)) {
             return;
         }
-    
+
         try {
             for (const numero of selected) {
                 await fetch(`/cancelar/admin/${numero}`, { method: "PUT" });
@@ -118,16 +119,16 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("delete-permanent").addEventListener("click", async () => {
         const selected = Array.from(document.querySelectorAll(".row-checkbox:checked"))
             .map(cb => cb.value);
-    
+
         if (selected.length === 0) {
             alert("No has seleccionado ninguna reserva.");
             return;
         }
-    
+
         if (!confirm(`¿Seguro que deseas eliminar permanentemente ${selected.length} reserva(s)?`)) {
             return;
         }
-    
+
         try {
             for (const numero of selected) {
                 await fetch(`/cancelar/admin/${numero}`, { method: "DELETE" });
