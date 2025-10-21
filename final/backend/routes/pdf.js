@@ -195,7 +195,7 @@ export function generarPdfPagado(datosReserva) {
       const info = [
         ['Nombre:', `${datosReserva.firstName || datosReserva.nombre || ''} ${datosReserva.lastName || datosReserva.apellido || ''}`],
         ['Email:', datosReserva.email || 'No especificado'],
-        ['Reserva ID:', datosReserva.numeroTransferencia || datosReserva.numero_transferencia || 'No aplica'],
+        ['Reserva ID:', datosReserva.numeroTransferencia || datosReserva.numero_Transferencia || 'No aplica'],
         ['Cuarto:', datosReserva.cuarto || datosReserva.room_name || 'No especificado'],
         ['Check-in:', datosReserva.checkin || datosReserva.checkin_date || 'No especificado'],
         ['Check-out:', datosReserva.checkout || datosReserva.checkout_date || 'No especificado'],

@@ -25,7 +25,8 @@ export async function insertarReserva(datos) {
         addTaxi,
         fullGuestName,
         metodoPago,
-        numeroTransferencia
+        numeroTransferencia,
+        total
     } = datos;
 
     const estado = metodoPago === 'transferencia' ? 'pendiente de pago' : 'activa';
@@ -51,7 +52,8 @@ export async function insertarReserva(datos) {
                 full_guest_name: fullGuestName,
                 metodo_pago: metodoPago,
                 numero_Transferencia: numeroTransferencia,
-                estado: estado
+                estado: estado,
+                total: total
             }
         ])
         .select(); // 👈 fuerza retorno de datos
