@@ -182,10 +182,11 @@ export function generarPdfPagado(datosReserva) {
 
       doc.moveDown();
       doc.fillColor('black').fontSize(20).font('Helvetica-Bold')
-         .text('Factura / Comprobante de Reserva', { align: 'center' });
+         .text('Factura / Comprobante de Reserva - PAGADO', { align: 'center' });
       doc.moveDown(1);
 
-      doc.moveTo(40, doc.y).lineTo(555, doc.y).strokeColor('black').lineWidth(1).stroke();
+      doc.moveTo(40, doc.y).lineTo(555, doc.y)
+         .strokeColor('black').lineWidth(1).stroke();
       doc.moveDown(1);
 
       // === INFORMACIÓN PRINCIPAL ===
@@ -194,13 +195,13 @@ export function generarPdfPagado(datosReserva) {
       const info = [
         ['Nombre:', `${datosReserva.firstName} ${datosReserva.lastName}`],
         ['Email:', datosReserva.email],
-        ['Reserva ID:', datosReserva.numeroTransferencia],
-        ['Cuarto:', datosReserva.cuarto],
-        ['Check-in:', datosReserva.checkin],
-        ['Check-out:', datosReserva.checkout],
-        ['Método de pago:', datosReserva.metodoPago || 'No especificado'],
-        ['Solicitudes especiales:', datosReserva.specialRequests || 'Ninguna'],
-        ['Hora de llegada:', datosReserva.arrivalTime || 'No especificada']
+        ['Reserva ID:', datosReserva.numero_Transferencia],
+        ['Cuarto:', datosReserva.room_name],
+        ['Check-in:', datosReserva.checkin_date],
+        ['Check-out:', datosReserva.checkout_date],
+        ['Método de pago:', datosReserva.metodo_pago || 'No especificado'],
+        ['Solicitudes especiales:', datosReserva.special_requests || 'Ninguna'],
+        ['Hora de llegada:', datosReserva.arrival_time || 'No especificada']
       ];
 
       info.forEach(([key, value]) => {
@@ -211,11 +212,12 @@ export function generarPdfPagado(datosReserva) {
 
       doc.moveDown();
 
-      // === CAMBIO CLAVE: texto de "PAGADO" ===
+      // === TOTAL ===
       const totalNum = datosReserva.total ?? 'No especificado';
-      doc.moveTo(40, doc.y).lineTo(555, doc.y).strokeColor('black').lineWidth(1).stroke();
+      doc.moveTo(40, doc.y).lineTo(555, doc.y)
+         .strokeColor('black').lineWidth(1).stroke();
       doc.moveDown(0.5);
-      doc.fontSize(16).font('Helvetica-Bold').fillColor('green')
+      doc.fontSize(16).font('Helvetica-Bold').fillColor('black')
          .text(`PAGADO: $${totalNum}`, { align: 'right' });
 
       doc.moveDown(2);
