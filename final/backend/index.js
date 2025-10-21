@@ -37,6 +37,33 @@ async function enviarCorreosReserva(datosReserva, sessionId = null) {
         
         const pdfBuffer = await generarPdfReserva(datosReserva);
 
+        const fileName = `reserva-${datosReserva.numeroTransferencia}.pdf`;
+    const { data: uploadData, error: uploadError } = await supabase.storage
+      .from('reservas-pdf')
+      .upload(fileName, pdfBuffer, {
+        contentType: 'application/pdf',
+        upsert: true, // sobrescribe si existe
+      });
+
+    if (uploadError) {
+      console.error('❌ Error subiendo PDF a Supabase:', uploadError);
+    } else {
+      console.log('✅ PDF subido a Supabase:', uploadData);
+    }
+
+    // 3️⃣ Obtener URL pública del PDF
+    const { data: publicUrlData } = supabase.storage
+      .from('reservas-pdf')
+      .getPublicUrl(fileName);
+
+    const pdfUrl = publicUrlData?.publicUrl || null;
+
+    // 4️⃣ Guardar esa URL en la base de datos (junto con la reserva)
+    await supabase
+      .from('reservas')
+      .update({ pdf_url: pdfUrl })
+      .eq('numero_transferencia', datosReserva.numeroTransferencia);
+
         const msgCliente = {
             to: datosReserva.email,
             from: process.env.EMAIL,
