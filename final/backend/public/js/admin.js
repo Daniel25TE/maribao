@@ -35,10 +35,16 @@ document.addEventListener("DOMContentLoaded", () => {
                     <td>${reserva.numero_Transferencia}</td>
                     <td class="flex flex-col items-start gap-1">
                       <span>${reserva.estado}</span>
-                      <button class="btn-cambiar-estado bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded text-sm"
-                        data-id="${reserva.id}" data-estado="${reserva.estado}">
-                        ${reserva.estado === 'pendiente de pago' ? 'Marcar como pagado' : 'Pagado'}
-                      </button>
+                      <div class="flex gap-2">
+                        <button class="btn-cambiar-estado bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded text-sm"
+                          data-id="${reserva.id}" data-estado="${reserva.estado}" data-nuevo="pagado">
+                          ${reserva.estado === 'pendiente de pago' ? 'Marcar como pagado' : 'Pagado'}
+                        </button>
+                        <button class="btn-cambiar-estado bg-yellow-500 hover:bg-yellow-600 text-white px-2 py-1 rounded text-sm"
+                          data-id="${reserva.id}" data-estado="${reserva.estado}" data-nuevo="pendiente de pago">
+                          Marcar como pendiente
+                        </button>
+                      </div>
                     </td>
 
                     <td>
@@ -58,38 +64,34 @@ document.addEventListener("DOMContentLoaded", () => {
     cargarReservas();
 
     document.addEventListener('click', async (e) => {
-    if (e.target.classList.contains('btn-cambiar-estado')) {
+      if (e.target.classList.contains('btn-cambiar-estado')) {
         const id = e.target.dataset.id;
-        const estadoActual = e.target.dataset.estado;
-
-        if (estadoActual === 'pagado') {
-            alert('Esta reserva ya está marcada como pagada.');
-            return;
-        }
-
-        const confirmar = confirm('¿Marcar esta reserva como PAGADA?');
+        const nuevoEstado = e.target.dataset.nuevo;
+    
+        const confirmar = confirm(`¿Marcar esta reserva como ${nuevoEstado.toUpperCase()}?`);
         if (!confirmar) return;
-
+    
         try {
-            const response = await fetch(`/api/reservas/${id}/estado`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ nuevoEstado: 'pagado' })
-            });
-
-            const result = await response.json();
-            if (result.success) {
-                alert('✅ Estado actualizado a PAGADO');
-                location.reload(); // recargar tabla
-            } else {
-                alert('❌ No se pudo actualizar el estado');
-            }
+          const response = await fetch(`/api/reservas/${id}/estado`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nuevoEstado })
+          });
+      
+          const result = await response.json();
+          if (result.success) {
+            alert(`✅ Estado actualizado a ${nuevoEstado.toUpperCase()}`);
+            location.reload();
+          } else {
+            alert('❌ No se pudo actualizar el estado');
+          }
         } catch (error) {
-            console.error('Error:', error);
-            alert('❌ Error al conectar con el servidor');
+          console.error('Error:', error);
+          alert('❌ Error al conectar con el servidor');
         }
-    }
+      }
     });
+
 
 
     document.getElementById("delete-selected").addEventListener("click", async () => {
