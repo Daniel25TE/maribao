@@ -193,15 +193,15 @@ export function generarPdfPagado(datosReserva) {
       doc.fillColor('black').fontSize(12).font('Helvetica');
 
       const info = [
-        ['Nombre:', `${datosReserva.firstName} ${datosReserva.lastName}`],
-        ['Email:', datosReserva.email],
-        ['Reserva ID:', datosReserva.numero_Transferencia],
-        ['Cuarto:', datosReserva.room_name],
-        ['Check-in:', datosReserva.checkin_date],
-        ['Check-out:', datosReserva.checkout_date],
-        ['Método de pago:', datosReserva.metodo_pago || 'No especificado'],
-        ['Solicitudes especiales:', datosReserva.special_requests || 'Ninguna'],
-        ['Hora de llegada:', datosReserva.arrival_time || 'No especificada']
+        ['Nombre:', `${datosReserva.firstName || datosReserva.nombre || ''} ${datosReserva.lastName || datosReserva.apellido || ''}`],
+        ['Email:', datosReserva.email || 'No especificado'],
+        ['Reserva ID:', datosReserva.numeroTransferencia || datosReserva.numero_transferencia || 'No aplica'],
+        ['Cuarto:', datosReserva.cuarto || datosReserva.room_name || 'No especificado'],
+        ['Check-in:', datosReserva.checkin || datosReserva.checkin_date || 'No especificado'],
+        ['Check-out:', datosReserva.checkout || datosReserva.checkout_date || 'No especificado'],
+        ['Método de pago:', datosReserva.metodoPago || datosReserva.metodo_pago || 'No especificado'],
+        ['Solicitudes especiales:', datosReserva.specialRequests || datosReserva.special_requests || 'Ninguna'],
+        ['Hora de llegada:', datosReserva.arrivalTime || datosReserva.arrival_time || 'No especificada']
       ];
 
       info.forEach(([key, value]) => {
@@ -213,7 +213,7 @@ export function generarPdfPagado(datosReserva) {
       doc.moveDown();
 
       // === TOTAL ===
-      const totalNum = datosReserva.total ?? 'No especificado';
+      const totalNum = datosReserva.total ?? datosReserva.total_reserva ?? 'No especificado';
       doc.moveTo(40, doc.y).lineTo(555, doc.y)
          .strokeColor('black').lineWidth(1).stroke();
       doc.moveDown(0.5);
