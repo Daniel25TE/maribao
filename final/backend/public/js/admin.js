@@ -52,6 +52,12 @@ document.addEventListener("DOMContentLoaded", () => {
                         ? `<a href="${reserva.pdf_url}" target="_blank" class="text-blue-600 hover:underline">Ver PDF</a>`
                         : '<span class="text-gray-400">Sin PDF</span>'}
                     </td>
+                    <td>
+                      ${reserva.pdf_reserva_pagada
+                        ? `<a href="${reserva.pdf_reserva_pagada}" target="_blank" class="text-green-600 hover:underline">Ver PDF Pagado</a>`
+                        : '<span class="text-gray-400">Sin PDF Pagado</span>'}
+                    </td>
+
                 `;
                 tbody.appendChild(row);
             });

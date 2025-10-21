@@ -17,7 +17,7 @@ import cancelarRoutes from "./routes/cancelar.js";
 import sgMail from "@sendgrid/mail";
 import mediaRoutes from './routes/media.js';
 import pdfRoutes from './routes/pdf.js';
-import { generarPdfReserva } from './routes/pdf.js';
+import { generarPdfReserva, generarPdfPagado } from './routes/pdf.js';
 
 
 dotenv.config();
@@ -581,24 +581,62 @@ app.get('/', (req, res) => {
 });
 
 app.put('/api/reservas/:id/estado', async (req, res) => {
-    try {
-        const { id } = req.params;
-        const { nuevoEstado } = req.body;
+  try {
+    const { id } = req.params;
+    const { nuevoEstado } = req.body;
 
-        const { data, error } = await supabase
-            .from('reservas')
-            .update({ estado: nuevoEstado })
-            .eq('id', id)
-            .select();
+    // 1️⃣ Obtener la reserva actual
+    const { data: reservaData, error: fetchError } = await supabase
+      .from('reservas')
+      .select('*')
+      .eq('id', id)
+      .single();
 
-        if (error) throw error;
+    if (fetchError) throw fetchError;
+    const reserva = reservaData;
 
-        res.json({ success: true, data: data[0] });
-    } catch (err) {
-        console.error('❌ Error al actualizar estado:', err);
-        res.status(500).json({ success: false, message: 'Error al actualizar estado' });
+    // 2️⃣ Si se marca como "pagado", generamos el nuevo PDF
+    if (nuevoEstado === 'pagado') {
+      const pdfBuffer = await generarPdfPagado(reserva);
+
+      // Subir el PDF al bucket
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from('reservas-pdf')
+        .upload(`pagado-${reserva.id}.pdf`, pdfBuffer, {
+          contentType: 'application/pdf',
+          upsert: true
+        });
+
+      if (uploadError) throw uploadError;
+
+      // Construir la URL pública del PDF
+      const pdfUrl = `https://${process.env.SUPABASE_PROJECT_ID}.supabase.co/storage/v1/object/public/reservas-pdf/${uploadData.path}`;
+
+      // Guardar URL en nueva columna "pdf_reserva_pagada"
+      const { error: updatePdfError } = await supabase
+        .from('reservas')
+        .update({ pdf_reserva_pagada: pdfUrl })
+        .eq('id', id);
+
+      if (updatePdfError) throw updatePdfError;
     }
+
+    // 3️⃣ Actualizar el estado de la reserva
+    const { data, error } = await supabase
+      .from('reservas')
+      .update({ estado: nuevoEstado })
+      .eq('id', id)
+      .select();
+
+    if (error) throw error;
+
+    res.json({ success: true, data: data[0] });
+  } catch (err) {
+    console.error('❌ Error al actualizar estado:', err);
+    res.status(500).json({ success: false, message: 'Error al actualizar estado' });
+  }
 });
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
