@@ -62,7 +62,7 @@ async function enviarCorreosReserva(datosReserva, sessionId = null) {
     await supabase
       .from('reservas')
       .update({ pdf_url: pdfUrl })
-      .eq('numero_transferencia', datosReserva.numeroTransferencia);
+      .eq('numero_Transferencia', datosReserva.numeroTransferencia);
 
         const msgCliente = {
             to: datosReserva.email,
