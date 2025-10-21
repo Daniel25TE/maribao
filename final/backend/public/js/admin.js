@@ -34,6 +34,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     <td>${reserva.arrival_time}</td>
                     <td>${reserva.numero_Transferencia}</td>
                     <td>${reserva.estado}</td>
+                    <td>
+                      ${reserva.pdf_url
+                        ? `<a href="${reserva.pdf_url}" target="_blank" class="text-blue-600 hover:underline">Ver PDF</a>`
+                        : '<span class="text-gray-400">Sin PDF</span>'}
+                    </td>
                 `;
                 tbody.appendChild(row);
             });
