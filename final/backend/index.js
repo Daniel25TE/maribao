@@ -19,8 +19,6 @@ import mediaRoutes from './routes/media.js';
 import pdfRoutes from './routes/pdf.js';
 import { generarPdfReserva } from './routes/pdf.js';
 
-const pdfBuffer = await generarPdfReserva(datosReserva);
-
 
 dotenv.config();
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
