@@ -35,6 +35,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     <td>${reserva.numero_Transferencia}</td>
                     <td>${reserva.estado}</td>
                     <td>
+                      <button class="btn-cambiar-estado bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded"
+                        data-id="${reserva.id}" data-estado="${reserva.estado}">
+                        ${reserva.estado === 'pendiente de pago' ? 'Marcar como pagado' : 'Pagado'}
+                      </button>
+                    </td>
+                    <td>
                       ${reserva.pdf_url
                         ? `<a href="${reserva.pdf_url}" target="_blank" class="text-blue-600 hover:underline">Ver PDF</a>`
                         : '<span class="text-gray-400">Sin PDF</span>'}
@@ -49,56 +55,94 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     cargarReservas();
-});
 
-document.getElementById("delete-selected").addEventListener("click", async () => {
-    const selected = Array.from(document.querySelectorAll(".row-checkbox:checked"))
-        .map(cb => cb.value);
+    document.addEventListener('click', async (e) => {
+    if (e.target.classList.contains('btn-cambiar-estado')) {
+        const id = e.target.dataset.id;
+        const estadoActual = e.target.dataset.estado;
 
-    if (selected.length === 0) {
-        alert("No has seleccionado ninguna reserva.");
-        return;
-    }
-
-    if (!confirm(`¿Seguro que deseas cancelar ${selected.length} reserva(s)?`)) {
-        return;
-    }
-
-    try {
-        for (const numero of selected) {
-            await fetch(`/cancelar/admin/${numero}`, { method: "PUT" });
+        if (estadoActual === 'pagado') {
+            alert('Esta reserva ya está marcada como pagada.');
+            return;
         }
-        alert("Reservas canceladas correctamente.");
-        window.location.reload(); // refrescamos la tabla
-    } catch (error) {
-        console.error("Error:", error);
-        alert("Error de conexión con el servidor.");
-    }
-});
-document.getElementById("delete-permanent").addEventListener("click", async () => {
-    const selected = Array.from(document.querySelectorAll(".row-checkbox:checked"))
-        .map(cb => cb.value);
 
-    if (selected.length === 0) {
-        alert("No has seleccionado ninguna reserva.");
-        return;
-    }
+        const confirmar = confirm('¿Marcar esta reserva como PAGADA?');
+        if (!confirmar) return;
 
-    if (!confirm(`¿Seguro que deseas eliminar permanentemente ${selected.length} reserva(s)?`)) {
-        return;
-    }
+        try {
+            const response = await fetch(`/api/reservas/${id}/estado`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nuevoEstado: 'pagado' })
+            });
 
-    try {
-        for (const numero of selected) {
-            await fetch(`/cancelar/admin/${numero}`, { method: "DELETE" });
+            const result = await response.json();
+            if (result.success) {
+                alert('✅ Estado actualizado a PAGADO');
+                location.reload(); // recargar tabla
+            } else {
+                alert('❌ No se pudo actualizar el estado');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('❌ Error al conectar con el servidor');
         }
-        alert("Reservas eliminadas permanentemente.");
-        window.location.reload(); // refrescamos la tabla
-    } catch (error) {
-        console.error("Error:", error);
-        alert("Error de conexión con el servidor.");
+    }
+    });
+
+
+    document.getElementById("delete-selected").addEventListener("click", async () => {
+        const selected = Array.from(document.querySelectorAll(".row-checkbox:checked"))
+            .map(cb => cb.value);
+    
+        if (selected.length === 0) {
+            alert("No has seleccionado ninguna reserva.");
+            return;
+        }
+    
+        if (!confirm(`¿Seguro que deseas cancelar ${selected.length} reserva(s)?`)) {
+            return;
+        }
+    
+        try {
+            for (const numero of selected) {
+                await fetch(`/cancelar/admin/${numero}`, { method: "PUT" });
+            }
+            alert("Reservas canceladas correctamente.");
+            window.location.reload(); // refrescamos la tabla
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Error de conexión con el servidor.");
+        }
+    });
+    document.getElementById("delete-permanent").addEventListener("click", async () => {
+        const selected = Array.from(document.querySelectorAll(".row-checkbox:checked"))
+            .map(cb => cb.value);
+    
+        if (selected.length === 0) {
+            alert("No has seleccionado ninguna reserva.");
+            return;
+        }
+    
+        if (!confirm(`¿Seguro que deseas eliminar permanentemente ${selected.length} reserva(s)?`)) {
+            return;
+        }
+    
+        try {
+            for (const numero of selected) {
+                await fetch(`/cancelar/admin/${numero}`, { method: "DELETE" });
+            }
+            alert("Reservas eliminadas permanentemente.");
+            window.location.reload(); // refrescamos la tabla
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Error de conexión con el servidor.");
+        }
+    });
+});
+window.addEventListener("pageshow", function (event) {
+    if (event.persisted) {
+        window.location.reload();
     }
 });
-
-
 

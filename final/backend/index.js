@@ -580,6 +580,25 @@ app.get('/', (req, res) => {
     res.send('Servidor del Hotel Maribao funcionando correctamente ✅');
 });
 
+app.put('/api/reservas/:id/estado', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { nuevoEstado } = req.body;
+
+        const { data, error } = await supabase
+            .from('reservas')
+            .update({ estado: nuevoEstado })
+            .eq('id', id)
+            .select();
+
+        if (error) throw error;
+
+        res.json({ success: true, data: data[0] });
+    } catch (err) {
+        console.error('❌ Error al actualizar estado:', err);
+        res.status(500).json({ success: false, message: 'Error al actualizar estado' });
+    }
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
