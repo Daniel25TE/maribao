@@ -101,8 +101,7 @@ export function dataForm() {
             <div>
               <label for="metodoPago">Método de pago:</label>
               <select id="metodoPago" name="metodoPago">
-                <option value="efectivo">Efectivo</option>
-                <option value="tarjeta">Tarjeta (Protected by Security-Stripe)</option>
+                <option value="tarjeta">Tarjeta</option>
                 <option value="transferencia">Transferencia</option>
               </select>
             </div>
