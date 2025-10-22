@@ -2,19 +2,15 @@
     "faqs": [
         {
             "question": "¿Hay servicio de transporte al aeropuerto?",
-            "answer": "El servicio de transporte al aeropuerto no está disponible en MARIBAO."
+            "answer": "Servicio de transporte está disponible bajo coordinación con anterioridad."
         },
         {
             "question": "¿Sirven desayuno?",
-            "answer": "Selecciona tus fechas y consulta la lista de habitaciones disponibles para ver si hay opciones de desayuno disponibles."
+            "answer": "No hay disponibilidad de desayuno."
         },
         {
             "question": "¿Tiene restaurante?",
-            "answer": "Desafortunadamente, no hay restaurante en MARIBAO."
-        },
-        {
-            "question": "¿Qué restaurantes, atracciones y opciones de transporte público hay cerca?",
-            "answer": "Para saber qué hay cerca de MARIBAO, haga clic en el enlace a continuación."
+            "answer": "Desafortunadamente, no hay restaurante en el hospedaje. Sin embargo,  en la playa y en los alrededores hay opciones de restaurantes."
         },
         {
             "question": "¿Hay piscina?",
@@ -22,7 +18,7 @@
         },
         {
             "question": "¿Cuál es la política de Wi-Fi?",
-            "answer": "No hay acceso a Internet disponible."
+            "answer": "Todo el complejo tiene Wifi libre. Se te otorgara la contraseña cuando hagas tu check-in."
         },
         {
             "question": "¿Hay habitaciones con balcón?",
@@ -34,31 +30,27 @@
         },
         {
             "question": "¿Hay habitaciones con baño privado?",
-            "answer": "Desafortunadamente, no hay spa ni centro de bienestar en MARIBAO."
-        },
-        {
-            "question": "¿Hay un spa?",
-            "answer": "Sí, aceptamos todas las principales tarjetas de crédito y débito."
+            "answer": "Si, todas las habitaciones tienen baño privado."
         },
         {
             "question": "¿Cuántas personas pueden dormir en MARIBAO?",
-            "answer": "Puede elegir entre varias opciones de alojamiento en MARIBAO (sujeto a disponibilidad) que pueden acomodar: 6 huéspedes - 7 huéspedes - 4 huéspedes"
+            "answer": "Nuestras habitaciones pueden alojar desde 1 persona hasta 10 personas dependiendo de la habitacion. Para verificar la disponibilidad porfavor dirigete a la pagina de `Reservar`."
         },
         {
-            "question": "¿Qué idiomas habla el personal del hotel?",
+            "question": "¿Qué idiomas habla el personal del hospedaje?",
             "answer": "Nuestro personal habla español e inglés."
         },
         {
             "question": "¿Cuáles son los horarios de entrada y salida en MARIBAO?",
-            "answer": "Podrás hacer el check-in en MARIBAO a partir de las 15:00 y el check-out hasta las 11:00."
+            "answer": "Podrás hacer el check-in en MARIBAO a partir de las 14:00 pm y el check-out hasta las 12:00 pm."
         },
         {
             "question": "¿Cuánto cuesta alojarse en MARIBAO?",
-            "answer": "Los precios en MARIBAO pueden variar en función de la estancia (fechas, condiciones del hotel, etc.). Para ver los precios, introduce tus fechas."
+            "answer": "Los precios en MARIBAO pueden variar en función de la estancia (fechas, condiciones del hospedaje, etc.). Para ver los precios, porfavor dirigete a la pagina de `Reservar` e introduce tus fechas."
         },
         {
             "question": "¿Cómo puedo hacer una solicitud especial?",
-            "answer": "Puedes escribirnos antes de tu llegada o indicarlo al momento de hacer tu reserva."
+            "answer": "Puedes escribirnos antes de tu llegada por nuestros canales de WhatsApp o indicarlo al momento de hacer tu reserva en el formulario."
         }
     ]
 }
