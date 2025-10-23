@@ -17,7 +17,7 @@ import cancelarRoutes from "./routes/cancelar.js";
 import sgMail from "@sendgrid/mail";
 import mediaRoutes from './routes/media.js';
 import pdfRoutes from './routes/pdf.js';
-import { generarPdfReserva, generarPdfPagado } from './routes/pdf.js';
+import { generarPdfReserva, generarPdfPagado, generarPdfAbonado } from './routes/pdf.js';
 
 
 dotenv.config();
@@ -634,6 +634,71 @@ app.put('/api/reservas/:id/estado', async (req, res) => {
   }
 });
 
+// index.js  — pega este bloque cerca de los otros PUT (por ejemplo debajo de app.put('/api/reservas/:id/estado') )
+
+app.put('/api/reservas/:id/abonado', async (req, res) => {
+  try {
+    const { id } = req.params;
+    // opcional: si mandas monto desde front envíalo en body; si no, se tomará el que haya en la tabla
+    const { montoAbonado } = req.body;
+
+    // 1) obtener la reserva actual
+    const { data: reservaData, error: fetchErr } = await supabase
+      .from('reservas')
+      .select('*')
+      .eq('id', id)
+      .single();
+    if (fetchErr) throw fetchErr;
+    const reserva = reservaData;
+
+    // 2) si montoAbonado fue enviado por el admin, actualizar la columna monto_abonado
+    if (typeof montoAbonado !== 'undefined' && montoAbonado !== null) {
+      const { error: updErr } = await supabase
+        .from('reservas')
+        .update({ monto_abonado: montoAbonado })
+        .eq('id', id);
+      if (updErr) throw updErr;
+      // recarga reserva con el nuevo monto
+      const { data: refreshed } = await supabase
+        .from('reservas')
+        .select('*')
+        .eq('id', id)
+        .single();
+      Object.assign(reserva, refreshed);
+    }
+
+    // 3) Generar el PDF abonado (usa la función que agregaste en routes/pdf.js)
+    const pdfBuffer = await generarPdfAbonado(reserva);
+
+    // 4) Subir al bucket (mismo bucket 'reservas-pdf'), nombre único
+    const fileName = `abonado-${reserva.id}-${Date.now()}.pdf`;
+    const { data: uploadData, error: uploadError } = await supabase.storage
+      .from('reservas-pdf')
+      .upload(fileName, pdfBuffer, {
+        contentType: 'application/pdf',
+        upsert: true
+      });
+    if (uploadError) throw uploadError;
+
+    // 5) Obtener URL pública (igual que con los otros PDFs)
+    const { data: publicUrlData } = supabase.storage
+      .from('reservas-pdf')
+      .getPublicUrl(fileName);
+    const pdfUrl = publicUrlData?.publicUrl || null;
+
+    // 6) Guardar la URL en la columna pdf_reserva_abonada y actualizar estado a 'abonado'
+    const { error: updateErr } = await supabase
+      .from('reservas')
+      .update({ pdf_reserva_abonada: pdfUrl, estado: 'abonado' })
+      .eq('id', id);
+    if (updateErr) throw updateErr;
+
+    res.json({ success: true, pdfUrl });
+  } catch (err) {
+    console.error('❌ Error en /reservas/:id/abonado', err);
+    res.status(500).json({ success: false, message: 'Error creando PDF abonado' });
+  }
+});
 
 
 const PORT = process.env.PORT || 3000;
