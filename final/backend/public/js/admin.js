@@ -33,19 +33,17 @@ document.addEventListener("DOMContentLoaded", () => {
           <td class="flex flex-col items-start gap-1">
             <span>${reserva.estado || ''}</span>
             <div class="flex gap-2">
-              <button class="btn-cambiar-estado bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded text-sm"
-                data-id="${reserva.id}" data-estado="${reserva.estado}" data-nuevo="pagado">
-                ${reserva.estado === 'pendiente de pago' ? 'Marcar como pagado' : 'Pagado'}
-              </button>
-
               <button class="btn-cambiar-estado bg-yellow-500 hover:bg-yellow-600 text-white px-2 py-1 rounded text-sm"
                 data-id="${reserva.id}" data-estado="${reserva.estado}" data-nuevo="pendiente de pago">
                 Marcar como pendiente
               </button>
-
               <button class="btn-abonado bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded text-sm"
                 data-id="${reserva.id}" data-estado="${reserva.estado}">
                 Marcar como abonado
+              </button>
+              <button class="btn-cambiar-estado bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded text-sm"
+                data-id="${reserva.id}" data-estado="${reserva.estado}" data-nuevo="pagado">
+                ${reserva.estado === 'pendiente de pago' ? 'Marcar como pagado' : 'Pagado'}
               </button>
             </div>
           </td>
@@ -56,14 +54,14 @@ document.addEventListener("DOMContentLoaded", () => {
               : '<span class="text-gray-400">Sin PDF</span>'}
           </td>
           <td>
-            ${reserva.pdf_reserva_pagada
-              ? `<a href="${reserva.pdf_reserva_pagada}" target="_blank" class="text-green-600 hover:underline">Ver PDF Pagado</a>`
-              : '<span class="text-gray-400">Sin PDF Pagado</span>'}
-          </td>
-          <td>
             ${reserva.pdf_reserva_abonada
               ? `<a href="${reserva.pdf_reserva_abonada}" target="_blank" class="text-indigo-600 hover:underline">Ver PDF Abonado</a>`
               : '<span class="text-gray-400">Sin PDF Abonado</span>'}
+          </td>
+          <td>
+            ${reserva.pdf_reserva_pagada
+              ? `<a href="${reserva.pdf_reserva_pagada}" target="_blank" class="text-green-600 hover:underline">Ver PDF Pagado</a>`
+              : '<span class="text-gray-400">Sin PDF Pagado</span>'}
           </td>
         `;
         tbody.appendChild(row);
