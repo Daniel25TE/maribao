@@ -1736,3 +1736,13 @@ textarea:invalid {
     margin: 0.5rem 0;
     font-size: 1rem;
 }
+.age-instructions {
+    font-size: 0.95rem;
+    color: #333;
+    background-color: #f9f9f9;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.8rem;
+    border-left: 4px solid #0ea5e9;
+    /* azul bonito tipo Tailwind cyan-500 */
+}

@@ -86,6 +86,20 @@ export async function loadRooms() {
 
             const generateAgeCheckboxes = (num) => {
                 ageContainer.innerHTML = '';
+
+                const message = document.createElement('p');
+                message.className = 'age-instructions';
+
+                if (num === 1) {
+                    message.textContent = 'Por favor especifica si la persona es niño, adulto o anciano. ' +
+                        'Niños y ancianos pagan la mitad. Niño es considerado hasta los 10 años y anciano mayor de 65 años.';
+                } else {
+                    message.textContent = `Por favor especifica, de entre las ${num} personas, cuántos son niños, adultos y ancianos. ` +
+                        'Niños y ancianos pagan la mitad. Niño es considerado hasta los 10 años y anciano mayor de 65 años.';
+                }
+            
+                ageContainer.appendChild(message);
+            
                 const columns = ['Niños', 'Adultos', 'Ancianos'];
                 const colDiv = document.createElement('div');
                 colDiv.className = 'age-columns';
