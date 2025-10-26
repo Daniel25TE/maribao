@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deja tu comentario</title>
     <link rel="stylesheet" href="styles/maribao-mobile.css">
 </head>
@@ -13,16 +14,26 @@
     </header>
 
     <main>
-        <div class="comentario-form">
-            <input type="text" id="numReserva" placeholder="Ingresa tu número de reserva" required>
-            <textarea id="comentario" placeholder="Escribe tu comentario" required></textarea>
-            <button id="enviarComentario">Enviar comentario</button>
-            <div id="mensaje"></div>
-        </div>
+        <form class="comentario-form" aria-labelledby="comentario-form-title">
+            <fieldset>
+                <legend id="comentario-form-title">Formulario de Comentarios</legend>
+    
+                <label for="numReserva">Número de reserva</label>
+                <input type="text" id="numReserva" name="numReserva" placeholder="Ingresa tu número de reserva" required>
+    
+                <label for="comentario">Comentario</label>
+                <textarea id="comentario" name="comentario" placeholder="Escribe tu comentario" required></textarea>
+    
+                <button type="submit" id="enviarComentario">Enviar comentario</button>
+            </fieldset>
+    
+            <div id="mensaje" aria-live="polite"></div>
+        </form>
     </main>
 
+
     <footer>
-        <p>&copy; 2025 Hotel</p>
+        <p id="copyright">&copy; 2025 Maribao. Todos los derechos reservados.</p>
     </footer>
 
     <script src="scripts/comentarios.js"></script>
