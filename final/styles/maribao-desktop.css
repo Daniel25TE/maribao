@@ -116,3 +116,86 @@
         border-radius: 0.5rem;
     }
 }
+:root {
+  --bg: #f6f7fb;
+  --card: #ffffff;
+  --accent: #25D366;
+  --text: #0f1724;
+}
+
+body {
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  padding: 40px;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+header {
+  margin-bottom: 24px;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+p.lead {
+  color: #374151;
+  margin-bottom: 32px;
+}
+
+.card {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 6px 20px rgba(12, 16, 24, 0.08);
+}
+
+.list {
+  display: grid;
+  gap: 18px;
+}
+
+.item {
+  padding: 18px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+  transition: transform 0.2s ease;
+}
+
+.item:hover {
+  transform: scale(1.01);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.btn.primary {
+  background: #0b69ff;
+  color: #fff;
+}
+
+.btn.whatsapp {
+  background: var(--accent);
+  color: #fff;
+}
+
+footer {
+  margin-top: 24px;
+  text-align: center;
+  color: #6b7280;
+}

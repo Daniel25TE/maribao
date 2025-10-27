@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contacto Reservas</title>
+
+  <!-- ✅ Link to desktop stylesheet (applies for screens 768px and up) -->
+  <link rel="stylesheet" href="styles/maribao-desktop.css" media="screen and (min-width: 768px)" />
+
+  <!-- ✅ Link to mobile stylesheet (applies for screens smaller than 768px) -->
+  <link rel="stylesheet" href="styles/maribao-mobile.css" media="screen and (max-width: 767px)" />
+</head>
+
+<body>
+  <div class="container">
+    <!-- 🧭 Header section -->
+    <header>
+      <h1>Contacto Reservas</h1>
+      <p class="lead">
+        Elige una de las opciones a continuación para proceder.  
+        Si necesitas asistencia directa, contáctanos por WhatsApp.
+      </p>
+    </header>
+
+    <!-- 💬 Main content with the 3 help options -->
+    <main class="card">
+      <section class="list" aria-label="Opciones de ayuda">
+
+        <!-- 🔹 Option 1: Cancel reservation -->
+        <article class="item" id="cancelar">
+          <h3>Quiero cancelar mi reserva</h3>
+          <p class="muted">
+            Si deseas cancelar tu reserva, puedes hacerlo desde la página de cancelación.
+          </p>
+          <div class="actions">
+            <!-- Link to your cancellation page -->
+            <a class="btn primary" href="./cancelar.html">Ir a cancelar mi reserva</a>
+          </div>
+        </article>
+
+        <!-- 🔹 Option 2: Complaint or refund -->
+        <article class="item" id="reembolso">
+          <h3>Tengo una queja o necesito un reembolso</h3>
+          <p>
+            Por favor contáctanos a través de nuestros números de WhatsApp  
+            para gestionar quejas y reembolsos.
+          </p>
+          <div class="actions">
+            <!-- ⚠️ Replace '1234567890' with your real WhatsApp number -->
+            <a class="btn whatsapp" href="https://wa.me/1234567890?text=Hola,+tengo+una+queja+o+necesito+un+reembolso"
+               target="_blank" rel="noopener noreferrer">
+              Abrir WhatsApp
+            </a>
+            <span class="muted">
+              También puedes detallar tu queja en el mensaje y adjuntar capturas si aplica.
+            </span>
+          </div>
+        </article>
+
+        <!-- 🔹 Option 3: Request invoice or payment receipt -->
+        <article class="item" id="factura">
+          <h3>Necesito una factura o comprobante de pago de mi reserva</h3>
+          <p>
+            Por favor, contáctanos por WhatsApp y envíanos los datos que recuerdes de tu reserva;  
+            te ayudaremos a encontrarla y a enviarte el comprobante de pago.
+          </p>
+          <div class="actions">
+            <a class="btn whatsapp"
+               href="https://wa.me/1234567890?text=Hola,+necesito+una+factura+o+comprobante+de+mi+reserva"
+               target="_blank" rel="noopener noreferrer">
+              Solicitar comprobante
+            </a>
+            <span class="muted">
+              Indica: nombre, email, fecha de la reserva y número de reserva si lo recuerdas.
+            </span>
+          </div>
+        </article>
+
+      </section>
+    </main>
+
+    <!-- ⚙️ Footer with additional note -->
+    <footer>
+      <p>
+        ¿No sabes tu número de reserva? Escríbenos por WhatsApp y te ayudamos a localizarla.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1786,3 +1786,74 @@ textarea:invalid {
 .comentario-form label {
     margin: 20px 10px 0px 5px;
 }
+:root {
+  --bg: #ffffff;
+  --accent: #25D366;
+  --text: #0f1724;
+}
+
+body {
+  font-family: Inter, system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 100%;
+}
+
+h1 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+p.lead {
+  font-size: 0.95rem;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.card {
+  padding: 16px;
+  background: #fafafa;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.item {
+  margin-bottom: 16px;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  background: #fff;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  border-radius: 8px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.btn.primary {
+  background: #0b69ff;
+  color: #fff;
+}
+
+.btn.whatsapp {
+  background: var(--accent);
+  color: #fff;
+}
+
+footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
