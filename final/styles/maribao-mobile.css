@@ -1817,29 +1817,13 @@ main.card {
     background: #e5e7eb;
 }
 
-/* === TEXTOS === */
-h3 {
-    font-size: 1.1rem;
-    color: #111827;
-}
-
-p,
-.muted {
-    font-size: 0.95rem;
-}
-
-.muted {
-    color: #6b7280;
-}
-
-/* === ACCIONES === */
+/* Contacto_reservas.html file css rules */
 .actions {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
 }
 
-/* === BOTONES === */
 .btn {
     display: inline-block;
     text-align: center;
@@ -1850,7 +1834,6 @@ p,
     transition: background 0.2s ease;
 }
 
-/* Botón primario */
 .btn.primary {
     background: #2563eb;
     color: #fff;
@@ -1858,16 +1841,6 @@ p,
 
 .btn.primary:hover {
     background: #1d4ed8;
-}
-
-/* Botón WhatsApp */
-.btn.whatsapp {
-    background: #25d366;
-    color: #fff;
-}
-
-.btn.whatsapp:hover {
-    background: #1ebe57;
 }
 
 p {
