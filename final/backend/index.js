@@ -89,6 +89,8 @@ Hora estimada de llegada: ${datosReserva.arrivalTime || 'No especificada'}
 Si deseas cancelar tu reserva, ingresa tu número de reserva en:
 https://daniel25te.github.io/maribao/final/cancelar.html
 
+<p>Nota: Si escogiste transferencia bancaria como metodo de pago, asegurate de hacer la transferencia del monto a abonar (mitad del monto total), o del monto total. Dentro de las siguientes 2 horas, de otra manera, tu reserva sera cancelada automaticamente. Porfavor envianos una captura de pantalla de la transferencia hecha, a este mismo correo electronico o nuestro numero de whatsap, +593 98 688 8256. </p>
+
 ¡Te esperamos!
 Hotel Maribao
             `,
@@ -108,6 +110,7 @@ Hotel Maribao
                 <p>Solicitudes especiales: ${datosReserva.specialRequests || 'Ninguna'}</p>
                 <p>Hora estimada de llegada: ${datosReserva.arrivalTime || 'No especificada'}</p>
                 <p>Si deseas cancelar tu reserva, <a href="https://daniel25te.github.io/maribao/final/cancelar.html"><strong>haz clic aquí</strong></a>.</p>
+                <p>Nota: Si escogiste transferencia bancaria como metodo de pago, asegurate de hacer la transferencia del monto a abonar (mitad del monto total), o del monto total. Dentro de las siguientes 2 horas, de otra manera, tu reserva sera cancelada automaticamente. Porfavor envianos una captura de pantalla de la transferencia hecha, a este mismo correo electronico o nuestro numero de whatsap, +593 98 688 8256. </p>
                 <p>¡Te esperamos!<br>Hotel Maribao</p>
             `,
             attachments: [
