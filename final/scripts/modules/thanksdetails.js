@@ -122,9 +122,9 @@ export function thanksdetails() {
 
         const titulo =
             metodoPago === 'transferencia'
-                ? '✅ ¡Reserva confirmada con pago por transferencia!'
+                ? '✅ Reserva en proceso'
                 : metodoPago === 'efectivo'
-                    ? '✅ ¡Reserva confirmada con pago en efectivo!'
+                    ? '✅ Reserva en proceso'
                     : '✅ ¡Reserva confirmada!';
 
         results.innerHTML = `
@@ -138,6 +138,23 @@ export function thanksdetails() {
             <p><strong>Solicitudes especiales:</strong> ${myInfo.get('specialRequests') || 'Ninguna'}</p>
             <p><strong>Hora de llegada:</strong> ${myInfo.get('arrivalTime') || 'No especificada'}</p>
             <p><strong>Método de pago:</strong> ${metodoPago}</p>
+            <h3 style="margin-top: 1rem; font-size: 1.3rem;">Instrucciones para la transferencia</h3>
+        <p>Por favor realiza la transferencia bancaria en uno de los siguientes bancos, incluyendo el siguiente número en la descripción de la transferencia, de esta manera podremos localizar tu reserva.</p>
+        <p style="text-align: center;"><strong style="font-size: 1.8rem; color: #333;">${numeroTransferencia}</strong></p>
+        <p>Una vez que completes la transferencia, adicional a esto tendras que enviar una captura de pantalla mostrando los datos de la transferencia, asegurate de incluir tu numero de reserva en la descripcion de tu transferencia y la cantidad transferida, sea parcial (abonada), o sea total (completa).</p>
+        <p>Puedes enviar tu comprobante de transferencia (captura de pantalla) a nuestro correo electronico **, o simplemente a nuestro whatsap "Paraiso Maribao", que puedes encontrarlo haciendo click en el icono de whatsap en la esquina inferior derecha de esta o cualquier pagina.</p>
+        <p>Abono mitad:${myInfo.get('abonoMitad')}</p>
+        <p>Monto total:${myInfo.get('totalFormateado')}</p>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem; margin-top: 1.5rem;">
+            <div style="text-align: center;">
+                <img src="images/qrcode1.webp" alt="Banco 1" width="180" style="border-radius: 8px;" />
+                <p>Banco del Pacifico</p>
+            </div>
+            <div style="text-align: center;">
+                <img src="images/qrcode2.webp" alt="Banco 2" width="180" style="border-radius: 8px;" />
+                <p>Banco de Guayaquil</p>
+            </div>
+        </div>
             <button id="btn-descargar-pdf" class="btn-pdf">📄 Descargar comprobante</button>
         `;
 

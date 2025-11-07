@@ -369,40 +369,37 @@ fetch('./data/discounts.json')
             cuarto: data.name,
             metodoPago: metodoPago,
             numeroTransferencia: numeroTransferencia, // siempre presente
-            total: totalReserva
+            total: totalReserva,
+            totalFormateado: totalFormateado,
+            abonoMitad: abonoMitad
         };
 
         if (metodoPago === "transferencia") {
             if (document.querySelector('#transferencia-info')) return;
 
+            const totalNum = Number(totalReserva) || 0;
+
+            if (totalNum <= 0) {
+                alert("Por favor selecciona fechas válidas para calcular el total antes de continuar con transferencia.");
+                return;
+            }
+        
+            // calcular la mitad y formatear a 2 decimales
+            const abonoMitad = (totalNum / 2).toFixed(2);
+            const totalFormateado = totalNum.toFixed(2);
+
             const transferenciaInfo = document.createElement("div");
             transferenciaInfo.id = "transferencia-info";
             transferenciaInfo.innerHTML = `
                 <h3 style="margin-top: 1rem; font-size: 1.3rem;">Instrucciones para la transferencia</h3>
-        <p>Por favor realiza la transferencia bancaria en uno de los siguientes bancos, incluyendo el siguiente número en la descripción de la transferencia, de esta manera podremos localizar tu reserva en nuestro sistema de verificacion de pagos:</p>
-        <p style="text-align: center;"><strong style="font-size: 1.8rem; color: #333;">${numeroTransferencia}</strong></p>
-        <p>Una vez que completes la transferencia, haz clic en <strong>"Confirmar reserva"</strong> más abajo y listo! tu reserva sera confirmada automaticamente.</p>
-
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem; margin-top: 1.5rem;">
-            <div style="text-align: center;">
-                <img src="https://placeholdit.com/150x150/2b2626/f0ebeb?text=QR+CODE" alt="Banco 1" width="180" style="border-radius: 8px;" />
-                <p>Cuenta Banco 1</p>
-            </div>
-            <div style="text-align: center;">
-                <img src="https://placeholdit.com/150x150/2b2626/f0ebeb?text=QR+CODE" alt="Banco 2" width="180" style="border-radius: 8px;" />
-                <p>Cuenta Banco 2</p>
-            </div>
-            <div style="text-align: center;">
-                <img src="https://placeholdit.com/150x150/2b2626/f0ebeb?text=QR+CODE" alt="Banco 3" width="180" style="border-radius: 8px;" />
-                <p>Cuenta Venmo</p>
-            </div>
-        </div>
-        <p>Nota: Para ofrecerte una mejor experiencia nuestro sistema de verificacion de pagos con transferencia 
-        verificara que la transferencia se haya completado correctamente despues de que tu confirmes la reserva. Si hubo algun problema con tu transferencia un miembro de nuestro equipo se contactara contigo por correo electronico dentro de 1 hora con futuras indicaciones sobre como
-        completar la transferencia exitosamente. (Si no nos contactamos contigo dentro de una hora, significa que todo salio bien con la transferencia y te estaremos esperando en Maribao!.)</p>
+        
+        <p>Para hacer la reservacion por transferencia deberas de abonar la mitad del precio total o pagar el monto total.</p>
+        <p><strong>Abonar mitad:</strong> $${abonoMitad}</p>
+        <p><strong>Monto total:</strong> $${totalFormateado}</p>
+        <p>Porfavor selecciona "siguiente", en la siguiente pagina te mostraremos los pasos para la transferencia</p>
             
         <button id="confirmar-transferencia" type="button" style="margin-top: 1.5rem; padding: 0.75rem 1.5rem; background-color: #007bff; color: white; border: none; border-radius: 6px; font-size: 1rem; cursor: pointer;">
-            Confirmar reserva
+            Siguiente
         </button>
             `;
             form.appendChild(transferenciaInfo);
