@@ -78,7 +78,7 @@ Detalles de tu estadía:
 - Check-in: ${datosReserva.checkin}
 - Check-out: ${datosReserva.checkout}
 
-${datosReserva.metodoPago ? `- Método de pago: ${datosReserva.metodoPago === 'tarjeta' ? 'Tarjeta (Stripe)' :
+${datosReserva.metodoPago ? `- Método de pago: ${datosReserva.metodoPago === 'tarjeta' ? 'Tarjeta' :
         datosReserva.metodoPago === 'transferencia' ? 'Transferencia bancaria' :
         'Efectivo'
     }` : ''}
@@ -89,7 +89,7 @@ Hora estimada de llegada: ${datosReserva.arrivalTime || 'No especificada'}
 Si deseas cancelar tu reserva, ingresa tu número de reserva en:
 https://daniel25te.github.io/maribao/final/cancelar.html
 
-<p>Nota: Si escogiste transferencia bancaria como metodo de pago, asegurate de hacer la transferencia del monto a abonar (mitad del monto total), o del monto total. Dentro de las siguientes 2 horas, de otra manera, tu reserva sera cancelada automaticamente. Porfavor envianos una captura de pantalla de la transferencia hecha, a este mismo correo electronico o nuestro numero de whatsap, +593 98 688 8256. </p>
+<p>Nota: Si elegiste transferencia bancaria como método de pago, por favor realiza la transferencia correspondiente al 50% del total o al monto completo dentro de las próximas 2 horas. De no recibir el pago en ese plazo, tu reserva será cancelada automáticamente. Una vez realizada la transferencia, envíanos una captura de pantalla del comprobante a este mismo correo electrónico o por WhatsApp al +593 98 688 8256.</p>
 
 ¡Te esperamos!
 Hotel Maribao
@@ -102,7 +102,7 @@ Hotel Maribao
                   - Cuarto: ${datosReserva.cuarto}<br>
                   - Check-in: ${datosReserva.checkin}<br>
                   - Check-out: ${datosReserva.checkout}<br>
-                  ${datosReserva.metodoPago ? `- Método de pago: ${datosReserva.metodoPago === 'tarjeta' ? 'Tarjeta (Stripe)' :
+                  ${datosReserva.metodoPago ? `- Método de pago: ${datosReserva.metodoPago === 'tarjeta' ? 'Tarjeta' :
                         datosReserva.metodoPago === 'transferencia' ? 'Transferencia bancaria' :
                         'Efectivo'
                     }<br>` : ''}
@@ -110,7 +110,7 @@ Hotel Maribao
                 <p>Solicitudes especiales: ${datosReserva.specialRequests || 'Ninguna'}</p>
                 <p>Hora estimada de llegada: ${datosReserva.arrivalTime || 'No especificada'}</p>
                 <p>Si deseas cancelar tu reserva, <a href="https://daniel25te.github.io/maribao/final/cancelar.html"><strong>haz clic aquí</strong></a>.</p>
-                <p>Nota: Si escogiste transferencia bancaria como metodo de pago, asegurate de hacer la transferencia del monto a abonar (mitad del monto total), o del monto total. Dentro de las siguientes 2 horas, de otra manera, tu reserva sera cancelada automaticamente. Porfavor envianos una captura de pantalla de la transferencia hecha, a este mismo correo electronico o nuestro numero de whatsap, +593 98 688 8256. </p>
+                <p>Nota: Si elegiste transferencia bancaria como método de pago, por favor realiza la transferencia correspondiente al 50% del total o al monto completo dentro de las próximas 2 horas. De no recibir el pago en ese plazo, tu reserva será cancelada automáticamente. Una vez realizada la transferencia, envíanos una captura de pantalla del comprobante a este mismo correo electrónico o por WhatsApp al +593 98 688 8256.</p>
                 <p>¡Te esperamos!<br>Hotel Maribao</p>
             `,
             attachments: [
@@ -138,7 +138,7 @@ Se ha realizado una nueva reserva${sessionId ? ' pagada con tarjeta' : ''} en tu
 📅 Check-in: ${datosReserva.checkin}
 📅 Check-out: ${datosReserva.checkout}
 🛏️ Cuarto reservado: ${datosReserva.cuarto}
-${datosReserva.metodoPago ? `- Método de pago: ${datosReserva.metodoPago === 'tarjeta' ? 'Tarjeta (Stripe)' :
+${datosReserva.metodoPago ? `- Método de pago: ${datosReserva.metodoPago === 'tarjeta' ? 'Tarjeta' :
         datosReserva.metodoPago === 'transferencia' ? 'Transferencia bancaria' :
         'Efectivo'
     }` : ''}
@@ -154,7 +154,7 @@ ${datosReserva.metodoPago ? `- Método de pago: ${datosReserva.metodoPago === 't
                   📅 Check-in: ${datosReserva.checkin}<br>
                   📅 Check-out: ${datosReserva.checkout}<br>
                   🛏️ Cuarto reservado: ${datosReserva.cuarto}<br>
-                  ${datosReserva.metodoPago ? `- Método de pago: ${datosReserva.metodoPago === 'tarjeta' ? 'Tarjeta (Stripe)' :
+                  ${datosReserva.metodoPago ? `- Método de pago: ${datosReserva.metodoPago === 'tarjeta' ? 'Tarjeta' :
                         datosReserva.metodoPago === 'transferencia' ? 'Transferencia bancaria' :
                         'Efectivo'
                     }<br>` : ''}
