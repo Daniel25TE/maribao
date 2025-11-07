@@ -345,89 +345,113 @@ fetch('./data/discounts.json')
     const form = document.getElementById("reservation-form");
 
     form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const metodoPago = form.metodoPago.value;
-
-        // 🔹 Generamos el número de transferencia siempre
-        const numeroTransferencia = Math.floor(100000 + Math.random() * 900000);
-
-        // Datos comunes a todos los métodos
-        const formData = {
-            checkin: form.checkin.value,
-            checkout: form.checkout.value,
-            firstName: form.firstName.value,
-            lastName: form.lastName.value,
-            email: form.email.value,
-            phone: form.phone.value,
-            country: form.country.value,
-            bookingFor: form.bookingFor.value,
-            travelForWork: form.travelForWork.value,
-            specialRequests: form.specialRequests.value,
-            arrivalTime: form.arrivalTime.value,
-            fullGuestName: form.fullGuestName.value,
-            cuarto: data.name,
-            metodoPago: metodoPago,
-            numeroTransferencia: numeroTransferencia, // siempre presente
-            total: totalReserva,
-            totalFormateado: totalFormateado,
-            abonoMitad: abonoMitad
-        };
-
-        if (metodoPago === "transferencia") {
-            if (document.querySelector('#transferencia-info')) return;
-
-            const totalNum = Number(totalReserva) || 0;
-
-            if (totalNum <= 0) {
-                alert("Por favor selecciona fechas válidas para calcular el total antes de continuar con transferencia.");
-                return;
-            }
+      e.preventDefault();
+      const metodoPago = form.metodoPago.value;
         
-            // calcular la mitad y formatear a 2 decimales
-            const abonoMitad = (totalNum / 2).toFixed(2);
-            const totalFormateado = totalNum.toFixed(2);
-
-            const transferenciaInfo = document.createElement("div");
-            transferenciaInfo.id = "transferencia-info";
-            transferenciaInfo.innerHTML = `
-                <h3 style="margin-top: 1rem; font-size: 1.3rem;">Instrucciones para la transferencia</h3>
+      // Generamos el número de transferencia siempre
+      const numeroTransferencia = Math.floor(100000 + Math.random() * 900000);
         
-        <p>Para hacer la reservacion por transferencia deberas de abonar la mitad del precio total o pagar el monto total.</p>
-        <p><strong>Abonar mitad:</strong> $${abonoMitad}</p>
-        <p><strong>Monto total:</strong> $${totalFormateado}</p>
-        <p>Porfavor selecciona "siguiente", en la siguiente pagina te mostraremos los pasos para la transferencia</p>
-            
-        <button id="confirmar-transferencia" type="button" style="margin-top: 1.5rem; padding: 0.75rem 1.5rem; background-color: #007bff; color: white; border: none; border-radius: 6px; font-size: 1rem; cursor: pointer;">
-            Siguiente
-        </button>
-            `;
-            form.appendChild(transferenciaInfo);
-
-            document.querySelector("#confirmar-transferencia").addEventListener("click", async () => {
-                mostrarContador("Procesando tu reserva...");
-                try {
-                    const response = await fetch("https://hotel-backend-3jw7.onrender.com/reserva", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(formData),
-                    });
-                    const result = await response.json();
-                    if (result.success) {
-                        const params = new URLSearchParams(formData);
-                        window.location.href = `thanks.html?${params.toString()}`;
-                    } else {
-                        alert("No se pudo completar la reserva.");
-                    }
-                } catch (error) {
-                    console.error(error);
-                    alert("Error al conectar con el servidor.");
-                }
-            });
-
-            return; // detener submit normal
+      // 🔹 Para transferencia necesitamos calcular antes abonoMitad y totalFormateado
+      let abonoMitad = 0;
+      let totalFormateado = 0;
+        
+      if (metodoPago === "transferencia") {
+        if (document.querySelector("#transferencia-info")) return;
+    
+        const totalNum = Number(totalReserva) || 0;
+        if (totalNum <= 0) {
+          alert("Por favor selecciona fechas válidas para calcular el total antes de continuar con transferencia.");
+          return;
         }
-
+    
+        // Calcular la mitad y formatear a 2 decimales
+        abonoMitad = (totalNum / 2).toFixed(2);
+        totalFormateado = totalNum.toFixed(2);
+    
+        const transferenciaInfo = document.createElement("div");
+        transferenciaInfo.id = "transferencia-info";
+        transferenciaInfo.innerHTML = `
+          <h3 style="margin-top: 1rem; font-size: 1.3rem;">Instrucciones para la transferencia</h3>
+          <p>Para hacer la reservacion por transferencia deberas de abonar la mitad del precio total o pagar el monto total.</p>
+          <p><strong>Abonar mitad:</strong> $${abonoMitad}</p>
+          <p><strong>Monto total:</strong> $${totalFormateado}</p>
+          <p>Por favor selecciona "Siguiente", en la siguiente página te mostraremos los pasos para la transferencia.</p>
+          <button id="confirmar-transferencia" type="button" style="margin-top: 1.5rem; padding: 0.75rem 1.5rem; background-color: #007bff; color: white; border: none; border-radius: 6px; font-size: 1rem; cursor: pointer;">
+            Siguiente
+          </button>
+        `;
+        form.appendChild(transferenciaInfo);
+    
+        // ⚙️ Crear formData AQUÍ dentro, después de tener los valores calculados
+        const formData = {
+          checkin: form.checkin.value,
+          checkout: form.checkout.value,
+          firstName: form.firstName.value,
+          lastName: form.lastName.value,
+          email: form.email.value,
+          phone: form.phone.value,
+          country: form.country.value,
+          bookingFor: form.bookingFor.value,
+          travelForWork: form.travelForWork.value,
+          specialRequests: form.specialRequests.value,
+          arrivalTime: form.arrivalTime.value,
+          fullGuestName: form.fullGuestName.value,
+          cuarto: data.name,
+          metodoPago,
+          numeroTransferencia,
+          total: totalReserva,
+          totalFormateado,
+          abonoMitad
+        };
+    
+        document.querySelector("#confirmar-transferencia").addEventListener("click", async () => {
+          mostrarContador("Procesando tu reserva...");
+          try {
+            const response = await fetch("https://hotel-backend-3jw7.onrender.com/reserva", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(formData),
+            });
+            const result = await response.json();
+            if (result.success) {
+              const params = new URLSearchParams({
+                ...formData,
+                total: totalFormateado,
+                abonoMitad,
+              });
+              window.location.href = `thanks.html?${params.toString()}`;
+            } else {
+              alert("No se pudo completar la reserva.");
+            }
+          } catch (error) {
+            console.error(error);
+            alert("Error al conectar con el servidor.");
+          }
+        });
+    
+        return; // detener el submit normal
+      }
+  
+      // 🔹 Para los otros métodos (tarjeta / efectivo) formData normal
+      const formData = {
+        checkin: form.checkin.value,
+        checkout: form.checkout.value,
+        firstName: form.firstName.value,
+        lastName: form.lastName.value,
+        email: form.email.value,
+        phone: form.phone.value,
+        country: form.country.value,
+        bookingFor: form.bookingFor.value,
+        travelForWork: form.travelForWork.value,
+        specialRequests: form.specialRequests.value,
+        arrivalTime: form.arrivalTime.value,
+        fullGuestName: form.fullGuestName.value,
+        cuarto: data.name,
+        metodoPago,
+        numeroTransferencia,
+        total: totalReserva
+      };
+  
         if (metodoPago === "tarjeta") {
             mostrarContador("Redirigiéndote a Stripe...");
             try {
