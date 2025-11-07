@@ -156,6 +156,7 @@ export function thanksdetails() {
             </div>
         </div>
             <button id="btn-descargar-pdf" class="btn-pdf">📄 Descargar comprobante</button>
+            <p>Nota Importante: Si no recibimos el comprobante de transferencia (captura de pantalla) dentro de las siguientes dos horas, tu reserva sera cancelada.
         `;
 
         attachPDFButton({
