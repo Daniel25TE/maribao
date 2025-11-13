@@ -65,30 +65,38 @@
                 </table>
             </div>
         </div>
-        <h2 class="text-lg font-bold mt-8 mb-2">📅 Fechas con Descuento</h2>
+        <!-- BLOQUE FECHAS CON DESCUENTO -->
+        <div class="w-full max-w-6xl mx-auto my-8 bg-white p-4 sm:p-6 rounded-xl shadow-lg flex flex-col items-center">
         
-        <div class="mb-4 flex gap-2">
-            <button id="add-discount" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md">
-                ➕ Agregar fecha de descuento
-            </button>
-        </div>
+            <!-- TÍTULO -->
+            <h2 class="text-lg font-bold mt-8 mb-4 text-center">📅 Fechas con Descuento</h2>
         
-        <div class="overflow-x-auto">
-            <table class="min-w-full border border-gray-300 text-sm sm:text-base">
-                <thead class="bg-gray-800 text-white">
-                    <tr>
-                        <th class="py-2 px-4 border border-gray-300">Fecha</th>
-                        <th class="py-2 px-4 border border-gray-300">Porcentaje</th>
-                        <th class="py-2 px-4 border border-gray-300">Descripción</th>
-                        <th class="py-2 px-4 border border-gray-300">Activo</th>
-                        <th class="py-2 px-4 border border-gray-300">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="fechas-descuento-table" class="text-gray-700">
-                    <!-- Filas se agregan dinámicamente -->
-                </tbody>
-            </table>
+            <!-- BOTÓN -->
+            <div class="mb-4 flex gap-2 justify-center w-full">
+                <button id="add-discount" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md">
+                    ➕ Agregar fecha de descuento
+                </button>
+            </div>
+        
+            <!-- TABLA -->
+            <div class="overflow-x-auto w-full">
+                <table class="min-w-full border border-gray-300 text-sm sm:text-base">
+                    <thead class="bg-gray-800 text-white">
+                        <tr>
+                            <th class="py-2 px-4 border border-gray-300">Fecha</th>
+                            <th class="py-2 px-4 border border-gray-300">Porcentaje</th>
+                            <th class="py-2 px-4 border border-gray-300">Descripción</th>
+                            <th class="py-2 px-4 border border-gray-300">Activo</th>
+                            <th class="py-2 px-4 border border-gray-300">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="fechas-descuento-table" class="text-gray-700">
+                        <!-- Filas se agregan dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
         </div>
+
 
     </main>
 
