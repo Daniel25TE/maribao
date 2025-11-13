@@ -32,19 +32,52 @@
                 <img src="images/maribao-logo6.webp" alt="Logotipo de Hotel Maribao" width="90" height="84">
             </picture>
         </a>
-
+    
+    
         <button class="hamburger-menu" type="button" aria-label="Abrir menú">☰</button>
-
+    
         <nav>
             <ul class="navigation">
-                <li><a href="index.html">Resumen</a></li>
-                <li><a href="reservar.html">Reserva</a></li>
-                <li><a href="servicios.html">Servicios</a></li>
-                <li><a href="gallery.html">Galería</a></li>
-                <li><a href="https://github.com/Daniel25TE">Future Links</a></li>
+                <li><a href="index.html" id="resumen" title="Resumen">Resumen</a></li>
+                <li><a href="reservar.html" id="reserva" title="Reserva">Reserva</a></li>
+                <li><a href="servicios.html" id="servicios" title="Servicios">Servicios</a></li>
+                <li><a href="gallery.html" id="gallery" title="Gallery">Galería</a></li>
+                <li><a href="https://hotel-backend-3jw7.onrender.com/login" id="Administrar-Sitio" title="">Administrar
+                        Sitio</a></li>
             </ul>
         </nav>
     </header>
+    <div class="sticky-cta" id="cta">
+        <a href="reservar.html">Reservar</a>
+    </div>
+    <div id="weather-note" class="sticky-note" aria-live="polite" hidden></div>
+    
+    <button class="whatsapp-btn" id="whatsappBtn" aria-label="Abrir contactos de WhatsApp">
+        <span id="whatsappIcon">
+            <img src="images/whatsapp.svg" alt="WhatsApp" width="24" height="24">
+        </span>
+    </button>
+    
+    <div class="contact-list" id="contactList" aria-hidden="true">
+        <div class="contact-header">
+            Nuestro equipo de atención al cliente está aquí para responder sus preguntas. ¡Pregúntenos cualquier cosa!
+        </div>
+        <button class="contact-item" data-number="593986888256">
+            <img src="images/customer_uno.svg" alt="Karen" class="avatar">
+            <span class="contact-info">
+                <strong>Paraíso Maribao</strong>
+                <span class="status">Disponible</span>
+            </span>
+        </button>
+    
+        <button class="contact-item" data-number="593990316262">
+            <img src="images/customer_dos.svg" alt="Mario" class="avatar">
+            <span class="contact-info">
+                <strong>Frank</strong>
+                <span class="status">Disponible</span>
+            </span>
+        </button>
+    </div>
 
     <main class="sobre-maribao">
         <!-- Historia -->
