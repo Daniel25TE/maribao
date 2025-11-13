@@ -96,7 +96,26 @@ export async function obtenerFechasOcupadasPorCuarto(roomName) {
         checkout: r.checkout_date,
     }));
 }
+
+export async function agregarFechaDescuento(fecha, porcentaje, descripcion = '') {
+  if (!fecha || porcentaje === undefined) {
+    throw new Error('Faltan datos: fecha y porcentaje son obligatorios');
+  }
+
+  const { data, error } = await supabase
+    .from('fechas_descuento')
+    .insert([{ fecha, porcentaje, descripcion }])
+    .select();
+
+  if (error) {
+    console.error("❌ Error al insertar fecha con descuento:", error);
+    throw error;
+  }
+
+  console.log("✅ Fecha con descuento agregada:", data[0]);
+  return data[0];
+}
+
+
 export { supabase };
 export default supabase;
-
-

@@ -65,6 +65,31 @@
                 </table>
             </div>
         </div>
+        <h2 class="text-lg font-bold mt-8 mb-2">📅 Fechas con Descuento</h2>
+        
+        <div class="mb-4 flex gap-2">
+            <button id="add-discount" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md">
+                ➕ Agregar fecha de descuento
+            </button>
+        </div>
+        
+        <div class="overflow-x-auto">
+            <table class="min-w-full border border-gray-300 text-sm sm:text-base">
+                <thead class="bg-gray-800 text-white">
+                    <tr>
+                        <th class="py-2 px-4 border border-gray-300">Fecha</th>
+                        <th class="py-2 px-4 border border-gray-300">Porcentaje</th>
+                        <th class="py-2 px-4 border border-gray-300">Descripción</th>
+                        <th class="py-2 px-4 border border-gray-300">Activo</th>
+                        <th class="py-2 px-4 border border-gray-300">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="fechas-descuento-table" class="text-gray-700">
+                    <!-- Filas se agregan dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+
     </main>
 
     <script src="/js/admin.js"></script>

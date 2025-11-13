@@ -562,6 +562,80 @@ app.get('/reservas', protegerRuta, async (req, res) => {
     }
 });
 
+// 📆 Obtener todas las fechas con descuento (solo activas y para admin)
+app.get('/api/admin/fechas-descuento', protegerRuta, async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from('fechas_descuento')
+      .select('*')
+      .order('fecha', { ascending: true });
+
+    if (error) throw error;
+    res.json(data);
+  } catch (err) {
+    console.error('❌ Error obteniendo fechas con descuento:', err);
+    res.status(500).json({ error: 'Error al obtener fechas de descuento' });
+  }
+});
+
+// ➕ Crear nueva fecha de descuento
+app.post('/api/admin/fechas-descuento', protegerRuta, async (req, res) => {
+  try {
+    const { fecha, porcentaje, descripcion, activo } = req.body;
+    if (!fecha || !porcentaje) return res.status(400).json({ error: 'Faltan campos obligatorios' });
+
+    const { data, error } = await supabase
+      .from('fechas_descuento')
+      .insert([{ fecha, porcentaje, descripcion, activo: activo ?? true }])
+      .select();
+
+    if (error) throw error;
+    res.json({ success: true, data });
+  } catch (err) {
+    console.error('❌ Error agregando fecha de descuento:', err);
+    res.status(500).json({ error: 'Error al agregar fecha de descuento' });
+  }
+});
+
+// ✏️ Actualizar una fecha de descuento
+app.put('/api/admin/fechas-descuento/:id', protegerRuta, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { fecha, porcentaje, descripcion, activo } = req.body;
+
+    const { data, error } = await supabase
+      .from('fechas_descuento')
+      .update({ fecha, porcentaje, descripcion, activo })
+      .eq('id', id)
+      .select();
+
+    if (error) throw error;
+    res.json({ success: true, data });
+  } catch (err) {
+    console.error('❌ Error actualizando fecha de descuento:', err);
+    res.status(500).json({ error: 'Error al actualizar fecha de descuento' });
+  }
+});
+
+// 🗑️ Eliminar fecha de descuento
+app.delete('/api/admin/fechas-descuento/:id', protegerRuta, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { error } = await supabase
+      .from('fechas_descuento')
+      .delete()
+      .eq('id', id);
+
+    if (error) throw error;
+    res.json({ success: true });
+  } catch (err) {
+    console.error('❌ Error eliminando fecha de descuento:', err);
+    res.status(500).json({ error: 'Error al eliminar fecha de descuento' });
+  }
+});
+
+
+
 
 app.get('/fechas-ocupadas', async (req, res) => {
     const roomName = req.query.roomName;

@@ -196,7 +196,112 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-}); // DOMContentLoaded
+});
+
+async function cargarFechasDescuento() {
+  try {
+    const response = await fetch("/api/admin/fechas-descuento", { credentials: "include" });
+    if (!response.ok) throw new Error("No autorizado o error de red");
+    const descuentos = await response.json();
+
+    const tbody = document.querySelector("#fechas-descuento-table");
+    tbody.innerHTML = "";
+
+    descuentos.forEach(d => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td class="py-2 px-4 border border-gray-300">${d.fecha}</td>
+        <td class="py-2 px-4 border border-gray-300">${d.porcentaje}%</td>
+        <td class="py-2 px-4 border border-gray-300">${d.descripcion || ''}</td>
+        <td class="py-2 px-4 border border-gray-300">${d.activo ? 'Sí' : 'No'}</td>
+        <td class="py-2 px-4 border border-gray-300 flex gap-2">
+            <button class="edit-discount bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded text-sm" data-id="${d.id}">✏️ Editar</button>
+            <button class="delete-discount bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded text-sm" data-id="${d.id}">🗑️ Eliminar</button>
+        </td>
+      `;
+      tbody.appendChild(row);
+    });
+  } catch (err) {
+    console.error("Error cargando fechas de descuento:", err);
+    alert("No se pudieron cargar las fechas de descuento");
+  }
+}
+
+// Ejecutar al cargar la página
+cargarFechasDescuento();
+
+document.addEventListener("click", async (e) => {
+  // Eliminar
+  if (e.target.classList.contains("delete-discount")) {
+    const id = e.target.dataset.id;
+    if (!confirm("¿Eliminar esta fecha de descuento?")) return;
+
+    try {
+      const res = await fetch(`/api/admin/fechas-descuento/${id}`, { method: "DELETE" });
+      const result = await res.json();
+      if (result.success) {
+        alert("✅ Fecha eliminada");
+        cargarFechasDescuento();
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error eliminando la fecha");
+    }
+  }
+
+  // Editar (puedes abrir un prompt simple o modal)
+  if (e.target.classList.contains("edit-discount")) {
+    const id = e.target.dataset.id;
+    const fecha = prompt("Nueva fecha (YYYY-MM-DD):");
+    const porcentaje = prompt("Nuevo porcentaje:");
+    const descripcion = prompt("Descripción:");
+    const activo = confirm("¿Activo? OK = Sí, Cancelar = No");
+
+    if (!fecha || !porcentaje) return;
+
+    try {
+      const res = await fetch(`/api/admin/fechas-descuento/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ fecha, porcentaje, descripcion, activo })
+      });
+      const result = await res.json();
+      if (result.success) {
+        alert("✅ Fecha actualizada");
+        cargarFechasDescuento();
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error actualizando la fecha");
+    }
+  }
+});
+
+// Agregar nueva fecha
+document.getElementById("add-discount").addEventListener("click", async () => {
+  const fecha = prompt("Fecha (YYYY-MM-DD):");
+  const porcentaje = prompt("Porcentaje:");
+  const descripcion = prompt("Descripción (opcional):");
+
+  if (!fecha || !porcentaje) return;
+
+  try {
+    const res = await fetch("/api/admin/fechas-descuento", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ fecha, porcentaje, descripcion, activo: true })
+    });
+    const result = await res.json();
+    if (result.success) {
+      alert("✅ Fecha agregada");
+      cargarFechasDescuento();
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Error agregando fecha");
+  }
+});
+
 
 window.addEventListener("pageshow", function (event) {
   if (event.persisted) {

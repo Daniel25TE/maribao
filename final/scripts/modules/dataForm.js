@@ -214,24 +214,31 @@ export function dataForm() {
 
 
     // cargar descuentos y luego inicializar el calendario
+// Cargar descuentos desde el backend y luego inicializar el calendario
 let discountsMap = {}; // mapa yyyy-mm-dd -> porcentaje
 
-fetch('./data/discounts.json')
+fetch('https://hotel-backend-3jw7.onrender.com/api/fechas-descuento')
   .then(res => {
-    if (!res.ok) throw new Error('No se pudo cargar discounts.json');
+    if (!res.ok) throw new Error('No se pudo obtener descuentos del backend');
     return res.json();
   })
-  .then(json => {
-    discountsMap = json || {};
+  .then(descuentos => {
+    // Convertimos la lista de fechas en un mapa como el original
+    descuentos.forEach(d => {
+      const key = d.fecha; // tu columna nueva
+      const porcentaje = parseFloat(d.porcentaje);
+      discountsMap[key] = porcentaje;
+    });
   })
   .catch(err => {
-    console.warn('No se pudo cargar discounts.json, continua sin descuentos', err);
+    console.warn('⚠️ No se pudo cargar descuentos del backend, continúa sin descuentos', err);
     discountsMap = {};
   })
   .finally(() => {
-    // ahora que tenemos discountsMap (o vacío), pasamos al calendario
+    // ahora que tenemos discountsMap (aunque esté vacío), cargamos el calendario
     cargarFechasOcupadas(data.name, discountsMap);
   });
+
 
 
 
