@@ -634,8 +634,21 @@ app.delete('/api/admin/fechas-descuento/:id', protegerRuta, async (req, res) => 
   }
 });
 
+// routes/public.js o index.js
+app.get("/api/fechas-descuento", async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from("fechas_descuento")
+      .select("fecha, porcentaje")
+      .eq("activo", true);
 
-
+    if (error) throw error;
+    res.json(data);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "No se pudo obtener descuentos del backend" });
+  }
+});
 
 app.get('/fechas-ocupadas', async (req, res) => {
     const roomName = req.query.roomName;
