@@ -29,7 +29,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
 const corsOptions = {
-    origin: 'https://daniel25te.github.io',
+    origin: ['https://maribao.com', 'https://www.maribao.com'],
     credentials: true,
 };
 async function enviarCorreosReserva(datosReserva, sessionId = null) {
