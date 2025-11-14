@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="This page gives the ability to see the the rooms of the hotel along with their information and gives the option to reserve them.">
+    <meta name="author" content="Daniel Llumiquinga">
+    <link rel="icon" href="images/maribao-logo2.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sansation:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/maribao-mobile.css">
+    <link rel="stylesheet" href="styles/maribao-desktop.css">
+    <script src="scripts/reservar.js" type="module"></script>
+    <meta property="og:title" content="Maribao Hotel - Reservar">
+    <meta property="og:description"
+        content="This page gives the ability to see the the rooms of the hotel along with their information and gives the option to reserve them.">
+    <meta property="og:image" content="https://daniel25te.github.io/maribao/images/maribao-logo5.webp">
+    <meta property="og:url" content="https://daniel25te.github.io/maribao/">
+    <meta property="og:type" content="website">
+    <title>Pagina para Reservar</title>
+</head>
+
+<body>
+    <header>
+        <a href="index.html" aria-label="Ir al inicio">
+            <picture>
+                <source srcset="images/maribao-logo6.webp 90w, images/maribao-logo5.webp 180w"
+                    sizes="(min-width: 320px) 90px, (min-width: 1200px) 180px">
+                <img src="images/maribao-logo6.webp" alt="Logotipo de Hotel Maribao" width="90" height="84">
+            </picture>
+        </a>
+
+
+        <button class="hamburger-menu" type="button" aria-label="Abrir menú">☰</button>
+
+        <nav>
+            <ul class="navigation">
+                <li><a href="index.html" id="resumen" title="Resumen">Resumen</a></li>
+                <li><a href="reservar.html" id="reserva" title="Reserva">Reserva</a></li>
+                <li><a href="servicios.html" id="servicios" title="Servicios">Servicios</a></li>
+                <li><a href="gallery.html" id="gallery" title="Gallery">Galería</a></li>
+                <li><a href="https://hotel-backend-3jw7.onrender.com/login" id="Administrar-Sitio" title="">Administrar Sitio</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="sticky-cta" id="cta">
+        <a href="reservar.html">Reservar</a>
+    </div>
+    
+    <button class="whatsapp-btn" id="whatsappBtn" aria-label="Abrir contactos de WhatsApp">
+        <span id="whatsappIcon">
+            <img src="images/whatsapp.svg" alt="WhatsApp" width="24" height="24">
+        </span>
+    </button>
+    
+    
+    <div class="contact-list" id="contactList" aria-hidden="true">
+        <div class="contact-header">
+            Nuestro equipo de atención al cliente está aquí para responder sus preguntas. ¡Pregúntenos cualquier cosa!
+        </div>
+        <button class="contact-item" data-number="593986888256">
+            <img src="images/customer_uno.svg" alt="Karen" class="avatar">
+            <span class="contact-info">
+                <strong>Paraíso Maribao</strong>
+                <span class="status">Disponible</span>
+            </span>
+        </button>
+    
+        <button class="contact-item" data-number="593990316262">
+            <img src="images/customer_dos.svg" alt="Mario" class="avatar">
+            <span class="contact-info">
+                <strong>Frank</strong>
+                <span class="status">Disponible</span>
+            </span>
+        </button>
+    </div>
+
+    <main>
+        <h1>Encuentra y Reserva</h1>
+        <section id="room-list">
+            <h2>Habitaciones disponibles</h2>
+            <div class="room-grid" id="rooms-container"></div>
+        </section>
+
+
+
+
+    </main>
+
+    <footer class="lazy-container">
+        <div id="footer-container">
+            <div id="footer-links">
+                <a href="sobre_maribao.html">Sobre Maribao</a>
+                <a href="servicios.html">Preguntas Frecuentes</a>
+                <a href="contacto_reservas.html">Ayuda</a>
+            </div>
+
+            <div id="social-icons">
+                <a href="https://www.instagram.com/maribao593/"><img src="images/instagram.svg" alt="Instagram" width="25"
+                        height="25" loading="lazy"></a>
+                <a href="https://www.tiktok.com/@maribao593"><img src="images/tiktok.svg" alt="Tiktok" width="25" height="25"
+                        loading="lazy"></a>
+                <a href="https://www.facebook.com/search/top/?q=maribao593"><img src="images/facebook.svg" alt="Facebook" width="25"
+                        height="25" loading="lazy"></a>
+            </div>
+
+            <p id="copyright">&copy; 2025 Maribao. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+
+
+
+
+</body>
+
+</html>

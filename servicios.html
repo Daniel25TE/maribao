@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="This website is a overall view of the Maribao Hotel, it has the information about the hotel along with photos, services, and prices.">
+        content="This page shows all the servicies of the Maribao hotel, restaurants, activities, FAQ, and rules of the house.">
     <meta name="author" content="Daniel Llumiquinga">
     <link rel="icon" href="images/maribao-logo2.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,14 +13,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Sansation:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/maribao-mobile.css">
     <link rel="stylesheet" href="styles/maribao-desktop.css">
-    <script src="scripts/maribao.js" type="module"></script>
-    <meta property="og:title" content="Maribao Hotel">
+    <script src="scripts/servicios.js" type="module"></script>
+    <meta property="og:title" content="Maribao Hotel - Servicios">
     <meta property="og:description"
-        content="This website is a overall view of the Maribao Hotel, it has the information about the hotel along with photos, services, and prices.">
+        content="This page shows all the servicies of the Maribao hotel, restaurants, activities, FAQ, and rules of the house.">
     <meta property="og:image" content="https://daniel25te.github.io/maribao/images/maribao-logo5.webp">
     <meta property="og:url" content="https://daniel25te.github.io/maribao/">
     <meta property="og:type" content="website">
-    <title>Maribao el mejor Hotel de General Villamil</title>
+    <title>Pagina de Servicios del Hotel</title>
 </head>
 
 <body>
@@ -57,6 +57,7 @@
         </span>
     </button>
     
+    
     <div class="contact-list" id="contactList" aria-hidden="true">
         <div class="contact-header">
             Nuestro equipo de atención al cliente está aquí para responder sus preguntas. ¡Pregúntenos cualquier cosa!
@@ -79,90 +80,66 @@
     </div>
 
     <main>
-        <div class="container-hero">
-            <div class="hero">
-                <picture>
-                    <source srcset="images/hero-image-maribao.webp" media="(min-width: 1000px)">
-                    <source srcset="images/hero-image-maribao-medium.webp" media="(min-width: 840px)">
-                    <img src="images/hero-image-maribao-mobile-test.webp" alt="Beautiful landscape of Madagascar"
-                        width="840" height="1080">
-                </picture>
-            </div>
-            <h1>Maribao espera por ti!
-            </h1>
-        </div>
-        <div class="video-container">
-
-            <section id="video-slider">
-                <h2>videos 6</h2>
-                <div class="slider-videos-track">
-                </div>
-                <button class="slider-videos-btn left">&#10094;</button>
-                <button class="slider-videos-btn right">&#10095;</button>
-                <div class="slider-videos-indicators"></div>
-            </section>
-        </div>
-
-
-        <div id="hero-image" class="lazy-container">
-
-            <button id="prevBtn" class="slider-btn left">&#10094;</button>
-
-            <div class="slider-track">
-
-
-            </div>
-
-            <button id="nextBtn" class="slider-btn right">&#10095;</button>
-            <div class="slider-indicators" id="sliderDots"></div>
-        </div>
-
-        <section id="options-list" class="lazy-container">
-            <h2>Comodidades del alojamiento</h2>
+        <h1>Nuestros Servicios</h1>
+        <section id="options-list">
+            <h2>Maribao te ofrece:</h2>
             <ul class="options-list">
-
+                <li class="option-item">
+                    <img src="images/house.svg" alt="house">
+                    <span>Apartamentos</span>
+                </li>
+                <!-- more items dynamically added -->
             </ul>
-
-        </section>
-
-        <section class="lazy-container comentario">
-            <h2>Comentarios de nuestros huéspedes</h2>
-            <div id="comentarios">
-
-
-            </div>
-            <a href="comentarios.html" id="dejarcomentario" title="Dejarcomentario">👉Dejar Comentario👈</a>
-        </section>
-
-
-        <section class="ubicacion lazy-container">
-            <div class="container">
-
-                <div class="info">
-                    <h2 class="interactivemap">Ubicación excelente</h2>
-                    <p class="interactivetextmap">Maribao Playa Paraíso, Engabao, General Villamil, Ecuador</p>
-                    <a href="tel:+1(801)-509-2879" class="call-us-map-interactive">Tel: +593 98-279-9633</a>
-                    <p class="interactivetextmap">Está ubicado en una de las mejores playas de General Villamil</p>
-                    <p class="interactivetextmap">110 km del aeropuerto</p>
-                    <p class="interactivetextmap">Enfrente de la playa</p>
-                    <p class="interactivetextmap">Restaurantes y cafeterías cercanos</p>
-                    <a class="map-link"
-                        href="https://www.google.com/maps/place/MARIBAO/@-2.5783067,-80.4926402,13z/data=!4m6!3m5!1s0x90320dd0f236bb69:0x46376d112e4e3e9f!8m2!3d-2.5783067!4d-80.4926402!16s%2Fg%2F11sjtw8bl7?entry=ttu"
-                        target="_blank" rel="noopener noreferrer">
-                        📍 Ver mapa
-                    </a>
-                </div>
-            </div>
         </section>
         <section class="lazy-container">
-            <h2 class="restaurantes">Restaurantes cercanos</h2>
+            <h2 class="restaurantes">Disfruta de los mejores restaurantes cercanos</h2>
             <div id="restaurant-grid">
+                <!-- Las tarjetas de restaurantes van aquí, agregadas dinámicamente -->
             </div>
         </section>
-
         <section class="faq-section lazy-container">
             <h2>Preguntas Frecuentes</h2>
-            <div id="faq-container-some"></div>
+            <div id="faq-container"></div>
+        </section>
+        <section class="hotel-policies lazy-container">
+            <h2>Políticas del Hospedaje</h2>
+            <table class="policies-table">
+                <tbody>
+                    <tr>
+                        <th>Ingreso</th>
+                        <td>A partir de las 14:00 PM. Es necesario informar con antelación la hora de
+                            llegada.</td>
+                    </tr>
+                    <tr>
+                        <th>Salida</th>
+                        <td>Hasta las 12:00 PM.</td>
+                    </tr>
+                    <tr>
+                        <th>Cancelación / Prepago</th>
+                        <td>Las políticas varían según el tipo de alojamiento. Ingrese sus fechas para ver los detalles
+                            específicos.</td>
+                    </tr>
+                    <tr>
+                        <th>Niños y camas</th>
+                        <td>
+                            <strong>Política para niños:</strong> Se aceptan niños de todas las edades.<br>
+                            <strong>Cunas y camas extra:</strong> No disponibles.
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Restricción de edad</th>
+                        <td>No hay restricción de edad para hacer el check-in.</td>
+                    </tr>
+                    <tr>
+                        <th>Métodos de pago aceptados</th>
+                        <td>Tarjeta de debito o credito y transferencia.</td>
+                    </tr>
+                    <tr>
+                        <th>Mascotas</th>
+                        <td><strong>¡Gratis!</strong> Se aceptan mascotas sin cargos adicionales.</td>
+                    </tr>
+                </tbody>
+            </table>
         </section>
 
 
@@ -179,12 +156,12 @@
             </div>
 
             <div id="social-icons">
-                <a href="https://www.instagram.com/maribao593/"><img src="images/instagram.svg" alt="Instagram" width="25" height="25"
-                        loading="lazy"></a>
-                <a href="https://www.tiktok.com/@maribao593"><img src="images/tiktok.svg" alt="Tiktok" width="25"
+                <a href="https://www.instagram.com/maribao593/"><img src="images/instagram.svg" alt="Instagram" width="25"
                         height="25" loading="lazy"></a>
-                <a href="https://www.facebook.com/search/top/?q=maribao593"><img src="images/facebook.svg" alt="Facebook" width="25" height="25"
+                <a href="https://www.tiktok.com/@maribao593"><img src="images/tiktok.svg" alt="Tiktok" width="25" height="25"
                         loading="lazy"></a>
+                <a href="https://www.facebook.com/search/top/?q=maribao593"><img src="images/facebook.svg" alt="Facebook" width="25"
+                        height="25" loading="lazy"></a>
             </div>
 
             <p id="copyright">&copy; 2025 Maribao. Todos los derechos reservados.</p>
