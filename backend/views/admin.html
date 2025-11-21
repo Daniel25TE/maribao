@@ -22,17 +22,21 @@
 
     <!-- MAIN -->
     <main class="flex-1 flex flex-col items-start justify-start p-4 sm:p-6">
+        <h2 class="text-xl font-bold">Nota: El boton amarillo cancela la reserva y envia un correo electronico de cancelacion al cliente PERO NO desbloquea las fechas del calendario. Si deseas desbloquear las fechas del calendario, deberas seleccionar el boton rojo.</h2>
+        <p>Entonces los pasos sugeridos para que canceles la reserva, envies un correo electronico de cancelacion al cliente y desbloquees las fechas del calendario son:</p>
+        <p>1. Primero seleccionar el boton amarillo y luego,</p>
+        <p>2. Seleccionar el boton rojo</p>
         <div class="w-full max-w-6xl mx-auto bg-white p-4 sm:p-6 rounded-xl shadow-lg overflow-x-auto">
 
             <!-- BOTONES -->
             <div class="mb-4 flex flex-col sm:flex-row gap-2">
                 <button id="delete-selected"
                     class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md w-full sm:w-auto">
-                    🗑️ Eliminar seleccionados
+                    🗑️ Cancelar reservas seleccionadas y enviar correo electronico de cancelacion al cliente, PERO NO desbloquea las fechas en el calendario.
                 </button>
                 <button id="delete-permanent"
                     class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md w-full sm:w-auto">
-                    ❌ Eliminar permanentemente
+                    ❌ Cancelar reservas seleccionadas y NO enviar correo electronico de cancelacion al cliente, PERO SI desbloquea las fechas del calendario.
                 </button>
             </div>
 

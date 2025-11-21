@@ -149,15 +149,20 @@ export function generarPdfReserva(datosReserva) {
       doc.moveDown(0.5);
       doc.fontSize(16).font('Helvetica-Bold').fillColor('black')
          .text(`Total a pagar: $${totalNum}`, { align: 'right' });
+    doc.fillColor('black');
 
-      doc.moveDown(2);
+    doc.moveDown(1);
+    doc.fontSize(11).font('Helvetica').fillColor('black')
+    .text('Política de cancelación: no reembolsable. Si tienes alguna duda sobre tu abono, por favor comunícate con nosotros a nuestro número de WhatsApp o correo electrónico.', {
+      align: 'center'
+    });
+    doc.moveDown(2);
 
-      // === PIE DE PÁGINA ===
-      doc.fontSize(10).font('Helvetica').fillColor('black');
-      doc.text('Gracias por reservar con nosotros.', { align: 'center' });
-      doc.text('Maribao Hotel • danielalejandrosud25@gmail.com • +1 (801)-509-2879', { align: 'center' });
+    doc.fontSize(10).font('Helvetica').fillColor('black');
+    doc.text('Gracias por reservar con nosotros.', { align: 'center' });
+    doc.text('Maribao • administrador@maribao.com • +593 98-688-8256', { align: 'center' });
 
-      doc.end();
+    doc.end();
 
     } catch (err) {
       reject(err);
@@ -225,15 +230,20 @@ export function generarPdfPagado(datosReserva) {
       doc.moveDown(0.5);
       doc.fontSize(16).font('Helvetica-Bold').fillColor('black')
          .text(`PAGADO: $${totalNum}`, { align: 'right' });
+    doc.fillColor('black');
 
-      doc.moveDown(2);
+    doc.moveDown(1);
+    doc.fontSize(11).font('Helvetica').fillColor('black')
+    .text('Política de cancelación: no reembolsable. Si tienes alguna duda sobre tu abono, por favor comunícate con nosotros a nuestro número de WhatsApp o correo electrónico.', {
+      align: 'center'
+    });
+    doc.moveDown(2);
 
-      // === PIE DE PÁGINA ===
-      doc.fontSize(10).font('Helvetica').fillColor('black');
-      doc.text('Gracias por reservar con nosotros.', { align: 'center' });
-      doc.text('Maribao Hotel • danielalejandrosud25@gmail.com • +1 (801)-509-2879', { align: 'center' });
+    doc.fontSize(10).font('Helvetica').fillColor('black');
+    doc.text('Gracias por reservar con nosotros.', { align: 'center' });
+    doc.text('Maribao • administrador@maribao.com • +593 98-688-8256', { align: 'center' });
 
-      doc.end();
+    doc.end();
 
     } catch (err) {
       reject(err);
@@ -263,7 +273,7 @@ export function generarPdfAbonado(datosReserva) {
 
       doc.moveDown();
       doc.fillColor('black').fontSize(20).font('Helvetica-Bold')
-         .text('Comprobante de Pago Parcial de Reserva - ABONADO', { align: 'center' });
+         .text('Comprobante de Abono de Reserva', { align: 'center' });
       doc.moveDown(1);
 
       doc.moveTo(40, doc.y).lineTo(555, doc.y).strokeColor('black').lineWidth(1).stroke();
@@ -316,15 +326,20 @@ export function generarPdfAbonado(datosReserva) {
       doc.fontSize(14).font('Helvetica-Bold').text(`Monto a pagar: $${montoAPagar.toFixed(2)}`, { align: 'right' });
       doc.moveDown(0.3);
       doc.fontSize(16).font('Helvetica-Bold').text(`Precio total: $${total.toFixed(2)}`, { align: 'right' });
+    doc.fillColor('black');
 
-      doc.moveDown(2);
+    doc.moveDown(1);
+    doc.fontSize(11).font('Helvetica').fillColor('black')
+    .text('Política de cancelación: no reembolsable. Si tienes alguna duda sobre tu abono, por favor comunícate con nosotros a nuestro número de WhatsApp o correo electrónico.', {
+      align: 'center'
+    });
+    doc.moveDown(2);
 
-      // === PIE DE PÁGINA ===
-      doc.fontSize(10).font('Helvetica').fillColor('black');
-      doc.text('Gracias por reservar con nosotros.', { align: 'center' });
-      doc.text('Maribao Hotel • danielalejandrosud25@gmail.com • +1 (801)-509-2879', { align: 'center' });
+    doc.fontSize(10).font('Helvetica').fillColor('black');
+    doc.text('Gracias por reservar con nosotros.', { align: 'center' });
+    doc.text('Maribao • administrador@maribao.com • +593 98-688-8256', { align: 'center' });
 
-      doc.end();
+    doc.end();
 
     } catch (err) {
       reject(err);
