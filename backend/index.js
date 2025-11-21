@@ -86,8 +86,6 @@ ${datosReserva.metodoPago ? `- Método de pago: ${datosReserva.metodoPago === 't
 Solicitudes especiales: ${datosReserva.specialRequests || 'Ninguna'}
 Hora estimada de llegada: ${datosReserva.arrivalTime || 'No especificada'}
 
-Si deseas cancelar tu reserva, ingresa tu número de reserva en:
-https://daniel25te.github.io/maribao/cancelar.html
 
 <p>Nota: Si elegiste transferencia bancaria como método de pago, por favor realiza la transferencia correspondiente al 50% del total o al monto completo dentro de las próximas 2 horas. De no recibir el pago en ese plazo, tu reserva será cancelada automáticamente. Una vez realizada la transferencia, envíanos una captura de pantalla del comprobante a este mismo correo electrónico o por WhatsApp al +593 98 688 8256.</p>
 
@@ -109,7 +107,6 @@ Hotel Maribao
                 </p>
                 <p>Solicitudes especiales: ${datosReserva.specialRequests || 'Ninguna'}</p>
                 <p>Hora estimada de llegada: ${datosReserva.arrivalTime || 'No especificada'}</p>
-                <p>Si deseas cancelar tu reserva, <a href="https://daniel25te.github.io/maribao/cancelar.html"><strong>haz clic aquí</strong></a>.</p>
                 <p>Nota: Si elegiste transferencia bancaria como método de pago, por favor realiza la transferencia correspondiente al 50% del total o al monto completo dentro de las próximas 2 horas. De no recibir el pago en ese plazo, tu reserva será cancelada automáticamente. Una vez realizada la transferencia, envíanos una captura de pantalla del comprobante a este mismo correo electrónico o por WhatsApp al +593 98 688 8256.</p>
                 <p>¡Te esperamos!<br>Hotel Maribao</p>
             `,
