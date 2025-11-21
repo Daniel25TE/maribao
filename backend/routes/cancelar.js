@@ -1,10 +1,10 @@
 import express from "express";
 import supabase from "../database.js";
-import sgMail from "@sendgrid/mail";
+import { Resend } from "resend";
 
 const router = express.Router();
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Función para enviar correos de cancelación
 async function enviarCorreoCancelacion(datosReserva, esCliente) {
@@ -47,8 +47,18 @@ La siguiente reserva ha sido cancelada:
       `,
     };
 
-    await sgMail.send(msgCliente);
-    if (esCliente) await sgMail.send(msgAdmin);
+    await resend.emails.send({
+          from: process.env.EMAIL,
+          to: datosReserva.email,
+          subject: msgCliente.subject,
+          text: msgCliente.text,
+        });
+    if (esCliente) await resend.emails.send({
+          from: process.env.EMAIL,
+          to: process.env.EMAIL_EMPLEADOR,
+          subject: msgAdmin.subject,
+          text: msgAdmin.text,
+        });
 
     console.log("📨 Correos de cancelación enviados con éxito");
   } catch (err) {

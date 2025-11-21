@@ -14,14 +14,14 @@ import Stripe from 'stripe';
 import bodyParser from 'body-parser';
 import { supabase } from './database.js';
 import cancelarRoutes from "./routes/cancelar.js";
-import sgMail from "@sendgrid/mail";
+import { Resend } from "resend";
 import mediaRoutes from './routes/media.js';
 import pdfRoutes from './routes/pdf.js';
 import { generarPdfReserva, generarPdfPagado, generarPdfAbonado } from './routes/pdf.js';
 
 
 dotenv.config();
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY);
 console.log("Node version:", process.version);
 console.log("Render PORT:", process.env.PORT);
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
@@ -114,13 +114,12 @@ Hotel Maribao
                 <p>¡Te esperamos!<br>Hotel Maribao</p>
             `,
             attachments: [
-                {
-                    content: pdfBuffer.toString('base64'),
-                    filename: `reserva-${datosReserva.numeroTransferencia}.pdf`,
-                    type: 'application/pdf',
-                    disposition: 'attachment',
-                }
+              {
+                filename: `reserva-${datosReserva.numeroTransferencia}.pdf`,
+                content: pdfBuffer.toString("base64"),
+              }
             ]
+
         };
 
       
@@ -163,21 +162,36 @@ ${datosReserva.metodoPago ? `- Método de pago: ${datosReserva.metodoPago === 't
                 <p>—<br>Hotel Maribao - Notificación automática</p>
             `,
             attachments: [
-                {
-                    content: pdfBuffer.toString('base64'),
-                    filename: `reserva-${datosReserva.numeroTransferencia}.pdf`,
-                    type: 'application/pdf',
-                    disposition: 'attachment',
-                }
+              {
+                filename: `reserva-${datosReserva.numeroTransferencia}.pdf`,
+                content: pdfBuffer.toString("base64"),
+              }
             ]
+
         };
 
-        await sgMail.send(msgCliente);
-        await sgMail.send(msgEmpleador);
+        await resend.emails.send({
+          from: process.env.EMAIL,
+          to: datosReserva.email,
+          subject: msgCliente.subject,
+          html: msgCliente.html,
+          text: msgCliente.text,
+          attachments: msgCliente.attachments,
+        });
+
+        await resend.emails.send({
+          from: process.env.EMAIL,
+          to: process.env.EMAIL_EMPLEADOR,
+          subject: msgEmpleador.subject,
+          html: msgEmpleador.html,
+          text: msgEmpleador.text,
+          attachments: msgEmpleador.attachments,
+        });
+
 
         console.log(`📧 Correos enviados para reserva${sessionId ? ' con sesión ' + sessionId : ''}`);
     } catch (error) {
-        console.error("❌ Error al enviar correos:", error.response?.body || error);
+        console.error("❌ Error al enviar correos:", error);
     }
 }
 
@@ -216,10 +230,17 @@ Hotel Maribao
             `
         };
 
-        await sgMail.send(msgCliente);
+        await resend.emails.send({
+          from: process.env.EMAIL,
+          to: datosReserva.email,
+          subject: msgCliente.subject,
+          html: msgCliente.html,
+          text: msgCliente.text,
+        });
+
         console.log(`📧 Correo de cancelación enviado al cliente ${datosReserva.email}`);
     } catch (error) {
-        console.error("❌ Error al enviar correo de cancelación:", error.response?.body || error);
+        console.error("❌ Error al enviar correos:", error);
     }
 }
 
