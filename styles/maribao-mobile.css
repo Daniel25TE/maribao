@@ -1251,10 +1251,9 @@ textarea:invalid {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    width: 60px;
-    height: 60px;
     background-color: #25D366;
-    border-radius: 50%;
+    border-radius: 50px;
+    /* cambia a píldora para que quepa el texto */
     border: none;
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -1262,11 +1261,22 @@ textarea:invalid {
     transition: background-color 0.3s ease;
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    color: white;
+    font-weight: bold;
+}
+
+.whatsapp-btn img {
+    display: block;
 }
 
 .whatsapp-btn:hover {
     background-color: #1ebc59;
+}
+
+.whatsapp-text {
+    font-size: 0.9rem;
 }
 
 .contact-list {
@@ -1931,29 +1941,49 @@ p {
 
 /* Galería */
 .galeria-sobre-maribao {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    max-width: 1200px;
+    /* contenedor más ancho */
+    margin: 2rem auto;
+    padding: 1rem;
+    background: #fdf6e3;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .galeria-sobre-maribao h2 {
-    margin: 0;
-    font-size: 1.5rem;
-    color: #2c3e50;
     text-align: center;
+    font-family: 'Georgia', serif;
+    font-size: 1.8rem;
+    color: #4b2e2e;
+    margin-bottom: 1.5rem;
 }
 
 .galeria-sobre-maribao-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* columnas más grandes */
+    gap: 1.5rem;
+    /* más espacio entre imágenes */
+}
+
+.galeria-sobre-maribao-grid picture {
+    display: block;
+    width: 100%;
 }
 
 .galeria-sobre-maribao-grid img {
+    display: block;
     width: 100%;
+    /* ocupa todo el ancho de la celda */
     height: auto;
-    border-radius: 0.5rem;
-    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.galeria-sobre-maribao-grid img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 }
 
 /* Mejoras */
@@ -1978,4 +2008,61 @@ p {
     padding: 0.75em;
     font-size: clamp(1rem, 2.5vw, 1.25rem);
     font-weight: bold;
+}
+
+.sobre-maribao-story {
+    display: block;
+    width: 100%;
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background: #d2b48c;
+    /* tono café claro tipo sepia */
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+
+    /* efecto de textura arrugada con degradado */
+    background-image:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.2), transparent 70%),
+        radial-gradient(circle at bottom right, rgba(0, 0, 0, 0.15), transparent 70%),
+        repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.05) 0px, rgba(0, 0, 0, 0.05) 2px, transparent 2px, transparent 6px);
+    background-blend-mode: multiply;
+}
+
+.sobre-maribao-story-picture {
+    display: block;
+    width: 100%;
+}
+
+.sobre-maribao-story-picture img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sobre-maribao-story-picture img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.year-story-maribao {
+    text-align: center;
+    /* centra el texto horizontalmente */
+    font-size: 1.2rem;
+    /* tamaño de fuente más visible */
+    font-weight: bold;
+    /* resalta el año */
+    color: #4b2e2e;
+    /* tono café oscuro para combinar con el estilo vintage */
+    margin-top: 1rem;
+    /* espacio respecto a la imagen */
+    letter-spacing: 2px;
+    /* separación entre letras para un look retro */
+    font-family: 'Georgia', serif;
+    /* tipografía clásica */
 }
