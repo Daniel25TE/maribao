@@ -19,7 +19,10 @@ document.addEventListener("DOMContentLoaded", () => {
           <td class="py-2 px-4">
             <input type="checkbox" class="row-checkbox" value="${reserva.numero_Transferencia}">
           </td>
-          <td>${reserva.created_at || ''}</td>
+          <td>${reserva.created_at ? new Date(reserva.created_at).toLocaleString("es-ES", {
+            dateStyle: "medium",
+            timeStyle: "short"
+          }) : ''}</td>
           <td>${reserva.nombre || ''}</td>
           <td>${reserva.email || ''}</td>
           <td>${reserva.telefono || ''}</td>
