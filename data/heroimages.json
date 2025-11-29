@@ -40,16 +40,6 @@
         "room": "Alrededores"
     },
     {
-        "src": "images/new-inventory-maribao-6-meduim.webp",
-        "srcset": "images//new-inventory-maribao-6-small.webp 640w, images/new-inventory-maribao-6-meduim.webp 1200w, images//new-inventory-maribao-6-large.webp 1920w",
-        "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
-        "alt": "Imagen 1",
-        "width": "1200",
-        "height": "675",
-        "title": "Estrella",
-        "room": "Alrededores"
-    },
-    {
         "src": "images/new-inventory-maribao-7-meduim.webp",
         "srcset": "images//new-inventory-maribao-7-small.webp 640w, images/new-inventory-maribao-7-meduim.webp 1200w, images//new-inventory-maribao-7-large.webp 1920w",
         "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
