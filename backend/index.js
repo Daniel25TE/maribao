@@ -24,7 +24,7 @@ dotenv.config();
 const resend = new Resend(process.env.RESEND_API_KEY);
 console.log("Node version:", process.version);
 console.log("Render PORT:", process.env.PORT);
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = new Stripe(process.env.SECRET_KEY_STRIPE_LIVE);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
@@ -253,7 +253,7 @@ app.post('/webhook', bodyParser.raw({ type: 'application/json' }), async (req, r
     let event;
 
     try {
-        event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
+        event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET_LIVE);
     } catch (err) {
         console.log(`⚠️  Webhook signature verification failed.`, err.message);
         return res.status(400).send(`Webhook Error: ${err.message}`);
