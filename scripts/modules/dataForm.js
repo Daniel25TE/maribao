@@ -321,14 +321,19 @@ fetch('https://hotel-backend-3jw7.onrender.com/api/fechas-descuento')
             total += nightlyPrice;
         }
 
-        // redondear a 2 decimales
-        totalReserva = total;               // total normal
-    subtotalReserva = total;            // guardar total base
-    totalPriceCopy.textContent = `$${total.toFixed(2)}`;
+// redondear total a 2 decimales correctamente
+totalReserva = Math.round((total + Number.EPSILON) * 100) / 100;
 
+// guardar total base (para transferencia y reseteos)
+subtotalReserva = totalReserva;
+
+// mostrar en pantalla SIEMPRE sin comisión (transferencia por defecto)
+totalPriceDisplay.textContent = `$${totalReserva.toFixed(2)}`;
+totalPriceCopy.textContent = `$${totalReserva.toFixed(2)}`;
+
+// resetear método de pago a transferencia
 metodoPagoSelect.value = "transferencia";
-        totalPriceDisplay.textContent = `$${totalReserva}`;
-        
+  
     } else {
         totalReserva = 0;
         totalPriceDisplay.textContent = "$0";
