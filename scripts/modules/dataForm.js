@@ -5,6 +5,8 @@ const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 export function dataForm() {
+    let subtotalReserva = 0; // 🔥 total SIN comisión (base)
+
     const data = JSON.parse(localStorage.getItem("selectedRoom") || "{}");
 
     if (!data || Object.keys(data).length === 0) return;
@@ -20,28 +22,26 @@ function calcularComisionStripe(total) {
 }
 
 // Función para actualizar total y texto del select
-function actualizarTotalConComision(totalBase) {
-    let totalFinal = totalBase;
-    let porcentajeText = '';
+function actualizarTotalConComision() {
+    const totalBase = subtotalReserva; // ⭐ SIEMPRE usar total sin comisión
 
-    if (metodoPagoSelect.value === 'tarjeta') {
-        const { comision, porcentaje } = calcularComisionStripe(totalBase);
-        totalFinal += comision;
-        porcentajeText = ` +${porcentaje.toFixed(2)}%`;
-        totalReserva = Math.round((totalFinal + Number.EPSILON) * 100) / 100; 
-    }
+    const { comision, porcentaje } = calcularComisionStripe(totalBase);
+    const totalFinal = totalBase + comision;
 
     totalPriceCopy.textContent = `$${totalFinal.toFixed(2)}`;
 
-    // Actualizar texto del select
+    totalReserva = Math.round((totalFinal + Number.EPSILON) * 100) / 100;
+
+    // actualizar nombre de la opción tarjeta
     for (let i = 0; i < metodoPagoSelect.options.length; i++) {
         if (metodoPagoSelect.options[i].value === 'tarjeta') {
-            metodoPagoSelect.options[i].text = `Tarjeta${porcentajeText}`;
+            metodoPagoSelect.options[i].text = `Tarjeta +${porcentaje.toFixed(2)}%`;
         } else {
             metodoPagoSelect.options[i].text = 'Transferencia';
         }
     }
 }
+
 
 
     // 🔹 Obtener el contenedor una sola vez
@@ -134,7 +134,7 @@ function actualizarTotalConComision(totalBase) {
               <label for="metodoPago">Método de pago:</label>
               <select id="metodoPago" name="metodoPago" required>
               <option value="transferencia">Transferencia</option>
-                <option value="tarjeta">Tarjeta</option>
+              <option value="tarjeta">Tarjeta</option>
               </select>
             </div>
             <p><strong>Total estimado:</strong> <span id="total-price-copy">$0</span></p>
@@ -278,22 +278,19 @@ fetch('https://hotel-backend-3jw7.onrender.com/api/fechas-descuento')
     const submitBtn = document.getElementById("submitBtn");
 
     metodoPagoSelect.addEventListener("change", () => {
-        const metodo = metodoPagoSelect.value;
+    const metodo = metodoPagoSelect.value;
 
-        if (metodo === "efectivo") {
-            submitBtn.textContent = "Confirmar reserva";
-        } else if (metodo === "tarjeta") {
-            submitBtn.textContent = "Continuar";
-        } else if (metodo === "transferencia") {
-            submitBtn.textContent = "Continuar";
-        }
-        const transferenciaInfo = document.getElementById("transferencia-info");
-        if (transferenciaInfo && metodo !== "transferencia") {
-            transferenciaInfo.remove();
-            localStorage.removeItem("numeroTransferencia");
-        }
-        actualizarTotalConComision(totalReserva);
-    });
+    if (metodo === "transferencia") {
+        totalPriceCopy.textContent = `$${subtotalReserva.toFixed(2)}`;
+        totalReserva = subtotalReserva;
+        return;
+    }
+
+    if (metodo === "tarjeta") {
+        actualizarTotalConComision(); // ⭐ sin parámetros
+    }
+});
+
     // Ejecutar al inicio para que el texto esté correcto desde el principio
     metodoPagoSelect.dispatchEvent(new Event("change"));
 
@@ -325,10 +322,13 @@ fetch('https://hotel-backend-3jw7.onrender.com/api/fechas-descuento')
         }
 
         // redondear a 2 decimales
-        totalReserva = Math.round((total + Number.EPSILON) * 100) / 100;
+        totalReserva = total;               // total normal
+    subtotalReserva = total;            // guardar total base
+    totalPriceCopy.textContent = `$${total.toFixed(2)}`;
 
+metodoPagoSelect.value = "transferencia";
         totalPriceDisplay.textContent = `$${totalReserva}`;
-        actualizarTotalConComision(totalReserva);
+        
     } else {
         totalReserva = 0;
         totalPriceDisplay.textContent = "$0";
