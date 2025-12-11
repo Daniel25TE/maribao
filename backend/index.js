@@ -473,7 +473,7 @@ app.post('/create-checkout-session', async (req, res) => {
                     product_data: {
                         name: description || 'Reserva Hotel',
                     },
-                    unit_amount: amount,
+                    unit_amount: Math.round(amount * 100),
                 },
                 quantity: 1,
             }],

@@ -37,7 +37,7 @@ router.post('/generate-pdf', (req, res) => {
     doc.moveDown();
 
     const titulo = (data.metodo_pago === 'tarjeta') 
-                    ? 'Comprobante de Reserva Pagada'
+                    ? 'Comprobante de Reserva'
                     : 'Comprobante de Abono de Reserva';
 
     doc.fillColor('black').fontSize(20).font('Helvetica-Bold')
