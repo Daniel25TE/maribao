@@ -12,6 +12,37 @@ export function dataForm() {
     // 🔹 Ajustar precio (limpia símbolos como $, , etc.)
     data.price = Number(data.price?.toString().replace(/[^\d.]/g, '')) || 0;
 
+    // Función para calcular comisión Stripe
+function calcularComisionStripe(total) {
+    const comision = total * 0.039 + 0.3; // 2.9% + 30 centavos
+    const porcentaje = (comision / total) * 100;
+    return { comision, porcentaje };
+}
+
+// Función para actualizar total y texto del select
+function actualizarTotalConComision(totalBase) {
+    let totalFinal = totalBase;
+    let porcentajeText = '';
+
+    if (metodoPagoSelect.value === 'tarjeta') {
+        const { comision, porcentaje } = calcularComisionStripe(totalBase);
+        totalFinal += comision;
+        porcentajeText = ` +${porcentaje.toFixed(2)}%`;
+    }
+
+    totalPriceCopy.textContent = `$${totalFinal.toFixed(2)}`;
+
+    // Actualizar texto del select
+    for (let i = 0; i < metodoPagoSelect.options.length; i++) {
+        if (metodoPagoSelect.options[i].value === 'tarjeta') {
+            metodoPagoSelect.options[i].text = `Tarjeta${porcentajeText}`;
+        } else {
+            metodoPagoSelect.options[i].text = 'Transferencia';
+        }
+    }
+}
+
+
     // 🔹 Obtener el contenedor una sola vez
     const preview = document.getElementById("selected-room-preview");
     preview.innerHTML = `
@@ -100,15 +131,15 @@ export function dataForm() {
             </div>
             <div>
               <label for="metodoPago">Método de pago:</label>
-              <select id="metodoPago" name="metodoPago">
+              <select id="metodoPago" name="metodoPago" required>
+              <option value="transferencia">Transferencia</option>
                 <option value="tarjeta">Tarjeta</option>
-                <option value="transferencia">Transferencia</option>
               </select>
             </div>
             <p><strong>Total estimado:</strong> <span id="total-price-copy">$0</span></p>
 
 
-            <label>Firma <input type="text" name="fullGuestName" placeholder="Nombre completo del huésped" autocomplete="name"></label>
+            <label>Firma <input type="text" name="fullGuestName" placeholder="Nombre completo del huésped" autocomplete="name" required></label>
 
             <button type="submit" id="submitBtn">Confirmar reserva</button>
 
@@ -260,6 +291,7 @@ fetch('https://hotel-backend-3jw7.onrender.com/api/fechas-descuento')
             transferenciaInfo.remove();
             localStorage.removeItem("numeroTransferencia");
         }
+        actualizarTotalConComision(totalReserva);
     });
     // Ejecutar al inicio para que el texto esté correcto desde el principio
     metodoPagoSelect.dispatchEvent(new Event("change"));
@@ -295,7 +327,7 @@ fetch('https://hotel-backend-3jw7.onrender.com/api/fechas-descuento')
         totalReserva = Math.round((total + Number.EPSILON) * 100) / 100;
 
         totalPriceDisplay.textContent = `$${totalReserva}`;
-        totalPriceCopy.textContent = `$${totalReserva}`;
+        actualizarTotalConComision(totalReserva);
     } else {
         totalReserva = 0;
         totalPriceDisplay.textContent = "$0";
@@ -481,24 +513,10 @@ fetch('https://hotel-backend-3jw7.onrender.com/api/fechas-descuento')
                 alert("Error al procesar el pago.");
             }
         } else {
-            mostrarContador("Procesando tu reserva en efectivo...");
-            try {
-                const response = await fetch("https://hotel-backend-3jw7.onrender.com/reserva", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(formData),
-                });
-                const result = await response.json();
-                if (result.success) {
-                    const params = new URLSearchParams(formData);
-                    window.location.href = `thanks.html?${params.toString()}`;
-                } else {
-                    alert("Error al procesar la reserva.");
-                }
-            } catch (error) {
-                console.error(error);
-                alert("Error al conectar con el servidor.");
-            }
+            
+            e.preventDefault(); // evita que se envíe
+        alert('Por favor, selecciona un método de pago');
+        return false;
         }
     });
 }
