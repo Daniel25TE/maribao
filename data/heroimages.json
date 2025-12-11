@@ -98,5 +98,15 @@
         "height": "675",
         "title": "Estrella",
         "room": "Alrededores"
+    },
+    {
+        "src": "images/new-inventory-maribao-26-meduim.webp",
+        "srcset": "images/new-inventory-maribao-26-small.webp 640w, images/new-inventory-maribao-26-meduim.webp 1200w, images/new-inventory-maribao-26-large.webp 1920w",
+        "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
+        "alt": "Imagen 1",
+        "width": "1200",
+        "height": "675",
+        "title": "Estrella",
+        "room": "Alrededores"
     }
 ]

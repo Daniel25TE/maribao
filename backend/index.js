@@ -17,7 +17,7 @@ import cancelarRoutes from "./routes/cancelar.js";
 import { Resend } from "resend";
 import mediaRoutes from './routes/media.js';
 import pdfRoutes from './routes/pdf.js';
-import { generarPdfReserva, generarPdfPagado, generarPdfAbonado } from './routes/pdf.js';
+import { generarPdfReserva, generarPdfPagado, generarPdfAbonado, generarPdfReservaTarjeta } from './routes/pdf.js';
 
 
 dotenv.config();
@@ -35,7 +35,13 @@ const corsOptions = {
 async function enviarCorreosReserva(datosReserva, sessionId = null) {
     try {
         
-        const pdfBuffer = await generarPdfReserva(datosReserva);
+        let pdfBuffer;
+
+        if (datosReserva.metodoPago === "tarjeta") {
+            pdfBuffer = await generarPdfReservaTarjeta(datosReserva);
+        } else {
+            pdfBuffer = await generarPdfReserva(datosReserva);
+        }
 
         const fileName = `reserva-${datosReserva.numeroTransferencia}.pdf`;
     const { data: uploadData, error: uploadError } = await supabase.storage
