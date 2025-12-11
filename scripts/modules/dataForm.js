@@ -28,6 +28,7 @@ function actualizarTotalConComision(totalBase) {
         const { comision, porcentaje } = calcularComisionStripe(totalBase);
         totalFinal += comision;
         porcentajeText = ` +${porcentaje.toFixed(2)}%`;
+        totalReserva = Math.round((totalFinal + Number.EPSILON) * 100) / 100; 
     }
 
     totalPriceCopy.textContent = `$${totalFinal.toFixed(2)}`;
