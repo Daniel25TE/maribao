@@ -467,7 +467,7 @@ fetch('https://hotel-backend-3jw7.onrender.com/api/fechas-descuento')
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
-                        amount: totalReserva * 100,
+                        amount: totalReserva,
                         currency: "usd",
                         description: `Reserva para ${formData.firstName} ${formData.lastName}`,
                         metadata: { reservaId: idReservaTemporal, datosReserva: JSON.stringify(formData) }
