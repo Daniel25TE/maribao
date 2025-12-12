@@ -18,9 +18,6 @@ import { Resend } from "resend";
 import mediaRoutes from './routes/media.js';
 import pdfRoutes from './routes/pdf.js';
 import { generarPdfReserva, generarPdfPagado, generarPdfAbonado, generarPdfReservaTarjeta } from './routes/pdf.js';
-const fs = require('fs');
-const path = require('path');
-
 
 
 dotenv.config();
@@ -296,7 +293,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', mediaRoutes);
 app.use('/api', pdfRoutes);
-app.use('/static', express.static(path.join(__dirname, 'static')));
 
 
 
@@ -605,37 +601,6 @@ app.get('/api/admin/fechas-descuento', protegerRuta, async (req, res) => {
     res.status(500).json({ error: 'Error al obtener fechas de descuento' });
   }
 });
-
-// 📆 Endpoint público para obtener fechas de descuento (frontend)
-app.get('/api/fechas-descuento', async (req, res) => {
-  try {
-    const { data, error } = await supabase
-      .from('fechas_descuento')
-      .select('*')
-      .eq('activo', true) 
-      .order('fecha', { ascending: true });
-
-    if (error) throw error;
-
-    // 🔥 Guardar copia como archivo estático
-    const staticDir = path.join(__dirname, 'static');
-    if (!fs.existsSync(staticDir)) {
-      fs.mkdirSync(staticDir);
-    }
-
-    const filePath = path.join(staticDir, 'discount_cache.json');
-    fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
-
-    console.log("📁 Archivo estático actualizado: discount_cache.json");
-
-    res.json(data);
-
-  } catch (err) {
-    console.error('❌ Error obteniendo fechas:', err);
-    res.status(500).json({ error: 'Error al obtener fechas de descuento' });
-  }
-});
-
 
 // ➕ Crear nueva fecha de descuento
 app.post('/api/admin/fechas-descuento', protegerRuta, async (req, res) => {
