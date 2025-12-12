@@ -293,6 +293,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', mediaRoutes);
 app.use('/api', pdfRoutes);
+app.use('/static', express.static(path.join(__dirname, 'static')));
 
 
 
