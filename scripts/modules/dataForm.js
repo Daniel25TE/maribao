@@ -257,9 +257,12 @@ if (localData) {
     parsed.forEach(d => {
       discountsMap[d.fecha] = parseFloat(d.porcentaje);
     });
+      console.log("✅ Descuentos cargados desde localStorage:", discountsMap);
   } catch (err) {
     console.warn("⚠️ Error parseando discount_cache en localStorage", err);
-  }
+    }
+} else {
+    console.log("ℹ️ No hay descuentos guardados en localStorage");
 }
 
 // 🔹 2️⃣ Inicializar calendario con los datos locales
@@ -278,7 +281,8 @@ fetch('https://hotel-backend-3jw7.onrender.com/api/fechas-descuento')
     });
 
     // 🔹 Guardar en localStorage para próximas visitas
-    localStorage.setItem("discount_cache", JSON.stringify(descuentos));
+      localStorage.setItem("discount_cache", JSON.stringify(descuentos));
+      console.log("✅ Descuentos obtenidos del backend y guardados en localStorage:", discountsMap);
 
     // 🔹 Recargar calendario con los datos actualizados
     cargarFechasOcupadas(data.name, discountsMap);
