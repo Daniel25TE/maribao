@@ -34,11 +34,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-    async function loadHomeVideo() {
+ 
+
+});
+
+async function loadHomeVideo() {
+     console.log("loadHomeVideo ejecutándose");
     try {
         const res = await fetch("https://hotel-backend-3jw7.onrender.com/api/settings/home-video");
         const data = await res.json();
-
+        console.log("home-video response:", data);
         if (!data.urls || !data.urls.length) return;
 
         const container = document.getElementById("home-video-container");
@@ -53,9 +58,8 @@ document.addEventListener("DOMContentLoaded", () => {
             video.width = 400;
             container.appendChild(video);
         });
+      console.log("container:", container);
     } catch (err) {
         console.error("Error cargando videos home:", err);
     }
 }
-
-});
