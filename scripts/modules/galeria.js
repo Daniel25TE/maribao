@@ -1,7 +1,6 @@
 export async function loadGallery() {
     const overlay = document.getElementById("loader-overlay");
     const loaderCount = document.getElementById("loader-count");
-    let firstImageLoaded = false;
 
     let count = 50;
     const interval = setInterval(() => {
@@ -12,107 +11,146 @@ export async function loadGallery() {
             clearInterval(interval);
         }
     }, 1000);
-    
+
+    // 1️⃣ CARGA LOCAL (PLACEHOLDER)
+    try {
+        const localRes = await fetch("/data/gallery-placeholder.json");
+        const localImages = await localRes.json();
+        renderGallery(localImages, { isPlaceholder: true });
+    } catch (err) {
+        console.warn("No se pudo cargar galería local", err);
+    }
+
+    // 2️⃣ CARGA BACKEND (REAL)
     try {
         const res = await fetch("https://hotel-backend-3jw7.onrender.com/api/media");
         const images = await res.json();
-        const gallery = document.getElementById("galeria");
-        const filterContainer = document.getElementById("galeria-filtros");
 
-        const observer = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    if (img.dataset.srcset) img.srcset = img.dataset.srcset;
-                    obs.unobserve(img);
-                }
-            });
-        }, {
-            rootMargin: '0px',
-            threshold: 0.01
+        renderGallery(images, {
+            clear: true,
+            hideLoaderOnLoad: true
         });
 
-        images.forEach((img, index) => {
-            const imageEl = document.createElement("img");
+        clearInterval(interval);
+    } catch (err) {
+        console.error("Error cargando galería:", err);
+        overlay?.classList.add("hidden");
+    }
+}
 
-            imageEl.dataset.src = img.url_medium;
-            imageEl.dataset.srcset = `${img.url_mobile} 640w, ${img.url_medium} 1200w, ${img.url_large} 1920w`;
-            imageEl.sizes = "(max-width: 840px) 100vw, 50vw";
-            imageEl.alt = img.alt;
-            imageEl.dataset.room = img.room;
-            imageEl.classList.add("lazy-img");
+function renderGallery(
+    images,
+    {
+        clear = false,
+        isPlaceholder = false,
+        hideLoaderOnLoad = false
+    } = {}
+) {
+    const gallery = document.getElementById("galeria");
+    const filterContainer = document.getElementById("galeria-filtros");
+    const overlay = document.getElementById("loader-overlay");
 
-            imageEl.onload = () => {
-                if (!firstImageLoaded) {
-                    firstImageLoaded = true;
-                    overlay.classList.add("hidden");
-                }
-            };
+    if (!gallery || !filterContainer) return;
 
-            gallery.appendChild(imageEl);
+    if (clear) {
+        gallery.innerHTML = "";
+        filterContainer.innerHTML = "";
+    }
 
-            if (index === 0 || index === 1) {
-                imageEl.src = imageEl.dataset.src;
-                imageEl.srcset = imageEl.dataset.srcset;
-            } else {
-                observer.observe(imageEl);
+    let firstImageLoaded = false;
+
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                if (img.dataset.srcset) img.srcset = img.dataset.srcset;
+                obs.unobserve(img);
             }
         });
+    }, { threshold: 0.01 });
 
-        const roomTypes = [...new Set(images.map(img => img.room))];
-        roomTypes.unshift("all");
+    images.forEach((img, index) => {
+        const imageEl = document.createElement("img");
 
-        roomTypes.forEach(room => {
-            const btn = document.createElement("button");
-            btn.textContent = room === "all" ? "Todas" : room;
-            btn.dataset.room = room;
-            btn.classList.add("filter-btn");
-            filterContainer.appendChild(btn);
+        imageEl.dataset.src = img.url_medium;
+        imageEl.dataset.srcset = `${img.url_mobile} 640w, ${img.url_medium} 1200w, ${img.url_large} 1920w`;
+        imageEl.sizes = "(max-width: 840px) 100vw, 50vw";
+        imageEl.alt = img.alt || "Imagen de galería";
+        imageEl.dataset.room = img.room || "general";
+        imageEl.classList.add("lazy-img");
 
-            btn.addEventListener("click", () => {
-                filterContainer.querySelectorAll("button").forEach(b => b.classList.remove("active"));
-                btn.classList.add("active");
-                filterImages(room);
-            });
-            if (room === "all") btn.classList.add("active");
-        });
-
-        function filterImages(room) {
-            const allImages = gallery.querySelectorAll("img");
-            allImages.forEach(img => {
-                if (room === "all" || img.dataset.room === room) {
-                    img.style.display = "block";
-                    if (!img.src) {
-                        img.src = img.dataset.src;
-                        if (img.dataset.srcset) img.srcset = img.dataset.srcset;
-                    }
-                } else {
-                    img.style.display = "none";
-                }
-            });
+        if (isPlaceholder) {
+            imageEl.classList.add("placeholder-img");
         }
 
-        const modal = document.getElementById("image-modal");
+        imageEl.onload = () => {
+            if (hideLoaderOnLoad && !firstImageLoaded) {
+                firstImageLoaded = true;
+                overlay?.classList.add("hidden");
+            }
+        };
+
+        gallery.appendChild(imageEl);
+
+        if (index < 2) {
+            imageEl.src = imageEl.dataset.src;
+            imageEl.srcset = imageEl.dataset.srcset;
+        } else {
+            observer.observe(imageEl);
+        }
+    });
+
+    // 🎯 FILTROS
+    const roomTypes = [...new Set(images.map(img => img.room || "general"))];
+    roomTypes.unshift("all");
+
+    roomTypes.forEach(room => {
+        const btn = document.createElement("button");
+        btn.textContent = room === "all" ? "Todas" : room;
+        btn.dataset.room = room;
+        btn.classList.add("filter-btn");
+
+        btn.addEventListener("click", () => {
+            filterContainer
+                .querySelectorAll("button")
+                .forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            filterImages(room);
+        });
+
+        filterContainer.appendChild(btn);
+        if (room === "all") btn.classList.add("active");
+    });
+
+    function filterImages(room) {
+        gallery.querySelectorAll("img").forEach(img => {
+            img.style.display =
+                room === "all" || img.dataset.room === room
+                    ? "block"
+                    : "none";
+        });
+    }
+
+    // 🖼 MODAL
+    const modal = document.getElementById("image-modal");
+    if (modal) {
         const modalImg = modal.querySelector("img");
         const modalClose = modal.querySelector(".modal-close-galeria");
         const modalOverlay = modal.querySelector(".modal-overlay-galeria");
 
         gallery.querySelectorAll("img").forEach(img => {
-            img.addEventListener("click", () => {
-                modalImg.src = img.src;
+            img.onclick = () => {
+                modalImg.src = img.src || img.dataset.src;
                 modalImg.srcset = img.srcset || "";
                 modalImg.sizes = img.sizes || "";
                 modalImg.alt = img.alt || "";
                 modal.hidden = false;
-            });
+            };
         });
 
-        modalClose.addEventListener("click", () => modal.hidden = true);
-        modalOverlay.addEventListener("click", () => modal.hidden = true);
-
-    } catch (err) {
-        console.error("Error cargando galería:", err);
-        overlay.classList.add("hidden");
+        modalClose.onclick = () => (modal.hidden = true);
+        modalOverlay.onclick = () => (modal.hidden = true);
     }
 }
+
