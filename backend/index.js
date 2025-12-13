@@ -287,7 +287,24 @@ app.post('/webhook', bodyParser.raw({ type: 'application/json' }), async (req, r
 
 
 app.set('trust proxy', 1);
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        mediaSrc: [
+          "'self'",
+          "https://*.supabase.co",   // si usas Supabase
+          "https://*.amazonaws.com", // por si acaso (S3)
+          "blob:"
+        ],
+        imgSrc: ["'self'", "data:", "https://*.supabase.co"],
+        connectSrc: ["'self'", "https://*.supabase.co"],
+      },
+    },
+  })
+);
+
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
