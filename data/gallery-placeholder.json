@@ -1,9 +1,198 @@
 [
   {
+    "url_mobile": "/images/new-inventory-maribao-1-small.webp",
+    "url_medium": "/images/new-inventory-maribao-1-meduim.webp",
+    "url_large": "/images/new-inventory-maribao-1-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Exteriores"
+  },
+  {
+    "url_mobile": "/images/new-inventory-maribao-10-small.webp",
+    "url_medium": "/images/new-inventory-maribao-10-meduim.webp",
+    "url_large": "/images/new-inventory-maribao-10-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Exteriores"
+  },
+  {
+    "url_mobile": "/images/new-inventory-maribao-11-small.webp",
+    "url_medium": "/images/new-inventory-maribao-11-meduim.webp",
+    "url_large": "/images/new-inventory-maribao-11-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Exteriores"
+  },
+  {
+    "url_mobile": "/images/new-inventory-maribao-12-small.webp",
+    "url_medium": "/images/new-inventory-maribao-12-meduim.webp",
+    "url_large": "/images/new-inventory-maribao-12-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Estrella"
+  },
+  {
+    "url_mobile": "/images/new-inventory-maribao-13-small.webp",
+    "url_medium": "/images/new-inventory-maribao-13-meduim.webp",
+    "url_large": "/images/new-inventory-maribao-13-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Exteriores"
+  },
+  {
+    "url_mobile": "/images/new-inventory-maribao-14-small.webp",
+    "url_medium": "/images/new-inventory-maribao-14-meduim.webp",
+    "url_large": "/images/new-inventory-maribao-14-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Exteriores"
+  },
+  {
+    "url_mobile": "/images/new-inventory-maribao-15-small.webp",
+    "url_medium": "/images/new-inventory-maribao-15-meduim.webp",
+    "url_large": "/images/new-inventory-maribao-15-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Surf"
+  },
+  {
+    "url_mobile": "/images/new-inventory-maribao-17-small.webp",
+    "url_medium": "/images/new-inventory-maribao-17-meduim.webp",
+    "url_large": "/images/new-inventory-maribao-17-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Surf"
+  },
+  {
+    "url_mobile": "/images/new-inventory-maribao-19-small.webp",
+    "url_medium": "/images/new-inventory-maribao-19-meduim.webp",
+    "url_large": "/images/new-inventory-maribao-19-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Exteriores"
+  },
+  {
+    "url_mobile": "/images/new-inventory-maribao-2-small.webp",
+    "url_medium": "/images/new-inventory-maribao-2-meduim.webp",
+    "url_large": "/images/new-inventory-maribao-2-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Exteriores"
+  },
+  {
+    "url_mobile": "/images/new-inventory-maribao-20-small.webp",
+    "url_medium": "/images/new-inventory-maribao-20-meduim.webp",
+    "url_large": "/images/new-inventory-maribao-20-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Exteriores"
+  },
+  {
+    "url_mobile": "/images/new-inventory-maribao-25-small.webp",
+    "url_medium": "/images/new-inventory-maribao-25-meduim.webp",
+    "url_large": "/images/new-inventory-maribao-25-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Exteriores"
+  },
+  {
     "url_mobile": "/images/new-inventory-maribao-26-small.webp",
     "url_medium": "/images/new-inventory-maribao-26-meduim.webp",
     "url_large": "/images/new-inventory-maribao-26-large.webp",
-    "alt": "Vista del hotel",
-    "room": "exteriores"
+    "alt": "Vista exterior del hotel",
+    "room": "#Exteriores"
+  },
+  {
+    "url_mobile": "/images/new-inventory-maribao-28-small.webp",
+    "url_medium": "/images/new-inventory-maribao-28-meduim.webp",
+    "url_large": "/images/new-inventory-maribao-28-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Exteriores"
+  },
+  {
+    "url_mobile": "/images/new-inventory-maribao-29-small.webp",
+    "url_medium": "/images/new-inventory-maribao-29-meduim.webp",
+    "url_large": "/images/new-inventory-maribao-29-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Sol"
+  },
+  {
+    "url_mobile": "/images/new-inventory-maribao-3-small.webp",
+    "url_medium": "/images/new-inventory-maribao-3-meduim.webp",
+    "url_large": "/images/new-inventory-maribao-3-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Estrella"
+  },
+  {
+    "url_mobile": "/images/new-inventory-maribao-4-small.webp",
+    "url_medium": "/images/new-inventory-maribao-4-meduim.webp",
+    "url_large": "/images/new-inventory-maribao-4-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Exteriores"
+  },
+  {
+    "url_mobile": "/images/new-inventory-maribao-5-small.webp",
+    "url_medium": "/images/new-inventory-maribao-5-meduim.webp",
+    "url_large": "/images/new-inventory-maribao-5-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Exteriores"
+  },
+  {
+    "url_mobile": "/images/new-inventory-maribao-6-small.webp",
+    "url_medium": "/images/new-inventory-maribao-6-meduim.webp",
+    "url_large": "/images/new-inventory-maribao-6-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Sol"
+  },
+  {
+    "url_mobile": "/images/new-inventory-maribao-7-small.webp",
+    "url_medium": "/images/new-inventory-maribao-7-meduim.webp",
+    "url_large": "/images/new-inventory-maribao-7-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Exteriores"
+  },
+  {
+    "url_mobile": "/images/new-inventory-maribao-8-small.webp",
+    "url_medium": "/images/new-inventory-maribao-8-meduim.webp",
+    "url_large": "/images/new-inventory-maribao-8-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Exteriores"
+  },
+  {
+    "url_mobile": "/images/new-inventory-maribao-9-small.webp",
+    "url_medium": "/images/new-inventory-maribao-9-meduim.webp",
+    "url_large": "/images/new-inventory-maribao-9-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Estrella"
+  },
+  {
+    "url_mobile": "/images/new-inventory-maribao-43-small.webp",
+    "url_medium": "/images/new-inventory-maribao-43-meduim.webp",
+    "url_large": "/images/new-inventory-maribao-43-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Luna"
+  },
+  {
+    "url_mobile": "/images/new-inventory-maribao-34-small.webp",
+    "url_medium": "/images/new-inventory-maribao-34-meduim.webp",
+    "url_large": "/images/new-inventory-maribao-34-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Sol"
+  },
+  {
+    "url_mobile": "/images/new-inventory-maribao-36-small.webp",
+    "url_medium": "/images/new-inventory-maribao-36-meduim.webp",
+    "url_large": "/images/new-inventory-maribao-36-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Surf"
+  },
+  {
+    "url_mobile": "/images/new-inventory-maribao-38-small.webp",
+    "url_medium": "/images/new-inventory-maribao-38-meduim.webp",
+    "url_large": "/images/new-inventory-maribao-38-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Sol"
+  },
+  {
+    "url_mobile": "/images/new-inventory-maribao-40-small.webp",
+    "url_medium": "/images/new-inventory-maribao-40-meduim.webp",
+    "url_large": "/images/new-inventory-maribao-40-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Surf"
+  },
+  {
+    "url_mobile": "/images/new-inventory-maribao-41-small.webp",
+    "url_medium": "/images/new-inventory-maribao-41-meduim.webp",
+    "url_large": "/images/new-inventory-maribao-41-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Sol"
   }
 ]

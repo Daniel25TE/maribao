@@ -10,8 +10,8 @@
         "room": "Alrededores"
     },
     {
-        "src": "images/new-inventory-maribao-2-meduim.webp",
-        "srcset": "images/new-inventory-maribao-2-small.webp 640w, images/new-inventory-maribao-2-meduim.webp 1200w, images/new-inventory-maribao-2-large.webp 1920w",
+        "src": "images/new-inventory-maribao-26-meduim.webp",
+        "srcset": "images/new-inventory-maribao-26-small.webp 640w, images/new-inventory-maribao-26-meduim.webp 1200w, images/new-inventory-maribao-26-large.webp 1920w",
         "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
         "alt": "Imagen 1",
         "width": "1200",
@@ -90,8 +90,8 @@
         "room": "Alrededores"
     },
     {
-        "src": "images/new-inventory-maribao-11-meduim.webp",
-        "srcset": "images/new-inventory-maribao-11-small.webp 640w, images/new-inventory-maribao-11-meduim.webp 1200w, images/new-inventory-maribao-11-large.webp 1920w",
+        "src": "images/new-inventory-maribao-13-meduim.webp",
+        "srcset": "images/new-inventory-maribao-13-small.webp 640w, images/new-inventory-maribao-13-meduim.webp 1200w, images/new-inventory-maribao-13-large.webp 1920w",
         "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
         "alt": "Imagen 1",
         "width": "1200",
@@ -100,8 +100,18 @@
         "room": "Alrededores"
     },
     {
-        "src": "images/new-inventory-maribao-26-meduim.webp",
-        "srcset": "images/new-inventory-maribao-26-small.webp 640w, images/new-inventory-maribao-26-meduim.webp 1200w, images/new-inventory-maribao-26-large.webp 1920w",
+        "src": "images/new-inventory-maribao-48-meduim.webp",
+        "srcset": "images/new-inventory-maribao-48-small.webp 640w, images/new-inventory-maribao-48-meduim.webp 1200w, images/new-inventory-maribao-48-large.webp 1920w",
+        "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
+        "alt": "Imagen 1",
+        "width": "1200",
+        "height": "675",
+        "title": "Estrella",
+        "room": "Alrededores"
+    },
+    {
+        "src": "images/new-inventory-maribao-49-medum.webp",
+        "srcset": "images/new-inventory-maribao-49-small.webp 640w, images/new-inventory-maribao-49-medum.webp 1200w, images/new-inventory-maribao-49-large.webp 1920w",
         "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
         "alt": "Imagen 1",
         "width": "1200",
