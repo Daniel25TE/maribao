@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function loadHomeVideo() {
     try {
-        const res = await fetch("/api/settings/home-video");
+        const res = await fetch("https://hotel-backend-3jw7.onrender.com/api/settings/home-video");
         const data = await res.json();
 
         if (!data.url) return;
