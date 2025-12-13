@@ -2066,3 +2066,86 @@ p {
     font-family: 'Georgia', serif;
     /* tipografía clásica */
 }
+
+/* Contenedor principal */
+.story-container {
+    position: relative;
+    width: 100%;
+    max-width: 200px;
+    /* ancho máximo del video */
+    margin: 10px auto;
+    
+    /* centrar el contenedor */
+    background-color: #000;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Cada video dentro del slider */
+.story-container video {
+    display: none;
+    /* por defecto oculto */
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    object-fit: cover;
+    
+}
+
+/* Video activo */
+.story-container video.active {
+    display: block;
+    /* solo el activo se muestra */
+}
+
+/* Botones de navegación */
+.story-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.4);
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    padding: 0.5rem 0.8rem;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 10;
+    transition: background-color 0.2s;
+}
+
+.story-btn:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.story-btn.left {
+    left: 1px;
+}
+
+.story-btn.right {
+    right: 1px;
+}
+
+/* Indicadores opcionales */
+.story-indicators {
+    position: absolute;
+    bottom: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    z-index: 10;
+}
+
+.story-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+}
+
+.story-dot.active {
+    background: #fff;
+}
