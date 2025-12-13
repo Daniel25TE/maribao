@@ -204,6 +204,7 @@ document.addEventListener("DOMContentLoaded", () => {
 document.getElementById("uploadVideo").addEventListener("click", async () => {
   const input = document.getElementById("videoInput");
   const status = document.getElementById("videoStatus");
+  const videoPreview = document.getElementById("videoPreview"); // opcional para previsualizar
 
   if (!input.files.length) {
     alert("Selecciona un video");
@@ -226,7 +227,21 @@ document.getElementById("uploadVideo").addEventListener("click", async () => {
 
     if (!res.ok) throw new Error(result.error);
 
-    status.textContent = "✅ Video actualizado correctamente";
+    status.textContent = `✅ Video subido correctamente`;
+    
+    // Mostrar URL pública
+    if (result.url) {
+      const urlEl = document.createElement("p");
+      urlEl.textContent = `URL pública: ${result.url}`;
+      status.appendChild(urlEl);
+
+      // Opcional: previsualizar video en el admin panel
+      if (videoPreview) {
+        videoPreview.src = result.url;
+        videoPreview.load();
+      }
+    }
+
   } catch (err) {
     console.error(err);
     status.textContent = "❌ Error subiendo el video";

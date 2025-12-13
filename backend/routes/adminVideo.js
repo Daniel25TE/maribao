@@ -8,40 +8,43 @@ const upload = multer({ storage: multer.memoryStorage() });
 router.post("/video", upload.single("video"), async (req, res) => {
   try {
     if (!req.file) {
-      return res.status(400).json({ error: "No se envió video" });
+      return res.status(400).json({ error: "No se envió ningún archivo" });
     }
 
-    const fileExt = req.file.originalname.split(".").pop();
-    const fileName = `home-video.${fileExt}`;
+    const file = req.file;
+    const filePath = `home/${file.originalname}`; // ruta dentro del bucket
 
-    // 1️⃣ Subir a Supabase Storage
-    const { error: uploadError } = await supabase.storage
+    // 1️⃣ Subir al bucket
+    const { data: uploadData, error: uploadError } = await supabase.storage
       .from("videos_storage")
-      .upload(fileName, req.file.buffer, {
-        contentType: req.file.mimetype,
-        upsert: true
+      .upload(filePath, file.buffer, {
+        contentType: file.mimetype,
+        upsert: true // reemplaza si ya existe
       });
 
     if (uploadError) throw uploadError;
 
-    // 2️⃣ Obtener URL pública
-    const { data } = supabase.storage
+    // 2️⃣ Generar URL pública
+    const { publicUrl, error: urlError } = supabase.storage
       .from("videos_storage")
-      .getPublicUrl(fileName);
+      .getPublicUrl(filePath);
 
-    // 3️⃣ Guardar URL en DB
-    await supabase
-      .from("site_settings")
-      .upsert({
-        key: "home_video_url",
-        value: data.publicUrl
-      });
+    if (urlError) throw urlError;
 
-    res.json({ success: true, url: data.publicUrl });
+    // 3️⃣ Guardar o actualizar en la tabla videos
+    const { data: upsertData, error: upsertError } = await supabase
+      .from("videos")
+      .upsert({ key: "home_video", value: publicUrl });
+
+    if (upsertError) throw upsertError;
+
+    res.json({ message: "Video subido y URL guardada correctamente", url: publicUrl });
+
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Error subiendo video" });
+    console.error("Error subiendo video:", err);
+    res.status(500).json({ error: err.message });
   }
 });
 
 export default router;
+
