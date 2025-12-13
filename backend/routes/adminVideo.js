@@ -1,6 +1,6 @@
 import express from "express";
 import multer from "multer";
-import { supabase } from "../supabaseClient.js";
+import { supabase } from "../database";
 
 const router = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
