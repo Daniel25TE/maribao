@@ -40,7 +40,10 @@ router.post("/video", upload.single("video"), async (req, res) => {
 
     if (upsertError) throw upsertError;
 
-    res.json({ message: "Video subido y URL guardada correctamente", url: publicUrl });
+    res.json({ 
+      message: "Video subido y URL guardada correctamente", 
+      url: signedUrl
+    });
 
   } catch (err) {
     console.error("Error subiendo video:", err);
