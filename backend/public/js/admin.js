@@ -228,6 +228,8 @@ document.getElementById("uploadVideo").addEventListener("click", async () => {
     if (!res.ok) throw new Error(result.error);
 
     status.textContent = `✅ Video subido correctamente`;
+
+    loadAdminVideos();
     
     // Mostrar URL pública
     if (result.url) {
@@ -280,6 +282,78 @@ async function cargarFechasDescuento() {
 
 // Ejecutar al cargar la página
 cargarFechasDescuento();
+
+async function loadAdminVideos() {
+  const container = document.getElementById("videosList");
+  container.innerHTML = ""; // limpiar antes de cargar
+
+  try {
+    const res = await fetch("/admin/videos", { credentials: "include" });
+    const result = await res.json();
+
+    if (!result.videos || !result.videos.length) {
+      container.textContent = "No hay videos subidos aún.";
+      return;
+    }
+
+    result.videos.forEach(video => {
+      // Crear contenedor para cada video
+      const videoDiv = document.createElement("div");
+      videoDiv.style.position = "relative";
+      videoDiv.style.display = "inline-block";
+      videoDiv.style.margin = "10px";
+
+      // Crear tag video
+      const vid = document.createElement("video");
+      vid.src = video.value;
+      vid.width = 200;
+      vid.controls = true;
+
+      // Crear botón X
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "✖";
+      deleteBtn.style.position = "absolute";
+      deleteBtn.style.top = "0";
+      deleteBtn.style.right = "0";
+      deleteBtn.style.background = "red";
+      deleteBtn.style.color = "white";
+      deleteBtn.style.border = "none";
+      deleteBtn.style.cursor = "pointer";
+
+      // Manejar click para borrar video
+      deleteBtn.addEventListener("click", () => deleteVideo(video.key, videoDiv));
+
+      videoDiv.appendChild(vid);
+      videoDiv.appendChild(deleteBtn);
+      container.appendChild(videoDiv);
+    });
+  } catch (err) {
+    console.error("Error cargando videos:", err);
+    container.textContent = "Error cargando videos.";
+  }
+}
+
+loadAdminVideos();
+
+async function deleteVideo(key, videoDiv) {
+  if (!confirm("¿Eliminar este video?")) return;
+
+  try {
+    const res = await fetch(`/admin/video/${key}`, {
+      method: "DELETE",
+      credentials: "include"
+    });
+
+    const result = await res.json();
+    if (!res.ok) throw new Error(result.error);
+
+    // Quitar del DOM
+    videoDiv.remove();
+  } catch (err) {
+    console.error("Error eliminando video:", err);
+    alert("Error eliminando video");
+  }
+}
 
 document.addEventListener("click", async (e) => {
   // Eliminar

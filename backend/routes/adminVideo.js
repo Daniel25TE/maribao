@@ -27,7 +27,7 @@ router.post("/video", upload.single("video"), async (req, res) => {
     // 2️⃣ Generar URL pública
     const { data, error: urlError } = await supabase.storage
       .from("videos_storage")
-      .createSignedUrl(filePath, 3 * 24 * 60 * 60); // 3 días en segundos
+      .createSignedUrl(filePath, 7 * 24 * 60 * 60);
 
     if (urlError) throw urlError;
 
@@ -50,6 +50,68 @@ router.post("/video", upload.single("video"), async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+// GET /admin/videos
+router.get("/videos", async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from("videos")
+      .select("key, value"); // traer key y value de cada video
+
+    if (error) throw error;
+
+    res.json({ videos: data });
+  } catch (err) {
+    console.error("Error listando videos:", err);
+    res.status(500).json({ error: "Error listando videos" });
+  }
+});
+
+// DELETE /admin/video/:key
+router.delete("/video/:key", async (req, res) => {
+  const { key } = req.params;
+
+  try {
+    // 1️⃣ Buscar el video en la tabla para obtener la URL
+    const { data, error: selectError } = await supabase
+      .from("videos")
+      .select("value")
+      .eq("key", key)
+      .single();
+
+    if (selectError || !data) {
+      return res.status(404).json({ error: "Video no encontrado" });
+    }
+
+    const fileUrl = data.value;
+
+    // 2️⃣ Extraer el nombre del archivo del URL
+    const urlParts = fileUrl.split("/");
+    const fileName = decodeURIComponent(urlParts[urlParts.length - 1].split("?")[0]);
+
+    // 3️⃣ Borrar el archivo del bucket
+    const { data: deleteData, error: deleteError } = await supabase.storage
+      .from("videos_storage")
+      .remove([fileName]);
+
+    if (deleteError) throw deleteError;
+
+    // 4️⃣ Borrar la fila de la tabla
+    const { error: rowError } = await supabase
+      .from("videos")
+      .delete()
+      .eq("key", key);
+
+    if (rowError) throw rowError;
+
+    res.json({ message: "Video eliminado correctamente" });
+
+  } catch (err) {
+    console.error("Error eliminando video:", err);
+    res.status(500).json({ error: "Error eliminando video" });
+  }
+});
+
 
 export default router;
 
