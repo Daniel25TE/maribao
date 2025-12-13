@@ -16,7 +16,7 @@ router.post("/video", upload.single("video"), async (req, res) => {
 
     // 1️⃣ Subir a Supabase Storage
     const { error: uploadError } = await supabase.storage
-      .from("videos")
+      .from("videos_storage")
       .upload(fileName, req.file.buffer, {
         contentType: req.file.mimetype,
         upsert: true
@@ -26,7 +26,7 @@ router.post("/video", upload.single("video"), async (req, res) => {
 
     // 2️⃣ Obtener URL pública
     const { data } = supabase.storage
-      .from("videos")
+      .from("videos_storage")
       .getPublicUrl(fileName);
 
     // 3️⃣ Guardar URL en DB
