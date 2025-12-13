@@ -36,7 +36,7 @@ router.post("/video", upload.single("video"), async (req, res) => {
     // 3️⃣ Guardar o actualizar en la tabla videos
     const { data: upsertData, error: upsertError } = await supabase
       .from("videos")
-      .upsert({ key: "home_video", value: publicUrl });
+      .upsert({ key: "home_video", value: signedUrl });
 
     if (upsertError) throw upsertError;
 
