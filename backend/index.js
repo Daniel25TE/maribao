@@ -18,7 +18,8 @@ import { Resend } from "resend";
 import mediaRoutes from './routes/media.js';
 import pdfRoutes from './routes/pdf.js';
 import { generarPdfReserva, generarPdfPagado, generarPdfAbonado, generarPdfReservaTarjeta } from './routes/pdf.js';
-
+import adminVideoRoutes from "./routes/adminVideo.js";
+import settingsRoutes from "./routes/settings.js";
 
 dotenv.config();
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -328,6 +329,8 @@ app.use('/login', limiter);
 app.use('/reservas', limiter);
 app.use('/reserva', limiter);
 app.use("/cancelar", cancelarRoutes);
+app.use("/admin", adminVideoRoutes);
+app.use("/api/settings", settingsRoutes);
 
 
 app.post('/reserva',

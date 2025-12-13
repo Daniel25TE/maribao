@@ -19,7 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
     lazyLoadStaticContainers();
     allheroimages();
     loadQuestions();
-    cargarComentarios();
+  cargarComentarios();
+  loadHomeVideo();
+
 
     
 
@@ -69,6 +71,24 @@ document.addEventListener('DOMContentLoaded', () => {
       openWhatsApp(number);
     });
   });
+
+
+  async function loadHomeVideo() {
+    try {
+        const res = await fetch("/api/settings/home-video");
+        const data = await res.json();
+
+        if (!data.url) return;
+
+        const video = document.getElementById("home-video");
+        if (!video) return;
+
+        video.src = data.url;
+        video.load();
+    } catch (err) {
+        console.error("Error cargando video home:", err);
+    }
+}
 
 
 });

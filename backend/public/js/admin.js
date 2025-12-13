@@ -201,6 +201,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+document.getElementById("uploadVideo").addEventListener("click", async () => {
+  const input = document.getElementById("videoInput");
+  const status = document.getElementById("videoStatus");
+
+  if (!input.files.length) {
+    alert("Selecciona un video");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("video", input.files[0]);
+
+  status.textContent = "Subiendo video...";
+
+  try {
+    const res = await fetch("/admin/video", {
+      method: "POST",
+      body: formData,
+      credentials: "include"
+    });
+
+    const result = await res.json();
+
+    if (!res.ok) throw new Error(result.error);
+
+    status.textContent = "✅ Video actualizado correctamente";
+  } catch (err) {
+    console.error(err);
+    status.textContent = "❌ Error subiendo el video";
+  }
+});
+
+
 async function cargarFechasDescuento() {
   try {
     const response = await fetch("/api/admin/fechas-descuento", { credentials: "include" });
