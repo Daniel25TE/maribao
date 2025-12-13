@@ -12,7 +12,7 @@ router.post("/video", upload.single("video"), async (req, res) => {
     }
 
     const file = req.file;
-    const filePath = `home/${file.originalname}`; // ruta dentro del bucket
+    const filePath = file.originalname; // ruta dentro del bucket
 
     // 1️⃣ Subir al bucket
     const { data: uploadData, error: uploadError } = await supabase.storage
