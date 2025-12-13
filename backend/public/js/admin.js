@@ -204,50 +204,81 @@ document.addEventListener("DOMContentLoaded", () => {
 document.getElementById("uploadVideo").addEventListener("click", async () => {
   const input = document.getElementById("videoInput");
   const status = document.getElementById("videoStatus");
-  const videoPreview = document.getElementById("videoPreview"); // opcional para previsualizar
+  const videoPreview = document.getElementById("videoPreview"); // opcional
 
   if (!input.files.length) {
     alert("Selecciona un video");
     return;
   }
 
-  const formData = new FormData();
-  formData.append("video", input.files[0]);
+  const file = input.files[0];
 
-  status.textContent = "Subiendo video...";
+  // Crear video temporal para validar duración
+  const tempVideo = document.createElement("video");
+  tempVideo.preload = "metadata";
+  tempVideo.src = URL.createObjectURL(file);
 
-  try {
-    const res = await fetch("/admin/video", {
-      method: "POST",
-      body: formData,
-      credentials: "include"
-    });
+  tempVideo.onloadedmetadata = async () => {
+    window.URL.revokeObjectURL(tempVideo.src);
+    const duration = tempVideo.duration;
 
-    const result = await res.json();
-
-    if (!res.ok) throw new Error(result.error);
-
-    status.textContent = `✅ Video subido correctamente`;
-
-    loadAdminVideos();
-    
-    // Mostrar URL pública
-    if (result.url) {
-      const urlEl = document.createElement("p");
-      urlEl.textContent = `URL pública: ${result.url}`;
-      status.appendChild(urlEl);
-
-      // Opcional: previsualizar video en el admin panel
-      if (videoPreview) {
-        videoPreview.src = result.url;
-        videoPreview.load();
-      }
+    if (duration > 60) {
+      alert("El video debe durar máximo 1 minuto");
+      return;
     }
 
-  } catch (err) {
-    console.error(err);
-    status.textContent = "❌ Error subiendo el video";
-  }
+    console.log("Video válido, duración:", duration, "segundos");
+
+    // --- Convertir a WebM ---
+    const stream = tempVideo.captureStream();
+    const options = { mimeType: "video/webm" };
+    const mediaRecorder = new MediaRecorder(stream, options);
+    const chunks = [];
+
+    mediaRecorder.ondataavailable = (e) => {
+      if (e.data.size > 0) chunks.push(e.data);
+    };
+
+    mediaRecorder.onstop = async () => {
+      const blob = new Blob(chunks, { type: "video/webm" });
+      const webmFile = new File([blob], "video.webm", { type: "video/webm" });
+
+      console.log("Video convertido a WebM:", webmFile);
+
+      // Subir al backend
+      const formData = new FormData();
+      formData.append("video", webmFile);
+
+      try {
+        status.textContent = "Subiendo video...";
+        const res = await fetch("/admin/video", {
+          method: "POST",
+          body: formData,
+          credentials: "include"
+        });
+
+        const result = await res.json();
+        if (!res.ok) throw new Error(result.error);
+
+        status.textContent = "✅ Video subido correctamente";
+
+        // Previsualización
+        if (result.url && videoPreview) {
+          videoPreview.src = result.url;
+          videoPreview.load();
+        }
+
+        // Recargar lista de videos en admin
+        loadAdminVideos();
+      } catch (err) {
+        console.error(err);
+        status.textContent = "❌ Error subiendo el video";
+      }
+    };
+
+    mediaRecorder.start();
+    setTimeout(() => mediaRecorder.stop(), duration * 1000);
+  };
 });
 
 
