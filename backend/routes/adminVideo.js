@@ -56,7 +56,7 @@ router.get("/videos", async (req, res) => {
   try {
     const { data, error } = await supabase
       .from("videos")
-      .select("key, value"); // traer key y value de cada video
+      .select("id, value"); // traer key y value de cada video
 
     if (error) throw error;
 
@@ -68,47 +68,40 @@ router.get("/videos", async (req, res) => {
 });
 
 // DELETE /admin/video/:key
-router.delete("/video/:key", async (req, res) => {
-  const { key } = req.params;
-
+router.delete("/video/:id", async (req, res) => {
   try {
-    // 1️⃣ Buscar el video en la tabla para obtener la URL
-    const { data, error: selectError } = await supabase
+    const { id } = req.params;
+
+    // 1️⃣ Buscar el video en la tabla
+    const { data, error } = await supabase
       .from("videos")
       .select("value")
-      .eq("key", key)
+      .eq("id", id)
       .single();
 
-    if (selectError || !data) {
+    if (error || !data) {
       return res.status(404).json({ error: "Video no encontrado" });
     }
 
-    const fileUrl = data.value;
+    // 2️⃣ Extraer path del archivo desde la URL
+    const url = data.value;
+    const path = url.split("/videos_storage/")[1].split("?")[0];
 
-    // 2️⃣ Extraer el nombre del archivo del URL
-    const urlParts = fileUrl.split("/");
-    const fileName = decodeURIComponent(urlParts[urlParts.length - 1].split("?")[0]);
-
-    // 3️⃣ Borrar el archivo del bucket
-    const { data: deleteData, error: deleteError } = await supabase.storage
+    // 3️⃣ Borrar del bucket
+    const { error: deleteError } = await supabase.storage
       .from("videos_storage")
-      .remove([fileName]);
+      .remove([path]);
 
     if (deleteError) throw deleteError;
 
-    // 4️⃣ Borrar la fila de la tabla
-    const { error: rowError } = await supabase
-      .from("videos")
-      .delete()
-      .eq("key", key);
-
-    if (rowError) throw rowError;
+    // 4️⃣ Borrar de la tabla
+    await supabase.from("videos").delete().eq("id", id);
 
     res.json({ message: "Video eliminado correctamente" });
 
   } catch (err) {
     console.error("Error eliminando video:", err);
-    res.status(500).json({ error: "Error eliminando video" });
+    res.status(500).json({ error: err.message });
   }
 });
 

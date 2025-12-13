@@ -321,7 +321,7 @@ async function loadAdminVideos() {
       deleteBtn.style.cursor = "pointer";
 
       // Manejar click para borrar video
-      deleteBtn.addEventListener("click", () => deleteVideo(video.key, videoDiv));
+      deleteBtn.addEventListener("click", () => deleteVideo(video.id, videoDiv));
 
       videoDiv.appendChild(vid);
       videoDiv.appendChild(deleteBtn);
@@ -335,11 +335,11 @@ async function loadAdminVideos() {
 
 loadAdminVideos();
 
-async function deleteVideo(key, videoDiv) {
+async function deleteVideo(id, videoDiv) {
   if (!confirm("¿Eliminar este video?")) return;
 
   try {
-    const res = await fetch(`/admin/video/${key}`, {
+    const res = await fetch(`/admin/video/${id}`, {
       method: "DELETE",
       credentials: "include"
     });
