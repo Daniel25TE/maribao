@@ -12,7 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
     setupCTAObserver();
     setupMenuToggle();
     loadGallery();
-    lazyLoadStaticContainers();
+  lazyLoadStaticContainers();
+  loadHomeVideo();
     const cta = document.getElementById('cta');
     const header = document.querySelector('header');
     const weather = document.getElementById('weather-note');
@@ -32,5 +33,29 @@ document.addEventListener("DOMContentLoaded", () => {
       openWhatsApp(number);
     });
   });
+
+    async function loadHomeVideo() {
+    try {
+        const res = await fetch("https://hotel-backend-3jw7.onrender.com/api/settings/home-video");
+        const data = await res.json();
+
+        if (!data.urls || !data.urls.length) return;
+
+        const container = document.getElementById("home-video-container");
+        if (!container) return;
+
+        container.innerHTML = ""; // limpiar videos anteriores
+
+        data.urls.forEach(url => {
+            const video = document.createElement("video");
+            video.src = url;
+            video.controls = true;
+            video.width = 400;
+            container.appendChild(video);
+        });
+    } catch (err) {
+        console.error("Error cargando videos home:", err);
+    }
+}
 
 });
