@@ -46,23 +46,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function loadHomeVideo() {
     const container = document.getElementById("home-video-container");
-
     if (!container) return;
 
-    // --- 1️⃣ Colocar placeholders mientras cargan los videos ---
+    // --- 1️⃣ Colocar un placeholder con un solo <video> en el DOM desde el inicio ---
     container.innerHTML = `
         <button class="story-btn left">◀</button>
         <button class="story-btn right">▶</button>
         <div class="story-indicators"></div>
-        <video controls muted autoplay width="400">
-            <source src="videos/estrella.webm" type="video/webm">
-        </video>
-        <video controls muted autoplay width="400">
+        <video id="homeVideo" muted autoplay playsinline controls width="400">
             <source src="videos/estrella.webm" type="video/webm">
         </video>
     `;
 
-    // Inicializar slider con placeholders
+    // Tomamos referencia al video
+    const video = document.getElementById("homeVideo");
+
+    // Inicializamos slider con el placeholder
     initializeStoryVideos(container);
 
     try {
@@ -73,24 +72,25 @@ async function loadHomeVideo() {
 
         if (!data.urls || !data.urls.length) return;
 
-        // Limpiar contenedor y reconstruirlo con los videos reales
-        container.innerHTML = `
-            <button class="story-btn left">◀</button>
-            <button class="story-btn right">▶</button>
-            <div class="story-indicators"></div>
-        `;
+        // Limpiamos indicadores y preparamos los videos reales
+        const indicatorsContainer = container.querySelector(".story-indicators");
+        indicatorsContainer.innerHTML = "";
 
-        data.urls.forEach(url => {
-            const video = document.createElement("video");
-            video.src = url;
-            video.controls = true;
-            video.muted = true; // puedes ajustar según quieras
-            video.autoplay = true;
-            video.width = 400;
-            container.appendChild(video);
-        });
+        // Solo reemplazamos el src del video existente para que autoplay funcione
+        video.src = data.urls[0]; // primer video del backend
+        video.load();
+        video.play().catch(err => console.warn(err));
 
-        // Inicializar slider con los videos del backend
+        // Agregar más videos dinámicamente al slider
+        for (let i = 1; i < data.urls.length; i++) {
+            const v = document.createElement("video");
+            v.src = data.urls[i];
+            v.muted = true;
+            v.width = 400;
+            container.appendChild(v);
+        }
+
+        // Re-inicializamos la slider para incluir todos los videos
         initializeStoryVideos(container);
 
     } catch (err) {
@@ -166,4 +166,3 @@ function initializeStoryVideos(container) {
     // Mostrar el primer video
     showVideo(currentIndex);
 }
-
