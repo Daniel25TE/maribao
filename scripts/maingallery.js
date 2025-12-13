@@ -54,10 +54,10 @@ async function loadHomeVideo() {
         <button class="story-btn left">◀</button>
         <button class="story-btn right">▶</button>
         <div class="story-indicators"></div>
-        <video muted width="400">
+        <video controls muted autoplay width="400">
             <source src="videos/estrella.webm" type="video/webm">
         </video>
-        <video muted width="400">
+        <video controls muted autoplay width="400">
             <source src="videos/estrella.webm" type="video/webm">
         </video>
     `;
@@ -85,6 +85,7 @@ async function loadHomeVideo() {
             video.src = url;
             video.controls = true;
             video.muted = true; // puedes ajustar según quieras
+            video.autoplay = true;
             video.width = 400;
             container.appendChild(video);
         });
