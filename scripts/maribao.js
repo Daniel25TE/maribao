@@ -78,15 +78,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const res = await fetch("https://hotel-backend-3jw7.onrender.com/api/settings/home-video");
         const data = await res.json();
 
-        if (!data.url) return;
+        if (!data.urls || !data.urls.length) return;
 
-        const video = document.getElementById("home-video");
-        if (!video) return;
+        const container = document.getElementById("home-video-container");
+        if (!container) return;
 
-        video.src = data.url;
-        video.load();
+        container.innerHTML = ""; // limpiar videos anteriores
+
+        data.urls.forEach(url => {
+            const video = document.createElement("video");
+            video.src = url;
+            video.controls = true;
+            video.width = 400;
+            container.appendChild(video);
+        });
     } catch (err) {
-        console.error("Error cargando video home:", err);
+        console.error("Error cargando videos home:", err);
     }
 }
 
