@@ -25,13 +25,13 @@ router.post("/video", upload.single("video"), async (req, res) => {
     if (uploadError) throw uploadError;
 
     // 2️⃣ Generar URL pública
-    const { data, error: urlError } = supabase.storage
+    const { data, error: urlError } = await supabase.storage
       .from("videos_storage")
-      .getPublicUrl(filePath);
+      .createSignedUrl(filePath, 3 * 24 * 60 * 60); // 3 días en segundos
 
     if (urlError) throw urlError;
 
-    const publicUrl = data.publicUrl;
+    const signedUrl = data.signedUrl;
 
     // 3️⃣ Guardar o actualizar en la tabla videos
     const { data: upsertData, error: upsertError } = await supabase
