@@ -2099,7 +2099,7 @@ p {
 .story-container::after {
     content: "";
     position: absolute;
-    bottom: 5px;
+    bottom: -10px;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
@@ -2119,12 +2119,13 @@ p {
 
 /* Video más pequeño que el contenedor */
 .story-container video {
-    width: 85%;
+    width: 100%;
     /* 🔥 deja marco visible */
-    height: 92%;
+    height: 100%;
     border-radius: 12px;
     object-fit: cover;
     background: black;
+    
 }
 
 .story-container video.active {
@@ -2136,7 +2137,7 @@ p {
     display: flex;
     justify-content: center;
     gap: 20px;
-    
+    margin-top: 10px;
     margin-bottom: 15px;
 }
 
@@ -2169,6 +2170,6 @@ p {
     /* centrado horizontal */
     letter-spacing: 0.5px;
     /* un toque de espaciado */
-    padding: 0;
+    padding: 0 0 10px 0;
     margin: 0;
 }
