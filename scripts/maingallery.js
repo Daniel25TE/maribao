@@ -55,7 +55,7 @@ async function loadHomeVideo() {
     <h2 class="story-h2">Esta semana...</h2>
     
     <div class="story-container">
-        <video id="homeVideo" muted autoplay playsinline controls width="400">
+        <video id="homeVideo" muted autoplay playsinline controls>
             <source src="videos/maribao-story-video.mp4" type="video/webm">
         </video>      
     </div>
@@ -87,19 +87,25 @@ async function loadHomeVideo() {
         video.load();
         video.play().catch(err => console.warn(err));
 
-        for (let i = 1; i < data.urls.length; i++) {
-    const v = document.createElement("video");
+        const storyContainerDiv = container.querySelector(".story-container");
 
+for (let i = 1; i < data.urls.length; i++) {
+    const v = document.createElement("video");
     v.src = data.urls[i];
     v.muted = true;
     v.autoplay = true;
-    v.playsInline = true;      // 🔥 CLAVE
-    v.setAttribute("playsinline", ""); // soporte iOS
-    v.controls = true;         // 🔥 CLAVE
-    v.width = 400;
+    v.playsInline = true;
+    v.setAttribute("playsinline", "");
+    v.controls = true;
 
-    container.appendChild(v);
+    // 🔹 NO usar width fijo
+    v.style.width = "100%";
+    v.style.height = "100%";
+    v.style.objectFit = "cover";
+
+    storyContainerDiv.appendChild(v);
 }
+
 
 
         // Re-inicializamos la slider para incluir todos los videos
