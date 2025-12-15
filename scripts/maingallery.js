@@ -50,11 +50,12 @@ async function loadHomeVideo() {
 
     // --- 1️⃣ Colocar un placeholder con un solo <video> en el DOM desde el inicio ---
     container.innerHTML = `
-        <button class="story-btn left">◀</button>
-        <button class="story-btn right">▶</button>
         <div class="story-indicators"></div>
         <video id="homeVideo" muted autoplay playsinline controls width="400">
-            <source src="videos/estrella.webm" type="video/webm">
+            <source src="videos/maribao-story-video.mp4" type="video/webm">
+        </video>
+        <video id="homeVideo" muted autoplay playsinline controls width="400">
+            <source src="videos/maribao-story-video.mp4" type="video/webm">
         </video>
     `;
 
@@ -81,14 +82,20 @@ async function loadHomeVideo() {
         video.load();
         video.play().catch(err => console.warn(err));
 
-        // Agregar más videos dinámicamente al slider
         for (let i = 1; i < data.urls.length; i++) {
-            const v = document.createElement("video");
-            v.src = data.urls[i];
-            v.muted = true;
-            v.width = 400;
-            container.appendChild(v);
-        }
+    const v = document.createElement("video");
+
+    v.src = data.urls[i];
+    v.muted = true;
+    v.autoplay = true;
+    v.playsInline = true;      // 🔥 CLAVE
+    v.setAttribute("playsinline", ""); // soporte iOS
+    v.controls = true;         // 🔥 CLAVE
+    v.width = 400;
+
+    container.appendChild(v);
+}
+
 
         // Re-inicializamos la slider para incluir todos los videos
         initializeStoryVideos(container);
@@ -125,22 +132,23 @@ function initializeStoryVideos(container) {
     });
 
     function showVideo(index) {
-        videos.forEach((vid, i) => {
-            vid.classList.toggle("active", i === index);
-            if (i === index) {
-                vid.style.display = "block";
-                vid.play().catch(err => console.warn(err));
-            } else {
-                vid.style.display = "none";
-                vid.pause();
-                vid.currentTime = 0;
-            }
-        });
+    videos.forEach((vid, i) => {
+        vid.pause();
+        vid.currentTime = 0;
+        vid.style.display = "none";
+        vid.classList.remove("active");
+    });
 
-        // actualizar indicadores
-        const dots = container.querySelectorAll(".story-dot");
-        dots.forEach((dot, i) => dot.classList.toggle("active", i === index));
-    }
+    const currentVideo = videos[index];
+    currentVideo.style.display = "block";
+    currentVideo.classList.add("active");
+    currentVideo.play().catch(() => {});
+
+    // actualizar indicadores
+    const dots = container.querySelectorAll(".story-dot");
+    dots.forEach((dot, i) => dot.classList.toggle("active", i === index));
+}
+
 
     // --- 2️⃣ Flechas ---
     const leftBtn = container.querySelector(".story-btn.left");
