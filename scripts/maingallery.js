@@ -50,13 +50,18 @@ async function loadHomeVideo() {
 
     // --- 1️⃣ Colocar un placeholder con un solo <video> en el DOM desde el inicio ---
     container.innerHTML = `
-        <div class="story-indicators"></div>
+    <div class="story-wrapper">
+    
+    <h2 class="story-h2">Esta semana...</h2>
+    
+    <div class="story-container">
         <video id="homeVideo" muted autoplay playsinline controls width="400">
             <source src="videos/maribao-story-video.mp4" type="video/webm">
-        </video>
-        <video id="homeVideo" muted autoplay playsinline controls width="400">
-            <source src="videos/maribao-story-video.mp4" type="video/webm">
-        </video>
+        </video>      
+    </div>
+    <div class="story-indicators"></div>
+    </div>
+    
     `;
 
     // Tomamos referencia al video
