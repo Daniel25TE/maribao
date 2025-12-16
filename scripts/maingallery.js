@@ -68,7 +68,7 @@ async function loadHomeVideo() {
     const video = document.getElementById("homeVideo");
 
     // Inicializamos slider con el placeholder
-    initializeStoryVideos(container);
+    
 
     try {
         // --- 2️⃣ Traer videos reales del backend ---
