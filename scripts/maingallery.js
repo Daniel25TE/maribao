@@ -9,11 +9,7 @@ import { createVideoSlider } from './modules/story-videos.js';
 import { loadGallery } from "./modules/galeria.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const storyContainer = document.getElementById("home-video-container");
 
-  if (storyContainer) {
-        createVideoSlider(storyContainer);
-    }
     highlightActiveLink();
     setupCTAObserver();
     setupMenuToggle();
@@ -60,7 +56,7 @@ async function loadHomeVideo() {
              muted
              autoplay
              playsinline
-             controls>
+             preload="auto">
       </video>      
     </div>
     <div class="story-indicators"></div>
@@ -89,7 +85,6 @@ async function loadHomeVideo() {
         // Solo reemplazamos el src del video existente para que autoplay funcione
         video.src = data.urls[0]; // primer video del backend
         video.load();
-        video.play().catch(err => console.warn(err));
 
         const storyContainerDiv = container.querySelector(".story-container");
 
@@ -100,7 +95,7 @@ for (let i = 1; i < data.urls.length; i++) {
     v.autoplay = true;
     v.playsInline = true;
     v.setAttribute("playsinline", "");
-    v.controls = true;
+    v.preload = "auto";
 
     // 🔹 NO usar width fijo
     v.style.width = "100%";
@@ -118,6 +113,17 @@ for (let i = 1; i < data.urls.length; i++) {
     } catch (err) {
         console.error("Error cargando videos home:", err);
     }
+}
+
+function enableControlsOnInteraction(video) {
+  const enable = () => {
+    video.controls = true;
+    video.removeEventListener("touchstart", enable);
+    video.removeEventListener("click", enable);
+  };
+
+  video.addEventListener("touchstart", enable, { once: true });
+  video.addEventListener("click", enable, { once: true });
 }
 
 
@@ -152,12 +158,22 @@ function initializeStoryVideos(container) {
         vid.currentTime = 0;
         vid.style.display = "none";
         vid.classList.remove("active");
+        vid.controls = false;
     });
 
     const currentVideo = videos[index];
     currentVideo.style.display = "block";
     currentVideo.classList.add("active");
+    
+    currentVideo.muted = true;
+  currentVideo.playsInline = true;
+        currentVideo.setAttribute("playsinline", "");
+        
+        enableControlsOnInteraction(currentVideo);
+
+  currentVideo.addEventListener("canplay", () => {
     currentVideo.play().catch(() => {});
+  }, { once: true });
 
     // actualizar indicadores
     const dots = container.querySelectorAll(".story-dot");
