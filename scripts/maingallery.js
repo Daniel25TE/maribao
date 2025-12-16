@@ -55,9 +55,13 @@ async function loadHomeVideo() {
     <h2 class="story-h2">Esta semana...</h2>
     
     <div class="story-container">
-        <video id="homeVideo" muted autoplay playsinline controls>
-            <source src="videos/maribao-story-video.mp4" type="video/webm">
-        </video>      
+        <video id="homeVideo"
+             src="videos/maribao-story-video.mp4"
+             muted
+             autoplay
+             playsinline
+             controls>
+      </video>      
     </div>
     <div class="story-indicators"></div>
     </div>
