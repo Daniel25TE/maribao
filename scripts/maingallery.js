@@ -56,6 +56,7 @@ async function loadHomeVideo() {
              muted
              autoplay
              playsinline
+             controls
              preload="auto">
       </video>      
     </div>
