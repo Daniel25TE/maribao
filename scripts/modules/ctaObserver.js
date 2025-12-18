@@ -30,11 +30,13 @@ async function fetchWeather(el) {
         const alt = data.weather[0].description;
 
         el.innerHTML = `
-            <img src="https://openweathermap.org/img/wn/${icon}@2x.png" 
-                 alt="${alt}" 
-                 style="width:28px; height:28px;">
-            <span>${temp}°C</span>
-        `;
+    <span style="font-size:12px; opacity:0.8;">Maribao</span>
+    <span style="font-size:12px; opacity:0.8;">ahora</span>
+    <img src="https://openweathermap.org/img/wn/${icon}@2x.png"
+         alt="${alt}"
+         style="width:28px; height:28px;">
+    <span>${temp}°C</span>
+`;
     } catch (err) {
         console.error("Error al cargar el clima:", err);
         el.style.display = "none";

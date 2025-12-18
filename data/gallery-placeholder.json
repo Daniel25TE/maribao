@@ -194,5 +194,152 @@
     "url_large": "/images/new-inventory-maribao-41-large.webp",
     "alt": "Vista exterior del hotel",
     "room": "#Sol"
+  },
+  {
+    "url_mobile": "/images/nueva-booking-catorce-small.webp",
+    "url_medium": "/images/nueva-booking-catorce-medium.webp",
+    "url_large": "/images/nueva-booking-catorce-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Experiencias"
+  },
+  {
+    "url_mobile": "/images/nueva-booking-cinco-small.webp",
+    "url_medium": "/images/nueva-booking-cinco-medium.webp",
+    "url_large": "/images/nueva-booking-cinco-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Playa Paraíso"
+  },
+  {
+    "url_mobile": "/images/nueva-booking-cuatro-small.webp",
+    "url_medium": "/images/nueva-booking-cuatro-medium.webp",
+    "url_large": "/images/nueva-booking-cuatro-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Experiencias"
+  },
+  {
+    "url_mobile": "/images/nueva-booking-diecinueve-small.webp",
+    "url_medium": "/images/nueva-booking-diecinueve-medium.webp",
+    "url_large": "/images/nueva-booking-diecinueve-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Experiencias"
+  },
+  {
+    "url_mobile": "/images/nueva-booking-dieciocho-small.webp",
+    "url_medium": "/images/nueva-booking-dieciocho-medium.webp",
+    "url_large": "/images/nueva-booking-dieciocho-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Exteriores"
+  },
+  {
+    "url_mobile": "/images/nueva-booking-diecisiete-small.webp",
+    "url_medium": "/images/nueva-booking-diecisiete-medium.webp",
+    "url_large": "/images/nueva-booking-diecisiete-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Experiencias"
+  },
+  {
+    "url_mobile": "/images/nueva-booking-diez-small.webp",
+    "url_medium": "/images/nueva-booking-diez-medium.webp",
+    "url_large": "/images/nueva-booking-diez-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Experiencias"
+  },
+  {
+    "url_mobile": "/images/nueva-booking-doce-small.webp",
+    "url_medium": "/images/nueva-booking-doce-medium.webp",
+    "url_large": "/images/nueva-booking-doce-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Playa Paraíso"
+  },
+  {
+    "url_mobile": "/images/nueva-booking-dos-small.webp",
+    "url_medium": "/images/nueva-booking-dos-medium.webp",
+    "url_large": "/images/nueva-booking-dos-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Experiencias"
+  },
+  {
+    "url_mobile": "/images/nueva-booking-nueve-small.webp",
+    "url_medium": "/images/nueva-booking-nueve-medium.webp",
+    "url_large": "/images/nueva-booking-nueve-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Experiencias"
+  },
+  {
+    "url_mobile": "/images/nueva-booking-ocho-small.webp",
+    "url_medium": "/images/nueva-booking-ocho-medium.webp",
+    "url_large": "/images/nueva-booking-ocho-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Playa Paraíso"
+  },
+  {
+    "url_mobile": "/images/nueva-booking-seis-small.webp",
+    "url_medium": "/images/nueva-booking-seis-medium.webp",
+    "url_large": "/images/nueva-booking-seis-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Experiencias"
+  },
+  {
+    "url_mobile": "/images/nueva-booking-treintaicuatro-small.webp",
+    "url_medium": "/images/nueva-booking-treintaicuatro-medium.webp",
+    "url_large": "/images/nueva-booking-treintaicuatro-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Experiencias"
+  },
+  {
+    "url_mobile": "/images/nueva-booking-veinte-small.webp",
+    "url_medium": "/images/nueva-booking-veinte-medium.webp",
+    "url_large": "/images/nueva-booking-veinte-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Experiencias"
+  },
+  {
+    "url_mobile": "/images/nueva-booking-veinticinco-small.webp",
+    "url_medium": "/images/nueva-booking-veinticinco-medium.webp",
+    "url_large": "/images/nueva-booking-veinticinco-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Playa Paraíso"
+  },
+  {
+    "url_mobile": "/images/nueva-booking-veinticuatro-small.webp",
+    "url_medium": "/images/nueva-booking-veinticuatro-medium.webp",
+    "url_large": "/images/nueva-booking-veinticuatro-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Playa Paraíso"
+  },
+  {
+    "url_mobile": "/images/nueva-booking-veintidos-small.webp",
+    "url_medium": "/images/nueva-booking-veintidos-medium.webp",
+    "url_large": "/images/nueva-booking-veintidos-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Experiencias"
+  },
+  {
+    "url_mobile": "/images/nueva-booking-veintiocho-small.webp",
+    "url_medium": "/images/nueva-booking-veintiocho-medium.webp",
+    "url_large": "/images/nueva-booking-veintiocho-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Experiencias"
+  },
+  {
+    "url_mobile": "/images/nueva-booking-veintisiete-small.webp",
+    "url_medium": "/images/nueva-booking-veintisiete-medium.webp",
+    "url_large": "/images/nueva-booking-veintisiete-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Experiencias"
+  },
+  {
+    "url_mobile": "/images/nueva-booking-veintiuno-small.webp",
+    "url_medium": "/images/nueva-booking-veintiuno-medium.webp",
+    "url_large": "/images/nueva-booking-veintiuno-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Experiencias"
+  },
+  {
+    "url_mobile": "/images/nueva-booking-veintitres-small.webp",
+    "url_medium": "/images/nueva-booking-veintitres-medium.webp",
+    "url_large": "/images/nueva-booking-veintitres-large.webp",
+    "alt": "Vista exterior del hotel",
+    "room": "#Playa Paraíso"
   }
 ]
