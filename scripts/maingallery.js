@@ -52,7 +52,7 @@ async function loadHomeVideo() {
     
     <div class="story-container">
         <video id="homeVideo"
-             src="videos/maribao-story-video.mp4"
+             src="videos/video-story-maribao.mp4"
              muted
              autoplay
              playsinline
