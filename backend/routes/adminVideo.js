@@ -27,7 +27,7 @@ router.post("/video", upload.single("video"), async (req, res) => {
     // 2️⃣ Generar URL pública
     const { data, error: urlError } = await supabase.storage
       .from("videos_storage")
-      .createSignedUrl(filePath, 7 * 24 * 60 * 60);
+      .createSignedUrl(filePath, 60 * 24 * 60 * 60);
 
     if (urlError) throw urlError;
 
