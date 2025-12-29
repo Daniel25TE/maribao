@@ -15,7 +15,7 @@ const supabase = createClient(
 function formatDate(dateStr) {
   if (!dateStr) return null;
   const d = new Date(dateStr);
-  if (isNaN(d)) return null;
+  if (isNaN(d.getTime())) return null;
   return d.toISOString().split("T")[0];
 }
 
@@ -46,37 +46,37 @@ router.get("/admin/stats", protegerRuta, async (req, res) => {
       return res.status(500).json({ error: "Error obteniendo estadísticas" });
     }
 
-    // Transformar daily a { date: 'YYYY-MM-DD', count: X }
+    // Construir daily
     const daily = (dailyRaw || [])
       .filter(v => v.created_at || v.date)
-      .map(v => ({
-        date: formatDate(v.created_at || v.date),
-        count: v.count || 1,
-      }));
+      .map(v => {
+        const date = formatDate(v.created_at || v.date);
+        return { date, count: v.count ?? 0 };
+      })
+      .filter(v => v.date);
 
-    // Transformar monthly a { date: 'YYYY-MM-DD', count: X }
-    const monthly = (monthlyRaw || [])
-      .filter(v => v.created_at || v.date)
-      .map(v => ({
-        date: formatDate(v.created_at || v.date),
-        count: v.count || 1,
-      }));
-
-    // Transformar weekly a { week: 'N', count: X }
+    // Construir weekly
     const weekly = (weeklyRaw || [])
-      .filter(v => v.created_at || v.date)
       .map(v => ({
-        week: v.week || getWeekNumber(new Date(v.created_at || v.date)),
-        count: v.count || 1,
-      }));
+        week: v.week ?? getWeekNumber(new Date(v.created_at || v.date)),
+        count: v.count ?? 0,
+      }))
+      .filter(v => v.week);
+
+    // Construir monthly
+    const monthly = (monthlyRaw || [])
+      .map(v => ({
+        date: formatDate(v.created_at || v.date),
+        count: v.count ?? 0,
+      }))
+      .filter(v => v.date);
 
     return res.json({
-      total: total || 0,
+      total,
       daily,
       weekly,
       monthly
     });
-
   } catch (error) {
     console.error("Error stats:", error);
     res.status(500).json({ error: "Error obteniendo estadísticas" });
@@ -84,5 +84,6 @@ router.get("/admin/stats", protegerRuta, async (req, res) => {
 });
 
 export default router;
+
 
 
