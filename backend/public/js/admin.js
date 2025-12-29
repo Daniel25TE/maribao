@@ -379,11 +379,11 @@ document.addEventListener("DOMContentLoaded", () => {
         <h4>Por día</h4>
         ${stats.daily.map(d => `<p>${d.date}: ${d.count}</p>`).join("")}
 
-        <h4>Por semana</h4>
-        ${stats.weekly.map(w => `<p>${w.week}: ${w.count}</p>`).join("")}
-
         <h4>Por mes</h4>
-        ${stats.monthly.map(m => `<p>${m.date}: ${m.count}</p>`).join("")}
+        ${stats.monthly.map(m => {
+          const mes = m.date ? m.date.slice(0, 7) : "—";
+          return `<p>${mes}: ${m.count}</p>`;
+        }).join("")}
       `;
 
       // Visitas de hoy
@@ -413,51 +413,54 @@ document.addEventListener("DOMContentLoaded", () => {
 function mostrarMes(data, mesSeleccionado) {
   const tbody = document.getElementById("visitas-semana");
   const statsMes = document.getElementById("stats-mes");
+  const totalMesEl = document.getElementById("total-mes");
+
   statsMes.classList.remove("hidden");
 
-  // Filtrar por mes: YYYY-MM
-  const visitasMes = data.monthly.filter(d => d.date && d.date.slice(0, 7) === mesSeleccionado);
-  console.log("Mes seleccionado:", mesSeleccionado);
-console.log("Visitas del mes:", visitasMes);
+  // Filtrar visitas del mes (YYYY-MM)
+  const visitasMes = data.daily.filter(
+    d => d.date && d.date.slice(0, 7) === mesSeleccionado
+  );
 
+  // Inicializar semanas del mes
+  const semanas = {
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0
+  };
 
-  if (visitasMes.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="2">No hay datos para este mes</td></tr>`;
-    document.getElementById("total-mes").textContent = 0;
-    return;
-  }
-
-  // Agrupar por semana
-  const semanas = {};
+  // Contar visitas por semana del mes
   visitasMes.forEach(d => {
-  const semana = d.week || getWeekNumber(new Date(d.date));
-  console.log(`Fecha: ${d.date}, Semana calculada: ${semana}, Count: ${d.count}`);
-  semanas[semana] = (semanas[semana] || 0) + d.count;
-});
+    const dia = Number(d.date.slice(8, 10)); // DD
+    let semana;
 
+    if (dia <= 7) semana = 1;
+    else if (dia <= 14) semana = 2;
+    else if (dia <= 21) semana = 3;
+    else if (dia <= 28) semana = 4;
+    else semana = 5;
 
+    semanas[semana] += d.count;
+  });
+
+  // Render tabla
   tbody.innerHTML = "";
-  let total = 0;
-  for (const [semana, count] of Object.entries(semanas)) {
-    tbody.innerHTML += `<tr><td>${semana}</td><td>${count}</td></tr>`;
-    total += count;
-  }
-  document.getElementById("total-mes").textContent = total;
+  let totalMes = 0;
+
+  Object.entries(semanas).forEach(([semana, count]) => {
+    tbody.innerHTML += `
+      <tr>
+        <td>Semana ${semana}</td>
+        <td>${count}</td>
+      </tr>
+    `;
+    totalMes += count;
+  });
+
+  totalMesEl.textContent = totalMes;
 }
-
-// Función para calcular número de semana si no viene de Supabase
-function getWeekNumber(date) {
-  const d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-  const dayNum = d.getDay() || 7;
-  d.setDate(d.getDate() + 4 - dayNum);
-  const yearStart = new Date(d.getFullYear(), 0, 1);
-  return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
-}
-
-
-
-
-
 
 
 document.addEventListener("click", async (e) => {
