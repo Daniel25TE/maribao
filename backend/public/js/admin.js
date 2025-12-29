@@ -361,26 +361,31 @@ async function cargarStats() {
     if (!res.ok) throw new Error("No autorizado");
 
     const stats = await res.json();
+    console.log("Datos recibidos de /api/admin/stats:", stats);
 
     const container = document.getElementById("stats-content");
 
+    // Mostrar todas las estadísticas
     container.innerHTML = `
       <p><strong>Total visitas:</strong> ${stats.total}</p>
 
       <h4>Por día</h4>
-      ${stats.daily.map(d => `<p>${d.day}: ${d.total}</p>`).join("")}
+      ${stats.daily.map(d => `<p>${d.date}: ${d.count}</p>`).join("")}
 
       <h4>Por semana</h4>
-      ${stats.weekly.map(w => `<p>${w.week}: ${w.total}</p>`).join("")}
+      ${stats.weekly.map(w => `<p>${w.week}: ${w.count}</p>`).join("")}
 
       <h4>Por mes</h4>
-      ${stats.monthly.map(m => `<p>${m.month}: ${m.total}</p>`).join("")}
+      ${stats.monthly.map(m => `<p>${m.date}: ${m.count}</p>`).join("")}
     `;
 
-    // Actualizar visitas de hoy
+    // Visitas de hoy
     const hoy = new Date().toISOString().split("T")[0];
-    const visitasHoy = stats.daily.find(d => d.day === hoy);
-    document.getElementById("visitas-hoy").textContent = visitasHoy ? visitasHoy.total : 0;
+console.log("Hoy:", hoy);
+const visitasHoy = stats.daily.find(d => d.date && d.date.slice(0, 10) === hoy);
+console.log("Visitas de hoy encontradas:", visitasHoy);
+
+    document.getElementById("visitas-hoy").textContent = visitasHoy ? visitasHoy.count : 0;
 
     // Selector de mes
     const selector = document.getElementById("mes-selector");
@@ -400,7 +405,10 @@ function mostrarMes(data, mesSeleccionado) {
   statsMes.classList.remove("hidden");
 
   // Filtrar por mes: YYYY-MM
-  const visitasMes = data.monthly.filter(d => d.month.startsWith(mesSeleccionado));
+  const visitasMes = data.monthly.filter(d => d.date && d.date.slice(0, 7) === mesSeleccionado);
+  console.log("Mes seleccionado:", mesSeleccionado);
+console.log("Visitas del mes:", visitasMes);
+
 
   if (visitasMes.length === 0) {
     tbody.innerHTML = `<tr><td colspan="2">No hay datos para este mes</td></tr>`;
@@ -411,9 +419,11 @@ function mostrarMes(data, mesSeleccionado) {
   // Agrupar por semana
   const semanas = {};
   visitasMes.forEach(d => {
-    const semana = d.week || getWeekNumber(new Date(d.month));
-    semanas[semana] = (semanas[semana] || 0) + d.total;
-  });
+  const semana = d.week || getWeekNumber(new Date(d.date));
+  console.log(`Fecha: ${d.date}, Semana calculada: ${semana}, Count: ${d.count}`);
+  semanas[semana] = (semanas[semana] || 0) + d.count;
+});
+
 
   tbody.innerHTML = "";
   let total = 0;
@@ -424,7 +434,7 @@ function mostrarMes(data, mesSeleccionado) {
   document.getElementById("total-mes").textContent = total;
 }
 
-// Función para calcular número de semana
+// Función para calcular número de semana si no viene de Supabase
 function getWeekNumber(date) {
   const d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
   const dayNum = d.getDay() || 7;
@@ -434,6 +444,7 @@ function getWeekNumber(date) {
 }
 
 cargarStats();
+
 
 
 

@@ -35,6 +35,7 @@ router.get("/admin/stats", protegerRuta, async (req, res) => {
     const { count: total } = await supabase
       .from("visits")
       .select("*", { count: "exact", head: true });
+    console.log("✅ Total de visitas en Supabase:", total);
 
     // Traer visitas desde RPCs
     const { data: dailyRaw, error: dailyError } = await supabase.rpc("visits_per_day");
@@ -46,6 +47,10 @@ router.get("/admin/stats", protegerRuta, async (req, res) => {
       return res.status(500).json({ error: "Error obteniendo estadísticas" });
     }
 
+    console.log("📊 DailyRaw:", dailyRaw);
+    console.log("📊 WeeklyRaw:", weeklyRaw);
+    console.log("📊 MonthlyRaw:", monthlyRaw);
+
     // Transformar daily a { day, total }
     const daily = dailyRaw
       .filter(v => v.created_at || v.date)
@@ -53,6 +58,8 @@ router.get("/admin/stats", protegerRuta, async (req, res) => {
         day: formatDate(v.created_at || v.date),
         total: v.count ?? 1
       }));
+    
+    console.log("📊 Daily procesado:", daily);
 
     // Transformar weekly a { week, total }
     const weekly = weeklyRaw.map(v => ({
@@ -60,11 +67,17 @@ router.get("/admin/stats", protegerRuta, async (req, res) => {
       total: v.count ?? 1
     }));
 
+    console.log("📊 Weekly procesado:", weekly);
+
     // Transformar monthly a { month, total }
     const monthly = monthlyRaw.map(v => ({
       month: formatDate(v.created_at || v.date),
       total: v.count ?? 1
     }));
+
+    console.log("📊 Monthly procesado:", monthly);
+
+    res.json({ total, daily, weekly, monthly });
 
     return res.json({ total, daily, weekly, monthly });
   } catch (error) {
