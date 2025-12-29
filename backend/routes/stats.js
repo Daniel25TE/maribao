@@ -1,7 +1,7 @@
 // backend/routes/stats.js
 import express from "express";
 import { createClient } from "@supabase/supabase-js";
-import { protegerRuta } from "../middlewares/auth.js"; // tu middleware compartido
+import { protegerRuta } from "../middlewares/auth.js";
 
 const router = express.Router();
 
@@ -11,6 +11,12 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_KEY
 );
 
+// Helper: formatear fecha a YYYY-MM-DD
+function formatDate(dateStr) {
+  const d = new Date(dateStr);
+  return d.toISOString().split("T")[0];
+}
+
 // Ruta de estadísticas protegida
 router.get("/admin/stats", protegerRuta, async (req, res) => {
   try {
@@ -19,15 +25,33 @@ router.get("/admin/stats", protegerRuta, async (req, res) => {
       .from("visits")
       .select("*", { count: "exact", head: true });
 
-    // Visitas por día, semana y mes usando tus funciones RPC
-    const { data: daily, error: dailyError } = await supabase.rpc("visits_per_day");
-    const { data: weekly, error: weeklyError } = await supabase.rpc("visits_per_week");
-    const { data: monthly, error: monthlyError } = await supabase.rpc("visits_per_month");
+    // Traer visitas por día, semana y mes desde RPCs
+    const { data: dailyRaw, error: dailyError } = await supabase.rpc("visits_per_day");
+    const { data: weeklyRaw, error: weeklyError } = await supabase.rpc("visits_per_week");
+    const { data: monthlyRaw, error: monthlyError } = await supabase.rpc("visits_per_month");
 
     if (dailyError || weeklyError || monthlyError) {
       console.error("Error obteniendo estadísticas:", { dailyError, weeklyError, monthlyError });
       return res.status(500).json({ error: "Error obteniendo estadísticas" });
     }
+
+    // Transformar daily a { date: 'YYYY-MM-DD', count: X }
+    const daily = dailyRaw.map(v => ({
+      date: formatDate(v.created_at || v.date), // depende del campo que venga
+      count: v.count || 1,                     // si tu RPC no devuelve count, contar 1
+    }));
+
+    // Transformar monthly a { date: 'YYYY-MM-DD', count: X } (opcional)
+    const monthly = monthlyRaw.map(v => ({
+      date: formatDate(v.created_at || v.date),
+      count: v.count || 1,
+    }));
+
+    // Transformar weekly a { week: 'N', count: X }
+    const weekly = weeklyRaw.map(v => ({
+      week: v.week || getWeekNumber(new Date(v.created_at || v.date)),
+      count: v.count || 1,
+    }));
 
     return res.json({
       total,
@@ -41,5 +65,15 @@ router.get("/admin/stats", protegerRuta, async (req, res) => {
   }
 });
 
+// Función para calcular número de semana si no viene de Supabase
+function getWeekNumber(date) {
+  const d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  const dayNum = d.getDay() || 7;
+  d.setDate(d.getDate() + 4 - dayNum);
+  const yearStart = new Date(d.getFullYear(), 0, 1);
+  return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+}
+
 export default router;
+
 
