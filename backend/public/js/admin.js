@@ -357,44 +357,67 @@ async function deleteVideo(id, videoDiv) {
 
 async function cargarStats() {
   try {
-    const res = await fetch("/api/admin/stats", {
-      credentials: "include"
-    });
+    const res = await fetch("/api/admin/stats", { credentials: "include" });
+    if (!res.ok) throw new Error("No autorizado");
+    const data = await res.json();
 
-    if (!res.ok) {
-      throw new Error("No autorizado");
-    }
+    // Visitas de hoy
+    const hoy = new Date().toISOString().split("T")[0];
+    const visitasHoy = data.daily.find(d => d.date === hoy);
+    document.getElementById("visitas-hoy").textContent = visitasHoy ? visitasHoy.count : 0;
 
-    const stats = await res.json();
-
-    const container = document.getElementById("stats-content");
-
-    container.innerHTML = `
-      <p><strong>Total visitas:</strong> ${stats.total}</p>
-
-      <h4>Por día</h4>
-      ${stats.daily
-        .map(d => `<p>${d.day}: ${d.total}</p>`)
-        .join("")}
-
-      <h4>Por semana</h4>
-      ${stats.weekly
-        .map(w => `<p>${w.week}: ${w.total}</p>`)
-        .join("")}
-
-      <h4>Por mes</h4>
-      ${stats.monthly
-        .map(m => `<p>${m.month}: ${m.total}</p>`)
-        .join("")}
-    `;
-  } catch (error) {
-    console.error(error);
-    document.getElementById("stats-content").textContent =
-      "No se pudieron cargar las estadísticas";
+    // Selector de mes
+    const selector = document.getElementById("mes-selector");
+    selector.addEventListener("change", () => mostrarMes(data, selector.value));
+    
+  } catch (err) {
+    console.error("Error cargando stats:", err);
+    document.getElementById("visitas-hoy").textContent = "Error cargando datos";
   }
 }
 
+function mostrarMes(data, mesSeleccionado) {
+  const tbody = document.getElementById("visitas-semana");
+  const statsMes = document.getElementById("stats-mes");
+  statsMes.classList.remove("hidden");
+
+  // Filtrar por mes: YYYY-MM
+  const visitasMes = data.monthly.filter(d => d.date.startsWith(mesSeleccionado));
+
+  if (visitasMes.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="2">No hay datos para este mes</td></tr>`;
+    document.getElementById("total-mes").textContent = 0;
+    return;
+  }
+
+  // Agrupar por semana
+  const semanas = {};
+  visitasMes.forEach(d => {
+    const semana = d.week || getWeekNumber(new Date(d.date)); // si tu data tiene semana, usa d.week
+    semanas[semana] = (semanas[semana] || 0) + d.count;
+  });
+
+  // Construir filas de la tabla
+  tbody.innerHTML = "";
+  let total = 0;
+  for (const [semana, count] of Object.entries(semanas)) {
+    tbody.innerHTML += `<tr><td>${semana}</td><td>${count}</td></tr>`;
+    total += count;
+  }
+  document.getElementById("total-mes").textContent = total;
+}
+
+// Función para calcular número de semana si no viene de Supabase
+function getWeekNumber(date) {
+  const d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  const dayNum = d.getDay() || 7;
+  d.setDate(d.getDate() + 4 - dayNum);
+  const yearStart = new Date(d.getFullYear(), 0, 1);
+  return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+}
+
 cargarStats();
+
 
 
 document.addEventListener("click", async (e) => {

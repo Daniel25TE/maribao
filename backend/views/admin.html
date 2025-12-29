@@ -115,10 +115,47 @@
 
         </section>
 
-        <section id="stats">
-            <h2>Estadísticas de visitas</h2>
-            <div id="stats-content">Cargando...</div>
+        <section id="stats" class="p-4">
+            <h2 class="text-xl font-bold mb-4">Estadísticas de visitas</h2>
+        
+            <!-- Visitas de hoy -->
+            <div class="mb-6">
+                <h3 class="font-semibold">Visitas de hoy</h3>
+                <div id="visitas-hoy">Cargando...</div>
+            </div>
+        
+            <!-- Selector de mes -->
+            <div class="mb-4">
+                <label for="mes-selector" class="font-semibold">Selecciona un mes:</label>
+                <input type="month" id="mes-selector" />
+            </div>
+        
+            <!-- Estadísticas por mes -->
+            <div id="stats-mes" class="hidden">
+                <h3 class="font-semibold mb-2">Visitas del mes seleccionado</h3>
+        
+                <table class="border-collapse border w-full text-left">
+                    <thead>
+                        <tr class="bg-gray-200">
+                            <th class="border px-2 py-1">Semana</th>
+                            <th class="border px-2 py-1">Cantidad de visitas</th>
+                        </tr>
+                    </thead>
+                    <tbody id="visitas-semana">
+                        <tr>
+                            <td colspan="2">Selecciona un mes</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr class="font-bold">
+                            <td>Total del mes</td>
+                            <td id="total-mes">0</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
         </section>
+
 
 
 
