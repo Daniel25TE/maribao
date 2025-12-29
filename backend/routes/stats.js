@@ -1,7 +1,5 @@
 import express from "express";
 import { createClient } from "@supabase/supabase-js";
-import { isAdmin } from "../middlewares/isAdmin.js";
-
 
 const router = express.Router();
 
@@ -10,31 +8,40 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_KEY
 );
 
-// ⚠️ aquí luego usaremos tu middleware isAdmin
-router.get("/admin/stats", isAdmin, async (req, res) => {
+// Middleware para proteger la ruta usando la sesión de tu login
+function protegerRuta(req, res, next) {
+  if (req.session.usuarioAutenticado) return next();
+  return res.status(401).json({ error: "No autorizado" });
+}
+
+router.get("/admin/stats", protegerRuta, async (req, res) => {
   try {
-    // total
-    const { count: total } = await supabase
+    // total de visitas
+    const { count: total, error: totalError } = await supabase
       .from("visits")
       .select("*", { count: "exact", head: true });
+    if (totalError) throw totalError;
 
-    // por día
-    const { data: daily } = await supabase.rpc("visits_per_day");
+    // visitas por día
+    const { data: daily, error: dailyError } = await supabase.rpc("visits_per_day");
+    if (dailyError) throw dailyError;
 
-    // por semana
-    const { data: weekly } = await supabase.rpc("visits_per_week");
+    // visitas por semana
+    const { data: weekly, error: weeklyError } = await supabase.rpc("visits_per_week");
+    if (weeklyError) throw weeklyError;
 
-    // por mes
-    const { data: monthly } = await supabase.rpc("visits_per_month");
+    // visitas por mes
+    const { data: monthly, error: monthlyError } = await supabase.rpc("visits_per_month");
+    if (monthlyError) throw monthlyError;
 
     return res.json({
       total,
       daily,
       weekly,
-      monthly
+      monthly,
     });
   } catch (error) {
-    console.error("Error stats:", error);
+    console.error("Error obteniendo estadísticas:", error);
     res.status(500).json({ error: "Error obteniendo estadísticas" });
   }
 });
