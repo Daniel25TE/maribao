@@ -52,34 +52,34 @@ router.get("/admin/stats", protegerRuta, async (req, res) => {
     console.log("📊 MonthlyRaw:", monthlyRaw);
 
     // Transformar daily a { day, total }
-    const daily = dailyRaw
-      .filter(v => v.created_at || v.date)
-      .map(v => ({
-        day: formatDate(v.created_at || v.date),
-        total: v.count ?? 1
-      }));
+    const daily = dailyRaw.map(v => ({
+  date: v.day,   // usa 'day' directamente
+  count: v.total
+}));
+
     
     console.log("📊 Daily procesado:", daily);
 
     // Transformar weekly a { week, total }
     const weekly = weeklyRaw.map(v => ({
-      week: v.week || getWeekNumber(new Date(v.created_at || v.date)),
-      total: v.count ?? 1
-    }));
+  week: v.week,
+  count: v.total
+}));
+
 
     console.log("📊 Weekly procesado:", weekly);
 
     // Transformar monthly a { month, total }
     const monthly = monthlyRaw.map(v => ({
-      month: formatDate(v.created_at || v.date),
-      total: v.count ?? 1
-    }));
+  date: v.month,   // aquí llamamos 'date' para que el frontend lo entienda
+  count: v.total
+}));
+
 
     console.log("📊 Monthly procesado:", monthly);
 
     res.json({ total, daily, weekly, monthly });
 
-    return res.json({ total, daily, weekly, monthly });
   } catch (error) {
     console.error("Error stats:", error);
     res.status(500).json({ error: "Error obteniendo estadísticas" });
