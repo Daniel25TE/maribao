@@ -13,8 +13,19 @@ const supabase = createClient(
 
 // Helper: formatear fecha a YYYY-MM-DD
 function formatDate(dateStr) {
+  if (!dateStr) return null;
   const d = new Date(dateStr);
+  if (isNaN(d)) return null;
   return d.toISOString().split("T")[0];
+}
+
+// Función para calcular número de semana si no viene de Supabase
+function getWeekNumber(date) {
+  const d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  const dayNum = d.getDay() || 7;
+  d.setDate(d.getDate() + 4 - dayNum);
+  const yearStart = new Date(d.getFullYear(), 0, 1);
+  return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
 }
 
 // Ruta de estadísticas protegida
@@ -36,43 +47,41 @@ router.get("/admin/stats", protegerRuta, async (req, res) => {
     }
 
     // Transformar daily a { date: 'YYYY-MM-DD', count: X }
-    const daily = dailyRaw.map(v => ({
-      date: formatDate(v.created_at || v.date), // depende del campo que venga
-      count: v.count || 1,                     // si tu RPC no devuelve count, contar 1
-    }));
+    const daily = (dailyRaw || [])
+      .filter(v => v.created_at || v.date)
+      .map(v => ({
+        date: formatDate(v.created_at || v.date),
+        count: v.count || 1,
+      }));
 
-    // Transformar monthly a { date: 'YYYY-MM-DD', count: X } (opcional)
-    const monthly = monthlyRaw.map(v => ({
-      date: formatDate(v.created_at || v.date),
-      count: v.count || 1,
-    }));
+    // Transformar monthly a { date: 'YYYY-MM-DD', count: X }
+    const monthly = (monthlyRaw || [])
+      .filter(v => v.created_at || v.date)
+      .map(v => ({
+        date: formatDate(v.created_at || v.date),
+        count: v.count || 1,
+      }));
 
     // Transformar weekly a { week: 'N', count: X }
-    const weekly = weeklyRaw.map(v => ({
-      week: v.week || getWeekNumber(new Date(v.created_at || v.date)),
-      count: v.count || 1,
-    }));
+    const weekly = (weeklyRaw || [])
+      .filter(v => v.created_at || v.date)
+      .map(v => ({
+        week: v.week || getWeekNumber(new Date(v.created_at || v.date)),
+        count: v.count || 1,
+      }));
 
     return res.json({
-      total,
+      total: total || 0,
       daily,
       weekly,
       monthly
     });
+
   } catch (error) {
     console.error("Error stats:", error);
     res.status(500).json({ error: "Error obteniendo estadísticas" });
   }
 });
-
-// Función para calcular número de semana si no viene de Supabase
-function getWeekNumber(date) {
-  const d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-  const dayNum = d.getDay() || 7;
-  d.setDate(d.getDate() + 4 - dayNum);
-  const yearStart = new Date(d.getFullYear(), 0, 1);
-  return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
-}
 
 export default router;
 
