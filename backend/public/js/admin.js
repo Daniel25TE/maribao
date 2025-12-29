@@ -374,7 +374,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Mostrar estadísticas
       container.innerHTML = `
-        <p><strong>Total visitas:</strong> ${stats.total}</p>
+        <p><strong>Total visitas desde que se creo la pagina (2025-12):</strong> ${stats.total}</p>
 
         <h4>Por día</h4>
         ${stats.daily.map(d => `<p>${d.date}: ${d.count}</p>`).join("")}
