@@ -20,6 +20,8 @@ import pdfRoutes from './routes/pdf.js';
 import { generarPdfReserva, generarPdfPagado, generarPdfAbonado, generarPdfReservaTarjeta } from './routes/pdf.js';
 import adminVideoRoutes from "./routes/adminVideo.js";
 import settingsRoutes from "./routes/settings.js";
+import visitRoutes from "./routes/visit.js";
+import statsRoutes from "./routes/stats.js";
 
 dotenv.config();
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -311,6 +313,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', mediaRoutes);
 app.use('/api', pdfRoutes);
+app.use("/api", visitRoutes);
+app.use("/api", statsRoutes);
 
 
 

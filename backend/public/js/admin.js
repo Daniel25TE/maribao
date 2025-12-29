@@ -355,6 +355,48 @@ async function deleteVideo(id, videoDiv) {
   }
 }
 
+async function cargarStats() {
+  try {
+    const res = await fetch("/api/admin/stats", {
+      credentials: "include"
+    });
+
+    if (!res.ok) {
+      throw new Error("No autorizado");
+    }
+
+    const stats = await res.json();
+
+    const container = document.getElementById("stats-content");
+
+    container.innerHTML = `
+      <p><strong>Total visitas:</strong> ${stats.total}</p>
+
+      <h4>Por día</h4>
+      ${stats.daily
+        .map(d => `<p>${d.day}: ${d.total}</p>`)
+        .join("")}
+
+      <h4>Por semana</h4>
+      ${stats.weekly
+        .map(w => `<p>${w.week}: ${w.total}</p>`)
+        .join("")}
+
+      <h4>Por mes</h4>
+      ${stats.monthly
+        .map(m => `<p>${m.month}: ${m.total}</p>`)
+        .join("")}
+    `;
+  } catch (error) {
+    console.error(error);
+    document.getElementById("stats-content").textContent =
+      "No se pudieron cargar las estadísticas";
+  }
+}
+
+cargarStats();
+
+
 document.addEventListener("click", async (e) => {
   // Eliminar
   if (e.target.classList.contains("delete-discount")) {
