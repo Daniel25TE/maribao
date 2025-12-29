@@ -1,7 +1,10 @@
-function protegerRuta(req, res, next) {
+// middlewares/auth.js
+
+export function protegerRuta(req, res, next) {
     if (req.session?.usuarioAutenticado) {
-        return next();
+        next();
     } else {
-        return res.status(401).json({ error: "No autorizado" });
+        res.status(401).json({ error: 'No autorizado' });
     }
 }
+
