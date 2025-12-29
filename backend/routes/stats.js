@@ -1,49 +1,45 @@
+// backend/routes/stats.js
 import express from "express";
 import { createClient } from "@supabase/supabase-js";
+import { protegerRuta } from "../middlewares/auth.js"; // tu middleware compartido
 
 const router = express.Router();
 
+// Supabase client (service role)
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_SERVICE_KEY
 );
 
-// Middleware para proteger la ruta usando la sesión de tu login
-function protegerRuta(req, res, next) {
-  if (req.session.usuarioAutenticado) return next();
-  return res.status(401).json({ error: "No autorizado" });
-}
-
+// Ruta de estadísticas protegida
 router.get("/admin/stats", protegerRuta, async (req, res) => {
   try {
-    // total de visitas
-    const { count: total, error: totalError } = await supabase
+    // Total de visitas
+    const { count: total } = await supabase
       .from("visits")
       .select("*", { count: "exact", head: true });
-    if (totalError) throw totalError;
 
-    // visitas por día
+    // Visitas por día, semana y mes usando tus funciones RPC
     const { data: daily, error: dailyError } = await supabase.rpc("visits_per_day");
-    if (dailyError) throw dailyError;
-
-    // visitas por semana
     const { data: weekly, error: weeklyError } = await supabase.rpc("visits_per_week");
-    if (weeklyError) throw weeklyError;
-
-    // visitas por mes
     const { data: monthly, error: monthlyError } = await supabase.rpc("visits_per_month");
-    if (monthlyError) throw monthlyError;
+
+    if (dailyError || weeklyError || monthlyError) {
+      console.error("Error obteniendo estadísticas:", { dailyError, weeklyError, monthlyError });
+      return res.status(500).json({ error: "Error obteniendo estadísticas" });
+    }
 
     return res.json({
       total,
       daily,
       weekly,
-      monthly,
+      monthly
     });
   } catch (error) {
-    console.error("Error obteniendo estadísticas:", error);
+    console.error("Error stats:", error);
     res.status(500).json({ error: "Error obteniendo estadísticas" });
   }
 });
 
 export default router;
+

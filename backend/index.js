@@ -307,14 +307,7 @@ app.use(
   })
 );
 
-app.use(cors(corsOptions));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/api', mediaRoutes);
-app.use('/api', pdfRoutes);
-app.use("/api", visitRoutes);
-app.use("/api", statsRoutes);
+
 
 
 
@@ -330,6 +323,14 @@ app.use(session({
     }
 }));
 
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/api', mediaRoutes);
+app.use('/api', pdfRoutes);
+app.use("/api", visitRoutes);
+app.use("/api", statsRoutes);
 
 function protegerRuta(req, res, next) {
     if (req.session.usuarioAutenticado) {
