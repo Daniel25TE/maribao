@@ -355,49 +355,60 @@ async function deleteVideo(id, videoDiv) {
   }
 }
 
-async function cargarStats() {
-  try {
-    const res = await fetch("/api/admin/stats", { credentials: "include" });
-    if (!res.ok) throw new Error("No autorizado");
+document.addEventListener("DOMContentLoaded", () => {
+  async function cargarStats() {
+    try {
+      const res = await fetch("/api/admin/stats", { credentials: "include" });
+      if (!res.ok) throw new Error("No autorizado");
 
-    const stats = await res.json();
-    console.log("Datos recibidos de /api/admin/stats:", stats);
+      const stats = await res.json();
+      console.log("Datos recibidos de /api/admin/stats:", stats);
 
-    const container = document.getElementById("stats-content");
+      const container = document.getElementById("stats-content");
+      const visitasHoyEl = document.getElementById("visitas-hoy");
 
-    // Mostrar todas las estadísticas
-    container.innerHTML = `
-      <p><strong>Total visitas:</strong> ${stats.total}</p>
+      if (!container || !visitasHoyEl) {
+        console.error("No se encontraron elementos del DOM");
+        return;
+      }
 
-      <h4>Por día</h4>
-      ${stats.daily.map(d => `<p>${d.date}: ${d.count}</p>`).join("")}
+      // Mostrar estadísticas
+      container.innerHTML = `
+        <p><strong>Total visitas:</strong> ${stats.total}</p>
 
-      <h4>Por semana</h4>
-      ${stats.weekly.map(w => `<p>${w.week}: ${w.count}</p>`).join("")}
+        <h4>Por día</h4>
+        ${stats.daily.map(d => `<p>${d.date}: ${d.count}</p>`).join("")}
 
-      <h4>Por mes</h4>
-      ${stats.monthly.map(m => `<p>${m.date}: ${m.count}</p>`).join("")}
-    `;
+        <h4>Por semana</h4>
+        ${stats.weekly.map(w => `<p>${w.week}: ${w.count}</p>`).join("")}
 
-    // Visitas de hoy
-    const hoy = new Date().toISOString().split("T")[0];
-console.log("Hoy:", hoy);
-const visitasHoy = stats.daily.find(d => d.date && d.date.slice(0, 10) === hoy);
-console.log("Visitas de hoy encontradas:", visitasHoy);
+        <h4>Por mes</h4>
+        ${stats.monthly.map(m => `<p>${m.date}: ${m.count}</p>`).join("")}
+      `;
 
-    document.getElementById("visitas-hoy").textContent = visitasHoy ? visitasHoy.count : 0;
+      // Visitas de hoy
+      const hoy = new Date().toISOString().split("T")[0];
+      const visitasHoy = stats.daily.find(d => d.date && d.date.slice(0, 10) === hoy);
+      visitasHoyEl.textContent = visitasHoy ? visitasHoy.count : 0;
 
-    // Selector de mes
-    const selector = document.getElementById("mes-selector");
-    selector.addEventListener("change", () => mostrarMes(stats, selector.value));
+      // Selector de mes
+      const selector = document.getElementById("mes-selector");
+      if (selector) {
+        selector.addEventListener("change", () => mostrarMes(stats, selector.value));
+      }
 
-  } catch (err) {
-    console.error("Error cargando stats:", err);
-    const container = document.getElementById("stats-content");
-    container.textContent = "No se pudieron cargar las estadísticas";
-    document.getElementById("visitas-hoy").textContent = "Error";
+    } catch (err) {
+      console.error("Error cargando stats:", err);
+      const container = document.getElementById("stats-content");
+      if (container) container.textContent = "No se pudieron cargar las estadísticas";
+      const visitasHoyEl = document.getElementById("visitas-hoy");
+      if (visitasHoyEl) visitasHoyEl.textContent = "Error";
+    }
   }
-}
+
+  cargarStats();
+});
+
 
 function mostrarMes(data, mesSeleccionado) {
   const tbody = document.getElementById("visitas-semana");
@@ -443,9 +454,7 @@ function getWeekNumber(date) {
   return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  cargarStats();
-});
+
 
 
 
