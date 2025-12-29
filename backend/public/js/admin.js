@@ -443,7 +443,9 @@ function getWeekNumber(date) {
   return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
 }
 
-cargarStats();
+document.addEventListener("DOMContentLoaded", () => {
+  cargarStats();
+});
 
 
 
