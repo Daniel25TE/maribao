@@ -100,22 +100,53 @@
                 </table>
             </div>
         </div>
-        <section class="bg-white p-4 rounded shadow mt-6">
-            <h2 class="text-lg font-semibold mb-2">Video principal</h2>
+        <section class="mt-12 p-6 max-w-3xl mx-auto bg-white rounded-xl shadow">
+            <h2 class="text-2xl font-bold mb-6 text-center">
+                Gestión de videos
+            </h2>
         
-            <input type="file" id="videoInput" accept="video/*" />
+            <!-- Video principal -->
+            <div class="mb-8">
+                <h3 class="text-gray-500 text-sm uppercase tracking-wide mb-2">
+                    Video principal
+                </h3>
         
-            <button id="uploadVideo" class="mt-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
-                Subir video
-            </button>
+                <!-- Upload controls -->
+                <div class="flex flex-col sm:flex-row items-center gap-4">
+                    <input type="file" id="videoInput" accept="video/*" class="block w-full text-sm text-gray-600
+                       file:mr-4 file:py-2 file:px-4
+                       file:rounded-lg file:border-0
+                       file:text-sm file:font-semibold
+                       file:bg-blue-50 file:text-blue-700
+                       hover:file:bg-blue-100" />
         
-            <p id="videoStatus" class="mt-2 text-sm"></p>
-            <video id="videoPreview" controls width="200"></video>
-            <div id="videosList"></div>
-
+                    <button id="uploadVideo"
+                        class="bg-blue-600 hover:bg-blue-700 transition text-white px-6 py-2 rounded-lg font-medium">
+                        Subir video
+                    </button>
+                </div>
+        
+                <!-- Status -->
+                <p id="videoStatus" class="mt-3 text-sm text-gray-600 text-center"></p>
+        
+                <!-- Preview -->
+                <div class="mt-6 flex justify-center">
+                    <video id="videoPreview" controls class="w-full max-w-md rounded-lg border shadow-sm"></video>
+                </div>
+            </div>
+        
+            <!-- Lista de videos -->
+            <div>
+                <h3 class="text-gray-500 text-sm uppercase tracking-wide mb-3">
+                    Videos subidos
+                </h3>
+        
+                <div id="videosList" class="grid gap-4 sm:grid-cols-2"></div>
+            </div>
         </section>
 
-        <section id="stats" class="p-6 max-w-3xl mx-auto bg-white rounded-xl shadow">
+
+        <section id="stats" class="mt-12 p-6 max-w-3xl mx-auto bg-white rounded-xl shadow">
             <h2 class="text-2xl font-bold mb-6 text-center">
                 Estadísticas de visitas
             </h2>

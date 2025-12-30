@@ -388,7 +388,7 @@ document.addEventListener("DOMContentLoaded", () => {
 if (totalGeneralEl) {
   totalGeneralEl.innerHTML = `
     <p>
-      <strong>Total visitas desde que se creó la página:</strong>
+      <strong>Total visitas desde que se creó la página (12-2025):</strong>
       ${stats.total}
     </p>
   `;
