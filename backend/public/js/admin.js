@@ -374,8 +374,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Mostrar estadísticas
       container.innerHTML = `
-        <p><strong>Total visitas desde que se creo la pagina (2025-12):</strong> ${stats.total}</p>
-
         <h4>Por día</h4>
         ${stats.daily.map(d => `<p>${d.date}: ${d.count}</p>`).join("")}
 
@@ -385,6 +383,17 @@ document.addEventListener("DOMContentLoaded", () => {
           return `<p>${mes}: ${m.count}</p>`;
         }).join("")}
       `;
+      const totalGeneralEl = document.getElementById("total-general");
+
+if (totalGeneralEl) {
+  totalGeneralEl.innerHTML = `
+    <p>
+      <strong>Total visitas desde que se creó la página:</strong>
+      ${stats.total}
+    </p>
+  `;
+}
+
 
       // Visitas de hoy
       const hoy = new Date().toISOString().split("T")[0];

@@ -115,48 +115,67 @@
 
         </section>
 
-        <section id="stats" class="p-4">
-            <h2 class="text-xl font-bold mb-4">Estadísticas de visitas</h2>
+        <section id="stats" class="p-6 max-w-3xl mx-auto bg-white rounded-xl shadow">
+            <h2 class="text-2xl font-bold mb-6 text-center">
+                Estadísticas de visitas
+            </h2>
         
-            <div id="stats-content"></div>
-
+            <!-- Stats crudos (debug / info general) -->
+            <div id="stats-content" class="mb-6 text-sm text-gray-700"></div>
+        
             <!-- Visitas de hoy -->
-            <div class="mb-6">
-                <h3 class="font-semibold">Visitas de hoy</h3>
-                <div id="visitas-hoy">Cargando...</div>
+            <div class="mb-6 text-center">
+                <h3 class="text-gray-500 text-sm uppercase tracking-wide mb-1">
+                    Visitas de hoy
+                </h3>
+                <div id="visitas-hoy" class="text-4xl font-bold text-blue-600">
+                    Cargando…
+                </div>
             </div>
         
             <!-- Selector de mes -->
-            <div class="mb-4">
-                <label for="mes-selector" class="font-semibold">Selecciona un mes:</label>
-                <input type="month" id="mes-selector" />
+            <div class="mb-6 flex justify-center items-center gap-2">
+                <label for="mes-selector" class="font-medium">
+                    Selecciona un mes:
+                </label>
+                <input type="month" id="mes-selector" class="border rounded px-3 py-1" />
             </div>
         
             <!-- Estadísticas por mes -->
             <div id="stats-mes" class="hidden">
-                <h3 class="font-semibold mb-2">Visitas del mes seleccionado</h3>
+                <h3 class="font-semibold mb-3 text-center">
+                    Visitas del mes seleccionado
+                </h3>
         
-                <table class="border-collapse border w-full text-left">
-                    <thead>
-                        <tr class="bg-gray-200">
-                            <th class="border px-2 py-1">Semana</th>
-                            <th class="border px-2 py-1">Cantidad de visitas</th>
-                        </tr>
-                    </thead>
-                    <tbody id="visitas-semana">
-                        <tr>
-                            <td colspan="2">Selecciona un mes</td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr class="font-bold">
-                            <td>Total del mes</td>
-                            <td id="total-mes">0</td>
-                        </tr>
-                    </tfoot>
-                </table>
+                <div class="overflow-x-auto">
+                    <table class="border-collapse border w-full text-center">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="border px-3 py-2">Semana</th>
+                                <th class="border px-3 py-2">Cantidad de visitas</th>
+                            </tr>
+                        </thead>
+        
+                        <tbody id="visitas-semana">
+                            <tr>
+                                <td colspan="2" class="py-4 text-gray-500">
+                                    Selecciona un mes
+                                </td>
+                            </tr>
+                        </tbody>
+        
+                        <tfoot>
+                            <tr class="font-bold bg-gray-50">
+                                <td class="border px-3 py-2">Total del mes</td>
+                                <td id="total-mes" class="border px-3 py-2">0</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <div id="total-general" class="mt-4 text-center text-sm text-gray-600"></div>
+                </div>
             </div>
         </section>
+
 
 
 
