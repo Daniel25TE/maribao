@@ -8,193 +8,181 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
-<body class="bg-gray-100 min-h-screen flex flex-col">
 
-    <!-- HEADER -->
-    <header class="bg-gray-800 text-white py-4 shadow-md">
-        <div class="container mx-auto px-4 flex justify-between items-center">
-            <h1 class="text-xl font-bold">📋 Panel de Reservas</h1>
-            <a href="/logout" class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md text-sm">
-                Cerrar sesión
-            </a>
-        </div>
-    </header>
+<body class="bg-gray-100 min-h-screen flex flex-col md:flex-row">
 
-    <!-- MAIN -->
-    <main class="flex-1 flex flex-col items-start justify-start p-4 sm:p-6">
-        <h2 class="text-xl font-bold">Nota: El boton amarillo cancela la reserva y envia un correo electronico de cancelacion al cliente PERO NO desbloquea las fechas del calendario. Si deseas desbloquear las fechas del calendario, deberas seleccionar el boton rojo.</h2>
-        <p>Entonces los pasos sugeridos para que canceles la reserva, envies un correo electronico de cancelacion al cliente y desbloquees las fechas del calendario son:</p>
-        <p>1. Primero seleccionar el boton amarillo y luego,</p>
-        <p>2. Seleccionar el boton rojo</p>
-        <div class="w-full max-w-6xl mx-auto bg-white p-4 sm:p-6 rounded-xl shadow-lg overflow-x-auto">
+    <!-- SIDEBAR -->
+    <aside id="sidebar"
+        class="bg-white w-64 p-4 border-r border-gray-200 fixed md:relative inset-y-0 left-0 transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-50">
+        <h1 class="text-xl font-bold mb-6 text-center">Admin Panel</h1>
+        <nav class="flex flex-col gap-2">
+            <button class="sidebar-btn active bg-gray-200 text-left px-4 py-2 rounded"
+                data-target="reservas-section">Reservas</button>
+            <button class="sidebar-btn text-left px-4 py-2 rounded" data-target="descuentos-section">Descuentos</button>
+            <button class="sidebar-btn text-left px-4 py-2 rounded" data-target="videos-section">Videos</button>
+            <button class="sidebar-btn text-left px-4 py-2 rounded" data-target="stats-section">Estadísticas</button>
+        </nav>
+        <a href="/logout" class="mt-6 block bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md text-center">
+            Cerrar sesión
+        </a>
+    </aside>
 
-            <!-- BOTONES -->
-            <div class="mb-4 flex flex-col sm:flex-row gap-2">
-                <button id="delete-selected"
-                    class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md w-full sm:w-auto">
-                    🗑️ Cancelar reservas seleccionadas y enviar correo electronico de cancelacion al cliente, PERO NO desbloquea las fechas en el calendario.
-                </button>
-                <button id="delete-permanent"
-                    class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md w-full sm:w-auto">
-                    ❌ Cancelar reservas seleccionadas y NO enviar correo electronico de cancelacion al cliente, PERO SI desbloquea las fechas del calendario.
-                </button>
-            </div>
+    <!-- BOTÓN HAMBURGUESA para móviles -->
+    <button id="hamburgerBtn" class="md:hidden fixed top-4 left-4 bg-gray-800 text-white p-2 rounded z-50">
+        ☰
+    </button>
 
-            <!-- TABLA -->
-            <div class="overflow-x-auto">
-                <table class="min-w-full border border-gray-300 text-sm sm:text-base">
-                    <thead class="bg-gray-800 text-white">
-                        <tr>
-                            <th class="py-3 px-4 border border-gray-300"></th>
-                            <th class="py-3 px-4 border border-gray-300">Fecha</th>
-                            <th class="py-3 px-4 border border-gray-300">Nombre</th>
-                            <th class="py-3 px-4 border border-gray-300">Email</th>
-                            <th class="py-3 px-4 border border-gray-300">Teléfono</th>
-                            <th class="py-3 px-4 border border-gray-300">Check-in</th>
-                            <th class="py-3 px-4 border border-gray-300">Check-out</th>
-                            <th class="py-3 px-4 border border-gray-300">Cuarto</th>
-                            <th class="py-3 px-4 border border-gray-300">Método de Pago</th>
-                            <th class="py-3 px-4 border border-gray-300">Solicitudes Especiales</th>
-                            <th class="py-3 px-4 border border-gray-300">Hora de Llegada</th>
-                            <th class="py-3 px-4 border border-gray-300">Número de Reserva</th>
-                            <th class="py-3 px-4 border border-gray-300">Estado</th>
-                            <th class="py-3 px-4 border border-gray-300">PDF</th>
-                            <th class="py-3 px-4 border border-gray-300">PDF Abonado</th>
-                            <th class="py-3 px-4 border border-gray-300">PDF Pagado</th>
-                        </tr>
-                    </thead>
-                    <tbody id="reservas-table" class="text-gray-700">
-                        <!-- FILAS SE AGREGAN DINÁMICAMENTE CON admin.js -->
-                    </tbody>
-                </table>
+    <!-- PANEL PRINCIPAL -->
+    <main class="flex-1 p-4 sm:p-6 transition-all duration-300">
+
+        <!-- RESERVAS -->
+        <section id="reservas-section" class="admin-section">
+            <h2 class="text-xl font-bold mb-2">Nota: El botón amarillo cancela la reserva y envía correo electrónico de
+                cancelación al cliente PERO NO desbloquea las fechas del calendario.</h2>
+            <p>Pasos sugeridos para cancelar la reserva y desbloquear fechas:</p>
+            <p>1. Primero seleccionar el botón amarillo y luego,</p>
+            <p>2. Seleccionar el botón rojo</p>
+            <div class="w-full bg-white p-4 sm:p-6 rounded-xl shadow-lg overflow-x-auto">
+
+                <!-- BOTONES -->
+                <div class="mb-4 flex flex-col sm:flex-row gap-2">
+                    <button id="delete-selected"
+                        class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md w-full sm:w-auto">
+                        🗑️ Cancelar reservas seleccionadas y enviar correo, PERO NO desbloquea fechas
+                    </button>
+                    <button id="delete-permanent"
+                        class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md w-full sm:w-auto">
+                        ❌ Cancelar reservas seleccionadas y NO enviar correo, PERO SI desbloquea fechas
+                    </button>
+                </div>
+
+                <!-- TABLA -->
+                <div class="overflow-x-auto">
+                    <table class="min-w-full border border-gray-300 text-sm sm:text-base">
+                        <thead class="bg-gray-800 text-white">
+                            <tr>
+                                <th class="py-3 px-4 border border-gray-300"></th>
+                                <th class="py-3 px-4 border border-gray-300">Fecha</th>
+                                <th class="py-3 px-4 border border-gray-300">Nombre</th>
+                                <th class="py-3 px-4 border border-gray-300">Email</th>
+                                <th class="py-3 px-4 border border-gray-300">Teléfono</th>
+                                <th class="py-3 px-4 border border-gray-300">Check-in</th>
+                                <th class="py-3 px-4 border border-gray-300">Check-out</th>
+                                <th class="py-3 px-4 border border-gray-300">Cuarto</th>
+                                <th class="py-3 px-4 border border-gray-300">Método de Pago</th>
+                                <th class="py-3 px-4 border border-gray-300">Solicitudes Especiales</th>
+                                <th class="py-3 px-4 border border-gray-300">Hora de Llegada</th>
+                                <th class="py-3 px-4 border border-gray-300">Número de Reserva</th>
+                                <th class="py-3 px-4 border border-gray-300">Estado</th>
+                                <th class="py-3 px-4 border border-gray-300">PDF</th>
+                                <th class="py-3 px-4 border border-gray-300">PDF Abonado</th>
+                                <th class="py-3 px-4 border border-gray-300">PDF Pagado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reservas-table" class="text-gray-700">
+                            <!-- FILAS DINÁMICAS -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-        <!-- BLOQUE FECHAS CON DESCUENTO -->
-        <div class="w-full max-w-6xl mx-auto my-8 bg-white p-4 sm:p-6 rounded-xl shadow-lg flex flex-col items-center">
-        
-            <!-- TÍTULO -->
-            <h2 class="text-lg font-bold mt-8 mb-4 text-center">📅 Fechas con Descuento</h2>
-        
-            <!-- BOTÓN -->
-            <div class="mb-4 flex gap-2 justify-center w-full">
-                <button id="add-discount" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md">
-                    ➕ Agregar fecha de descuento
-                </button>
+        </section>
+
+        <!-- DESCUENTOS -->
+        <section id="descuentos-section" class="admin-section hidden mt-12">
+            <div class="w-full bg-white p-4 sm:p-6 rounded-xl shadow-lg flex flex-col items-start">
+
+                <h2 class="text-lg font-bold mt-8 mb-4 text-left">📅 Fechas con Descuento</h2>
+
+                <div class="mb-4 flex gap-2 justify-start w-full">
+                    <button id="add-discount" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md">
+                        ➕ Agregar fecha de descuento
+                    </button>
+                </div>
+
+                <div class="overflow-x-auto w-full">
+                    <table class="min-w-full border border-gray-300 text-sm sm:text-base">
+                        <thead class="bg-gray-800 text-white">
+                            <tr>
+                                <th class="py-2 px-4 border border-gray-300">Fecha</th>
+                                <th class="py-2 px-4 border border-gray-300">Porcentaje</th>
+                                <th class="py-2 px-4 border border-gray-300">Descripción</th>
+                                <th class="py-2 px-4 border border-gray-300">Activo</th>
+                                <th class="py-2 px-4 border border-gray-300">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="fechas-descuento-table" class="text-gray-700">
+                            <!-- FILAS DINÁMICAS -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        
-            <!-- TABLA -->
-            <div class="overflow-x-auto w-full">
-                <table class="min-w-full border border-gray-300 text-sm sm:text-base">
-                    <thead class="bg-gray-800 text-white">
-                        <tr>
-                            <th class="py-2 px-4 border border-gray-300">Fecha</th>
-                            <th class="py-2 px-4 border border-gray-300">Porcentaje</th>
-                            <th class="py-2 px-4 border border-gray-300">Descripción</th>
-                            <th class="py-2 px-4 border border-gray-300">Activo</th>
-                            <th class="py-2 px-4 border border-gray-300">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="fechas-descuento-table" class="text-gray-700">
-                        <!-- Filas se agregan dinámicamente -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <section class="mt-12 p-6 max-w-3xl mx-auto bg-white rounded-xl shadow">
-            <h2 class="text-2xl font-bold mb-6 text-center">
-                Gestión de videos
-            </h2>
-        
-            <!-- Video principal -->
+        </section>
+
+        <!-- VIDEOS -->
+        <section id="videos-section" class="admin-section hidden mt-12 p-6 w-full bg-white rounded-xl shadow">
+            <h2 class="text-2xl font-bold mb-6 text-left">Gestión de videos</h2>
+
             <div class="mb-8">
-                <h3 class="text-gray-500 text-sm uppercase tracking-wide mb-2">
-                    Video principal
-                </h3>
-        
-                <!-- Upload controls -->
-                <div class="flex flex-col sm:flex-row items-center gap-4">
+                <h3 class="text-gray-500 text-sm uppercase tracking-wide mb-2">Video principal</h3>
+
+                <div class="flex flex-col sm:flex-row items-start gap-4">
                     <input type="file" id="videoInput" accept="video/*" class="block w-full text-sm text-gray-600
                        file:mr-4 file:py-2 file:px-4
                        file:rounded-lg file:border-0
                        file:text-sm file:font-semibold
                        file:bg-blue-50 file:text-blue-700
                        hover:file:bg-blue-100" />
-        
+
                     <button id="uploadVideo"
                         class="bg-blue-600 hover:bg-blue-700 transition text-white px-6 py-2 rounded-lg font-medium">
                         Subir video
                     </button>
                 </div>
-        
-                <!-- Status -->
-                <p id="videoStatus" class="mt-3 text-sm text-gray-600 text-center"></p>
-        
-                <!-- Preview -->
-                <div class="mt-6 flex justify-center">
+
+                <p id="videoStatus" class="mt-3 text-sm text-gray-600 text-left"></p>
+
+                <div class="mt-6 flex justify-start">
                     <video id="videoPreview" controls class="w-full max-w-md rounded-lg border shadow-sm"></video>
                 </div>
             </div>
-        
-            <!-- Lista de videos -->
+
             <div>
-                <h3 class="text-gray-500 text-sm uppercase tracking-wide mb-3">
-                    Videos subidos
-                </h3>
-        
+                <h3 class="text-gray-500 text-sm uppercase tracking-wide mb-3 text-left">Videos subidos</h3>
                 <div id="videosList" class="grid gap-4 sm:grid-cols-2"></div>
             </div>
         </section>
 
+        <!-- ESTADÍSTICAS -->
+        <section id="stats-section" class="admin-section hidden mt-12 p-6 w-full bg-white rounded-xl shadow">
+            <h2 class="text-2xl font-bold mb-6 text-left">Estadísticas de visitas</h2>
 
-        <section id="stats" class="mt-12 p-6 max-w-3xl mx-auto bg-white rounded-xl shadow">
-            <h2 class="text-2xl font-bold mb-6 text-center">
-                Estadísticas de visitas
-            </h2>
-        
-            <!-- Stats crudos (debug / info general) -->
             <div id="stats-content" class="mb-6 text-sm text-gray-700"></div>
-        
-            <!-- Visitas de hoy -->
-            <div class="mb-6 text-center">
-                <h3 class="text-gray-500 text-sm uppercase tracking-wide mb-1">
-                    Visitas de hoy
-                </h3>
-                <div id="visitas-hoy" class="text-4xl font-bold text-blue-600">
-                    Cargando…
-                </div>
+
+            <div class="mb-6 text-left">
+                <h3 class="text-gray-500 text-sm uppercase tracking-wide mb-1">Visitas de hoy</h3>
+                <div id="visitas-hoy" class="text-4xl font-bold text-blue-600">Cargando…</div>
             </div>
-        
-            <!-- Selector de mes -->
-            <div class="mb-6 flex justify-center items-center gap-2">
-                <label for="mes-selector" class="font-medium">
-                    Selecciona un mes:
-                </label>
+
+            <div class="mb-6 flex flex-col sm:flex-row items-start gap-2">
+                <label for="mes-selector" class="font-medium">Selecciona un mes:</label>
                 <input type="month" id="mes-selector" class="border rounded px-3 py-1" />
             </div>
-        
-            <!-- Estadísticas por mes -->
+
             <div id="stats-mes" class="hidden">
-                <h3 class="font-semibold mb-3 text-center">
-                    Visitas del mes seleccionado
-                </h3>
-        
+                <h3 class="font-semibold mb-3 text-left">Visitas del mes seleccionado</h3>
                 <div class="overflow-x-auto">
-                    <table class="border-collapse border w-full text-center">
+                    <table class="border-collapse border w-full text-left">
                         <thead>
                             <tr class="bg-gray-100">
                                 <th class="border px-3 py-2">Semana</th>
                                 <th class="border px-3 py-2">Cantidad de visitas</th>
                             </tr>
                         </thead>
-        
                         <tbody id="visitas-semana">
                             <tr>
-                                <td colspan="2" class="py-4 text-gray-500">
-                                    Selecciona un mes
-                                </td>
+                                <td colspan="2" class="py-4 text-gray-500">Selecciona un mes</td>
                             </tr>
                         </tbody>
-        
                         <tfoot>
                             <tr class="font-bold bg-gray-50">
                                 <td class="border px-3 py-2">Total del mes</td>
@@ -202,18 +190,49 @@
                             </tr>
                         </tfoot>
                     </table>
-                    <div id="total-general" class="mt-4 text-center text-sm text-gray-600"></div>
+                    <div id="total-general" class="mt-4 text-left text-sm text-gray-600"></div>
                 </div>
             </div>
         </section>
 
-
-
-
-
     </main>
 
     <script src="/js/admin.js"></script>
+    <script>
+        // Toggle sidebar en móviles
+        const sidebar = document.getElementById('sidebar');
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+
+        hamburgerBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+        });
+
+        // Navegación entre secciones
+        const sidebarBtns = document.querySelectorAll('.sidebar-btn');
+        const sections = document.querySelectorAll('.admin-section');
+
+        sidebarBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Quitar active a todos
+                sidebarBtns.forEach(b => b.classList.remove('bg-gray-200'));
+                btn.classList.add('bg-gray-200');
+
+                const targetId = btn.getAttribute('data-target');
+                sections.forEach(sec => {
+                    if (sec.id === targetId) {
+                        sec.classList.remove('hidden');
+                    } else {
+                        sec.classList.add('hidden');
+                    }
+                });
+
+                // Si estamos en móvil, cerrar sidebar
+                if (window.innerWidth < 768) {
+                    sidebar.classList.add('-translate-x-full');
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
