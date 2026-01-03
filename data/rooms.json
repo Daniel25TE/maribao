@@ -33,58 +33,76 @@
             "description": "Tamaño del apartamento: 215 ft²",
             "images": [
                 {
-                    "src": "images/maribao_outside3_medium.webp",
-                    "srcset": "images/maribao_outside3_mobile.webp 640w, images/maribao_outside3_medium.webp 1200w, images/maribao_outside3_large.webp 1920w",
+                    "src": "images/new-inventory-inside-1-medium.webp",
+                    "srcset": "images/new-inventory-inside-1-small.webp 640w, images/new-inventory-inside-1-medium.webp 1200w, images/new-inventory-inside-1-large.webp 1920w",
                     "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
                     "alt": "Imagen 1",
                     "width": "1200",
                     "height": "675",
-                    "title": "Estrella"
+                    "title": "Luna"
                 },
                 {
-                    "src": "images/maribao_outside6_medium.webp",
-                    "srcset": "images/maribao_outside6_mobile.webp 640w, images/maribao_outside6_medium.webp 1200w, images/maribao_outside6_large.webp 1920w",
+                    "src": "images/new-inventory-inside-2-medium.webp",
+                    "srcset": "images/new-inventory-inside-2-small.webp 640w, images/new-inventory-inside-2-medium.webp 1200w, images/new-inventory-inside-2-large.webp 1920w",
                     "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
                     "alt": "Imagen 1",
                     "width": "1200",
                     "height": "675",
-                    "title": "Estrella"
+                    "title": "Luna"
                 },
                 {
-                    "src": "images/cuartouno_medium.webp",
-                    "srcset": "images/cuartouno_mobile.webp 640w, images/cuartouno_medium.webp 1200w, images/cuartouno_large.webp 1920w",
+                    "src": "images/new-inventory-inside-3-medium.webp",
+                    "srcset": "images/new-inventory-inside-3-small.webp 640w, images/new-inventory-inside-3-medium.webp 1200w, images/new-inventory-inside-3-large.webp 1920w",
                     "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
                     "alt": "Imagen 1",
                     "width": "1200",
                     "height": "675",
-                    "title": "Estrella"
+                    "title": "Luna"
                 },
                 {
-                    "src": "images/cuartounocuatro_medium.webp",
-                    "srcset": "images/cuartounocuatro_mobile.webp 640w, images/cuartounocuatro_medium.webp 1200w, images/cuartounocuatro_large.webp 1920w",
+                    "src": "images/new-inventory-inside-4-medium.webp",
+                    "srcset": "images/new-inventory-inside-4-small.webp 640w, images/new-inventory-inside-4-medium.webp 1200w, images/new-inventory-inside-4-large.webp 1920w",
                     "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
                     "alt": "Imagen 1",
                     "width": "1200",
                     "height": "675",
-                    "title": "Estrella"
+                    "title": "Luna"
                 },
                 {
-                    "src": "images/cuartounotres_medium.webp",
-                    "srcset": "images/cuartounotres_mobile.webp 640w, images/cuartounotres_medium.webp 1200w, images/cuartounotres_large.webp 1920w",
+                    "src": "images/new-inventory-inside-5-medium.webp",
+                    "srcset": "images/new-inventory-inside-5-small.webp 640w, images/new-inventory-inside-5-medium.webp 1200w, images/new-inventory-inside-5-large.webp 1920w",
                     "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
                     "alt": "Imagen 1",
                     "width": "1200",
                     "height": "675",
-                    "title": "Estrella"
+                    "title": "Luna"
                 },
                 {
-                    "src": "images/new-inventory-maribao-3-meduim.webp",
-                    "srcset": "images//new-inventory-maribao-3-small.webp 640w, images/new-inventory-maribao-3-meduim.webp 1200w, images//new-inventory-maribao-3-large.webp 1920w",
+                    "src": "images/new-inventory-inside-6-medium.webp",
+                    "srcset": "images/new-inventory-inside-6-small.webp 640w, images/new-inventory-inside-6-medium.webp 1200w, images/new-inventory-inside-6-large.webp 1920w",
                     "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
                     "alt": "Imagen 1",
                     "width": "1200",
                     "height": "675",
-                    "title": "Estrella"
+                    "title": "Luna"
+                },
+                {
+                    "src": "images/new-inventory-inside-7-medium.webp",
+                    "srcset": "images/new-inventory-inside-7-small.webp 640w, images/new-inventory-inside-7-medium.webp 1200w, images/new-inventory-inside-7-large.webp 1920w",
+                    "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
+                    "alt": "Imagen 1",
+                    "width": "1200",
+                    "height": "675",
+                    "title": "Luna"
+                },
+                {
+                    "src": "images/new-inventory-inside-8-medium.webp",
+                    "srcset": "images/new-inventory-inside-8-small.webp 640w, images/new-inventory-inside-8-medium.webp 1200w, images/new-inventory-inside-8-large.webp 1920w",
+                    "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
+                    "alt": "Imagen 1",
+                    "width": "1200",
+                    "height": "675",
+                    "title": "Luna"
                 }
             ],
             "features": [
@@ -342,67 +360,22 @@
             "description": "Tamaño 226 ft²",
             "images": [
                 {
-                    "src": "images/cuartocuatro_uno_medium.webp",
-                    "srcset": "images/cuartocuatro_uno_mobile.webp 640w, images/cuartocuatro_uno_medium.webp 1200w, images/cuartocuatro_uno_large.webp 1920w",
-                    "sizes": "(max-width: 840px) 100vw, 50vw",
-                    "alt": "Habitación con vista al mar",
+                    "src": "images/new-inventory-inside-14-medium.webp",
+                    "srcset": "images/new-inventory-inside-14-small.webp 640w, images/new-inventory-inside-14-medium.webp 1200w, images/new-inventory-inside-14-large.webp 1920w",
+                    "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
+                    "alt": "Imagen 1",
                     "width": "1200",
                     "height": "675",
-                    "title": "Habitación Deluxe"
+                    "title": "Luna"
                 },
                 {
-                    "src": "images/cuartocuatro_dos_medium.webp",
-                    "srcset": "images/cuartocuatro_dos_mobile.webp 640w, images/cuartocuatro_dos_medium.webp 1200w, images/cuartocuatro_dos_large.webp 1920w",
-                    "sizes": "(max-width: 840px) 100vw, 50vw",
-                    "alt": "Habitación con vista al mar",
+                    "src": "images/new-inventory-inside-9-medium.webp",
+                    "srcset": "images/new-inventory-inside-9-small.webp 640w, images/new-inventory-inside-9-medium.webp 1200w, images/new-inventory-inside-9-large.webp 1920w",
+                    "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
+                    "alt": "Imagen 1",
                     "width": "1200",
                     "height": "675",
-                    "title": "Habitación Deluxe"
-                },
-                {
-                    "src": "images/cuartocuatro_tres_medium.webp",
-                    "srcset": "images/cuartocuatro_tres_mobile.webp 640w, images/cuartocuatro_tres_medium.webp 1200w, images/cuartocuatro_tres_large.webp 1920w",
-                    "sizes": "(max-width: 840px) 100vw, 50vw",
-                    "alt": "Habitación con vista al mar",
-                    "width": "1200",
-                    "height": "675",
-                    "title": "Habitación Deluxe"
-                },
-                {
-                    "src": "images/cuartocuatro_cuatro_medium.webp",
-                    "srcset": "images/cuartocuatro_cuatro_mobile.webp 640w, images/cuartocuatro_cuatro_medium.webp 1200w, images/cuartocuatro_cuatro_large.webp 1920w",
-                    "sizes": "(max-width: 840px) 100vw, 50vw",
-                    "alt": "Habitación con vista al mar",
-                    "width": "1200",
-                    "height": "675",
-                    "title": "Habitación Deluxe"
-                },
-                {
-                    "src": "images/cuartocuatro_cinco_medium.webp",
-                    "srcset": "images/cuartocuatro_cinco_mobile.webp 640w, images/cuartocuatro_cinco_medium.webp 1200w, images/cuartocuatro_cinco_large.webp 1920w",
-                    "sizes": "(max-width: 840px) 100vw, 50vw",
-                    "alt": "Habitación con vista al mar",
-                    "width": "1200",
-                    "height": "675",
-                    "title": "Habitación Deluxe"
-                },
-                {
-                    "src": "images/cuartocinco_uno_medium.webp",
-                    "srcset": "images/cuartocinco_uno_mobile.webp 640w, images/cuartocinco_uno_medium.webp 1200w, images/cuartocinco_uno_large.webp 1920w",
-                    "sizes": "(max-width: 840px) 100vw, 50vw",
-                    "alt": "Habitación con vista al mar",
-                    "width": "1200",
-                    "height": "675",
-                    "title": "Habitación Deluxe"
-                },
-                {
-                    "src": "images/cuartocinco_dos_medium.webp",
-                    "srcset": "images/cuartocinco_dos_mobile.webp 640w, images/cuartocinco_dos_medium.webp 1200w, images/cuartocinco_dos_large.webp 1920w",
-                    "sizes": "(max-width: 840px) 100vw, 50vw",
-                    "alt": "Habitación con vista al mar",
-                    "width": "1200",
-                    "height": "675",
-                    "title": "Habitación Deluxe"
+                    "title": "Luna"
                 },
                 {
                     "src": "images/cuartocinco_tres_medium.webp",
@@ -412,6 +385,33 @@
                     "width": "1200",
                     "height": "675",
                     "title": "Habitación Deluxe"
+                },
+                {
+                    "src": "images/new-inventory-inside-11-medium.webp",
+                    "srcset": "images/new-inventory-inside-11-small.webp 640w, images/new-inventory-inside-11-medium.webp 1200w, images/new-inventory-inside-11-large.webp 1920w",
+                    "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
+                    "alt": "Imagen 1",
+                    "width": "1200",
+                    "height": "675",
+                    "title": "Luna"
+                },
+                {
+                    "src": "images/new-inventory-inside-12-medium.webp",
+                    "srcset": "images/new-inventory-inside-12-small.webp 640w, images/new-inventory-inside-12-medium.webp 1200w, images/new-inventory-inside-12-large.webp 1920w",
+                    "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
+                    "alt": "Imagen 1",
+                    "width": "1200",
+                    "height": "675",
+                    "title": "Luna"
+                },
+                {
+                    "src": "images/new-inventory-inside-13-medium.webp",
+                    "srcset": "images/new-inventory-inside-13-small.webp 640w, images/new-inventory-inside-13-medium.webp 1200w, images/new-inventory-inside-13-large.webp 1920w",
+                    "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 50vw",
+                    "alt": "Imagen 1",
+                    "width": "1200",
+                    "height": "675",
+                    "title": "Luna"
                 }
             ],
             "features": [
