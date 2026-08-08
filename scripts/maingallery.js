@@ -73,18 +73,18 @@ async function loadHomeVideo() {
 
     try {
         // --- 2️⃣ Traer videos reales del backend ---
-        const res = await fetch("https://hotel-backend-3jw7.onrender.com/api/settings/home-video");
-        const data = await res.json();
-        console.log("home-video response:", data);
+        const res = await fetch("https://ur3wos0qn7.execute-api.us-east-1.amazonaws.com/Prod/api/media/videos");
+        const videos = await res.json();
+        console.log("videos response:", videos);
 
-        if (!data.urls || !data.urls.length) return;
+        if (!videos || !videos.length) return;
 
         // Limpiamos indicadores y preparamos los videos reales
         const indicatorsContainer = container.querySelector(".story-indicators");
         indicatorsContainer.innerHTML = "";
 
         // Solo reemplazamos el src del video existente para que autoplay funcione
-        video.src = data.urls[0]; // primer video del backend
+        video.src = videos[0].url; // primer video del backend
         video.load();
 
         const storyContainerDiv = container.querySelector(".story-container");

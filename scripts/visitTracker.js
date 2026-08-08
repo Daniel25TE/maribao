@@ -1,4 +1,4 @@
-fetch("https://hotel-backend-3jw7.onrender.com/api/visit", {
+fetch("https://ur3wos0qn7.execute-api.us-east-1.amazonaws.com/Prod/api/stats/visit", {
   method: "POST",
   credentials: "include"
 }).catch(() => {});

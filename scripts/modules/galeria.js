@@ -23,8 +23,16 @@ export async function loadGallery() {
 
     // 2️⃣ CARGA BACKEND (REAL)
     try {
-        const res = await fetch("https://hotel-backend-3jw7.onrender.com/api/media");
-        const images = await res.json();
+        const res = await fetch("https://ur3wos0qn7.execute-api.us-east-1.amazonaws.com/Prod/api/media/photos");
+        const raw = await res.json();
+        // Normalize new backend shape (url/altText/room) to the shape renderGallery expects
+        const images = raw.map(p => ({
+            url_medium: p.url,
+            url_mobile: p.url,
+            url_large: p.url,
+            alt: p.altText || "",
+            room: p.room || "general"
+        }));
 
         renderGallery(images, {
             clear: true,

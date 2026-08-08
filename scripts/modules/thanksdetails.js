@@ -76,7 +76,7 @@ export function thanksdetails() {
     }
 
     if (sessionId) {
-        fetch(`https://hotel-backend-3jw7.onrender.com/stripe-session?session_id=${sessionId}`)
+        fetch(`https://ur3wos0qn7.execute-api.us-east-1.amazonaws.com/Prod/api/payment/stripe-session?session_id=${sessionId}`)
             .then(res => res.json())
             .then(data => {
                 if (data.reserva) {
@@ -177,6 +177,8 @@ export function thanksdetails() {
 
 async function generarPDFComprobante(datosReserva) {
     try {
+        // PDF generation not yet implemented in new backend — button hidden until available
+        throw new Error("PDF generation not available");
         const response = await fetch("https://hotel-backend-3jw7.onrender.com/api/generate-pdf", {
             method: "POST",
             headers: { "Content-Type": "application/json" },

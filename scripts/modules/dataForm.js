@@ -155,20 +155,10 @@ function actualizarTotalConComision() {
     }
     async function cargarFechasOcupadas(roomName, discountsMap = {}) {
     try {
-        const { data: fechas, error } = await supabaseClient
-            .from("reservas")
-            .select("checkin_date, checkout_date")
-            .eq("room_name", roomName);
-
-        if (error) {
-            console.error("❌ Error cargando fechas ocupadas:", error);
-            return;
-        }
-
-        const rangosBloqueados = fechas.map(f => ({
-            from: f.checkin_date,
-            to: f.checkout_date
-        }));
+        const res = await fetch(
+            `https://ur3wos0qn7.execute-api.us-east-1.amazonaws.com/Prod/api/reservations/booked-dates?roomName=${encodeURIComponent(roomName)}`
+        );
+        const rangosBloqueados = await res.json(); // array of "yyyy-mm-dd" strings
 
         console.log(`📅 Fechas ocupadas para ${roomName}:`, rangosBloqueados);
         console.log('📌 discountsMap:', discountsMap);
@@ -255,7 +245,7 @@ if (localData) {
   try {
     const parsed = JSON.parse(localData);
     parsed.forEach(d => {
-      discountsMap[d.fecha] = parseFloat(d.porcentaje);
+      discountsMap[d.date] = parseFloat(d.percentage);
     });
       console.log("✅ Descuentos cargados desde localStorage:", discountsMap);
   } catch (err) {
@@ -269,7 +259,7 @@ if (localData) {
 cargarFechasOcupadas(data.name, discountsMap);
 
 // 🔹 3️⃣ Luego, fetch al backend y actualizar localStorage + calendario
-fetch('https://hotel-backend-3jw7.onrender.com/api/fechas-descuento')
+fetch('https://ur3wos0qn7.execute-api.us-east-1.amazonaws.com/Prod/api/discounts/active')
   .then(res => {
     if (!res.ok) throw new Error('No se pudo obtener descuentos del backend');
     return res.json();
@@ -277,7 +267,7 @@ fetch('https://hotel-backend-3jw7.onrender.com/api/fechas-descuento')
   .then(descuentos => {
     discountsMap = {};
     descuentos.forEach(d => {
-      discountsMap[d.fecha] = parseFloat(d.porcentaje);
+      discountsMap[d.date] = parseFloat(d.percentage);
     });
 
     // 🔹 Guardar en localStorage para próximas visitas
@@ -473,13 +463,23 @@ metodoPagoSelect.value = "transferencia";
         document.querySelector("#confirmar-transferencia").addEventListener("click", async () => {
           mostrarContador("Procesando tu reserva...");
           try {
-            const response = await fetch("https://hotel-backend-3jw7.onrender.com/reserva", {
+            const response = await fetch("https://ur3wos0qn7.execute-api.us-east-1.amazonaws.com/Prod/api/reservations", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(formData),
+              body: JSON.stringify({
+                id: crypto.randomUUID(),
+                guestName: `${formData.firstName} ${formData.lastName}`,
+                email: formData.email,
+                phone: formData.phone,
+                roomName: formData.cuarto,
+                checkIn: formData.checkin,
+                checkOut: formData.checkout,
+                totalPrice: formData.total,
+                status: "pending"
+              }),
             });
             const result = await response.json();
-            if (result.success) {
+            if (result.id) {
               const params = new URLSearchParams({
                 ...formData,
                 total: totalFormateado,
@@ -522,7 +522,7 @@ metodoPagoSelect.value = "transferencia";
             mostrarContador("Redirigiéndote a Stripe...");
             try {
                 const idReservaTemporal = Math.floor(100000 + Math.random() * 900000);
-                const response = await fetch("https://hotel-backend-3jw7.onrender.com/create-checkout-session", {
+                const response = await fetch("https://ur3wos0qn7.execute-api.us-east-1.amazonaws.com/Prod/api/payment/create-checkout-session", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
