@@ -13,15 +13,15 @@ document.getElementById('enviarComentario').addEventListener('click', async () =
 
     try {
         // Enviar comentario al backend
-        const res = await fetch('https://hotel-backend-3jw7.onrender.com/api/comentario', {
-            method: 'POST',
+        const res = await fetch(`https://ur3wos0qn7.execute-api.us-east-1.amazonaws.com/Prod/api/reservations/by-transfer/${encodeURIComponent(numReserva)}/comment`, {
+            method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ numReserva, comentario })
+            body: JSON.stringify({ comment: comentario })
         });
 
         const data = await res.json();
 
-        if (data.ok) {
+        if (res.ok && data.id) {
             // Ocultar los fields
             document.getElementById('numReserva').style.display = 'none';
             document.getElementById('comentario').style.display = 'none';
@@ -32,7 +32,7 @@ document.getElementById('enviarComentario').addEventListener('click', async () =
             mensaje.style.color = "green";
         }
         else {
-            mensaje.textContent = data.error;
+            mensaje.textContent = res.status === 404 ? "Número de reserva no encontrado." : "No se pudo guardar el comentario.";
             mensaje.style.color = "red";
         }
     } catch (err) {

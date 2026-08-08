@@ -17,21 +17,21 @@ buscarForm.addEventListener("submit", async (e) => {
     if (!numero) return;
 
     try {
-        const res = await fetch(`https://hotel-backend-3jw7.onrender.com/cancelar/cliente/${numero}`);
+        const res = await fetch(`https://ur3wos0qn7.execute-api.us-east-1.amazonaws.com/Prod/api/reservations/by-transfer/${encodeURIComponent(numero)}`);
         const data = await res.json();
 
         if (res.status !== 200) {
-            messageDiv.textContent = data.error || "Reserva no encontrada";
+            messageDiv.textContent = "Reserva no encontrada";
             return;
         }
 
         // Mostrar detalles
         detalleText.innerHTML = `
-            Nombre: ${data.nombre}<br>
-            Cuarto: ${data.room_name}<br>
-            Check-in: ${data.checkin_date}<br>
-            Check-out: ${data.checkout_date}<br>
-            Método de pago: ${data.metodo_pago}
+            Nombre: ${data.guestName}<br>
+            Cuarto: ${data.roomName}<br>
+            Check-in: ${data.checkIn}<br>
+            Check-out: ${data.checkOut}<br>
+            Estado: ${data.status}
         `;
         currentNumero = numero;
         detalleDiv.style.display = "block";
@@ -50,8 +50,8 @@ cancelarBtn.addEventListener("click", async () => {
     if (!confirmCancel) return;
 
     try {
-        const res = await fetch(`https://hotel-backend-3jw7.onrender.com/cancelar/cliente/${currentNumero}`, {
-            method: "PUT"
+        const res = await fetch(`https://ur3wos0qn7.execute-api.us-east-1.amazonaws.com/Prod/api/reservations/by-transfer/${encodeURIComponent(currentNumero)}/cancel`, {
+            method: "PATCH"
         });
 
         const data = await res.json();

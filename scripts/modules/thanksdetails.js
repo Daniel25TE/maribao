@@ -177,29 +177,49 @@ export function thanksdetails() {
 
 async function generarPDFComprobante(datosReserva) {
     try {
-        // PDF generation not yet implemented in new backend — button hidden until available
-        throw new Error("PDF generation not available");
-        const response = await fetch("https://hotel-backend-3jw7.onrender.com/api/generate-pdf", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(datosReserva),
-        });
+        // Load jsPDF from CDN on demand (only when the button is clicked)
+        if (!window.jspdf) {
+            await new Promise((resolve, reject) => {
+                const script = document.createElement("script");
+                script.src = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js";
+                script.onload = resolve;
+                script.onerror = reject;
+                document.head.appendChild(script);
+            });
+        }
 
-        if (!response.ok) throw new Error("No se pudo generar el PDF");
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
 
-        const blob = await response.blob();
-        const url = window.URL.createObjectURL(blob);
+        doc.setFontSize(18);
+        doc.text("Hotel Maribao - Comprobante de Reserva", 20, 20);
 
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "comprobante.pdf";
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        return url;
+        doc.setFontSize(12);
+        let y = 40;
+        const line = (label, value) => {
+            doc.text(`${label}: ${value || "No especificado"}`, 20, y);
+            y += 10;
+        };
+
+        line("Nombre",            datosReserva.nombre);
+        line("Email",             datosReserva.email);
+        line("Teléfono",          datosReserva.telefono);
+        line("Habitación",        datosReserva.room_name);
+        line("Check-in",          datosReserva.checkin_date);
+        line("Check-out",         datosReserva.checkout_date);
+        line("Total",             `$${datosReserva.total}`);
+        line("Método de pago",    datosReserva.metodo_pago);
+        line("Número de reserva", datosReserva.reservationid);
+        line("Hora de llegada",   datosReserva.arrival_time);
+        if (datosReserva.special_requests && datosReserva.special_requests !== "Ninguna") {
+            line("Solicitudes especiales", datosReserva.special_requests);
+        }
+
+        doc.save("comprobante-maribao.pdf");
 
     } catch (error) {
-        console.error("Error al descargar PDF:", error);
+        console.error("Error al generar PDF:", error);
+        alert("No se pudo generar el comprobante. Por favor toma una captura de pantalla.");
     }
 }
 

@@ -475,6 +475,7 @@ metodoPagoSelect.value = "transferencia";
                 checkIn: formData.checkin,
                 checkOut: formData.checkout,
                 totalPrice: formData.total,
+                transferNumber: String(formData.numeroTransferencia),
                 status: "pending"
               }),
             });
