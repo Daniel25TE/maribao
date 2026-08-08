@@ -1481,38 +1481,37 @@ textarea:invalid {
 .modal-overlay-galeria {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(4px);
-    transition: background 0.3s ease;
-
 }
 
 .modal-content-galeria {
     position: relative;
-    max-width: 90%;
-    max-height: 90%;
+    width: 90vw;
+    height: 85vh;
+    max-width: 860px;
+    max-height: 680px;
     z-index: 1001;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    box-shadow: none;
     transform: scale(0.8);
     opacity: 0;
     animation: modalShow 0.3s forwards;
     padding: 0;
+    background: transparent;
 }
 
 .modal-content-galeria img {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
     border-radius: 12px;
     object-fit: contain;
 }
 
 .modal-close-galeria {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+    position: fixed;
     font-size: 1.8rem;
     background: rgba(255, 255, 255, 0.9);
     border: none;

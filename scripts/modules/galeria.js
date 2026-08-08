@@ -147,6 +147,28 @@ function renderGallery(
         const modalClose = modal.querySelector(".modal-close-galeria");
         const modalOverlay = modal.querySelector(".modal-overlay-galeria");
 
+        function positionCloseBtn() {
+            const container = modal.querySelector(".modal-content-galeria");
+            const cr = container.getBoundingClientRect();
+            const naturalW = modalImg.naturalWidth;
+            const naturalH = modalImg.naturalHeight;
+            const containerW = cr.width;
+            const containerH = cr.height;
+
+            // Calculate actual rendered image size inside the container (object-fit: contain)
+            const scale = Math.min(containerW / naturalW, containerH / naturalH);
+            const renderedW = naturalW * scale;
+            const renderedH = naturalH * scale;
+
+            // Image is centered inside the container
+            const imgLeft = cr.left + (containerW - renderedW) / 2;
+            const imgTop = cr.top + (containerH - renderedH) / 2;
+            const imgRight = imgLeft + renderedW;
+
+            modalClose.style.top = (imgTop - 10) + 'px';
+            modalClose.style.left = (imgRight - 20) + 'px';
+        }
+
         gallery.querySelectorAll("img").forEach(img => {
             img.onclick = () => {
                 modalImg.src = img.src || img.dataset.src;
@@ -154,6 +176,12 @@ function renderGallery(
                 modalImg.sizes = img.sizes || "";
                 modalImg.alt = img.alt || "";
                 modal.hidden = false;
+                const doPosition = () => setTimeout(positionCloseBtn, 50);
+                if (modalImg.complete && modalImg.naturalWidth) {
+                    doPosition();
+                } else {
+                    modalImg.onload = doPosition;
+                }
             };
         });
 
